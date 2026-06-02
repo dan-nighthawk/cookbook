@@ -43,6 +43,50 @@ def strip_schema_examples(node):
     return removed
 
 
+def add_missing_response_content(paths):
+    """Give success responses a body schema so the client returns the payload.
+
+    typescript-fetch (and the Python generator) emit a `void`/`None` return for
+    any 2xx response that has no `content`, silently discarding the JSON body.
+    The live spec omits response schemas on almost every endpoint, so methods
+    like `getStyles()` resolve to `undefined` even though the API returns data.
+
+    Inject a permissive `application/json` object schema for every 2xx response
+    (other than 204 No Content) that lacks one. The generated method then parses
+    and returns the body, typed loosely as an object. Error responses (4xx/5xx)
+    are left untouched — they don't affect the success return type.
+    """
+    added = 0
+    for ops in paths.values():
+        if not isinstance(ops, dict):
+            continue
+        for op in ops.values():
+            if not isinstance(op, dict):
+                continue
+            for code, resp in (op.get("responses") or {}).items():
+                if not isinstance(resp, dict):
+                    continue
+                if not code.startswith("2") or code == "204":
+                    continue
+                if "content" in resp:
+                    continue
+                resp["content"] = {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": True,
+                            "description": (
+                                "Auto-added by sdk/patch-spec.py: the source spec "
+                                "declared no response body schema, so the client "
+                                "would otherwise return void and drop the payload."
+                            ),
+                        }
+                    }
+                }
+                added += 1
+    return added
+
+
 def collect_schema_refs(node, refs):
     """Collect every `#/components/schemas/<name>` reference in the document."""
     prefix = "#/components/schemas/"
@@ -91,6 +135,10 @@ def main():
     # 1. Strip schema-level `examples` (3.1 leakage) from every defined schema.
     removed = strip_schema_examples(schemas)
 
+    # 1b. Give success responses a body schema so generated methods return the
+    #     payload instead of `void` (the live spec omits response schemas).
+    bodies = add_missing_response_content(spec.get("paths", {}))
+
     # 2. Stub any referenced-but-undefined schema so $refs resolve and the
     #    generator produces a (permissive) model instead of a dangling import.
     referenced = set()
@@ -111,6 +159,7 @@ def main():
 
     print(f"patched spec written to {dst}")
     print(f"  removed {removed} schema-level 'examples' key(s)")
+    print(f"  added body schema to {bodies} success response(s)")
     print(f"  stubbed {len(missing)} missing schema(s): {missing or 'none'}")
 
 

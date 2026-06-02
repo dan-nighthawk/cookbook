@@ -243,6 +243,9 @@ jobs:
           npm pkg set "exports[.].types"="./dist/index.d.ts"
           npm pkg set "exports[.].import"="./dist/index.mjs"
           npm pkg set "exports[.].require"="./dist/index.js"
+          # Keep package.json importable (some tooling reads it); an exports map
+          # otherwise blocks the "./package.json" subpath.
+          npm pkg set "exports[./package.json]"="./package.json"
           npm pkg set "files[]=dist"
           npm pkg set scripts.build="tsup src/index.ts --format cjs,esm --dts --clean --sourcemap --target es2020"
           # 'prepare' (= npm run build) would fire during install before tsup exists;
