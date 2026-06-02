@@ -27,6 +27,9 @@ YakYak turns a premise into published, episodic video through a layered model:
 - **Cast** — the characters: name, description, portrait image, assigned voice,
   and subtitle font/color.
 
+See **[Workflows & use cases](workflows.md)** for a flow diagram of the pipeline
+and the ways you re-enter it from a finished movie.
+
 ## The generation pipeline
 
 A movie is produced by chaining `workflow/gen-*` steps, then rendered:
