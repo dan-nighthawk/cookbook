@@ -1,0 +1,17 @@
+# Downloaded / patched OpenAPI specs (fetched fresh at publish time)
+spec.json
+spec.patched.json
+
+# SDK build & generator artifacts
+dist/
+build/
+*.tgz
+*.egg-info/
+node_modules/
+.openapi-generator/
+.openapi-generator-cli/
+openapitools.json
+
+# Python
+__pycache__/
+*.pyc

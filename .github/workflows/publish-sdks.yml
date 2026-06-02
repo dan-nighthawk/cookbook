@@ -5,6 +5,10 @@ name: Publish SDKs
 #   - Python  -> PyPI  as "yakyak-sdk"
 #   - JS/TS   -> npm   as "yakyak-sdk"
 #
+# The published spec has a couple of codegen-breaking quirks (a dangling $ref and
+# OpenAPI-3.1 `examples` inside 3.0 schemas), so each job first downloads the spec
+# and runs sdk/patch-spec.py to repair it before generating.
+#
 # Required repository secrets:
 #   PYPI_API_TOKEN  - a PyPI API token (value starts with "pypi-")
 #   NPM_TOKEN       - an npm automation/publish token
@@ -32,8 +36,6 @@ on:
 
 env:
   SPEC_URL: https://api.yakyak.ai/api/docs-json
-  # Pin the generator for reproducible output.
-  OPENAPI_GENERATOR_VERSION: 7.11.0
 
 concurrency:
   group: publish-sdks-${{ github.event.inputs.version }}
@@ -64,14 +66,18 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Download and patch OpenAPI spec
+        run: |
+          curl -fsSL "${SPEC_URL}" -o spec.json
+          python3 sdk/patch-spec.py spec.json spec.patched.json
+
       - name: Generate Python client from OpenAPI spec
-        env:
-          OPENAPI_GENERATOR_VERSION: ${{ env.OPENAPI_GENERATOR_VERSION }}
         run: |
           npx --yes @openapitools/openapi-generator-cli@2 generate \
-            -i "${SPEC_URL}" \
+            -i spec.patched.json \
             -g python \
             -o sdk/python \
+            --skip-validate-spec \
             --additional-properties=packageName=yakyak_sdk,projectName=yakyak-sdk,packageVersion=${{ github.event.inputs.version }}
 
       - name: Build distribution
@@ -119,12 +125,18 @@ jobs:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
 
+      - name: Download and patch OpenAPI spec
+        run: |
+          curl -fsSL "${SPEC_URL}" -o spec.json
+          python3 sdk/patch-spec.py spec.json spec.patched.json
+
       - name: Generate TypeScript client from OpenAPI spec
         run: |
           npx --yes @openapitools/openapi-generator-cli@2 generate \
-            -i "${SPEC_URL}" \
+            -i spec.patched.json \
             -g typescript-fetch \
             -o sdk/javascript \
+            --skip-validate-spec \
             --additional-properties=npmName=yakyak-sdk,npmVersion=${{ github.event.inputs.version }},supportsES6=true,typescriptThreePlus=true
 
       - name: Build package
