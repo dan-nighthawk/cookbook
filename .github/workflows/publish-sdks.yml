@@ -1,0 +1,156 @@
+name: Publish SDKs
+
+# Manually triggered workflow that generates the YakYak client SDKs from the live
+# OpenAPI spec (https://api.yakyak.ai/api/docs-json) and publishes them:
+#   - Python  -> PyPI  as "yakyak-sdk"
+#   - JS/TS   -> npm   as "yakyak-sdk"
+#
+# Required repository secrets:
+#   PYPI_API_TOKEN  - a PyPI API token (value starts with "pypi-")
+#   NPM_TOKEN       - an npm automation/publish token
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish (e.g. 1.0.0). Must be a new, unpublished version."
+        required: true
+        type: string
+      target:
+        description: "Which registries to publish to."
+        required: true
+        default: both
+        type: choice
+        options:
+          - both
+          - pypi
+          - npm
+      dry_run:
+        description: "Build and validate only — do not actually publish."
+        required: false
+        default: false
+        type: boolean
+
+env:
+  SPEC_URL: https://api.yakyak.ai/api/docs-json
+  # Pin the generator for reproducible output.
+  OPENAPI_GENERATOR_VERSION: 7.11.0
+
+concurrency:
+  group: publish-sdks-${{ github.event.inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  publish-python:
+    name: Publish Python SDK (PyPI)
+    if: ${{ github.event.inputs.target == 'both' || github.event.inputs.target == 'pypi' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java (required by openapi-generator)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Node (provides the generator CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate Python client from OpenAPI spec
+        env:
+          OPENAPI_GENERATOR_VERSION: ${{ env.OPENAPI_GENERATOR_VERSION }}
+        run: |
+          npx --yes @openapitools/openapi-generator-cli@2 generate \
+            -i "${SPEC_URL}" \
+            -g python \
+            -o sdk/python \
+            --additional-properties=packageName=yakyak_sdk,projectName=yakyak-sdk,packageVersion=${{ github.event.inputs.version }}
+
+      - name: Build distribution
+        working-directory: sdk/python
+        run: |
+          python -m pip install --upgrade pip build twine
+          python -m build
+          python -m twine check dist/*
+
+      - name: Publish to PyPI
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        working-directory: sdk/python
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: python -m twine upload dist/*
+
+      - name: Dry run notice
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: echo "dry_run=true — skipped 'twine upload'. Distribution built and validated."
+
+      - name: Upload built artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-sdk-dist
+          path: sdk/python/dist/*
+
+  publish-npm:
+    name: Publish JS/TS SDK (npm)
+    if: ${{ github.event.inputs.target == 'both' || github.event.inputs.target == 'npm' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java (required by openapi-generator)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Generate TypeScript client from OpenAPI spec
+        run: |
+          npx --yes @openapitools/openapi-generator-cli@2 generate \
+            -i "${SPEC_URL}" \
+            -g typescript-fetch \
+            -o sdk/javascript \
+            --additional-properties=npmName=yakyak-sdk,npmVersion=${{ github.event.inputs.version }},supportsES6=true,typescriptThreePlus=true
+
+      - name: Build package
+        working-directory: sdk/javascript
+        run: |
+          npm install
+          npm run build --if-present
+
+      - name: Publish to npm
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        working-directory: sdk/javascript
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public
+
+      - name: Dry run (npm pack)
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        working-directory: sdk/javascript
+        run: |
+          echo "dry_run=true — running 'npm publish --dry-run' instead of publishing."
+          npm publish --dry-run --access public
+
+      - name: Upload built tarball
+        working-directory: sdk/javascript
+        run: npm pack --pack-destination "$RUNNER_TEMP"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-sdk-tarball
+          path: ${{ runner.temp }}/*.tgz
