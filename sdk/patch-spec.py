@@ -66,6 +66,26 @@ def main():
     with open(src) as f:
         spec = json.load(f)
 
+    # 0. Fill publisher metadata the live spec omits. The Python generator reads
+    #    author/license straight from `info`, and both generators read `servers`
+    #    for the client base URL. typescript-fetch ignores `info.contact`/
+    #    `info.license`, so these are no-ops for the npm build (which sets the
+    #    same fields via `npm pkg set` in the workflow).
+    info = spec.setdefault("info", {})
+    info.setdefault("contact", {
+        "name": "YakYak Support",
+        "email": "support@yakyak.ai",
+        "url": "https://github.com/yakyak-support/cookbook",
+    })
+    info.setdefault("license", {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+    })
+    # Safety net: if the deployed API hasn't yet published a `servers` entry, the
+    # generators would otherwise fall back to http://localhost.
+    if not spec.get("servers"):
+        spec["servers"] = [{"url": "https://api.yakyak.ai"}]
+
     schemas = spec.setdefault("components", {}).setdefault("schemas", {})
 
     # 1. Strip schema-level `examples` (3.1 leakage) from every defined schema.

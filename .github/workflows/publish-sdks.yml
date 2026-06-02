@@ -78,7 +78,9 @@ jobs:
             -g python \
             -o sdk/python \
             --skip-validate-spec \
-            --additional-properties=packageName=yakyak_sdk,projectName=yakyak-sdk,packageVersion=${{ github.event.inputs.version }}
+            --git-user-id yakyak-support \
+            --git-repo-id cookbook \
+            --additional-properties=packageName=yakyak_sdk,projectName=yakyak-sdk,packageVersion=${{ github.event.inputs.version }},packageUrl=https://github.com/yakyak-support/cookbook,licenseInfo=Apache-2.0
 
       - name: Build distribution
         working-directory: sdk/python
@@ -137,7 +139,18 @@ jobs:
             -g typescript-fetch \
             -o sdk/javascript \
             --skip-validate-spec \
+            --git-user-id yakyak-support \
+            --git-repo-id cookbook \
             --additional-properties=npmName=yakyak-sdk,npmVersion=${{ github.event.inputs.version }},supportsES6=true,typescriptThreePlus=true
+
+      - name: Fill package.json fields the generator leaves blank
+        working-directory: sdk/javascript
+        run: |
+          npm pkg set author="YakYak Support"
+          npm pkg set license="Apache-2.0"
+          npm pkg set homepage="https://github.com/yakyak-support/cookbook#readme"
+          npm pkg set bugs.url="https://github.com/yakyak-support/cookbook/issues"
+          npm pkg set "keywords[]=yakyak" "keywords[]=sdk" "keywords[]=openapi"
 
       - name: Build package
         working-directory: sdk/javascript
