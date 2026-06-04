@@ -26,6 +26,7 @@ The API is organized into five resource groups: **Users** (auth & accounts),
 
 | Folder | What's inside |
 |--------|---------------|
+| [`course/`](course/) | Hands-on, copy-paste course (curl · JS · Python) — from signup to a rendered, shareable movie. **Start here.** |
 | [`docs/`](docs/) | Concepts, glossary, and guides for the YakYak API and workflow model. |
 | [`sdk/`](sdk/) | Client libraries generated from the OpenAPI spec — [Python](sdk/python/) and [JavaScript/TypeScript](sdk/javascript/). |
 | [`examples/`](examples/) | End-to-end, runnable recipes that drive the API (create campaign → generate → render → post). |

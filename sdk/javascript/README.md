@@ -35,7 +35,7 @@ const client = new YakYakClient({
   token: process.env.YAKYAK_API_TOKEN,
 });
 
-const styles = await client.data.listStyles();
+const styles = await client.data.getStyles();
 const campaign = await client.workflow.createCampaign({ /* ... */ });
 ```
 

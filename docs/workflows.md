@@ -4,8 +4,9 @@ The end-to-end flow a user moves through in YakYak — from one of four entry po
 through authoring (cast + scenes), to soundtrack, render, and distribution.
 
 Stages and routes below are taken from the API
-(`WorkflowController` @ `workflow`, `SocialController` @ `social`); all paths are
-served under `/api`, e.g. `POST https://api.yakyak.ai/api/workflow/create-campaign`.
+(`WorkflowController` @ `workflow`, `SocialController` @ `social`); paths are served
+at the **root**, e.g. `POST https://api.yakyak.ai/workflow/create-campaign`. Only the
+interactive docs live under `/api` (Swagger UI at `/api/docs`).
 
 ```mermaid
 flowchart TB
