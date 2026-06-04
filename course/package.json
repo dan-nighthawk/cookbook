@@ -1,0 +1,13 @@
+{
+  "name": "yakyak-course",
+  "private": true,
+  "type": "module",
+  "description": "Runnable JS scripts for the YakYak API course (uses the yakyak-sdk client).",
+  "scripts": {
+    "01-signup": "node 01-signup/signup.js",
+    "02-hello-world": "node 02-hello-world/hello.js"
+  },
+  "dependencies": {
+    "yakyak-sdk": "^0.0.5"
+  }
+}

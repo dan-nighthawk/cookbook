@@ -13,6 +13,11 @@ that break code generation:
      `SendFreeTrialDto.email.examples`). `examples` is only valid on MediaType /
      Parameter objects in 3.0, not on schemas, so validation rejects it.
 
+  3. Missing `requestBody` on @Body() routes — most `workflow/*` POSTs read a JSON
+     body but declare no schema, so generated methods cannot send a payload. We
+     inject request bodies (typed DTOs for the routes the cookbook uses, permissive
+     objects elsewhere) so e.g. `client.workflow.createCampaign({...})` works.
+
 This script applies targeted, generic fixes and writes the patched spec out. It is
 intentionally conservative: it only strips `examples` *within components.schemas*
 (where it is never valid in 3.0) and only stubs refs that are genuinely missing.
@@ -22,6 +27,30 @@ Usage:
 """
 import json
 import sys
+
+
+def strip_schema_enums(node):
+    """Recursively remove `enum` constraints anywhere under a schema subtree.
+
+    Several enums in the live spec are incomplete and drift from reality (e.g.
+    `ExecutionLogEntryDto.type` lists only script/image/movie but the API also
+    returns subtitlesMovie, burn, movieConcat, …). The strict Python generator
+    raises a ValidationError when it deserializes a value outside the enum, so we
+    drop enums and treat these fields as plain strings. typescript-fetch ignores
+    enums at runtime, so this only matters for Python — but we strip for both so
+    the clients behave identically.
+    """
+    removed = 0
+    if isinstance(node, dict):
+        if "enum" in node:
+            del node["enum"]
+            removed += 1
+        for value in node.values():
+            removed += strip_schema_enums(value)
+    elif isinstance(node, list):
+        for item in node:
+            removed += strip_schema_enums(item)
+    return removed
 
 
 def strip_schema_examples(node):
@@ -87,6 +116,144 @@ def add_missing_response_content(paths):
     return added
 
 
+# Request bodies the live spec omits. NestJS controllers that read the body via
+# `@Body()` without a typed DTO (or via `@Body('field')`) produce operations with
+# no `requestBody`, so the generators emit methods that cannot send a payload
+# (typescript-fetch: only `initOverrides`; python: no body param at all). We inject
+# a named DTO per endpoint so the generated method takes a typed body, e.g.
+# `client.workflow.createCampaign({ createCampaignDto: { ... } })`.
+#
+# Keyed by (METHOD, path). `props` are best-effort and permissive
+# (additionalProperties stays on, so unknown/extra fields still pass). Shapes were
+# verified against the live API + a web-app capture; see course/ for usage.
+S = "string"
+KNOWN_REQUEST_BODIES = {
+    ("post", "/workflow/create-campaign"): ("CreateCampaignDto",
+        {"userId": S, "prompt": S, "name": S, "description": S, "styleId": S,
+         "aspectRatio": S, "animationType": S, "imageQuality": S,
+         "mode": S, "skipSoundtrack": "boolean", "eventId": S}, ["userId"]),
+    ("post", "/workflow/start-campaign"): ("StartCampaignDto",
+        {"userId": S, "campaignId": S}, ["campaignId"]),
+    ("post", "/workflow/gen-movie-cast"): ("GenMovieCastDto",
+        {"movieId": S}, ["movieId"]),
+    ("post", "/workflow/gen-movie-screenplay"): ("GenMovieScreenplayDto",
+        {"movieId": S}, ["movieId"]),
+    ("post", "/workflow/save-movie-custom-cast"): ("SaveMovieCustomCastDto",
+        {"movieId": S, "characters": "array"}, ["movieId", "characters"]),
+    ("post", "/workflow/set-cast"): ("SetCastDto",
+        {"movieId": S, "cast": "array"}, ["movieId", "cast"]),
+    ("post", "/workflow/fork-campaign"): ("ForkCampaignDto",
+        {"userId": S, "sourceCampaignId": S, "sourceMovieId": S}, ["userId"]),
+    ("post", "/workflow/update-campaign-settings"): ("UpdateCampaignSettingsDto",
+        {"campaignId": S, "aspectRatio": S, "animationType": S,
+         "imageQuality": S, "additionalDescription": S}, ["campaignId"]),
+    ("post", "/workflow/switch-campaign-mode"): ("SwitchCampaignModeDto",
+        {"campaignId": S, "mode": S}, ["campaignId", "mode"]),
+    ("post", "/workflow/create-scene"): ("CreateSceneDto",
+        {"userId": S, "movieId": S, "sceneNumber": "number", "title": S,
+         "story": S, "dialogue": S, "leadCast": S, "backgroundColor": S,
+         "generate": "boolean"}, ["movieId"]),
+    ("post", "/workflow/update-scene-dialogue"): ("UpdateSceneDialogueDto",
+        {"userId": S, "sceneId": S, "dialogue": S}, ["sceneId"]),
+    ("post", "/workflow/rerun-scene"): ("RerunSceneDto",
+        {"sceneId": S, "from": S}, ["sceneId"]),
+    ("post", "/workflow/export-render"): ("ExportRenderDto",
+        {"movieId": S, "force": "boolean"}, ["movieId"]),
+    ("post", "/workflow/set-soundtrack-audio"): ("SetSoundtrackAudioDto",
+        {"movieId": S, "audioPath": S}, ["movieId", "audioPath"]),
+    ("post", "/workflow/select-soundtrack-history"): ("SelectSoundtrackHistoryDto",
+        {"movieId": S, "audioPath": S}, ["movieId"]),
+}
+
+
+def add_missing_request_bodies(spec):
+    """Inject request-body schemas for mutating operations that lack one.
+
+    Named DTOs (KNOWN_REQUEST_BODIES) get typed properties so the generated method
+    has an ergonomic, documented body param. Every other body-less POST/PUT/PATCH
+    gets a permissive inline object body so it can at least send arbitrary JSON
+    instead of silently dropping the payload.
+    """
+    schemas = spec.setdefault("components", {}).setdefault("schemas", {})
+    named = generic = 0
+    for path, ops in spec.get("paths", {}).items():
+        if not isinstance(ops, dict):
+            continue
+        for method, op in ops.items():
+            if method.lower() not in ("post", "put", "patch"):
+                continue
+            if not isinstance(op, dict) or "requestBody" in op:
+                continue
+            known = KNOWN_REQUEST_BODIES.get((method.lower(), path))
+            if known:
+                name, props, required = known
+
+                def prop_schema(t):
+                    if t == "array":
+                        return {"type": "array", "items": {"type": "object", "additionalProperties": True}}
+                    return {"type": t}
+
+                # Don't clobber a schema the source spec already defines (e.g. SetCastDto).
+                if name not in schemas:
+                    schema = {
+                        "type": "object",
+                        "additionalProperties": True,
+                        "properties": {k: prop_schema(t) for k, t in props.items()},
+                        "description": "Auto-added by sdk/patch-spec.py (the source spec declared no requestBody for this route).",
+                    }
+                    if required:
+                        schema["required"] = required
+                    schemas[name] = schema
+                op["requestBody"] = {
+                    "required": bool(required),
+                    "content": {"application/json": {"schema": {"$ref": f"#/components/schemas/{name}"}}},
+                }
+                named += 1
+            else:
+                op["requestBody"] = {
+                    "required": False,
+                    "content": {"application/json": {"schema": {
+                        "type": "object",
+                        "additionalProperties": True,
+                        "description": "Auto-added by sdk/patch-spec.py: source spec declared no requestBody for this route.",
+                    }}},
+                }
+                generic += 1
+    return named, generic
+
+
+def add_post_created_responses(spec):
+    """Map a 201 response on POST operations that only declare 200.
+
+    NestJS returns 201 Created from POST handlers by default, but the spec
+    documents many of them as 200. The strict Python generator only deserializes
+    the declared status code, so a real 201 yields `None` (typescript-fetch is
+    lenient and returns any 2xx body). Clone the 200 response onto 201 (or add a
+    permissive one) so the generated client returns the payload either way.
+    """
+    added = 0
+    permissive = {"application/json": {"schema": {
+        "type": "object", "additionalProperties": True,
+        "description": "Auto-added by sdk/patch-spec.py: POST returns 201 Created.",
+    }}}
+    for ops in spec.get("paths", {}).values():
+        if not isinstance(ops, dict):
+            continue
+        op = ops.get("post")
+        if not isinstance(op, dict):
+            continue
+        responses = op.setdefault("responses", {})
+        if "201" in responses:
+            continue
+        ok = responses.get("200")
+        responses["201"] = {
+            "description": (ok or {}).get("description", "Created"),
+            "content": (ok or {}).get("content", permissive),
+        }
+        added += 1
+    return added
+
+
 def collect_schema_refs(node, refs):
     """Collect every `#/components/schemas/<name>` reference in the document."""
     prefix = "#/components/schemas/"
@@ -135,9 +302,21 @@ def main():
     # 1. Strip schema-level `examples` (3.1 leakage) from every defined schema.
     removed = strip_schema_examples(schemas)
 
+    # 1a. Strip `enum` constraints (several are incomplete and break the strict
+    #     Python client when the API returns a newer value).
+    enums = strip_schema_enums(schemas)
+
     # 1b. Give success responses a body schema so generated methods return the
     #     payload instead of `void` (the live spec omits response schemas).
     bodies = add_missing_response_content(spec.get("paths", {}))
+
+    # 1c. Give mutating operations a request body so generated methods can send a
+    #     payload (the live spec omits requestBody on @Body() routes).
+    named_reqs, generic_reqs = add_missing_request_bodies(spec)
+
+    # 1d. Map a 201 response on POSTs that only declare 200 (NestJS returns 201),
+    #     so the strict Python generator deserializes the real status code.
+    created = add_post_created_responses(spec)
 
     # 2. Stub any referenced-but-undefined schema so $refs resolve and the
     #    generator produces a (permissive) model instead of a dangling import.
@@ -159,7 +338,10 @@ def main():
 
     print(f"patched spec written to {dst}")
     print(f"  removed {removed} schema-level 'examples' key(s)")
+    print(f"  removed {enums} schema-level 'enum' constraint(s)")
     print(f"  added body schema to {bodies} success response(s)")
+    print(f"  added request body to {named_reqs} named + {generic_reqs} generic operation(s)")
+    print(f"  mapped 201 on {created} POST operation(s)")
     print(f"  stubbed {len(missing)} missing schema(s): {missing or 'none'}")
 
 

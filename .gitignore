@@ -15,3 +15,12 @@ openapitools.json
 # Python
 __pycache__/
 *.pyc
+
+# course / local SDK builds
+course/.env
+course/node_modules/
+sdk/javascript/
+sdk/python/
+.venv/
+.DS_Store
+course/package-lock.json
