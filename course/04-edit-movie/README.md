@@ -65,4 +65,5 @@ python 04-edit-movie/edit-movie.py     # Python (yakyak-sdk)
 
 ---
 
-**Next:** Lesson 5 — cast deep-dive: AI cast, roles, voices & custom portraits.
+**Next:** Lesson 5 — bring your own pre-rendered image, animate it with Kling AI video,
+and voice it with the Narrator.
