@@ -135,9 +135,12 @@ KNOWN_REQUEST_BODIES = {
     ("post", "/workflow/start-campaign"): ("StartCampaignDto",
         {"userId": S, "campaignId": S}, ["campaignId"]),
     ("post", "/workflow/gen-movie-cast"): ("GenMovieCastDto",
-        {"movieId": S}, ["movieId"]),
-    ("post", "/workflow/gen-movie-screenplay"): ("GenMovieScreenplayDto",
-        {"movieId": S}, ["movieId"]),
+        {"movieId": S, "roleCounts": "object"}, ["movieId"]),
+    # gen-movie-screenplay already has a typed GenMovieScreenplayRequestDto in the spec.
+    ("post", "/workflow/gen-custom-cast-image"): ("GenCustomCastImageDto",
+        {"movieId": S, "characterName": S, "description": S}, ["movieId", "characterName"]),
+    ("post", "/workflow/delete-scene"): ("DeleteSceneDto",
+        {"sceneId": S}, ["sceneId"]),
     ("post", "/workflow/save-movie-custom-cast"): ("SaveMovieCustomCastDto",
         {"movieId": S, "characters": "array"}, ["movieId", "characters"]),
     ("post", "/workflow/set-cast"): ("SetCastDto",
@@ -191,6 +194,8 @@ def add_missing_request_bodies(spec):
                 def prop_schema(t):
                     if t == "array":
                         return {"type": "array", "items": {"type": "object", "additionalProperties": True}}
+                    if t == "object":
+                        return {"type": "object", "additionalProperties": True}
                     return {"type": t}
 
                 # Don't clobber a schema the source spec already defines (e.g. SetCastDto).

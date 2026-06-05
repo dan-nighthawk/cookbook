@@ -20,7 +20,7 @@ layer in scenes, cast, soundtrack, your own media, and publishing.
 | 1 | [Sign up & get your token](01-signup/) | Create an account, confirm email, save a token to `.env` |
 | 2 | [Hello, world](02-hello-world/) ⭐ | **Fork Fruit Island** and **render → shareable link** |
 | 3 | [Create your own campaign](03-new-campaign/) | From a prompt: custom cast with uploaded portraits, a Ken Burns scene, render |
-| 4 | Add a new scene | Grow the movie scene by scene |
+| 4 | [Edit your movie](04-edit-movie/) | AI screenplay, then delete a scene, add a Narrator (cinematic voice) & an AI Guru |
 | 5 | Cast: characters, roles & images | AI cast, custom characters, portraits |
 | 6 | Soundtrack | Reuse, generate, or skip music |
 | 7 | Bring your own images | Upload art for a scene |
