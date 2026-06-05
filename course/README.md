@@ -23,7 +23,7 @@ layer in scenes, cast, soundtrack, your own media, and publishing.
 | 4 | [Edit your movie](04-edit-movie/) | AI screenplay, then delete a scene, add a Narrator (cinematic voice) & an AI Guru |
 | 5 | [Bring your own image + AI animation](05-byo-image/) | Upload a pre-rendered still, animate it with Kling, voice it with your Narrator |
 | 6 | [Add a pre-rendered intro clip](06-intro-clip/) | Upload your own opening video and prepend it as scene 1 |
-| 7 | Soundtrack | Reuse, generate, or skip music |
+| 7 | [Soundtrack](07-soundtrack/) | Upload your own music or compose an AI score (and reuse or skip) |
 | 8 | Publish to social | Connect a network and post |
 | 9 | Advanced | Basic vs Pro mode, progress & recovery |
 
