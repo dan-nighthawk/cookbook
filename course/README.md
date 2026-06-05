@@ -22,11 +22,10 @@ layer in scenes, cast, soundtrack, your own media, and publishing.
 | 3 | [Create your own campaign](03-new-campaign/) | From a prompt: custom cast with uploaded portraits, a Ken Burns scene, render |
 | 4 | [Edit your movie](04-edit-movie/) | AI screenplay, then delete a scene, add a Narrator (cinematic voice) & an AI Guru |
 | 5 | [Bring your own image + AI animation](05-byo-image/) | Upload a pre-rendered still, animate it with Kling, voice it with your Narrator |
-| 6 | Soundtrack | Reuse, generate, or skip music |
-| 7 | Bring your own images | Upload art for a scene |
-| 8 | Bring your own clips | Drop in prerendered video |
-| 9 | Publish to social | Connect a network and post |
-| 10 | Advanced | Basic vs Pro mode, progress & recovery |
+| 6 | [Add a pre-rendered intro clip](06-intro-clip/) | Upload your own opening video and prepend it as scene 1 |
+| 7 | Soundtrack | Reuse, generate, or skip music |
+| 8 | Publish to social | Connect a network and post |
+| 9 | Advanced | Basic vs Pro mode, progress & recovery |
 
 ## Setup
 
