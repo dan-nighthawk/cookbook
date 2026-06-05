@@ -1,21 +1,39 @@
-# Lesson 1 — Sign up & get your token
+# Lesson 1 — Sign up & get a Personal Access Token
 
-Create an account, confirm your email, and save a Bearer token to `course/.env` so
-every later lesson can authenticate.
+Create an account, confirm your email, and mint a **Personal Access Token (PAT)** —
+a **non-expiring** key saved to `course/.env`. Every later lesson uses the PAT, so
+there's no more signing in.
+
+Every step in this course can be done three ways — in the **YakYak web app (GUI)**,
+with **plain REST** (`curl`), or with the **SDK clients (JavaScript / Python)**. The
+screencast below shows the GUI; the runnable scripts that follow do exactly the same
+thing via REST and the SDK. Pick whichever you prefer — they're interchangeable.
+
+> Why a PAT and not the login JWT? The token from `login-by-email` is a short-lived
+> session token. A PAT (`yy_live_…`) doesn't expire, so the course only authenticates
+> once.
+
+## Watch it
+
+<video src="../assets/screencast/01-signup.mp4" controls width="100%"></video>
+
+▶ If the video doesn't play inline, [open the screen recording](../assets/screencast/01-signup.mp4) —
+it walks through signing up and creating a PAT in the web app.
 
 ## What the script does
 
-1. `POST /users/create-by-email` — creates the account (a no-op if it already exists).
-2. Tells you to **click the confirmation link** emailed to you, then **polls
-   `login-by-email` every 10 seconds** until the account is confirmed.
-3. Writes `YAKYAK_TOKEN` and `YAKYAK_USER_ID` into `course/.env`.
-4. Smoke-tests the token by listing styles.
-
-> Most write calls need both the token **and** your `userId`, so we save both.
+1. `POST /users/create-by-email` — creates the account and emails a **confirmation link**.
+2. Polls `POST /users/login-by-email` every 10 s — it only returns a session token
+   **after** you click the link, so this doubles as "wait for confirmation".
+3. `POST /access-tokens` with that session token →
+   `{ name, scopes: ["video_creation","social_publishing","account_management"] }`
+   returns your **PAT**.
+4. Writes `YAKYAK_TOKEN` (the PAT) and `YAKYAK_USER_ID` to `course/.env`.
+5. Smoke-tests the PAT by listing styles.
 
 ## Run it
 
-First, from the `course/` folder, create your `.env`:
+From `course/`, create your `.env` first:
 
 ```bash
 cp .env.example .env
@@ -25,33 +43,31 @@ cp .env.example .env
 Then pick a language:
 
 ```bash
-# bash + curl
-bash 01-signup/signup.sh
-```
-
-```bash
-# JavaScript (uses the yakyak-sdk client)
-npm install
-node 01-signup/signup.js
-```
-
-```bash
-# Python (uses the yakyak-sdk client)
-pip install -r requirements.txt
-python 01-signup/signup.py
+bash 01-signup/signup.sh        # bash + curl
+npm install && node 01-signup/signup.js   # JavaScript (yakyak-sdk)
+pip install -r requirements.txt && python 01-signup/signup.py   # Python (yakyak-sdk)
 ```
 
 Each script pauses on "waiting for confirmation…" — open the email, click the link,
-and it continues automatically and writes your token.
+and it continues, mints the PAT, and writes it to `.env`.
+
+## Managing tokens
+
+```bash
+# list your PATs (id, name, scopes, tokenHint)
+curl -s "$YAKYAK_API_BASE/access-tokens" -H "Authorization: Bearer $YAKYAK_TOKEN"
+# revoke one
+curl -s -X DELETE "$YAKYAK_API_BASE/access-tokens/<id>" -H "Authorization: Bearer $YAKYAK_TOKEN"
+```
 
 ## Notes
 
-- **Base URL is overridable.** `.env`'s `YAKYAK_API_BASE` (and the SDK's
-  `baseUrl`/`host`) point at `https://api.beta.yakyak.ai` for the tutorial; swap to
-  `https://api.yakyak.ai` for production.
-- **Already confirmed?** The login poll succeeds on the first try and you're done.
-- **SDK version.** The JS/Python scripts need `yakyak-sdk` ≥ 0.0.5 (see the course
-  [README](../README.md#prerequisite-sdk-005)).
+- **Scopes**: `video_creation` (campaigns/episodes), `social_publishing` (posting),
+  `account_management`. The course requests all three.
+- **Base URL is overridable** — `.env`'s `YAKYAK_API_BASE` and the SDK's
+  `baseUrl`/`host` point at beta; swap to `https://api.yakyak.ai` for production.
+- The PAT is shown **once** at creation — that's why we save it to `.env` immediately.
+- JS/Python need `yakyak-sdk` ≥ 0.0.5 (see the course [README](../README.md#2-prerequisite-sdk--005)).
 
 ---
 

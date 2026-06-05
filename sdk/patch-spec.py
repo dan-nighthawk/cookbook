@@ -254,6 +254,31 @@ def add_post_created_responses(spec):
     return added
 
 
+def add_pat_routes(spec):
+    """Add the Personal Access Token routes the live spec omits.
+
+    The web app creates non-expiring PATs via `POST /access-tokens` (body =
+    CreateAccessTokenDto, response = { token, metadata }), but the route isn't in
+    the published spec, so the generated SDK can't expose it. Add it under the
+    Users tag so it surfaces as `client.users.createAccessToken({...})`.
+    """
+    paths = spec.setdefault("paths", {})
+    if "/access-tokens" in paths:
+        return 0
+    obj = {"type": "object", "additionalProperties": True}
+    paths["/access-tokens"] = {
+        "post": {
+            "tags": ["users"],
+            "operationId": "UsersController_createAccessToken",
+            "summary": "Create a personal access token (non-expiring) — added by sdk/patch-spec.py",
+            "requestBody": {"required": True, "content": {"application/json": {
+                "schema": {"$ref": "#/components/schemas/CreateAccessTokenDto"}}}},
+            "responses": {"201": {"description": "Created", "content": {"application/json": {"schema": obj}}}},
+        },
+    }
+    return 1
+
+
 def collect_schema_refs(node, refs):
     """Collect every `#/components/schemas/<name>` reference in the document."""
     prefix = "#/components/schemas/"
@@ -318,6 +343,9 @@ def main():
     #     so the strict Python generator deserializes the real status code.
     created = add_post_created_responses(spec)
 
+    # 1e. Add the Personal Access Token route the live spec omits.
+    pat = add_pat_routes(spec)
+
     # 2. Stub any referenced-but-undefined schema so $refs resolve and the
     #    generator produces a (permissive) model instead of a dangling import.
     referenced = set()
@@ -342,6 +370,7 @@ def main():
     print(f"  added body schema to {bodies} success response(s)")
     print(f"  added request body to {named_reqs} named + {generic_reqs} generic operation(s)")
     print(f"  mapped 201 on {created} POST operation(s)")
+    print(f"  added {pat} PAT route(s)")
     print(f"  stubbed {len(missing)} missing schema(s): {missing or 'none'}")
 
 
