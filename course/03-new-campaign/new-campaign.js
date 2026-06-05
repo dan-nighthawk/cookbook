@@ -18,15 +18,23 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const yak = new YakYakClient({ baseUrl: base, token });
 
 // Multipart upload isn't a JSON call, so use fetch + FormData directly.
+// The upload occasionally returns an empty body, so retry until we get a URL.
 async function uploadPortrait(path, campaignId) {
-  const fd = new FormData();
-  fd.append("file", new Blob([await readFile(path)], { type: "image/png" }), basename(path));
-  fd.append("userId", userId);
-  fd.append("campaignId", campaignId);
-  const res = await fetch(base + "/workflow/upload-cast-character-image",
-    { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
-  if (!res.ok) throw new Error(`upload failed: ${res.status}`);
-  return (await res.json()).imageUrl;
+  const bytes = await readFile(path);
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      const fd = new FormData();
+      fd.append("file", new Blob([bytes], { type: "image/png" }), basename(path));
+      fd.append("userId", userId);
+      fd.append("campaignId", campaignId);
+      const res = await fetch(base + "/workflow/upload-cast-character-image",
+        { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
+      const url = res.ok ? (await res.json().catch(() => ({}))).imageUrl : null;
+      if (url) return url;
+    } catch { /* retry */ }
+    await new Promise((r) => setTimeout(r, 2000));
+  }
+  throw new Error(`upload failed for ${path}`);
 }
 
 async function waitScene(sceneId, type) { // type is also the rerun step: image|movie|burn

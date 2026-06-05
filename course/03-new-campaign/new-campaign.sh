@@ -21,9 +21,21 @@ echo "campaign: $CAMPAIGN_ID"
 MOVIE_ID=$(api POST /workflow/start-campaign "{\"campaignId\":\"$CAMPAIGN_ID\"}" | field movieId)
 echo "movie: $MOVIE_ID"
 
-# 3. Upload two character portraits (multipart). 💸 No AI image gen — your own art.
-upload() { curl -s -X POST "$YAKYAK_API_BASE/workflow/upload-cast-character-image" -H "$AUTH" \
-  -F "file=@$1;type=image/png" -F "userId=$YAKYAK_USER_ID" -F "campaignId=$CAMPAIGN_ID" | field imageUrl; }
+# 3. Upload two character portraits (multipart). ✅ No AI image gen — your own art.
+# The upload occasionally returns an empty body, so retry until we get a URL.
+upload() {
+  local url=""
+  for _ in 1 2 3 4 5; do
+    url=$(curl -s -X POST "$YAKYAK_API_BASE/workflow/upload-cast-character-image" -H "$AUTH" \
+      -F "file=@$1;type=image/png" -F "userId=$YAKYAK_USER_ID" -F "campaignId=$CAMPAIGN_ID" \
+      | python3 -c "import sys,json
+try: print(json.load(sys.stdin).get('imageUrl') or '')
+except Exception: print('')")
+    [ -n "$url" ] && { printf '%s' "$url"; return 0; }
+    sleep 2
+  done
+  echo "upload failed for $1" >&2; return 1
+}
 CAST_IMGS=( "$ROOT"/assets/cast/*.png )
 IMG_HERO=$(upload "${CAST_IMGS[0]}"); echo "hero portrait uploaded"
 IMG_VILLAIN=$(upload "${CAST_IMGS[1]}"); echo "villain portrait uploaded"

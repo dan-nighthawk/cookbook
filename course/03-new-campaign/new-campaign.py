@@ -35,12 +35,21 @@ def D(x):
 
 
 def upload_portrait(path, campaign_id):
-    r = requests.post(f"{BASE}/workflow/upload-cast-character-image",
-        headers={"Authorization": f"Bearer {TOKEN}"},
-        files={"file": (os.path.basename(path), open(path, "rb"), "image/png")},
-        data={"userId": USER, "campaignId": campaign_id})
-    r.raise_for_status()
-    return r.json()["imageUrl"]
+    # The upload occasionally returns an empty body, so retry until we get a URL.
+    for _ in range(5):
+        try:
+            r = requests.post(f"{BASE}/workflow/upload-cast-character-image",
+                headers={"Authorization": f"Bearer {TOKEN}"},
+                files={"file": (os.path.basename(path), open(path, "rb"), "image/png")},
+                data={"userId": USER, "campaignId": campaign_id})
+            if r.ok:
+                url = r.json().get("imageUrl")
+                if url:
+                    return url
+        except Exception:
+            pass
+        time.sleep(2)
+    raise RuntimeError(f"upload failed for {path}")
 
 
 def wait_scene(scene_id, step):  # step is also the rerun "from" value: image|movie|burn
