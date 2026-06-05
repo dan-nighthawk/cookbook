@@ -1,23 +1,61 @@
 """Lesson 1 (Python, yakyak-sdk): sign up, confirm email, then mint a non-expiring
-Personal Access Token (PAT) and save it to .env. Later lessons use the PAT — no re-auth.
+Personal Access Token (PAT) and save it to .env. If YAKYAK_PASSWORD is blank, a strong
+password is generated and saved to .env (use it to sign into the web app too).
+Later lessons use the PAT — no re-auth.
 
 Run:  pip install -r requirements.txt && python 01-signup/signup.py   (from the course/ folder)
 """
 import os
 import re
+import secrets
+import string
 import time
 
 from yakyak_sdk import (ApiClient, Configuration, CreateAccessTokenDto,
                         CreateByEmailDto, DataApi, LoginByEmailDto, UsersApi)
 
 ENV_FILE = os.path.join(os.path.dirname(__file__), "..", ".env")
-env = {}
-for line in open(ENV_FILE):
-    line = line.strip()
-    if line and not line.startswith("#") and "=" in line:
-        k, v = line.split("=", 1)
-        env[k.strip()] = v.strip()
-base, email, password = env["YAKYAK_API_BASE"], env["YAKYAK_EMAIL"], env["YAKYAK_PASSWORD"]
+
+
+def read_env():
+    env = {}
+    for line in open(ENV_FILE):
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, v = line.split("=", 1)
+            v = v.strip()
+            if len(v) >= 2 and v[0] in "'\"" and v[-1] == v[0]:
+                v = v[1:-1]
+            env[k.strip()] = v
+    return env
+
+
+def save_env(key, value, quote=False):
+    v = "'" + value + "'" if quote else value
+    txt = open(ENV_FILE).read()
+    pat = re.compile(rf"^{key}=.*$", re.M)
+    line = f"{key}={v}"
+    txt = pat.sub(lambda m: line, txt) if pat.search(txt) else txt + ("" if txt.endswith("\n") else "\n") + line + "\n"
+    open(ENV_FILE, "w").write(txt)
+
+
+def gen_password():
+    """Length 14, including A-Z, a-z, 0-9, and a special from !@#$%^&*."""
+    pools = [string.ascii_uppercase, string.ascii_lowercase, string.digits, "!@#$%^&*"]
+    allc = "".join(pools)
+    chars = [secrets.choice(p) for p in pools]
+    chars += [secrets.choice(allc) for _ in range(14 - len(chars))]
+    secrets.SystemRandom().shuffle(chars)
+    return "".join(chars)
+
+
+env = read_env()
+base, email = env["YAKYAK_API_BASE"], env["YAKYAK_EMAIL"]
+password = env.get("YAKYAK_PASSWORD", "")
+if not password:
+    password = gen_password()
+    save_env("YAKYAK_PASSWORD", password, quote=True)
+    print("🔐 Generated a password and saved it to course/.env (use it to sign into the web app too).")
 
 anon = UsersApi(ApiClient(Configuration(host=base)))  # host is overridable (beta vs prod)
 
@@ -51,16 +89,8 @@ created = users.users_controller_create_access_token(CreateAccessTokenDto.from_d
 }))
 pat = created["token"] if isinstance(created, dict) else created.to_dict()["token"]
 
-
-def set_key(text, key, value):
-    pat_re = re.compile(rf"^{key}=.*$", re.M)
-    return pat_re.sub(f"{key}={value}", text) if pat_re.search(text) else text + f"\n{key}={value}\n"
-
-
-txt = open(ENV_FILE).read()
-txt = set_key(txt, "YAKYAK_TOKEN", pat)
-txt = set_key(txt, "YAKYAK_USER_ID", login.user_id)
-open(ENV_FILE, "w").write(txt)
+save_env("YAKYAK_TOKEN", pat)
+save_env("YAKYAK_USER_ID", login.user_id)
 print("✅ PAT saved to course/.env (it doesn't expire — no re-auth in later lessons).")
 
 data = DataApi(ApiClient(Configuration(host=base, access_token=pat)))
