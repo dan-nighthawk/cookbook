@@ -15,7 +15,7 @@ const env = Object.fromEntries(
 );
 const { YAKYAK_API_BASE: base, YAKYAK_TOKEN: token, YAKYAK_USER_ID: userId } = env;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const yak = new YakYakClient({ baseUrl: base, token });
+const yak = new YakYakClient({ baseUrl: base, token, userId });
 const finalUrl = async (movieId) => {
   const got = await yak.workflow.getMovie({ movieId });
   return (got.movie ?? got).finalMovieUrl || "";
@@ -28,25 +28,9 @@ const { movieId } = await yak.workflow.forkCampaign({ forkCampaignDto: {
 console.log("movie:", movieId);
 const oldUrl = await finalUrl(movieId); // wait for this to change after re-render
 
-// 2. Upload the pre-rendered clip to your media library (multipart; retry on empty body).
+// 2. Upload the pre-rendered clip to your media library — uploads.userMedia returns { id, url }.
 const clip = join(ROOT, "assets/scenes/opening.mp4");
-async function uploadMedia() {
-  const bytes = await readFile(clip);
-  for (let i = 0; i < 5; i++) {
-    try {
-      const fd = new FormData();
-      fd.append("file", new Blob([bytes], { type: "video/mp4" }), "opening.mp4");
-      fd.append("userId", userId); fd.append("filename", "opening.mp4");
-      const res = await fetch(base + "/workflow/upload-user-media",
-        { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
-      const d = res.ok ? await res.json().catch(() => ({})) : {};
-      if (d.id && d.url) return d;
-    } catch { /* retry */ }
-    await sleep(2000);
-  }
-  throw new Error("media upload failed");
-}
-const media = await uploadMedia();
+const media = await yak.uploads.userMedia({ file: await readFile(clip), filename: "opening.mp4" });
 console.log("uploaded clip:", media.id);
 
 // 3. Insert it as the first scene (the intro).

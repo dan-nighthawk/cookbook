@@ -31,8 +31,9 @@ the dramatic trailer voice from `GET /data/voice`). ✅ (text only)
    Kling animates a still into real video (vs. the cheap **Ken Burns** pan/zoom). 💸
 2. **Create an empty scene** — `create-scene { …, leadCast: "Narrator", generate: false }`.
    `generate:false` is the key: **no AI still is drawn**, because we're bringing our own. ✅
-3. **Upload your image** — `upload-scene-image` (multipart `file` + `sceneId`) sets the
-   scene's picture to [`assets/scenes/asian-fruit-lady.jpeg`](../assets/scenes/). ✅
+3. **Upload your image** — `upload-scene-image` (multipart `file` + `sceneId`, wrapped by
+   `yak.uploads.sceneImage(...)`) sets the scene's picture to
+   [`assets/scenes/asian-fruit-lady.jpeg`](../assets/scenes/). ✅
 4. **Voice it** — `regen-scene-asset { asset: "subtitle", from: "subtitle" }` renders the
    Narrator's voice-over of the dialogue plus the caption track. ✅
 5. **Animate it** — `rerun-scene { from: "movie" }` runs **Kling** over your still. 💸
@@ -69,7 +70,7 @@ file — a `1:1` image matches the campaign's `aspectRatio`.
   `animationType: "kenburns"` and skip step 1.
 - **Voices carry across episodes.** The Narrator here reuses Lesson 4's "Cinema" voice;
   any `voiceId` from `GET /data/voice` works.
-- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
+- Needs `yakyak-sdk` ≥ 0.0.7 (see the course [README](../README.md#2-prerequisite-sdk--007)).
 
 ---
 

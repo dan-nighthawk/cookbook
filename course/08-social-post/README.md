@@ -78,8 +78,4 @@ continues automatically, ending with your published link.
   before running it for real.
 - **Manage connections:** `GET /social/connected-networks/{userId}` to list,
   `POST /social/disconnect-network` to remove one.
-- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
-
----
-
-**Next:** Lesson 9 — advanced: basic vs pro mode, progress & recovery.
+- Needs `yakyak-sdk` ≥ 0.0.7 (see the course [README](../README.md#2-prerequisite-sdk--007)).

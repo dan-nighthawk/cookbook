@@ -6,7 +6,7 @@ import { YakYakClient } from "yakyak-sdk";
 import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { dirname, join, basename } from "node:path";
+import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const env = Object.fromEntries(
@@ -16,27 +16,7 @@ const env = Object.fromEntries(
 );
 const { YAKYAK_API_BASE: base, YAKYAK_TOKEN: token, YAKYAK_USER_ID: userId } = env;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const yak = new YakYakClient({ baseUrl: base, token });
-
-// Multipart upload isn't a JSON call, so use fetch + FormData directly.
-// The upload occasionally returns an empty body, so retry until we get a URL.
-async function uploadPortrait(path, campaignId) {
-  const bytes = await readFile(path);
-  for (let attempt = 0; attempt < 5; attempt++) {
-    try {
-      const fd = new FormData();
-      fd.append("file", new Blob([bytes], { type: "image/png" }), basename(path));
-      fd.append("userId", userId);
-      fd.append("campaignId", campaignId);
-      const res = await fetch(base + "/workflow/upload-cast-character-image",
-        { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
-      const url = res.ok ? (await res.json().catch(() => ({}))).imageUrl : null;
-      if (url) return url;
-    } catch { /* retry */ }
-    await new Promise((r) => setTimeout(r, 2000));
-  }
-  throw new Error(`upload failed for ${path}`);
-}
+const yak = new YakYakClient({ baseUrl: base, token, userId });
 
 async function waitMovie(movieId, type) { // poll a movie-level execution until it completes
   for (let i = 0; i < 120; i++) {
@@ -61,10 +41,10 @@ console.log("campaign:", campaignId);
 const { movieId } = await yak.workflow.startCampaign({ startCampaignDto: { campaignId } });
 console.log("movie:", movieId);
 
-// 4. Upload portraits (your own art, no AI image gen)
+// 4. Upload portraits (your own art, no AI image gen) — uploads.castImage hides the multipart POST
 const imgs = (await import("node:fs")).readdirSync(join(ROOT, "assets/cast")).filter((f) => f.endsWith(".png"));
-const heroImg = await uploadPortrait(join(ROOT, "assets/cast", imgs[0]), campaignId);
-const villainImg = await uploadPortrait(join(ROOT, "assets/cast", imgs[1]), campaignId);
+const heroImg = await yak.uploads.castImage({ campaignId, file: await readFile(join(ROOT, "assets/cast", imgs[0])), filename: imgs[0] });
+const villainImg = await yak.uploads.castImage({ campaignId, file: await readFile(join(ROOT, "assets/cast", imgs[1])), filename: imgs[1] });
 console.log("portraits uploaded");
 
 // 5. Custom cast (imageUrl links each portrait) + voices/fonts

@@ -7,10 +7,8 @@ Run:  pip install -r requirements.txt && python 07-soundtrack/soundtrack.py  (fr
 import os
 import time
 
-import requests
-from yakyak_sdk import (ApiClient, Configuration, ExportRenderDto,
-                        ForkCampaignDto, SetSoundtrackAudioDto,
-                        SoundtrackVolumeRequestDto, WorkflowApi)
+from yakyak_sdk import (ExportRenderDto, ForkCampaignDto, SetSoundtrackAudioDto,
+                        SoundtrackVolumeRequestDto, YakYakClient)
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 env = {}
@@ -21,8 +19,8 @@ for line in open(os.path.join(ROOT, ".env")):
         env[k.strip()] = v.strip()
 BASE, TOKEN, USER = env["YAKYAK_API_BASE"], env["YAKYAK_TOKEN"], env["YAKYAK_USER_ID"]
 TUT_CAMPAIGN, TUT_MOVIE = env["YAKYAK_TUTORIAL_CAMPAIGN_ID"], env["YAKYAK_TUTORIAL_MOVIE_ID"]
-client = ApiClient(Configuration(host=BASE, access_token=TOKEN))
-wf = WorkflowApi(client)
+yak = YakYakClient(base_url=BASE, token=TOKEN, user_id=USER)
+wf = yak.workflow
 
 
 def D(x):
@@ -68,26 +66,9 @@ print("movie:", movie_id)
 url = final_url(movie_id)  # current render; each export updates it
 
 # ================= A) Bring your own soundtrack =================
-# 1. Upload your music file (multipart: file, movieId). Retry on empty body. ✅
+# 1. Upload your music file — uploads.soundtrack hides the multipart POST. ✅
 track = os.path.join(ROOT, "assets/scenes/Five Years in a Turkish Prison.mp3")
-
-
-def upload_soundtrack():
-    for _ in range(5):
-        try:
-            r = requests.post(f"{BASE}/workflow/upload-soundtrack-audio",
-                headers={"Authorization": f"Bearer {TOKEN}"},
-                files={"file": (os.path.basename(track), open(track, "rb"), "audio/mpeg")},
-                data={"movieId": movie_id})
-            if r.ok and r.json().get("audioPath"):
-                return r.json()["audioPath"]
-        except Exception:
-            pass
-        time.sleep(2)
-    raise RuntimeError("soundtrack upload failed")
-
-
-audio_path = upload_soundtrack()
+audio_path = yak.uploads.soundtrack(movie_id, track)
 print("uploaded your track:", audio_path.split("/")[-1])
 # 2. Make the uploaded track the active soundtrack, and set its volume.
 wf.workflow_controller_set_soundtrack_audio_path(SetSoundtrackAudioDto.from_dict({"movieId": movie_id, "audioPath": audio_path}))

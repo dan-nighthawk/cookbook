@@ -5,7 +5,7 @@ import { YakYakClient } from "yakyak-sdk";
 import { readFileSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
-import { dirname, join, basename } from "node:path";
+import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const env = Object.fromEntries(
@@ -15,24 +15,8 @@ const env = Object.fromEntries(
 );
 const { YAKYAK_API_BASE: base, YAKYAK_TOKEN: token, YAKYAK_USER_ID: userId } = env;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const yak = new YakYakClient({ baseUrl: base, token });
+const yak = new YakYakClient({ baseUrl: base, token, userId });
 
-async function uploadPortrait(path, campaignId) {
-  const bytes = await readFile(path);
-  for (let i = 0; i < 5; i++) {
-    try {
-      const fd = new FormData();
-      fd.append("file", new Blob([bytes], { type: "image/png" }), basename(path));
-      fd.append("userId", userId); fd.append("campaignId", campaignId);
-      const res = await fetch(base + "/workflow/upload-cast-character-image",
-        { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
-      const url = res.ok ? (await res.json().catch(() => ({}))).imageUrl : null;
-      if (url) return url;
-    } catch { /* retry */ }
-    await sleep(2000);
-  }
-  throw new Error(`upload failed for ${path}`);
-}
 async function waitMovie(movieId, type) {
   for (let i = 0; i < 60; i++) {
     const prog = await yak.workflow.getMovieProgress({ movieId });
@@ -56,8 +40,8 @@ const { campaignId } = await yak.workflow.createCampaign({ createCampaignDto: {
 const { movieId } = await yak.workflow.startCampaign({ startCampaignDto: { campaignId } });
 console.log("movie:", movieId);
 const castImgs = (await readdir(join(ROOT, "assets/cast"))).filter((f) => f.endsWith(".png"));
-const heroImg = await uploadPortrait(join(ROOT, "assets/cast", castImgs[0]), campaignId);
-const villainImg = await uploadPortrait(join(ROOT, "assets/cast", castImgs[1]), campaignId);
+const heroImg = await yak.uploads.castImage({ campaignId, file: await readFile(join(ROOT, "assets/cast", castImgs[0])), filename: castImgs[0] });
+const villainImg = await yak.uploads.castImage({ campaignId, file: await readFile(join(ROOT, "assets/cast", castImgs[1])), filename: castImgs[1] });
 const baseCast = [
   { name: "Mango Max", role: "Protagonist", description: "Our charming mango hero", imageUrl: heroImg, sortOrder: 0 },
   { name: "Chef Blendero", role: "Antagonist", description: "The evil chef who blends fruit into smoothies", imageUrl: villainImg, sortOrder: 1 },

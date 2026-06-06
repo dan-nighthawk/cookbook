@@ -21,8 +21,8 @@ it walks through uploading the clip and inserting it as the intro in the web app
 ## What the script does
 
 1. `POST /workflow/fork-campaign` → a movie to add the intro to (instant, no gen).
-2. `POST /workflow/upload-user-media` (multipart: `file`, `userId`, `filename`) →
-   uploads the clip to your library and returns `{ id, url, … }`.
+2. `POST /workflow/upload-user-media` (multipart: `file`, `userId`, `filename`; wrapped by
+   `yak.uploads.userMedia(...)`) → uploads the clip to your library and returns `{ id, url, … }`.
 3. `POST /workflow/insert-media-scene { movieId, sceneNumber: 1, mediaUrl, title,
    mediaId }` → inserts the clip as the **first** scene; the rest shift down.
 4. `POST /workflow/export-render { force: true }` → poll `get-movie-progress`, then
@@ -52,8 +52,9 @@ forked scenes.
   *source's* finished URL; `export-render` produces a new one in your bucket a moment
   after `movieConcat` completes (it also muxes the soundtrack), so the scripts poll
   until it differs.
-- Uploads occasionally return an empty body — the scripts retry until they get a URL.
-- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
+- Uploads occasionally return an empty body — the SDK's `uploads.*` helpers (and the bash
+  `curl` loop) retry until they get a URL.
+- Needs `yakyak-sdk` ≥ 0.0.7 (see the course [README](../README.md#2-prerequisite-sdk--007)).
 
 ---
 

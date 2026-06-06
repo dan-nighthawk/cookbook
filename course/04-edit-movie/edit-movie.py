@@ -7,11 +7,9 @@ import glob
 import os
 import time
 
-import requests
-from yakyak_sdk import (ApiClient, Configuration, CreateCampaignDto, DataApi,
-                        DeleteSceneDto, GenCustomCastImageDto, GenMovieCastDto,
-                        GenMovieScreenplayRequestDto, SaveMovieCustomCastDto,
-                        SetCastDto, StartCampaignDto, WorkflowApi)
+from yakyak_sdk import (CreateCampaignDto, DeleteSceneDto, GenCustomCastImageDto,
+                        GenMovieCastDto, GenMovieScreenplayRequestDto, SaveMovieCustomCastDto,
+                        SetCastDto, StartCampaignDto, YakYakClient)
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 env = {}
@@ -21,8 +19,8 @@ for line in open(os.path.join(ROOT, ".env")):
         k, v = line.split("=", 1)
         env[k.strip()] = v.strip()
 BASE, TOKEN, USER = env["YAKYAK_API_BASE"], env["YAKYAK_TOKEN"], env["YAKYAK_USER_ID"]
-client = ApiClient(Configuration(host=BASE, access_token=TOKEN))
-wf, data = WorkflowApi(client), DataApi(client)
+yak = YakYakClient(base_url=BASE, token=TOKEN, user_id=USER)
+wf, data = yak.workflow, yak.data
 
 
 def D(x):
@@ -31,21 +29,6 @@ def D(x):
     if isinstance(x, list):
         return [D(i) for i in x]
     return x
-
-
-def upload_portrait(path, campaign_id):
-    for _ in range(5):
-        try:
-            r = requests.post(f"{BASE}/workflow/upload-cast-character-image",
-                headers={"Authorization": f"Bearer {TOKEN}"},
-                files={"file": (os.path.basename(path), open(path, "rb"), "image/png")},
-                data={"userId": USER, "campaignId": campaign_id})
-            if r.ok and r.json().get("imageUrl"):
-                return r.json()["imageUrl"]
-        except Exception:
-            pass
-        time.sleep(2)
-    raise RuntimeError(f"upload failed for {path}")
 
 
 def wait_movie(movie_id, step):
@@ -78,8 +61,8 @@ campaign_id = D(wf.workflow_controller_create_campaign(CreateCampaignDto.from_di
 movie_id = D(wf.workflow_controller_start_campaign(StartCampaignDto.from_dict({"campaignId": campaign_id})))["movieId"]
 print("movie:", movie_id)
 imgs = sorted(glob.glob(os.path.join(ROOT, "assets/cast", "*.png")))
-hero_img = upload_portrait(imgs[0], campaign_id)
-villain_img = upload_portrait(imgs[1], campaign_id)
+hero_img = yak.uploads.cast_image(campaign_id, imgs[0])
+villain_img = yak.uploads.cast_image(campaign_id, imgs[1])
 base_cast = [
     {"name": "Mango Max", "role": "Protagonist", "description": "Our charming mango hero", "imageUrl": hero_img, "sortOrder": 0},
     {"name": "Chef Blendero", "role": "Antagonist", "description": "The evil chef who blends fruit into smoothies", "imageUrl": villain_img, "sortOrder": 1},

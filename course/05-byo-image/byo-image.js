@@ -17,28 +17,11 @@ const env = Object.fromEntries(
 );
 const { YAKYAK_API_BASE: base, YAKYAK_TOKEN: token, YAKYAK_USER_ID: userId } = env;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const yak = new YakYakClient({ baseUrl: base, token });
+const yak = new YakYakClient({ baseUrl: base, token, userId });
 
 const IMAGE = join(ROOT, "assets/scenes/asian-fruit-lady.jpeg");   // <- your own pre-rendered still
 const DIALOGUE = "Once upon a time there was a lady who thought her fruits were alive";
 
-// Upload a scene image straight over HTTP (multipart) — same trick Lesson 3/4 use for portraits.
-async function uploadSceneImage(path, sceneId) {
-  const bytes = await readFile(path);
-  for (let i = 0; i < 5; i++) {
-    try {
-      const fd = new FormData();
-      fd.append("file", new Blob([bytes], { type: "image/jpeg" }), basename(path));
-      fd.append("sceneId", sceneId);
-      const res = await fetch(base + "/workflow/upload-scene-image",
-        { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
-      const url = res.ok ? (await res.json().catch(() => ({}))).imageUrl : null;
-      if (url) return url;
-    } catch { /* retry */ }
-    await sleep(2000);
-  }
-  throw new Error(`scene image upload failed for ${path}`);
-}
 // Poll one scene asset's status straight off get-movie.
 async function sceneStatus(movieId, sceneId, key) {
   const m = await yak.workflow.getMovie({ movieId });
@@ -91,7 +74,7 @@ const sceneId = scene.id;
 console.log("scene:", sceneId);
 
 // ---- 3) Upload your own pre-rendered still as the scene image ✅ ----
-const imgUrl = await uploadSceneImage(IMAGE, sceneId);
+const imgUrl = await yak.uploads.sceneImage({ sceneId, file: await readFile(IMAGE), filename: basename(IMAGE) });
 console.log("uploaded your image:", imgUrl);
 
 // ---- 4) Voice the scene: generate the Narrator's voice-over + captions ✅ ----

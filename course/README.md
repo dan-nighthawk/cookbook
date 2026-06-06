@@ -25,7 +25,6 @@ layer in scenes, cast, soundtrack, your own media, and publishing.
 | 6 | [Add a pre-rendered intro clip](06-intro-clip/) | Upload your own opening video and prepend it as scene 1 |
 | 7 | [Soundtrack](07-soundtrack/) | Upload your own music or compose an AI score (and reuse or skip) |
 | 8 | [Publish to social](08-social-post/) | Connect a network and post your movie ([watch the result](https://www.youtube.com/watch?v=TBq5_CwhxdI)) |
-| 9 | Advanced | Basic vs Pro mode, progress & recovery |
 
 ## Setup
 
@@ -53,10 +52,10 @@ YAKYAK_TUTORIAL_MOVIE_ID=                     # the episode Lesson 2 forks
 > SDK clients take it as a constructor option (`new YakYakClient({ baseUrl })` /
 > `Configuration(host=…)`), so you can point the same scripts at beta or prod.
 
-### 2. Prerequisite: SDK ≥ 0.0.6
+### 2. Prerequisite: SDK ≥ 0.0.7
 
 The JS/Python lessons call the SDK's workflow methods (e.g.
-`client.workflow.createCampaign({ … })`). Those require **`yakyak-sdk` 0.0.6+**,
+`client.workflow.createCampaign({ … })`). Those require **`yakyak-sdk` 0.0.7+**,
 which adds request bodies the earlier builds were missing (see
 [`sdk/patch-spec.py`](../sdk/patch-spec.py)). Install per language:
 

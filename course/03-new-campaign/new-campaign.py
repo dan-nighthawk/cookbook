@@ -9,10 +9,9 @@ import os
 import time
 
 import requests
-from yakyak_sdk import (ApiClient, Configuration, CreateCampaignDto, DataApi,
-                        ExportRenderDto, GenMovieCastDto, GenMovieScreenplayRequestDto,
-                        SaveMovieCustomCastDto, SetCastDto, SetSoundtrackAudioDto,
-                        StartCampaignDto, WorkflowApi)
+from yakyak_sdk import (CreateCampaignDto, ExportRenderDto, GenMovieCastDto,
+                        GenMovieScreenplayRequestDto, SaveMovieCustomCastDto, SetCastDto,
+                        SetSoundtrackAudioDto, StartCampaignDto, YakYakClient)
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 env = {}
@@ -22,9 +21,8 @@ for line in open(os.path.join(ROOT, ".env")):
         k, v = line.split("=", 1)
         env[k.strip()] = v.strip()
 BASE, TOKEN, USER = env["YAKYAK_API_BASE"], env["YAKYAK_TOKEN"], env["YAKYAK_USER_ID"]
-client = ApiClient(Configuration(host=BASE, access_token=TOKEN))
-wf = WorkflowApi(client)
-data = DataApi(client)
+yak = YakYakClient(base_url=BASE, token=TOKEN, user_id=USER)
+wf, data = yak.workflow, yak.data
 
 
 def D(x):
@@ -34,24 +32,6 @@ def D(x):
     if isinstance(x, list):
         return [D(i) for i in x]
     return x
-
-
-def upload_portrait(path, campaign_id):
-    # The upload occasionally returns an empty body, so retry until we get a URL.
-    for _ in range(5):
-        try:
-            r = requests.post(f"{BASE}/workflow/upload-cast-character-image",
-                headers={"Authorization": f"Bearer {TOKEN}"},
-                files={"file": (os.path.basename(path), open(path, "rb"), "image/png")},
-                data={"userId": USER, "campaignId": campaign_id})
-            if r.ok:
-                url = r.json().get("imageUrl")
-                if url:
-                    return url
-        except Exception:
-            pass
-        time.sleep(2)
-    raise RuntimeError(f"upload failed for {path}")
 
 
 def wait_movie(movie_id, step):  # poll a movie-level execution until it completes
@@ -78,10 +58,10 @@ print("campaign:", campaign_id)
 movie_id = D(wf.workflow_controller_start_campaign(StartCampaignDto.from_dict({"campaignId": campaign_id})))["movieId"]
 print("movie:", movie_id)
 
-# 4. upload portraits (your own art, no AI image gen)
+# 4. upload portraits (your own art, no AI image gen) — uploads.cast_image hides the multipart POST
 imgs = sorted(glob.glob(os.path.join(ROOT, "assets/cast", "*.png")))
-hero_img = upload_portrait(imgs[0], campaign_id)
-villain_img = upload_portrait(imgs[1], campaign_id)
+hero_img = yak.uploads.cast_image(campaign_id, imgs[0])
+villain_img = yak.uploads.cast_image(campaign_id, imgs[1])
 print("portraits uploaded")
 
 # 5. custom cast (imageUrl links each portrait) + voices/fonts

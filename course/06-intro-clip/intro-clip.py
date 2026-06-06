@@ -6,9 +6,7 @@ Run:  pip install -r requirements.txt && python 06-intro-clip/intro-clip.py  (fr
 import os
 import time
 
-import requests
-from yakyak_sdk import (ApiClient, Configuration, ExportRenderDto, ForkCampaignDto,
-                        InsertMediaSceneDto, WorkflowApi)
+from yakyak_sdk import ExportRenderDto, ForkCampaignDto, InsertMediaSceneDto, YakYakClient
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 env = {}
@@ -18,7 +16,8 @@ for line in open(os.path.join(ROOT, ".env")):
         k, v = line.split("=", 1)
         env[k.strip()] = v.strip()
 BASE, TOKEN, USER = env["YAKYAK_API_BASE"], env["YAKYAK_TOKEN"], env["YAKYAK_USER_ID"]
-wf = WorkflowApi(ApiClient(Configuration(host=BASE, access_token=TOKEN)))
+yak = YakYakClient(base_url=BASE, token=TOKEN, user_id=USER)
+wf = yak.workflow
 
 
 def D(x):
@@ -38,23 +37,9 @@ movie_id = D(wf.workflow_controller_fork_campaign(ForkCampaignDto.from_dict({
 print("movie:", movie_id)
 old_url = final_url(movie_id)  # wait for this to change after re-render
 
-# 2. Upload the pre-rendered clip to your media library (multipart; retry on empty body).
+# 2. Upload the pre-rendered clip to your media library — uploads.user_media returns {id, url}.
 clip = os.path.join(ROOT, "assets/scenes/opening.mp4")
-media = None
-for _ in range(5):
-    try:
-        r = requests.post(f"{BASE}/workflow/upload-user-media",
-            headers={"Authorization": f"Bearer {TOKEN}"},
-            files={"file": ("opening.mp4", open(clip, "rb"), "video/mp4")},
-            data={"userId": USER, "filename": "opening.mp4"})
-        if r.ok and r.json().get("id") and r.json().get("url"):
-            media = r.json()
-            break
-    except Exception:
-        pass
-    time.sleep(2)
-if not media:
-    raise SystemExit("media upload failed")
+media = yak.uploads.user_media(clip, "opening.mp4")
 print("uploaded clip:", media["id"])
 
 # 3. Insert it as the first scene (the intro).

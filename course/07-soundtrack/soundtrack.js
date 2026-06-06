@@ -16,7 +16,7 @@ const env = Object.fromEntries(
 );
 const { YAKYAK_API_BASE: base, YAKYAK_TOKEN: token, YAKYAK_USER_ID: userId } = env;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const yak = new YakYakClient({ baseUrl: base, token });
+const yak = new YakYakClient({ baseUrl: base, token, userId });
 const finalUrl = async (movieId) => {
   const got = await yak.workflow.getMovie({ movieId });
   return (got.movie ?? got).finalMovieUrl || "";
@@ -49,25 +49,9 @@ console.log("movie:", movieId);
 let url = await finalUrl(movieId); // current render; each export updates it
 
 // ================= A) Bring your own soundtrack =================
-// 1. Upload your music file (multipart: file, movieId). Retry on empty body. ✅
+// 1. Upload your music file — uploads.soundtrack hides the multipart POST. ✅
 const track = join(ROOT, "assets/scenes/Five Years in a Turkish Prison.mp3");
-async function uploadSoundtrack() {
-  const bytes = await readFile(track);
-  for (let i = 0; i < 5; i++) {
-    try {
-      const fd = new FormData();
-      fd.append("file", new Blob([bytes], { type: "audio/mpeg" }), basename(track));
-      fd.append("movieId", movieId);
-      const res = await fetch(base + "/workflow/upload-soundtrack-audio",
-        { method: "POST", headers: { Authorization: `Bearer ${token}` }, body: fd });
-      const d = res.ok ? await res.json().catch(() => ({})) : {};
-      if (d.audioPath) return d.audioPath;
-    } catch { /* retry */ }
-    await sleep(2000);
-  }
-  throw new Error("soundtrack upload failed");
-}
-const audioPath = await uploadSoundtrack();
+const audioPath = await yak.uploads.soundtrack({ movieId, file: await readFile(track), filename: basename(track) });
 console.log("uploaded your track:", audioPath.split("/").pop());
 // 2. Make the uploaded track the active soundtrack, and set its volume.
 await yak.workflow.setSoundtrackAudioPath({ setSoundtrackAudioDto: { movieId, audioPath } });

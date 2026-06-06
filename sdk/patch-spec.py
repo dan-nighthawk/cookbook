@@ -171,6 +171,16 @@ KNOWN_REQUEST_BODIES = {
         {"movieId": S, "audioPath": S}, ["movieId"]),
 }
 
+# multipart/form-data file-upload routes. These are NOT given a JSON request body (that
+# would mislabel them); the hand-written SDK `uploads.*` facade wraps them instead.
+UPLOAD_PATHS = {
+    "/workflow/upload-cast-character-image",
+    "/workflow/upload-scene-image",
+    "/workflow/upload-user-media",
+    "/workflow/upload-soundtrack-audio",
+    "/workflow/upload-scene-movie",
+}
+
 
 def add_missing_request_bodies(spec):
     """Inject request-body schemas for mutating operations that lack one.
@@ -189,6 +199,11 @@ def add_missing_request_bodies(spec):
             if method.lower() not in ("post", "put", "patch"):
                 continue
             if not isinstance(op, dict) or "requestBody" in op:
+                continue
+            # Upload routes are multipart/form-data — injecting a generic JSON body would
+            # mislabel them and produce generated methods that silently drop the file. Leave
+            # them body-less; the hand-written SDK `uploads.*` facade handles them instead.
+            if path in UPLOAD_PATHS:
                 continue
             known = KNOWN_REQUEST_BODIES.get((method.lower(), path))
             if known:

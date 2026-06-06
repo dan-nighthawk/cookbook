@@ -61,7 +61,7 @@ python 04-edit-movie/edit-movie.py     # Python (yakyak-sdk)
   the scripts poll `get-cast` until it shows up (and again until its portrait is ready).
 - `roleCounts` also takes `protagonists` / `antagonists` / `supporting` if you want the
   AI to invent more characters.
-- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
+- Needs `yakyak-sdk` ≥ 0.0.7 (see the course [README](../README.md#2-prerequisite-sdk--007)).
 
 ---
 

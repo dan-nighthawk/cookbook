@@ -73,8 +73,8 @@ whether you forked it or built it scene by scene. Next we make it yours.
   learning; delete extras later with `POST /workflow/delete-campaign`.
 - **SDK methods** map straight to the routes: `forkCampaign`, `exportRender`,
   `getMovieProgress`, `getMovie` (JS) / `workflow_controller_*` (Python).
-- The JS/Python versions need `yakyak-sdk` ≥ 0.0.6 — see the
-  [prerequisite](../README.md#2-prerequisite-sdk--006).
+- The JS/Python versions need `yakyak-sdk` ≥ 0.0.7 — see the
+  [prerequisite](../README.md#2-prerequisite-sdk--007).
 
 ---
 

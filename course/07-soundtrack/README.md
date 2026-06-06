@@ -29,8 +29,8 @@ it walks through uploading a track and generating an AI score in the web app.
 
 **A. Bring your own soundtrack**
 
-1. `POST /workflow/upload-soundtrack-audio` (multipart: `file`, `movieId`) → uploads your
-   `.mp3` and returns its `{ audioPath, audioUrl }`.
+1. `POST /workflow/upload-soundtrack-audio` (multipart: `file`, `movieId`; wrapped by
+   `yak.uploads.soundtrack(...)`) → uploads your `.mp3` and returns its `{ audioPath, audioUrl }`.
 2. `POST /workflow/set-soundtrack-audio { movieId, audioPath }` → makes that track the
    active soundtrack; `POST /workflow/set-soundtrack { movieId, volumePercentage }` sets
    its level.
@@ -75,7 +75,7 @@ You get two links: the same movie with your uploaded track, then with an AI scor
 - **Why render twice / wait for the URL to change?** A fork reports the *source's*
   finished URL; each `export-render` produces a new one a moment after `movieConcat`, so
   the scripts wait for `finalMovieUrl` to differ (same trick as Lesson 6).
-- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
+- Needs `yakyak-sdk` ≥ 0.0.7 (see the course [README](../README.md#2-prerequisite-sdk--007)).
 
 ---
 

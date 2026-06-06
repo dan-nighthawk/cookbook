@@ -8,6 +8,6 @@
     "02-hello-world": "node 02-hello-world/hello.js"
   },
   "dependencies": {
-    "yakyak-sdk": "^0.0.6"
+    "yakyak-sdk": "^0.0.7"
   }
 }

@@ -9,11 +9,9 @@ Run:  pip install -r requirements.txt && python 05-byo-image/byo-image.py  (from
 import os
 import time
 
-import requests
-from yakyak_sdk import (ApiClient, Configuration, CreateCampaignDto,
-                        CreateSceneDto, DataApi, ExportRenderDto, RerunSceneDto,
+from yakyak_sdk import (CreateCampaignDto, CreateSceneDto, ExportRenderDto, RerunSceneDto,
                         SaveMovieCustomCastDto, SetCastDto, StartCampaignDto,
-                        UpdateCampaignSettingsDto, WorkflowApi)
+                        UpdateCampaignSettingsDto, YakYakClient)
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 env = {}
@@ -23,8 +21,8 @@ for line in open(os.path.join(ROOT, ".env")):
         k, v = line.split("=", 1)
         env[k.strip()] = v.strip()
 BASE, TOKEN, USER = env["YAKYAK_API_BASE"], env["YAKYAK_TOKEN"], env["YAKYAK_USER_ID"]
-client = ApiClient(Configuration(host=BASE, access_token=TOKEN))
-wf, data = WorkflowApi(client), DataApi(client)
+yak = YakYakClient(base_url=BASE, token=TOKEN, user_id=USER)
+wf, data = yak.workflow, yak.data
 
 IMAGE = os.path.join(ROOT, "assets/scenes/asian-fruit-lady.jpeg")  # <- your own pre-rendered still
 DIALOGUE = "Once upon a time there was a lady who thought her fruits were alive"
@@ -36,21 +34,6 @@ def D(x):
     if isinstance(x, list):
         return [D(i) for i in x]
     return x
-
-
-def upload_scene_image(path, scene_id):
-    for _ in range(5):  # the upload occasionally returns an empty body — retry
-        try:
-            r = requests.post(f"{BASE}/workflow/upload-scene-image",
-                headers={"Authorization": f"Bearer {TOKEN}"},
-                files={"file": (os.path.basename(path), open(path, "rb"), "image/jpeg")},
-                data={"sceneId": scene_id})
-            if r.ok and r.json().get("imageUrl"):
-                return r.json()["imageUrl"]
-        except Exception:
-            pass
-        time.sleep(2)
-    raise RuntimeError(f"scene image upload failed for {path}")
 
 
 def scene_status(movie_id, scene_id, key):
@@ -106,7 +89,7 @@ scene_id = D(wf.workflow_controller_create_scene(CreateSceneDto.from_dict({
 print("scene:", scene_id)
 
 # ---- 3) Upload your own pre-rendered still as the scene image ✅ ----
-img_url = upload_scene_image(IMAGE, scene_id)
+img_url = yak.uploads.scene_image(scene_id, IMAGE)
 print("uploaded your image:", img_url)
 
 # ---- 4) Voice the scene: generate the Narrator's voice-over + captions ✅ ----

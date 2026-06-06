@@ -55,15 +55,16 @@ then your movie link.
 
 ## Notes
 
-- **Multipart uploads** use plain HTTP (curl `-F`, `FormData`, `requests files=`) — the
-  SDK covers every JSON call. `gen-movie-cast` / `gen-movie-screenplay` are
-  `genMovieCast` / `genMovieScreenplay` (JS) and `gen_movie_cast` / `gen_movie_screenplay`
-  with `GenMovieCastDto` / `GenMovieScreenplayRequestDto` (Python).
+- **Portrait uploads** are `multipart/form-data`, which the JSON SDK can't express — the
+  JS/Python clients wrap them as `yak.uploads.castImage({ campaignId, file })` /
+  `yak.uploads.cast_image(campaign_id, path)` (auth + retry handled inside); bash posts
+  with `curl -F`. Everything else is a JSON SDK call (`gen-movie-cast` /
+  `gen-movie-screenplay` → `genMovieCast` / `genMovieScreenplay`, …).
 - The screenplay (scene stories and dialogue) is **AI-written** from your premise.
   Rewriting a scene's dialogue and re-rendering just that scene is Lesson 4.
 - **Voices/fonts** are hard-coded to known-good ids here; list options with
   `GET /data/voice` and `GET /data/font`.
-- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
+- Needs `yakyak-sdk` ≥ 0.0.7 (see the course [README](../README.md#2-prerequisite-sdk--007)).
 
 ---
 
