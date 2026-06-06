@@ -24,15 +24,23 @@ const movieId = fork.movieId ?? fork.movie?.id ?? fork.id;
 console.log("Forked movie:", movieId);
 
 console.log("Rendering (stitching the scenes into the final movie)…");
-await yak.workflow.exportRender({ exportRenderDto: { movieId, force: false } });
+// force:true — a fresh fork reports no changes, so the change-aware render
+// (force:false) would be a no-op. Forcing re-stitches it into your account.
+await yak.workflow.exportRender({ exportRenderDto: { movieId, force: true } });
 
+// Render runs concat → soundtrack; finalMovieUrl is the soundtrack output, so
+// wait for movieSoundtrack (not just movieConcat). Sleep first to let the backend
+// flip the executions back to processing before the first poll.
 let status = "waiting";
 for (let i = 0; i < 60 && status !== "completed"; i++) {
+  await sleep(5000);
   const prog = await yak.workflow.getMovieProgress({ movieId });
-  status = prog.executions?.find((e) => e.type === "movieConcat")?.status ?? "waiting";
+  const ex = Object.fromEntries((prog.executions ?? []).map((e) => [e.type, e.status]));
+  const concat = ex.movieConcat, sound = ex.movieSoundtrack;
+  status = (concat === "completed" && (sound === undefined || sound === "completed")) ? "completed"
+    : ([concat, sound].includes("failed") ? "failed" : "processing");
   console.log("  render:", status);
   if (status === "failed") { console.error("Render failed."); process.exit(1); }
-  if (status !== "completed") await sleep(5000);
 }
 
 const got = await yak.workflow.getMovie({ movieId });

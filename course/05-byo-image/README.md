@@ -69,7 +69,7 @@ file — a `1:1` image matches the campaign's `aspectRatio`.
   `animationType: "kenburns"` and skip step 1.
 - **Voices carry across episodes.** The Narrator here reuses Lesson 4's "Cinema" voice;
   any `voiceId` from `GET /data/voice` works.
-- Needs `yakyak-sdk` ≥ 0.0.5 (see the course [README](../README.md#2-prerequisite-sdk--005)).
+- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
 
 ---
 

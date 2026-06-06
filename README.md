@@ -2,11 +2,14 @@
 
 How to use **[YakYak](https://yakyak.ai/)** as a Human or AI Agent.
 
-YakYak is an autonomous AI media agency — *"Your AI Media Agency."* It writes,
+YakYak is an autonomous AI media agency. It writes,
 casts, voices, and ships episodic video for your channel on auto-pilot. You pick a
-style and a premise; YakYak generates the summary, cast, screenplay, scenes,
+style and a premise; YakYak generates the plot, cast, screenplay, scenes,
 soundtrack, and renders, then publishes each episode to your connected social
 networks on a schedule.
+
+For greater control you can also connect your own AI agents to the APIs to gain
+fine grained control of every aspect of the creative pipeline.
 
 This cookbook is a collection of recipes, client libraries, and integrations for
 driving that pipeline programmatically through the YakYak API.

@@ -53,7 +53,7 @@ forked scenes.
   after `movieConcat` completes (it also muxes the soundtrack), so the scripts poll
   until it differs.
 - Uploads occasionally return an empty body — the scripts retry until they get a URL.
-- Needs `yakyak-sdk` ≥ 0.0.5 (see the course [README](../README.md#2-prerequisite-sdk--005)).
+- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
 
 ---
 

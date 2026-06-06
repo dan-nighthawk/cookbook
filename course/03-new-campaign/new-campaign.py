@@ -1,5 +1,6 @@
 """Lesson 3 (Python, yakyak-sdk): create your own campaign from a prompt, with a custom
-cast (uploaded portraits) and one Ken Burns scene, then render it.
+cast (uploaded portraits), then let YakYak write the screenplay — generating every scene
+(AI still + Ken Burns + subtitles) — and render the movie.
 
 Run:  pip install -r requirements.txt && python 03-new-campaign/new-campaign.py  (from course/, after Lesson 1)
 """
@@ -8,9 +9,10 @@ import os
 import time
 
 import requests
-from yakyak_sdk import (ApiClient, Configuration, CreateCampaignDto, CreateSceneDto,
-                        DataApi, ExportRenderDto, RerunSceneDto, SaveMovieCustomCastDto,
-                        SetCastDto, SetSoundtrackAudioDto, StartCampaignDto, WorkflowApi)
+from yakyak_sdk import (ApiClient, Configuration, CreateCampaignDto, DataApi,
+                        ExportRenderDto, GenMovieCastDto, GenMovieScreenplayRequestDto,
+                        SaveMovieCustomCastDto, SetCastDto, SetSoundtrackAudioDto,
+                        StartCampaignDto, WorkflowApi)
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
 env = {}
@@ -52,22 +54,15 @@ def upload_portrait(path, campaign_id):
     raise RuntimeError(f"upload failed for {path}")
 
 
-def wait_scene(scene_id, step):  # step is also the rerun "from" value: image|movie|burn
-    retries = 0
-    for _ in range(80):
-        execs = D(wf.workflow_controller_get_scene_progress(scene_id)).get("executions", [])
+def wait_movie(movie_id, step):  # poll a movie-level execution until it completes
+    for _ in range(120):
+        execs = D(wf.workflow_controller_get_movie_progress(movie_id)).get("executions", [])
         s = next((e["status"] for e in execs if e["type"] == step), "waiting")
         print(f"  {step}: {s}")
         if s == "completed":
             return
         if s == "failed":
-            if retries < 3:
-                retries += 1
-                print(f"  {step} failed — retrying ({retries}/3)")
-                wf.workflow_controller_rerun_scene(RerunSceneDto.from_dict({"sceneId": scene_id, "from": step}))
-                time.sleep(5)
-                continue
-            raise RuntimeError(f"{step} failed after retries")
+            raise RuntimeError(f"{step} failed")
         time.sleep(5)
     raise TimeoutError(step)
 
@@ -96,22 +91,17 @@ wf.workflow_controller_save_movie_custom_cast(SaveMovieCustomCastDto.from_dict({
 ]}))
 cast = {c["name"]: c["id"] for c in D(wf.workflow_controller_get_cast(movie_id))["cast"]}
 wf.workflow_controller_set_cast(SetCastDto.from_dict({"movieId": movie_id, "cast": [
-    {"id": cast["Mango Max"], "name": "Mango Max", "description": "Our sweet lovable mango hero", "voiceId": "pNInz6obpgDQGcFmaJgB", "fontFamily": "Bangers", "color": "#e0b000"},
-    {"id": cast["Chef Blendero"], "name": "Chef Blendero", "description": "The evil chef", "voiceId": "VR6AewLTigWG4xSOukaG", "fontFamily": "Bangers", "color": "#640080"},
+    {"id": cast["Mango Max"], "name": "Mango Max", "role": "Protagonist", "description": "Our sweet lovable mango hero", "voiceId": "pNInz6obpgDQGcFmaJgB", "fontFamily": "Bangers", "color": "#e0b000"},
+    {"id": cast["Chef Blendero"], "name": "Chef Blendero", "role": "Antagonist", "description": "The evil chef", "voiceId": "VR6AewLTigWG4xSOukaG", "fontFamily": "Bangers", "color": "#640080"},
 ]}))
 
-# 6. one scene -> AI still -> Ken Burns -> subtitles
-scene_id = D(wf.workflow_controller_create_scene(CreateSceneDto.from_dict({
-    "movieId": movie_id, "sceneNumber": 1, "title": "The encounter",
-    "story": "Mango Max faces Chef Blendero on a sunny beach under coconut palms",
-    "dialogue": "You'll never blend me, Blendero!", "leadCast": "Mango Max", "generate": True,
-})))["id"]
-print("scene:", scene_id, "\ngenerating the scene image…")
-wait_scene(scene_id, "image")
-wf.workflow_controller_rerun_scene(RerunSceneDto.from_dict({"sceneId": scene_id, "from": "movie"}))
-print("ken burns…"); wait_scene(scene_id, "movie")
-wf.workflow_controller_rerun_scene(RerunSceneDto.from_dict({"sceneId": scene_id, "from": "burn"}))
-print("subtitles…"); wait_scene(scene_id, "burn")
+# 6. render the custom cast, then let YakYak write the screenplay. gen-movie-screenplay
+#    writes every scene from your premise AND renders each one — AI still (💸) → Ken
+#    Burns → subtitles — server-side. Wait for the movieScreenplay execution to finish.
+wf.workflow_controller_gen_movie_cast(GenMovieCastDto.from_dict({"movieId": movie_id}))
+print("writing the screenplay & generating scenes (💸 one AI still per scene, takes a few minutes)…")
+wf.workflow_controller_gen_movie_screenplay(GenMovieScreenplayRequestDto.from_dict({"movieId": movie_id}))
+wait_movie(movie_id, "movieScreenplay")
 
 # 7. pick an existing soundtrack (e.g. Fruit Island), if available.
 #    This endpoint returns a JSON array; fetch it directly (the strict SDK

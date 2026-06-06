@@ -75,7 +75,7 @@ curl -s -X DELETE "$YAKYAK_API_BASE/access-tokens/<id>" -H "Authorization: Beare
 - **Base URL is overridable** — `.env`'s `YAKYAK_API_BASE` and the SDK's
   `baseUrl`/`host` point at beta; swap to `https://api.yakyak.ai` for production.
 - The PAT is shown **once** at creation — that's why we save it to `.env` immediately.
-- JS/Python need `yakyak-sdk` ≥ 0.0.5 (see the course [README](../README.md#2-prerequisite-sdk--005)).
+- JS/Python need `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
 
 ---
 

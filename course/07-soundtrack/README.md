@@ -75,7 +75,7 @@ You get two links: the same movie with your uploaded track, then with an AI scor
 - **Why render twice / wait for the URL to change?** A fork reports the *source's*
   finished URL; each `export-render` produces a new one a moment after `movieConcat`, so
   the scripts wait for `finalMovieUrl` to differ (same trick as Lesson 6).
-- Needs `yakyak-sdk` ≥ 0.0.5 (see the course [README](../README.md#2-prerequisite-sdk--005)).
+- Needs `yakyak-sdk` ≥ 0.0.6 (see the course [README](../README.md#2-prerequisite-sdk--006)).
 
 ---
 

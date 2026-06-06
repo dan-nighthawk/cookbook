@@ -1,5 +1,6 @@
 // Lesson 3 (JavaScript, yakyak-sdk): create your own campaign from a prompt, with a
-// custom cast (uploaded portraits) and one Ken Burns scene, then render it.
+// custom cast (uploaded portraits), then let YakYak write the screenplay — generating
+// every scene (AI still + Ken Burns + subtitles) — and render the movie.
 // Run:  npm install && node 03-new-campaign/new-campaign.js   (from course/, after Lesson 1)
 import { YakYakClient } from "yakyak-sdk";
 import { readFileSync } from "node:fs";
@@ -37,17 +38,13 @@ async function uploadPortrait(path, campaignId) {
   throw new Error(`upload failed for ${path}`);
 }
 
-async function waitScene(sceneId, type) { // type is also the rerun step: image|movie|burn
-  let retries = 0;
-  for (let i = 0; i < 80; i++) {
-    const prog = await yak.workflow.getSceneProgress({ sceneId });
+async function waitMovie(movieId, type) { // poll a movie-level execution until it completes
+  for (let i = 0; i < 120; i++) {
+    const prog = await yak.workflow.getMovieProgress({ movieId });
     const s = prog.executions?.find((e) => e.type === type)?.status ?? "waiting";
     console.log(`  ${type}: ${s}`);
     if (s === "completed") return;
-    if (s === "failed") {
-      if (retries < 3) { retries++; console.log(`  ${type} failed — retrying (${retries}/3)`); await yak.workflow.rerunScene({ rerunSceneDto: { sceneId, from: type } }); await sleep(5000); continue; }
-      throw new Error(`${type} failed after retries`);
-    }
+    if (s === "failed") throw new Error(`${type} failed`);
     await sleep(5000);
   }
   throw new Error(`${type} timed out`);
@@ -64,7 +61,7 @@ console.log("campaign:", campaignId);
 const { movieId } = await yak.workflow.startCampaign({ startCampaignDto: { campaignId } });
 console.log("movie:", movieId);
 
-// 4. Upload portraits (💸 your own art, no AI image gen)
+// 4. Upload portraits (your own art, no AI image gen)
 const imgs = (await import("node:fs")).readdirSync(join(ROOT, "assets/cast")).filter((f) => f.endsWith(".png"));
 const heroImg = await uploadPortrait(join(ROOT, "assets/cast", imgs[0]), campaignId);
 const villainImg = await uploadPortrait(join(ROOT, "assets/cast", imgs[1]), campaignId);
@@ -78,23 +75,17 @@ await yak.workflow.saveMovieCustomCast({ saveMovieCustomCastDto: { movieId, char
 const cast = (await yak.workflow.getCast({ movieId })).cast;
 const idOf = (name) => cast.find((c) => c.name === name).id;
 await yak.workflow.setCast({ setCastDto: { movieId, cast: [
-  { id: idOf("Mango Max"), name: "Mango Max", description: "Our sweet lovable mango hero", voiceId: "pNInz6obpgDQGcFmaJgB", fontFamily: "Bangers", color: "#e0b000" },
-  { id: idOf("Chef Blendero"), name: "Chef Blendero", description: "The evil chef", voiceId: "VR6AewLTigWG4xSOukaG", fontFamily: "Bangers", color: "#640080" },
+  { id: idOf("Mango Max"), name: "Mango Max", role: "Protagonist", description: "Our sweet lovable mango hero", voiceId: "pNInz6obpgDQGcFmaJgB", fontFamily: "Bangers", color: "#e0b000" },
+  { id: idOf("Chef Blendero"), name: "Chef Blendero", role: "Antagonist", description: "The evil chef", voiceId: "VR6AewLTigWG4xSOukaG", fontFamily: "Bangers", color: "#640080" },
 ] } });
 
-// 6. One scene → AI still (💸) → Ken Burns → subtitles
-const scene = await yak.workflow.createScene({ createSceneDto: {
-  movieId, sceneNumber: 1, title: "The encounter",
-  story: "Mango Max faces Chef Blendero on a sunny beach under coconut palms",
-  dialogue: "You'll never blend me, Blendero!", leadCast: "Mango Max", generate: true,
-} });
-const sceneId = scene.id;
-console.log("scene:", sceneId, "\ngenerating the scene image…");
-await waitScene(sceneId, "image");
-await yak.workflow.rerunScene({ rerunSceneDto: { sceneId, from: "movie" } });
-console.log("ken burns…"); await waitScene(sceneId, "movie");
-await yak.workflow.rerunScene({ rerunSceneDto: { sceneId, from: "burn" } });
-console.log("subtitles…"); await waitScene(sceneId, "burn");
+// 6. Render the custom cast, then let YakYak write the screenplay. genMovieScreenplay
+//    writes every scene from your premise AND renders each one — AI still (💸) → Ken
+//    Burns → subtitles — server-side. Wait for the movieScreenplay execution to finish.
+await yak.workflow.genMovieCast({ genMovieCastDto: { movieId } });
+console.log("writing the screenplay & generating scenes (💸 one AI still per scene, takes a few minutes)…");
+await yak.workflow.genMovieScreenplay({ genMovieScreenplayRequestDto: { movieId } });
+await waitMovie(movieId, "movieScreenplay");
 
 // 7. Pick an existing soundtrack (e.g. Fruit Island), if available
 const list = await yak.workflow.getAvailableSoundtracks({ movieId });

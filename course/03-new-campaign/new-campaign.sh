@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Lesson 3 (bash/curl): create your own campaign from a prompt, with a custom cast
-# (uploaded portraits) and one Ken Burns scene, then render it.
+# (uploaded portraits), then let YakYak write the screenplay — generating every scene
+# (AI still + Ken Burns + subtitles) — and render the movie.
 # Run:  bash 03-new-campaign/new-campaign.sh   (from course/, after Lesson 1)
 set -euo pipefail
 
@@ -49,30 +50,19 @@ api POST /workflow/save-movie-custom-cast "{\"movieId\":\"$MOVIE_ID\",\"characte
 read -r HERO_ID VILLAIN_ID < <(api GET "/workflow/get-cast/$MOVIE_ID" | python3 -c "
 import sys,json;c={x['name']:x['id'] for x in json.load(sys.stdin)['cast']};print(c['Mango Max'],c['Chef Blendero'])")
 api POST /workflow/set-cast "{\"movieId\":\"$MOVIE_ID\",\"cast\":[
-  {\"id\":\"$HERO_ID\",\"name\":\"Mango Max\",\"description\":\"Our sweet lovable mango hero\",\"voiceId\":\"pNInz6obpgDQGcFmaJgB\",\"fontFamily\":\"Bangers\",\"color\":\"#e0b000\"},
-  {\"id\":\"$VILLAIN_ID\",\"name\":\"Chef Blendero\",\"description\":\"The evil chef\",\"voiceId\":\"VR6AewLTigWG4xSOukaG\",\"fontFamily\":\"Bangers\",\"color\":\"#640080\"}]}" >/dev/null
+  {\"id\":\"$HERO_ID\",\"name\":\"Mango Max\",\"role\":\"Protagonist\",\"description\":\"Our sweet lovable mango hero\",\"voiceId\":\"pNInz6obpgDQGcFmaJgB\",\"fontFamily\":\"Bangers\",\"color\":\"#e0b000\"},
+  {\"id\":\"$VILLAIN_ID\",\"name\":\"Chef Blendero\",\"role\":\"Antagonist\",\"description\":\"The evil chef\",\"voiceId\":\"VR6AewLTigWG4xSOukaG\",\"fontFamily\":\"Bangers\",\"color\":\"#640080\"}]}" >/dev/null
 
-# 6. Create one scene and generate its image (💸 one AI still), then animate + subtitle it.
-SCENE_ID=$(api POST /workflow/create-scene "{\"movieId\":\"$MOVIE_ID\",\"sceneNumber\":1,\"title\":\"The encounter\",\"story\":\"Mango Max faces Chef Blendero on a sunny beach under coconut palms\",\"dialogue\":\"You'll never blend me, Blendero!\",\"leadCast\":\"Mango Max\",\"generate\":true}" | field id)
-echo "scene: $SCENE_ID"
-
-wait_scene() { # $1 = execution type / rerun step (image|movie|burn)
-  local tries=0
-  for _ in $(seq 1 80); do
-    s=$(api GET "/workflow/get-scene-progress/$SCENE_ID" | python3 -c "import sys,json;print(next((e['status'] for e in json.load(sys.stdin)['executions'] if e['type']=='$1'),'waiting'))")
-    echo "  $1: $s"
-    [ "$s" = completed ] && return 0
-    if [ "$s" = failed ]; then
-      if [ "$tries" -lt 3 ]; then tries=$((tries+1)); echo "  $1 failed — retrying ($tries/3)"; api POST /workflow/rerun-scene "{\"sceneId\":\"$SCENE_ID\",\"from\":\"$1\"}" >/dev/null; sleep 5; continue; fi
-      echo "  $1 failed after retries"; return 1
-    fi
-    sleep 5
-  done; return 1; }
-echo "generating the scene image…"; wait_scene image
-api POST /workflow/rerun-scene "{\"sceneId\":\"$SCENE_ID\",\"from\":\"movie\"}" >/dev/null
-echo "ken burns…"; wait_scene movie
-api POST /workflow/rerun-scene "{\"sceneId\":\"$SCENE_ID\",\"from\":\"burn\"}" >/dev/null
-echo "subtitles…"; wait_scene burn
+# 6. Render the custom cast, then let YakYak write the screenplay. gen-movie-screenplay
+#    writes every scene from your premise AND renders each one — AI still (💸) → Ken
+#    Burns → subtitles — server-side. Wait for the movieScreenplay execution to finish.
+api POST /workflow/gen-movie-cast "{\"movieId\":\"$MOVIE_ID\"}" >/dev/null
+echo "writing the screenplay & generating scenes (💸 one AI still per scene, takes a few minutes)…"
+api POST /workflow/gen-movie-screenplay "{\"movieId\":\"$MOVIE_ID\"}" >/dev/null
+for _ in $(seq 1 120); do
+  s=$(api GET "/workflow/get-movie-progress/$MOVIE_ID" | python3 -c "import sys,json;print(next((e['status'] for e in json.load(sys.stdin).get('executions',[]) if e['type']=='movieScreenplay'),'waiting'))")
+  echo "  screenplay: $s"; [ "$s" = completed ] && break; [ "$s" = failed ] && { echo "screenplay failed"; exit 1; }; sleep 5
+done
 
 # 7. Pick an existing soundtrack (e.g. the Fruit Island track), if any are available.
 AUDIO=$(api GET "/workflow/available-soundtracks/$MOVIE_ID" | python3 -c "import sys,json;d=json.load(sys.stdin);d=d if isinstance(d,list) else d.get('soundtracks',[]);print(d[0]['audioPath'] if d else '')")

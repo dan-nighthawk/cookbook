@@ -53,11 +53,11 @@ YAKYAK_TUTORIAL_MOVIE_ID=                     # the episode Lesson 2 forks
 > SDK clients take it as a constructor option (`new YakYakClient({ baseUrl })` /
 > `Configuration(host=…)`), so you can point the same scripts at beta or prod.
 
-### 2. Prerequisite: SDK ≥ 0.0.5
+### 2. Prerequisite: SDK ≥ 0.0.6
 
 The JS/Python lessons call the SDK's workflow methods (e.g.
-`client.workflow.createCampaign({ … })`). Those require **`yakyak-sdk` 0.0.5+**,
-which adds request bodies the earlier build was missing (see
+`client.workflow.createCampaign({ … })`). Those require **`yakyak-sdk` 0.0.6+**,
+which adds request bodies the earlier builds were missing (see
 [`sdk/patch-spec.py`](../sdk/patch-spec.py)). Install per language:
 
 ```bash

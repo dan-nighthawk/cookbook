@@ -28,18 +28,30 @@ movie_id = fork.get("movieId") or (fork.get("movie") or {}).get("id")
 print("Forked movie:", movie_id)
 
 print("Rendering (stitching the scenes into the final movie)…")
-wf.workflow_controller_export_render(ExportRenderDto(movie_id=movie_id, force=False))
+# force=True — a fresh fork reports no changes, so the change-aware render
+# (force=False) would be a no-op. Forcing re-stitches it into your account.
+wf.workflow_controller_export_render(ExportRenderDto(movie_id=movie_id, force=True))
 
+# Render runs concat -> soundtrack; finalMovieUrl is the soundtrack output, so
+# wait for movieSoundtrack (not just movieConcat). Sleep first to let the backend
+# flip the executions back to processing before the first poll.
 status = "waiting"
 for _ in range(60):
+    time.sleep(5)
     prog = wf.workflow_controller_get_movie_progress(movie_id)
-    status = next((e["status"] for e in prog.get("executions", []) if e["type"] == "movieConcat"), "waiting")
+    ex = {e["type"]: e["status"] for e in prog.get("executions", [])}
+    concat, sound = ex.get("movieConcat"), ex.get("movieSoundtrack")
+    if concat == "completed" and sound in (None, "completed"):
+        status = "completed"
+    elif "failed" in (concat, sound):
+        status = "failed"
+    else:
+        status = "processing"
     print("  render:", status)
     if status == "completed":
         break
     if status == "failed":
         raise SystemExit("Render failed.")
-    time.sleep(5)
 
 got = wf.workflow_controller_get_movie(movie_id)
 movie = got.get("movie", got)
