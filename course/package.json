@@ -5,7 +5,13 @@
   "description": "Runnable JS scripts for the YakYak API course (uses the yakyak-sdk client).",
   "scripts": {
     "01-signup": "node 01-signup/signup.js",
-    "02-hello-world": "node 02-hello-world/hello.js"
+    "02-hello-world": "node 02-hello-world/hello.js",
+    "03-new-campaign": "node 03-new-campaign/new-campaign.js",
+    "04-edit-movie": "node 04-edit-movie/edit-movie.js",
+    "05-byo-image": "node 05-byo-image/byo-image.js",
+    "06-intro-clip": "node 06-intro-clip/intro-clip.js",
+    "07-soundtrack": "node 07-soundtrack/soundtrack.js",
+    "08-social-post": "node 08-social-post/social-post.js"
   },
   "dependencies": {
     "yakyak-sdk": "^0.0.7"
