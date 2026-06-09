@@ -81,16 +81,31 @@ jobs:
       - name: Log in to Docker Hub
         # Only needed for private repos / to dodge anonymous pull rate limits.
         # Skips cleanly when the secret is absent (public images pull anonymously).
+        # Retried with backoff: registry-1.docker.io intermittently times out
+        # the /v2/ handshake ("context deadline exceeded") before auth even runs.
         if: ${{ env.DOCKER_HUB_PAT != '' }}
-        uses: docker/login-action@v3
-        with:
-          username: ${{ env.DOCKERHUB_NAMESPACE }}
-          password: ${{ env.DOCKER_HUB_PAT }}
+        run: |
+          n=0; max=5
+          until echo "$DOCKER_HUB_PAT" | docker login -u "$DOCKERHUB_NAMESPACE" --password-stdin; do
+            n=$((n + 1))
+            if [ "$n" -ge "$max" ]; then echo "::error::docker login failed after $max attempts"; exit 1; fi
+            echo "::warning::docker login attempt $n/$max failed; retrying in $((n * 10))s"
+            sleep $((n * 10))
+          done
 
       - name: Pull images
         run: |
-          docker pull "$ENGINE_IMAGE"
-          if [ "${{ matrix.requires_model }}" = "true" ]; then docker pull "$PREPARE_IMAGE"; fi
+          retry() {
+            n=0; max=5
+            until "$@"; do
+              n=$((n + 1))
+              if [ "$n" -ge "$max" ]; then echo "::error::'$*' failed after $max attempts"; return 1; fi
+              echo "::warning::'$*' attempt $n/$max failed; retrying in $((n * 10))s"
+              sleep $((n * 10))
+            done
+          }
+          retry docker pull "$ENGINE_IMAGE"
+          if [ "${{ matrix.requires_model }}" = "true" ]; then retry docker pull "$PREPARE_IMAGE"; fi
 
       - name: Ensure campaign (self-heal setup)
         # Only for shows that ship a campaign.import.json AND have no CAMPAIGN_ID

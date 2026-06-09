@@ -70,14 +70,27 @@ jobs:
       - name: Log in to Docker Hub
         # Only needed for private repos / to dodge anonymous pull rate limits.
         # Skips cleanly when the secret is absent (public images pull anonymously).
+        # Retried with backoff: registry-1.docker.io intermittently times out
+        # the /v2/ handshake ("context deadline exceeded") before auth even runs.
         if: ${{ env.DOCKER_HUB_PAT != '' }}
-        uses: docker/login-action@v3
-        with:
-          username: ${{ env.DOCKERHUB_NAMESPACE }}
-          password: ${{ env.DOCKER_HUB_PAT }}
+        run: |
+          n=0; max=5
+          until echo "$DOCKER_HUB_PAT" | docker login -u "$DOCKERHUB_NAMESPACE" --password-stdin; do
+            n=$((n + 1))
+            if [ "$n" -ge "$max" ]; then echo "::error::docker login failed after $max attempts"; exit 1; fi
+            echo "::warning::docker login attempt $n/$max failed; retrying in $((n * 10))s"
+            sleep $((n * 10))
+          done
 
       - name: Pull engine image
-        run: docker pull "$ENGINE_IMAGE"
+        run: |
+          n=0; max=5
+          until docker pull "$ENGINE_IMAGE"; do
+            n=$((n + 1))
+            if [ "$n" -ge "$max" ]; then echo "::error::docker pull failed after $max attempts"; exit 1; fi
+            echo "::warning::docker pull attempt $n/$max failed; retrying in $((n * 10))s"
+            sleep $((n * 10))
+          done
 
       - name: Post existing episode to social
         env:
