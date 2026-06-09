@@ -1,0 +1,528 @@
+{
+  "_comment": "Daily Pull — Tarot (#8 in marketing/BreakingBricksNews/docs/alternative_setups.md). The FIRST 'Randomized (seeded)' show: each episode draws a 3-card Past/Present/Future spread from the 22 Major Arcana with a date-seeded RNG in compute.js, then dramatizes it via `claude -p`. Config + 23-member recurring cast ONLY (The Reader host + all 22 Major Arcana, so every drawable card has a stable portrait, per-card accent colour and voice — allowNewCharacters=false because the entire draw pool pre-exists); no rendered assets (those generate per episode). Import: POST /workflow/import-campaign { userId, importData: <this file> }, or just run marketing/showrunner/setup_show.sh which imports it, generates the 23 cast portraits, composes the soundtrack, and writes CAMPAIGN_ID into show.env. Style resolves by label ('Digital Painting'); the art-nouveau / Mucha art direction lives in movies[0].style (appended to every image prompt). Card meanings + imagery are public domain (A.E. Waite, Pictorial Key to the Tarot, 1911; Rider–Waite–Smith deck, 1909). animationType 'kenburns' = candle-lit drift (interim look while Kling AI is in progress). The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
+  "message": "Hand-authored Daily Pull cast/config template (no rendered assets)",
+  "exportedAt": "2026-06-09 00:00:00",
+  "campaigns": [
+    {
+      "name": "Daily Pull — Tarot",
+      "prompt": "A daily tarot show: The Reader, a mystic host, draws a 3-card Past/Present/Future spread from the 22 Major Arcana and reads it; each drawn card appears as its own personified figure. Five scenes, ending on a one-line takeaway caption card.",
+      "status": "active",
+      "aspectRatio": "9:16",
+      "animationType": "kenburns",
+      "imageQuality": "fast",
+      "mode": "pro",
+      "subtitleMode": "overlay",
+      "allowNewCharacters": false,
+      "skipSoundtrack": false,
+      "style": {
+        "label": "Digital Painting",
+        "description": "Hand-painted aesthetic with visible brushstrokes, artistic color palettes, and painterly textures."
+      },
+      "movies": [
+        {
+          "title": "Daily Pull",
+          "plot": "Recurring cast template for Daily Pull. Holds The Reader (mystic host; opens + closes every episode) and all 22 Major Arcana as personified recurring characters; each episode clones this roster and draws three of the cards.",
+          "styleShort": "Art Nouveau Tarot",
+          "style": "ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+          "season": null,
+          "episode": null,
+          "scenes": [],
+          "customCast": [
+            {
+              "name": "The Reader",
+              "role": "Narrator",
+              "sortOrder": 0,
+              "description": "The Reader: a warm, uncanny mystic host at a candle-lit table draped in dark velvet, a deck fanned before her, an ornate art-nouveau headscarf and amber jewellery, soft candlelight on her knowing face, inviting and serene. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Fool",
+              "role": "Protagonist",
+              "sortOrder": 1,
+              "description": "The Fool (Major Arcana 0), personified: a bright-eyed young wanderer in patchwork motley with a knapsack on a stick and a small white dog at the heel, stepping weightlessly toward a cliff edge under a white sun. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Magician",
+              "role": "Protagonist",
+              "sortOrder": 2,
+              "description": "The Magician (Major Arcana 1), personified: a poised figure in white and red robes, one hand raised to the sky and one to the earth, an infinity sign above the brow, the four suit-symbols on the table, roses and lilies around. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The High Priestess",
+              "role": "Protagonist",
+              "sortOrder": 3,
+              "description": "The High Priestess (Major Arcana 2), personified: a serene veiled woman seated between a black pillar and a white pillar, a crescent moon at her feet and a scroll of hidden law on her lap, calm and unreadable. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Empress",
+              "role": "Protagonist",
+              "sortOrder": 4,
+              "description": "The Empress (Major Arcana 3), personified: a radiant crowned mother on a cushioned throne in a field of golden wheat, a heart-shaped shield at her side, forest and waterfall behind, generous and warm. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Emperor",
+              "role": "Protagonist",
+              "sortOrder": 5,
+              "description": "The Emperor (Major Arcana 4), personified: a stern bearded ruler on a stone throne carved with rams' heads, armour beneath the robe, an ankh sceptre in hand, barren red mountains behind, immovable. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Hierophant",
+              "role": "Protagonist",
+              "sortOrder": 6,
+              "description": "The Hierophant (Major Arcana 5), personified: a robed high priest between two stone pillars raising a hand in blessing, a triple crown and crossed keys at his feet, two acolytes kneeling before him. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Lovers",
+              "role": "Protagonist",
+              "sortOrder": 7,
+              "description": "The Lovers (Major Arcana 6), personified: a man and a woman beneath a radiant winged angel, a tree of flame behind one and a fruited tree behind the other, a mountain between them, sunlit and open. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Chariot",
+              "role": "Protagonist",
+              "sortOrder": 8,
+              "description": "The Chariot (Major Arcana 7), personified: an armoured charioteer crowned with stars under a starry canopy, a black sphinx and a white sphinx yoked before the car, a walled city behind, driven and resolute. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "Strength",
+              "role": "Protagonist",
+              "sortOrder": 9,
+              "description": "Strength (Major Arcana 8), personified: a calm woman in a white gown garlanded with flowers gently closing the jaws of a great tawny lion with bare hands, an infinity sign over her head, serene. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Hermit",
+              "role": "Protagonist",
+              "sortOrder": 10,
+              "description": "The Hermit (Major Arcana 9), personified: a grey-robed elder alone on a snowy peak, a lantern holding a single six-pointed star raised before him, a staff in the other hand, contemplative and still. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "Wheel of Fortune",
+              "role": "Protagonist",
+              "sortOrder": 11,
+              "description": "Wheel of Fortune (Major Arcana 10), personified: a great golden wheel inscribed with mystic letters turning in the clouds, a sphinx above, a serpent descending, a jackal-headed figure rising, four winged beasts reading in the corners. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "Justice",
+              "role": "Protagonist",
+              "sortOrder": 12,
+              "description": "Justice (Major Arcana 11), personified: a crowned figure enthroned between two pillars, an upraised double-edged sword in one hand and balanced scales in the other, level-eyed and impartial. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Hanged Man",
+              "role": "Protagonist",
+              "sortOrder": 13,
+              "description": "The Hanged Man (Major Arcana 12), personified: a man suspended serenely by one ankle from a living T-shaped tree, hands behind his back, a radiant halo about his head, at peace in the reversal. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "Death",
+              "role": "Protagonist",
+              "sortOrder": 14,
+              "description": "Death (Major Arcana 13), personified: a skeletal rider in black armour on a pale white horse, a black banner bearing a white rose, a fallen king before him, a sun rising between two towers on the horizon. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "Temperance",
+              "role": "Protagonist",
+              "sortOrder": 15,
+              "description": "Temperance (Major Arcana 14), personified: a winged angel with one foot on land and one in a stream, pouring water endlessly between two golden cups, a path to a crowned mountain behind, calm and exact. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Devil",
+              "role": "Protagonist",
+              "sortOrder": 16,
+              "description": "The Devil (Major Arcana 15), personified: a horned half-goat figure on a black pedestal, a torch held downward, two loosely chained human figures below who could lift the chains off at any moment, low red glow. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Tower",
+              "role": "Protagonist",
+              "sortOrder": 17,
+              "description": "The Tower (Major Arcana 16), personified: a tall stone tower struck by a bolt of lightning, its golden crown blasted off, flames in the windows, two figures falling headlong against a black sky. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Star",
+              "role": "Protagonist",
+              "sortOrder": 18,
+              "description": "The Star (Major Arcana 17), personified: a kneeling figure by a still pool under one great eight-pointed star and seven smaller ones, pouring water from two jugs onto land and water, a bird in a tree behind, tranquil. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Moon",
+              "role": "Protagonist",
+              "sortOrder": 19,
+              "description": "The Moon (Major Arcana 18), personified: a pale full moon dripping light over a winding path between two towers, a dog and a wolf baying upward, a crayfish crawling from the water, silver-blue and uncertain. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The Sun",
+              "role": "Protagonist",
+              "sortOrder": 20,
+              "description": "The Sun (Major Arcana 19), personified: a radiant child crowned with a sunflower riding a white horse before a wall of tall sunflowers, a great beaming sun overhead, a red banner streaming, pure and bright. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "Judgement",
+              "role": "Protagonist",
+              "sortOrder": 21,
+              "description": "Judgement (Major Arcana 20), personified: a great angel sounding a trumpet from the clouds, pale figures rising with arms uplifted from open graves below, a cross banner, snow-capped mountains behind, awe-struck. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            },
+            {
+              "name": "The World",
+              "role": "Protagonist",
+              "sortOrder": 22,
+              "description": "The World (Major Arcana 21), personified: a dancing figure draped in a violet sash within a great laurel wreath, a wand in each hand, the four winged beasts in the corners, cosmic and triumphant. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+            }
+          ],
+          "cast": {
+            "cast": [
+              {
+                "name": "The Reader",
+                "role": "Narrator",
+                "description": "The Reader — warm mystic host who draws and reads the spread; opens & closes every episode."
+              },
+              {
+                "name": "The Fool",
+                "role": "Protagonist",
+                "description": "The Fool — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Magician",
+                "role": "Protagonist",
+                "description": "The Magician — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The High Priestess",
+                "role": "Protagonist",
+                "description": "The High Priestess — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Empress",
+                "role": "Protagonist",
+                "description": "The Empress — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Emperor",
+                "role": "Protagonist",
+                "description": "The Emperor — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Hierophant",
+                "role": "Protagonist",
+                "description": "The Hierophant — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Lovers",
+                "role": "Protagonist",
+                "description": "The Lovers — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Chariot",
+                "role": "Protagonist",
+                "description": "The Chariot — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "Strength",
+                "role": "Protagonist",
+                "description": "Strength — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Hermit",
+                "role": "Protagonist",
+                "description": "The Hermit — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "Wheel of Fortune",
+                "role": "Protagonist",
+                "description": "Wheel of Fortune — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "Justice",
+                "role": "Protagonist",
+                "description": "Justice — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Hanged Man",
+                "role": "Protagonist",
+                "description": "The Hanged Man — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "Death",
+                "role": "Protagonist",
+                "description": "Death — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "Temperance",
+                "role": "Protagonist",
+                "description": "Temperance — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Devil",
+                "role": "Protagonist",
+                "description": "The Devil — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Tower",
+                "role": "Protagonist",
+                "description": "The Tower — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Star",
+                "role": "Protagonist",
+                "description": "The Star — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Moon",
+                "role": "Protagonist",
+                "description": "The Moon — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The Sun",
+                "role": "Protagonist",
+                "description": "The Sun — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "Judgement",
+                "role": "Protagonist",
+                "description": "Judgement — Major Arcana, personified; appears when drawn."
+              },
+              {
+                "name": "The World",
+                "role": "Protagonist",
+                "description": "The World — Major Arcana, personified; appears when drawn."
+              }
+            ],
+            "castImages": [],
+            "castVoices": [
+              {
+                "characterName": "The Reader",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+              },
+              {
+                "characterName": "The Fool",
+                "voiceName": "Will",
+                "voiceId": "bIHbv24MWmeRgasZH58o"
+              },
+              {
+                "characterName": "The Magician",
+                "voiceName": "Michael",
+                "voiceId": "flq6f7yk4E4fJM5XTYuZ"
+              },
+              {
+                "characterName": "The High Priestess",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+              },
+              {
+                "characterName": "The Empress",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+              },
+              {
+                "characterName": "The Emperor",
+                "voiceName": "George",
+                "voiceId": "JBFqnCBsd6RMkjVDRZzb"
+              },
+              {
+                "characterName": "The Hierophant",
+                "voiceName": "George",
+                "voiceId": "JBFqnCBsd6RMkjVDRZzb"
+              },
+              {
+                "characterName": "The Lovers",
+                "voiceName": "Will",
+                "voiceId": "bIHbv24MWmeRgasZH58o"
+              },
+              {
+                "characterName": "The Chariot",
+                "voiceName": "Michael",
+                "voiceId": "flq6f7yk4E4fJM5XTYuZ"
+              },
+              {
+                "characterName": "Strength",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+              },
+              {
+                "characterName": "The Hermit",
+                "voiceName": "George",
+                "voiceId": "JBFqnCBsd6RMkjVDRZzb"
+              },
+              {
+                "characterName": "Wheel of Fortune",
+                "voiceName": "Brian",
+                "voiceId": "nPczCjzI2devNBz1zQrb"
+              },
+              {
+                "characterName": "Justice",
+                "voiceName": "Patrick",
+                "voiceId": "ODq5zmih8GrVes37Dizd"
+              },
+              {
+                "characterName": "The Hanged Man",
+                "voiceName": "Will",
+                "voiceId": "bIHbv24MWmeRgasZH58o"
+              },
+              {
+                "characterName": "Death",
+                "voiceName": "Clyde",
+                "voiceId": "2EiwWnXFnvU5JabPnv8n"
+              },
+              {
+                "characterName": "Temperance",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+              },
+              {
+                "characterName": "The Devil",
+                "voiceName": "Clyde",
+                "voiceId": "2EiwWnXFnvU5JabPnv8n"
+              },
+              {
+                "characterName": "The Tower",
+                "voiceName": "Clyde",
+                "voiceId": "2EiwWnXFnvU5JabPnv8n"
+              },
+              {
+                "characterName": "The Star",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+              },
+              {
+                "characterName": "The Moon",
+                "voiceName": "Patrick",
+                "voiceId": "ODq5zmih8GrVes37Dizd"
+              },
+              {
+                "characterName": "The Sun",
+                "voiceName": "Brian",
+                "voiceId": "nPczCjzI2devNBz1zQrb"
+              },
+              {
+                "characterName": "Judgement",
+                "voiceName": "Patrick",
+                "voiceId": "ODq5zmih8GrVes37Dizd"
+              },
+              {
+                "characterName": "The World",
+                "voiceName": "Brian",
+                "voiceId": "nPczCjzI2devNBz1zQrb"
+              }
+            ],
+            "castSubtitles": [
+              {
+                "characterName": "The Reader",
+                "fontFamily": "Cinzel",
+                "color": "#F2D58A"
+              },
+              {
+                "characterName": "The Fool",
+                "fontFamily": "Cinzel",
+                "color": "#8FD14F"
+              },
+              {
+                "characterName": "The Magician",
+                "fontFamily": "Cinzel",
+                "color": "#E03A3A"
+              },
+              {
+                "characterName": "The High Priestess",
+                "fontFamily": "Cinzel",
+                "color": "#5B6BD6"
+              },
+              {
+                "characterName": "The Empress",
+                "fontFamily": "Cinzel",
+                "color": "#E66FA8"
+              },
+              {
+                "characterName": "The Emperor",
+                "fontFamily": "Cinzel",
+                "color": "#8B1E1E"
+              },
+              {
+                "characterName": "The Hierophant",
+                "fontFamily": "Cinzel",
+                "color": "#C9A227"
+              },
+              {
+                "characterName": "The Lovers",
+                "fontFamily": "Cinzel",
+                "color": "#FF8FB0"
+              },
+              {
+                "characterName": "The Chariot",
+                "fontFamily": "Cinzel",
+                "color": "#3E6E9C"
+              },
+              {
+                "characterName": "Strength",
+                "fontFamily": "Cinzel",
+                "color": "#E8A23D"
+              },
+              {
+                "characterName": "The Hermit",
+                "fontFamily": "Cinzel",
+                "color": "#9AA3AE"
+              },
+              {
+                "characterName": "Wheel of Fortune",
+                "fontFamily": "Cinzel",
+                "color": "#E0A82E"
+              },
+              {
+                "characterName": "Justice",
+                "fontFamily": "Cinzel",
+                "color": "#6E8CA0"
+              },
+              {
+                "characterName": "The Hanged Man",
+                "fontFamily": "Cinzel",
+                "color": "#2FA3A3"
+              },
+              {
+                "characterName": "Death",
+                "fontFamily": "Cinzel",
+                "color": "#E8E6DF"
+              },
+              {
+                "characterName": "Temperance",
+                "fontFamily": "Cinzel",
+                "color": "#5FB3C4"
+              },
+              {
+                "characterName": "The Devil",
+                "fontFamily": "Cinzel",
+                "color": "#7A1020"
+              },
+              {
+                "characterName": "The Tower",
+                "fontFamily": "Cinzel",
+                "color": "#E64A19"
+              },
+              {
+                "characterName": "The Star",
+                "fontFamily": "Cinzel",
+                "color": "#4FD1E0"
+              },
+              {
+                "characterName": "The Moon",
+                "fontFamily": "Cinzel",
+                "color": "#9FB4D4"
+              },
+              {
+                "characterName": "The Sun",
+                "fontFamily": "Cinzel",
+                "color": "#FFC93C"
+              },
+              {
+                "characterName": "Judgement",
+                "fontFamily": "Cinzel",
+                "color": "#C98A2E"
+              },
+              {
+                "characterName": "The World",
+                "fontFamily": "Cinzel",
+                "color": "#7E57C2"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

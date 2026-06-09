@@ -1,0 +1,69 @@
+{
+  "_comment": "Petty Court (Reddit/AITA Drama Reenactments) campaign import for YakYak — structure mirrors a real /workflow/export-campaign export. Config + 6-member cast roster ONLY (Judge Justine Payne the anchor + 5 recurring litigant archetypes: Marlene the Monster-in-Law, Trevor the Freeloader, Bridezilla Bree, Dex the Petty Ex, Reasonable Ray); no rendered images/videos/audio (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }. Then copy the returned campaign id into marketing/PettyCourt/show.env CAMPAIGN_ID. The style resolves by label ('Cartoon 3D'); no style.id is set because style uuids are per-environment. The bold daytime-TV courtroom-sitcom art direction is in movies[0].style — that text is appended to every image prompt. Per-character accent colors are in cast.castSubtitles (subtitle font 'Bangers' for the whole cast — comic-book title energy that reads as a tabloid lower-third). Like Market Mayhem and unlike the single-narrator computed shows, each character gets a DISTINCT voice so the comedy lands (withering judge vs passive-aggressive MIL vs whiny bride vs smug ex vs sincere everyman). animationType is 'kenburns' on purpose: Ken Burns reaction shots + comedic zoom punches ARE the docs/alternative_setups.md #9 target (no Kling needed for this show). The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
+  "message": "Hand-authored Petty Court cast/config template (no rendered assets)",
+  "exportedAt": "2026-06-09 00:00:00",
+  "campaigns": [
+    {
+      "name": "Petty Court — Reddit/AITA Drama Reenactments",
+      "prompt": "A daily small-claims-TV sitcom: a real Reddit drama thread, paraphrased and dramatized, presided over by Judge Justine Payne with a recurring roster of litigant archetypes. Eight scenes, ending on the verdict.",
+      "status": "active",
+      "aspectRatio": "9:16",
+      "animationType": "kenburns",
+      "imageQuality": "fast",
+      "mode": "pro",
+      "subtitleMode": "overlay",
+      "allowNewCharacters": false,
+      "skipSoundtrack": false,
+      "style": {
+        "label": "Cartoon 3D",
+        "description": "Colorful and bouncy 3D characters with exaggerated features, smooth surfaces, and playful animations. Family-friendly style with vibrant color palettes."
+      },
+      "movies": [
+        {
+          "title": "Petty Court",
+          "plot": "Recurring cast template for the daily Petty Court drama show. Holds Judge Justine Payne (anchor, opens every episode + delivers the verdict) plus the five recurring litigant archetypes; each episode clones this roster and casts the day's two real-story parties onto whichever archetypes fit.",
+          "styleShort": "Cartoon 3D",
+          "style": "Bouncy 3D cartoon sitcom staged in an over-the-top daytime-TV small-claims courtroom; a single exaggerated character front and center, big expressive rubbery faces, glossy smooth surfaces, bold saturated colors and high-contrast comic lighting, warm TV-studio key light, a glossy faux-wood judge's bench with a brass gavel and a 'PETTY COURT' nameplate, cheesy lower-third chyrons and a fake-courtroom backdrop, comedic zoom punches on reaction shots. Family-friendly, punchy, screenshot-ready.",
+          "season": null,
+          "episode": null,
+          "scenes": [],
+          "customCast": [
+            { "name": "Judge Justine Payne",        "role": "Guru",        "sortOrder": 0, "description": "Judge Justine Payne: a sharp-tongued daytime-TV small-claims judge, flowing black judicial robe with a bold statement necklace, reading glasses perched low on her nose, one eyebrow permanently raised, a brass gavel caught mid-bang, seated high behind a glossy faux-wood bench with a 'PETTY COURT' nameplate, warm studio key light, exaggerated bouncy 3D cartoon style." },
+            { "name": "Marlene the Monster-in-Law", "role": "Antagonist", "sortOrder": 1, "description": "Marlene the Monster-in-Law: an immaculately groomed overbearing mother-in-law, stiff helmet of silver hair, twin-set and pearls, a pinched passive-aggressive smile, clutching a casserole dish like a weapon, a smug 'I was only trying to help' sparkle in her eye, exaggerated rubbery features, bouncy 3D cartoon style." },
+            { "name": "Trevor the Freeloader",      "role": "Antagonist", "sortOrder": 2, "description": "Trevor the Freeloader: a perpetually-lounging twenty-something couch-surfer, rumpled hoodie and pajama pants, epic bedhead, holding a game controller and somebody else's energy drink, an unbothered shrug, a faint cloud of laziness around him, exaggerated cartoon proportions, bouncy 3D cartoon style." },
+            { "name": "Bridezilla Bree",            "role": "Antagonist", "sortOrder": 3, "description": "Bridezilla Bree: a wild-eyed bride mid-meltdown, enormous poofy white gown, tiara knocked askew, one mascara streak of pure fury, clutching a seating chart in one hand and a phone in the other, screaming-but-make-it-glam energy, hot-pink accents, exaggerated rubbery features, bouncy 3D cartoon style." },
+            { "name": "Dex the Petty Ex",           "role": "Antagonist", "sortOrder": 4, "description": "Dex the Petty Ex: a smug, scheming ex-partner, slicked-back hair and a too-tight blazer, phone raised mid-screenshot, a self-satisfied smirk, holding a cardboard box of someone's returned belongings (suspiciously dented), cold turquoise rim light, exaggerated cartoon features, bouncy 3D cartoon style." },
+            { "name": "Reasonable Ray",             "role": "Protagonist", "sortOrder": 5, "description": "Reasonable Ray: a level-headed everyman, plain plaid shirt, a tired-but-sincere expression, palms open in honest 'I just asked them to do the dishes' bewilderment, visibly the only normal person in the room, warm trustworthy blue tones, exaggerated bouncy 3D cartoon style." }
+          ],
+          "cast": {
+            "cast": [
+              { "name": "Judge Justine Payne",        "role": "Guru",        "description": "Judge Justine Payne — sharp-tongued small-claims judge, opens court & delivers the verdict every episode." },
+              { "name": "Marlene the Monster-in-Law", "role": "Antagonist", "description": "Marlene the Monster-in-Law — immaculate, passive-aggressive overbearing in-law; casserole as a weapon." },
+              { "name": "Trevor the Freeloader",      "role": "Antagonist", "description": "Trevor the Freeloader — couch-surfing slacker, eats your food, pays no rent, victim in his own mind." },
+              { "name": "Bridezilla Bree",            "role": "Antagonist", "description": "Bridezilla Bree — wild-eyed bride mid-meltdown, the whole day is all about her." },
+              { "name": "Dex the Petty Ex",           "role": "Antagonist", "description": "Dex the Petty Ex — smug and scheming, screenshots everything, returns your stuff damaged." },
+              { "name": "Reasonable Ray",             "role": "Protagonist", "description": "Reasonable Ray — level-headed everyman, usually Not the Asshole, the audience surrogate." }
+            ],
+            "castImages": [],
+            "castVoices": [
+              { "characterName": "Judge Justine Payne",        "voiceName": "Sarah",   "voiceId": "EXAVITQu4vr4xnSDxMaL" },
+              { "characterName": "Marlene the Monster-in-Law", "voiceName": "Dorothy", "voiceId": "ThT5KcBeYPX3keUQqHPh" },
+              { "characterName": "Trevor the Freeloader",      "voiceName": "Sam",     "voiceId": "yoZ06aMxZJJ28mfd3POQ" },
+              { "characterName": "Bridezilla Bree",            "voiceName": "Gigi",    "voiceId": "jBpfuIE2acCO8z3wKNLl" },
+              { "characterName": "Dex the Petty Ex",           "voiceName": "Antoni",  "voiceId": "ErXwobaYiN019PkySvjV" },
+              { "characterName": "Reasonable Ray",             "voiceName": "Brian",   "voiceId": "nPczCjzI2devNBz1zQrb" }
+            ],
+            "castSubtitles": [
+              { "characterName": "Judge Justine Payne",        "fontFamily": "Bangers", "color": "#FFD700" },
+              { "characterName": "Marlene the Monster-in-Law", "fontFamily": "Bangers", "color": "#8E44AD" },
+              { "characterName": "Trevor the Freeloader",      "fontFamily": "Bangers", "color": "#2ECC40" },
+              { "characterName": "Bridezilla Bree",            "fontFamily": "Bangers", "color": "#FF1493" },
+              { "characterName": "Dex the Petty Ex",           "fontFamily": "Bangers", "color": "#00CED1" },
+              { "characterName": "Reasonable Ray",             "fontFamily": "Bangers", "color": "#1E90FF" }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

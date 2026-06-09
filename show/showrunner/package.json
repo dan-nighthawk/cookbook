@@ -1,0 +1,16 @@
+{
+  "name": "bbn-upload-to-yakyak",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "JS port of upload_to_yakyak.sh — pushes the latest Breaking Bricks News story into a YakYak campaign using the official yakyak-sdk JavaScript client.",
+  "bin": {
+    "upload-to-yakyak": "./upload_to_yakyak.js"
+  },
+  "scripts": {
+    "upload": "node ./upload_to_yakyak.js"
+  },
+  "dependencies": {
+    "yakyak-sdk": "^0.0.7"
+  }
+}

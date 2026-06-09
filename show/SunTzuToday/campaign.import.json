@@ -1,0 +1,57 @@
+{
+  "_comment": "Sun Tzu, Today campaign import for YakYak — structure mirrors a real /workflow/export-campaign export. Config + 3-member cast roster ONLY (The Strategist who frames each maxim, The Student who lives it, The Rival who opposes him); no rendered assets (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }. Then copy the returned campaign id into marketing/SunTzuToday/show.env CAMPAIGN_ID. The style resolves by label ('Oil Painting'); no style.id is set because style uuids are per-environment. The cinematic chiaroscuro / ink-and-steel art direction is in movies[0].style — that text is appended to every image prompt. This is the FIRST 'Extracted' show: the story comes from a public-domain corpus (corpus/art_of_war.md, Lionel Giles 1910 translation, Project Gutenberg #132) walked one maxim per episode by compute.js (cursor = number of files in stories/). Distinct voices per character. animationType is 'kenburns' on purpose: reliable interim look while Kling AI (the doc's #3 target for duel motion) is in progress. The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
+  "message": "Hand-authored Sun Tzu, Today cast/config template (no rendered assets)",
+  "exportedAt": "2026-06-09 00:00:00",
+  "campaigns": [
+    {
+      "name": "Sun Tzu, Today — Ancient Strategy for Modern Life",
+      "prompt": "An episodic series: each episode takes one verbatim maxim from Sun Tzu's Art of War and stages it as a modern micro-drama — The Strategist frames the maxim, The Student faces a contemporary dilemma and applies it, The Rival opposes him. Seven scenes, ending on the maxim as a caption card.",
+      "status": "active",
+      "aspectRatio": "9:16",
+      "animationType": "kenburns",
+      "imageQuality": "fast",
+      "mode": "pro",
+      "subtitleMode": "overlay",
+      "allowNewCharacters": false,
+      "skipSoundtrack": false,
+      "style": {
+        "label": "Oil Painting",
+        "description": "Cinematic chiaroscuro oil painting — dramatic light, deep shadow, painterly brushwork and classical gravitas."
+      },
+      "movies": [
+        {
+          "title": "Sun Tzu, Today",
+          "plot": "Recurring cast template for Sun Tzu, Today. Holds The Strategist (mentor; opens + closes every episode), The Student (modern protagonist), and The Rival (recurring antagonist); each episode clones this roster.",
+          "styleShort": "Oil Painting",
+          "style": "Cinematic chiaroscuro oil painting; ink-and-steel palette of deep blacks, cold steel greys and a single warm gold light source; dramatic Caravaggio side-lighting, visible painterly brushwork, a lone figure emerging from shadow, classical gravitas, film-still composition, faint calligraphic ink textures in the background.",
+          "season": null,
+          "episode": null,
+          "scenes": [],
+          "customCast": [
+            { "name": "The Strategist", "role": "Guru",        "sortOrder": 0, "description": "The Strategist: a timeless master-strategist mentor in the spirit of Sun Tzu, an ageless robed sage with a calm unreadable face, close-cropped grey beard, steel-grey and bronze robes, holding a single bamboo strategy slip, lit by one warm gold light against deep shadow, cinematic chiaroscuro oil-painting style." },
+            { "name": "The Student",    "role": "Protagonist", "sortOrder": 1, "description": "The Student: a modern young professional everyperson in a plain dark blazer, earnest and a little overwhelmed, expressive open face, carrying a worn notebook, caught between ambition and doubt, warm gold key light against steel-grey shadow, cinematic chiaroscuro oil-painting style." },
+            { "name": "The Rival",      "role": "Antagonist",  "sortOrder": 2, "description": "The Rival: a sharp, polished modern adversary — the toxic boss / ruthless competitor archetype — immaculate cold-grey suit, a thin confident smirk, hard backlit silhouette, crimson accent (tie or light), looming and composed, cinematic chiaroscuro oil-painting style." }
+          ],
+          "cast": {
+            "cast": [
+              { "name": "The Strategist", "role": "Guru",        "description": "The Strategist — timeless Sun Tzu-style mentor who frames each maxim; opens & closes every episode." },
+              { "name": "The Student",    "role": "Protagonist", "description": "The Student — modern young professional who faces a dilemma and applies the maxim." },
+              { "name": "The Rival",      "role": "Antagonist",  "description": "The Rival — recurring modern adversary (toxic boss / ruthless competitor), crimson accent." }
+            ],
+            "castImages": [],
+            "castVoices": [
+              { "characterName": "The Strategist", "voiceName": "George", "voiceId": "JBFqnCBsd6RMkjVDRZzb" },
+              { "characterName": "The Student",    "voiceName": "Will",   "voiceId": "bIHbv24MWmeRgasZH58o" },
+              { "characterName": "The Rival",      "voiceName": "Clyde",  "voiceId": "2EiwWnXFnvU5JabPnv8n" }
+            ],
+            "castSubtitles": [
+              { "characterName": "The Strategist", "fontFamily": "Cinzel", "color": "#C9A227" },
+              { "characterName": "The Student",    "fontFamily": "Cinzel", "color": "#6E8CA0" },
+              { "characterName": "The Rival",      "fontFamily": "Cinzel", "color": "#8B1E1E" }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+# showrunner/ is pure source. Override the repo-root catch-all
+#   marketing/** filter=lfs diff=lfs merge=lfs -text
+# so the engine code is stored inline (diffable), not as Git LFS pointers.
+# `-filter` clears the inherited LFS filter; `text diff merge` force normal text
+# handling. Do NOT use -diff/-merge (those flag a file binary).
+*.py            text diff merge -filter
+*.js            text diff merge -filter
+*.sh            text diff merge -filter
+*.md            text diff merge -filter
+*.json          text diff merge -filter
+*.txt           text diff merge -filter
+*.env           text diff merge -filter
+*.yml           text diff merge -filter
+*.yaml          text diff merge -filter
+Dockerfile*     text diff merge -filter
+.gitattributes  text diff merge -filter
+.gitkeep        text diff merge -filter
+# (No binary assets live here; if any are added, re-state them as filter=lfs.)

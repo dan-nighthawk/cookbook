@@ -1,0 +1,97 @@
+{
+  "_comment": "Cosmic Brief (Horoscopes) campaign import for YakYak — structure mirrors a real /workflow/export-campaign export. Config + 13-member cast roster ONLY (the 12 zodiac signs + 'The Cosmic Guru' who opens and closes each episode); no rendered images/videos/audio (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }. Then copy the returned campaign id into marketing/Horoscopes/show.env CAMPAIGN_ID. The style resolves by label ('Digital Painting'); no style.id is set because style uuids are per-environment. The rich celestial art direction is in movies[0].style — that text is appended to every image prompt. Per-sign accent colors are in cast.castSubtitles (subtitle font 'Akaya Telivigala' for the whole cast). Every member shares one calming voice — Brian (voiceId nPczCjzI2devNBz1zQrb) — so the show reads in a single consistent narrator (req: all signs same voice). animationType is 'kenburns' on purpose: Ken Burns is the cheaper interim look while Kling AI animation is still being worked on. The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode (a real export shows exactly one season=null template movie).",
+  "message": "Hand-authored Cosmic Brief cast/config template (no rendered assets)",
+  "exportedAt": "2026-06-07 00:00:00",
+  "campaigns": [
+    {
+      "name": "Cosmic Brief — Weekly Horoscopes",
+      "prompt": "A weekly horoscope show: 12 zodiac avatars, one contemplative scene each, computed deterministically from the ISO week.",
+      "status": "active",
+      "aspectRatio": "9:16",
+      "animationType": "kenburns",
+      "imageQuality": "fast",
+      "mode": "pro",
+      "subtitleMode": "overlay",
+      "allowNewCharacters": false,
+      "skipSoundtrack": false,
+      "style": {
+        "label": "Digital Painting",
+        "description": "Hand-painted aesthetic with visible brushstrokes, artistic color palettes, and painterly textures."
+      },
+      "movies": [
+        {
+          "title": "Cosmic Brief",
+          "plot": "Recurring cast template for the weekly Cosmic Brief horoscopes. Holds the 12 zodiac avatars plus The Cosmic Guru (opening + closing narrator); each episode clones this roster.",
+          "styleShort": "Digital Painting",
+          "style": "Mystical celestial digital painting; painterly tarot-card portraiture of a single zodiac avatar, deep indigo and gold palette, starfield and nebula backgrounds, soft volumetric glow, ornate art-nouveau framing, contemplative and luminous.",
+          "season": null,
+          "episode": null,
+          "scenes": [],
+          "customCast": [
+            { "name": "Aries",       "role": "Protagonist", "sortOrder": 0,  "description": "Aries the Ram: a confident fire-element avatar with curved ram horns, warm bronze skin, ember-red and orange accents, an athletic forward-leaning stance, celestial painterly style." },
+            { "name": "Taurus",      "role": "Protagonist", "sortOrder": 1,  "description": "Taurus the Bull: a grounded earth-element avatar with bull-horn motifs, calm steady eyes, emerald-green accents, lush floral and stone textures, celestial painterly style." },
+            { "name": "Gemini",      "role": "Protagonist", "sortOrder": 2,  "description": "Gemini the Twins: a lively air-element avatar with a doubled/mirrored silhouette, quick expressive features, bright golden-yellow accents, swirling breeze motifs, celestial painterly style." },
+            { "name": "Cancer",      "role": "Protagonist", "sortOrder": 3,  "description": "Cancer the Crab: a tender water-element avatar with a pearlescent shell motif, gentle lunar features, silver and pale-blue accents, moonlit tide backdrop, celestial painterly style." },
+            { "name": "Leo",         "role": "Protagonist", "sortOrder": 4,  "description": "Leo the Lion: a regal fire-element avatar with a radiant lion's mane, proud posture, rich gold accents, sunburst halo, celestial painterly style." },
+            { "name": "Virgo",       "role": "Protagonist", "sortOrder": 5,  "description": "Virgo the Maiden: a precise earth-element avatar holding a sheaf of wheat, composed and elegant, sage and olive-green accents, fine detailed linework, celestial painterly style." },
+            { "name": "Libra",       "role": "Protagonist", "sortOrder": 6,  "description": "Libra the Scales: a balanced air-element avatar with floating golden scales, serene symmetry, soft rose-pink accents, harmonious composition, celestial painterly style." },
+            { "name": "Scorpio",     "role": "Protagonist", "sortOrder": 7,  "description": "Scorpio the Scorpion: an intense water-element avatar with a subtle scorpion-tail silhouette, piercing gaze, deep crimson and maroon accents, shadowed dramatic lighting, celestial painterly style." },
+            { "name": "Sagittarius", "role": "Protagonist", "sortOrder": 8,  "description": "Sagittarius the Archer: an adventurous fire-element avatar drawing a star-bow, dynamic motion, violet-purple accents, comet-trail backdrop, celestial painterly style." },
+            { "name": "Capricorn",   "role": "Protagonist", "sortOrder": 9,  "description": "Capricorn the Goat: a disciplined earth-element avatar with sea-goat horns, stoic determined features, slate and charcoal accents, mountain-summit backdrop, celestial painterly style." },
+            { "name": "Aquarius",    "role": "Protagonist", "sortOrder": 10, "description": "Aquarius the Water-Bearer: a futuristic air-element avatar pouring a stream of stars, inventive open expression, electric-cyan accents, geometric constellation backdrop, celestial painterly style." },
+            { "name": "Pisces",      "role": "Protagonist", "sortOrder": 11, "description": "Pisces the Fish: a dreamy water-element avatar with two intertwined fish, soft faraway gaze, teal and sea-green accents, underwater starlight shimmer, celestial painterly style." },
+            { "name": "The Cosmic Guru", "role": "Narrator", "sortOrder": 12, "description": "The Cosmic Guru: a serene celestial sage and narrator who opens and closes the week, flowing star-woven indigo robe, kind ancient eyes, a glowing constellation halo above the brow, hands raised in calm blessing, deep indigo and gold palette, ornate art-nouveau framing, painterly tarot-card portraiture, celestial painterly style." }
+          ],
+          "cast": {
+            "cast": [
+              { "name": "Aries",       "role": "Protagonist", "description": "Aries the Ram — confident fire avatar, ember-red/orange." },
+              { "name": "Taurus",      "role": "Protagonist", "description": "Taurus the Bull — grounded earth avatar, emerald green." },
+              { "name": "Gemini",      "role": "Protagonist", "description": "Gemini the Twins — lively air avatar, golden yellow." },
+              { "name": "Cancer",      "role": "Protagonist", "description": "Cancer the Crab — tender water avatar, silver/pale blue." },
+              { "name": "Leo",         "role": "Protagonist", "description": "Leo the Lion — regal fire avatar, gold." },
+              { "name": "Virgo",       "role": "Protagonist", "description": "Virgo the Maiden — precise earth avatar, sage olive." },
+              { "name": "Libra",       "role": "Protagonist", "description": "Libra the Scales — balanced air avatar, rose pink." },
+              { "name": "Scorpio",     "role": "Protagonist", "description": "Scorpio the Scorpion — intense water avatar, deep crimson." },
+              { "name": "Sagittarius", "role": "Protagonist", "description": "Sagittarius the Archer — adventurous fire avatar, violet." },
+              { "name": "Capricorn",   "role": "Protagonist", "description": "Capricorn the Goat — disciplined earth avatar, slate." },
+              { "name": "Aquarius",    "role": "Protagonist", "description": "Aquarius the Water-Bearer — futuristic air avatar, electric cyan." },
+              { "name": "Pisces",      "role": "Protagonist", "description": "Pisces the Fish — dreamy water avatar, teal." },
+              { "name": "The Cosmic Guru", "role": "Narrator", "description": "The Cosmic Guru — serene celestial sage and narrator, star-woven indigo robe, indigo & gold." }
+            ],
+            "castImages": [],
+            "castVoices": [
+              { "characterName": "Aries",       "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Taurus",      "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Gemini",      "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Cancer",      "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Leo",         "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Virgo",       "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Libra",       "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Scorpio",     "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Sagittarius", "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Capricorn",   "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Aquarius",    "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "Pisces",      "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" },
+              { "characterName": "The Cosmic Guru", "voiceName": "Brian", "voiceId": "nPczCjzI2devNBz1zQrb" }
+            ],
+            "castSubtitles": [
+              { "characterName": "Aries",       "fontFamily": "Akaya Telivigala", "color": "#FF4500" },
+              { "characterName": "Taurus",      "fontFamily": "Akaya Telivigala", "color": "#3CB371" },
+              { "characterName": "Gemini",      "fontFamily": "Akaya Telivigala", "color": "#FFD93B" },
+              { "characterName": "Cancer",      "fontFamily": "Akaya Telivigala", "color": "#9FB6CD" },
+              { "characterName": "Leo",         "fontFamily": "Akaya Telivigala", "color": "#FFB400" },
+              { "characterName": "Virgo",       "fontFamily": "Akaya Telivigala", "color": "#8A9A5B" },
+              { "characterName": "Libra",       "fontFamily": "Akaya Telivigala", "color": "#F4A6C0" },
+              { "characterName": "Scorpio",     "fontFamily": "Akaya Telivigala", "color": "#8B1E3F" },
+              { "characterName": "Sagittarius", "fontFamily": "Akaya Telivigala", "color": "#7B5CD6" },
+              { "characterName": "Capricorn",   "fontFamily": "Akaya Telivigala", "color": "#4A4E69" },
+              { "characterName": "Aquarius",    "fontFamily": "Akaya Telivigala", "color": "#2EC4D6" },
+              { "characterName": "Pisces",      "fontFamily": "Akaya Telivigala", "color": "#2E8B8B" },
+              { "characterName": "The Cosmic Guru", "fontFamily": "Akaya Telivigala", "color": "#F5E0A3" }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

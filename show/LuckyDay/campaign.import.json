@@ -1,0 +1,97 @@
+{
+  "_comment": "Lucky Day (Daily Feng Shui Almanac) campaign import for YakYak — structure mirrors marketing/Horoscopes/campaign.import.json (a real /workflow/export-campaign export). Config + 13-member cast roster ONLY (the 12 Chinese zodiac animals + 'The Feng Shui Master' who opens and closes each episode); no rendered images/videos/audio (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }, or just run marketing/showrunner/setup_show.sh which does it and writes CAMPAIGN_ID into show.env. The style resolves by label ('Digital Painting'); the rich ink-wash art direction lives in movies[0].style (appended to every image prompt). This is a CHINESE-LANGUAGE show: every member shares one native Mandarin voice — Mr. Chen, voiceId cwzmKSYMCC9Aym1ymCnt (added to the ElevenLabs account from the shared library) — and one brush-calligraphy subtitle font 'Ma Shan Zheng' in gold (#FFD24D). Because Chinese has no word spaces, subtitles render as one full calligraphic couplet per reading (verified). animationType is 'kenburns' (interim look while Kling AI is in progress). The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
+  "message": "Hand-authored Lucky Day cast/config template (no rendered assets)",
+  "exportedAt": "2026-06-08 00:00:00",
+  "campaigns": [
+    {
+      "name": "Lucky Day — Daily Feng Shui Almanac",
+      "prompt": "A daily Chinese feng-shui almanac show: 12 zodiac-animal avatars plus a Feng Shui Master, one contemplative ink-wash scene each, computed deterministically from the date.",
+      "status": "active",
+      "aspectRatio": "9:16",
+      "animationType": "kenburns",
+      "imageQuality": "fast",
+      "mode": "pro",
+      "subtitleMode": "overlay",
+      "allowNewCharacters": false,
+      "skipSoundtrack": false,
+      "style": {
+        "label": "Digital Painting",
+        "description": "Hand-painted aesthetic with visible brushstrokes, artistic color palettes, and painterly textures."
+      },
+      "movies": [
+        {
+          "title": "Lucky Day",
+          "plot": "Recurring cast template for the daily Lucky Day feng-shui almanac. Holds the 12 Chinese zodiac animals plus The Feng Shui Master (opening + closing narrator); each episode clones this roster.",
+          "styleShort": "Chinese Ink Wash",
+          "style": "Traditional Chinese ink-wash painting (国画/水墨) with gold-leaf accents on deep cinnabar red; a single dignified zodiac-animal spirit-creature in red-and-gold silk, auspicious cloud and lantern motifs, incense smoke, soft volumetric glow, calligraphic brushwork, contemplative and luminous.",
+          "season": null,
+          "episode": null,
+          "scenes": [],
+          "customCast": [
+            { "name": "Rat",     "role": "Protagonist", "sortOrder": 0,  "description": "Rat zodiac avatar (鼠): a nimble, clever spirit-creature, bright-eyed and whiskered, draped in red and gold silk, subtle rat motifs, auspicious clouds, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Ox",      "role": "Protagonist", "sortOrder": 1,  "description": "Ox zodiac avatar (牛): a steady, powerful spirit-creature with broad horns, calm and patient, red and gold silk, plowed-field motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Tiger",   "role": "Protagonist", "sortOrder": 2,  "description": "Tiger zodiac avatar (虎): a bold, striped spirit-creature, fierce and noble, red and gold silk, bamboo and wind motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Rabbit",  "role": "Protagonist", "sortOrder": 3,  "description": "Rabbit zodiac avatar (兔): a gentle, graceful spirit-creature with long ears, serene, red and gold silk, moon and osmanthus motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Dragon",  "role": "Protagonist", "sortOrder": 4,  "description": "Dragon zodiac avatar (龙): a regal, coiling spirit-creature with flowing whiskers, auspicious and commanding, red and gold silk, cloud and pearl motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Snake",   "role": "Protagonist", "sortOrder": 5,  "description": "Snake zodiac avatar (蛇): a sleek, wise spirit-creature, mysterious and elegant, red and gold silk, coiling water motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Horse",   "role": "Protagonist", "sortOrder": 6,  "description": "Horse zodiac avatar (马): a spirited, galloping spirit-creature with flowing mane, free and energetic, red and gold silk, mountain-wind motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Goat",    "role": "Protagonist", "sortOrder": 7,  "description": "Goat zodiac avatar (羊): a tender, artistic spirit-creature with curled horns, peaceful, red and gold silk, meadow and flower motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Monkey",  "role": "Protagonist", "sortOrder": 8,  "description": "Monkey zodiac avatar (猴): a clever, lively spirit-creature with a quick grin, witty, red and gold silk, peach and branch motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Rooster", "role": "Protagonist", "sortOrder": 9,  "description": "Rooster zodiac avatar (鸡): a proud, vivid spirit-creature with a bright crest, confident, red and gold silk, dawn and chrysanthemum motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Dog",     "role": "Protagonist", "sortOrder": 10, "description": "Dog zodiac avatar (狗): a loyal, alert spirit-creature with kind eyes, steadfast, red and gold silk, gateway and lantern motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "Pig",     "role": "Protagonist", "sortOrder": 11, "description": "Pig zodiac avatar (猪): a content, gentle spirit-creature, generous and warm, red and gold silk, harvest and abundance motifs, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork." },
+            { "name": "The Feng Shui Master", "role": "Narrator", "sortOrder": 12, "description": "The Feng Shui Master: a calm white-bearded sage and narrator who opens and closes the day, flowing slate-grey robe, kind ancient eyes, holding a brush or compass (罗盘), incense smoke and gold lanterns around him, gold-leaf on deep cinnabar red, traditional Chinese ink-wash (国画) brushwork, dignified and luminous." }
+          ],
+          "cast": {
+            "cast": [
+              { "name": "Rat",     "role": "Protagonist", "description": "Rat (鼠) — clever, nimble avatar, red & gold." },
+              { "name": "Ox",      "role": "Protagonist", "description": "Ox (牛) — steady, powerful avatar, red & gold." },
+              { "name": "Tiger",   "role": "Protagonist", "description": "Tiger (虎) — bold, noble avatar, red & gold." },
+              { "name": "Rabbit",  "role": "Protagonist", "description": "Rabbit (兔) — gentle, graceful avatar, red & gold." },
+              { "name": "Dragon",  "role": "Protagonist", "description": "Dragon (龙) — regal, commanding avatar, red & gold." },
+              { "name": "Snake",   "role": "Protagonist", "description": "Snake (蛇) — sleek, wise avatar, red & gold." },
+              { "name": "Horse",   "role": "Protagonist", "description": "Horse (马) — spirited, energetic avatar, red & gold." },
+              { "name": "Goat",    "role": "Protagonist", "description": "Goat (羊) — tender, artistic avatar, red & gold." },
+              { "name": "Monkey",  "role": "Protagonist", "description": "Monkey (猴) — clever, lively avatar, red & gold." },
+              { "name": "Rooster", "role": "Protagonist", "description": "Rooster (鸡) — proud, vivid avatar, red & gold." },
+              { "name": "Dog",     "role": "Protagonist", "description": "Dog (狗) — loyal, steadfast avatar, red & gold." },
+              { "name": "Pig",     "role": "Protagonist", "description": "Pig (猪) — content, generous avatar, red & gold." },
+              { "name": "The Feng Shui Master", "role": "Narrator", "description": "The Feng Shui Master — calm white-bearded sage narrator, slate-grey robe, red & gold." }
+            ],
+            "castImages": [],
+            "castVoices": [
+              { "characterName": "Rat",     "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Ox",      "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Tiger",   "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Rabbit",  "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Dragon",  "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Snake",   "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Horse",   "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Goat",    "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Monkey",  "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Rooster", "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Dog",     "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "Pig",     "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" },
+              { "characterName": "The Feng Shui Master", "voiceName": "Mr. Chen", "voiceId": "cwzmKSYMCC9Aym1ymCnt" }
+            ],
+            "castSubtitles": [
+              { "characterName": "Rat",     "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Ox",      "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Tiger",   "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Rabbit",  "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Dragon",  "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Snake",   "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Horse",   "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Goat",    "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Monkey",  "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Rooster", "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Dog",     "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "Pig",     "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" },
+              { "characterName": "The Feng Shui Master", "fontFamily": "Ma Shan Zheng", "color": "#FFD24D" }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

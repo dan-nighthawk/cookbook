@@ -1,0 +1,69 @@
+{
+  "_comment": "Market Mayhem (Crypto & Markets Daily) campaign import for YakYak — structure mirrors a real /workflow/export-campaign export. Config + 6-member cast roster ONLY (Max Mayhem the anchor + 5 personified assets: Bitcoin, Ethereum, Doge, The Fed, Gold); no rendered images/videos/audio (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }. Then copy the returned campaign id into marketing/MarketMayhem/show.env CAMPAIGN_ID. The style resolves by label ('Anime / Manga'); no style.id is set because style uuids are per-environment. The bold editorial-cartoon / financial-terminal art direction is in movies[0].style — that text is appended to every image prompt. Per-character accent colors are in cast.castSubtitles (subtitle font 'Orbitron' for the whole cast — a geometric futuristic sans that reads as a trading terminal). Unlike the single-narrator computed shows, each character gets a DISTINCT voice so the comedy lands (smug veteran vs chaos gremlin vs disapproving Fed vs boomer). animationType is 'kenburns' on purpose: Ken Burns is the cheaper, reliable interim look while Kling AI animation is still being worked on (the docs/alternative_setups.md #6 target is Kling for green/red candle 'battles'). The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
+  "message": "Hand-authored Market Mayhem cast/config template (no rendered assets)",
+  "exportedAt": "2026-06-09 00:00:00",
+  "campaigns": [
+    {
+      "name": "Market Mayhem — Crypto & Markets Daily",
+      "prompt": "A daily crypto/markets show: personified assets (Bitcoin, Ethereum, Doge, The Fed, Gold) react to the day's real price action, anchored by Max Mayhem. Eight scenes, dramatized from live prices and the Fear & Greed index.",
+      "status": "active",
+      "aspectRatio": "9:16",
+      "animationType": "kenburns",
+      "imageQuality": "fast",
+      "mode": "pro",
+      "subtitleMode": "overlay",
+      "allowNewCharacters": false,
+      "skipSoundtrack": false,
+      "style": {
+        "label": "Anime / Manga",
+        "description": "Anime / manga aesthetic — bold linework, cel shading, expressive characters and dramatic lighting."
+      },
+      "movies": [
+        {
+          "title": "Market Mayhem",
+          "plot": "Recurring cast template for the daily Market Mayhem markets show. Holds Max Mayhem (anchor, opens + closes every episode) plus the five personified assets; each episode clones this roster.",
+          "styleShort": "Anime / Manga",
+          "style": "Anime / manga meets financial-terminal HUD; a single personified market character front and center, bold clean linework and cel shading, expressive exaggerated emotion, speed-lines and dramatic anime lighting, glowing green and red candlestick charts, ticker tape and percentage glyphs in the background, high-contrast neon-on-dark palette. Green means up, red means down — that is the entire color language.",
+          "season": null,
+          "episode": null,
+          "scenes": [],
+          "customCast": [
+            { "name": "Max Mayhem", "role": "Guru",        "sortOrder": 0, "description": "Max Mayhem: a manic late-night financial-news anchor, loud pinstripe blazer with the sleeves pushed up, wild caffeinated eyes, slicked hair coming loose, seated at a glowing desk of blinking red-and-green tickers and breaking-news lower-thirds, gesturing big, bold anime / manga style." },
+            { "name": "Bitcoin",    "role": "Protagonist", "sortOrder": 1, "description": "Bitcoin: a smug gold-orange veteran character shaped around a glowing ₿ medallion, mirrored sunglasses, arms crossed, a been-here-before smirk, faint scars from past crashes, standing on a pile of older coins, warm orange rim light, bold anime / manga style." },
+            { "name": "Ethereum",   "role": "Protagonist", "sortOrder": 2, "description": "Ethereum: an earnest, slightly anxious younger-sibling character built around a faceted iridescent blue-purple diamond Ξ, too many gadgets and gas-fee meters clipped on, mid-explanation with a raised finger, eager helpful expression, cool violet glow, bold anime / manga style." },
+            { "name": "Doge",       "role": "Protagonist", "sortOrder": 3, "description": "Doge: a gleeful chaos-gremlin Shiba Inu memecoin, golden-yellow shiba fur, giant excited grin, tongue out, riding a rocket emoji, zero impulse control, comic-sans 'wow' energy crackling around it, bright yellow glow, bold anime / manga style." },
+            { "name": "The Fed",    "role": "Antagonist", "sortOrder": 4, "description": "The Fed: a stern grey-suited disapproving-parent character, dollar-green necktie, half-moon reading glasses lowered to deliver a rate-hike glare, a giant interest-rate dial behind it, arms folded, marble-pillar backdrop, cold institutional lighting, bold anime / manga style." },
+            { "name": "Gold",       "role": "Antagonist", "sortOrder": 5, "description": "Gold: a slow, sturdy boomer character shaped like a smug bar of bullion with a warm metallic sheen, tiny reading spectacles, 'back in my day' posture, leaning on a cane of solid gold, unbothered while everything around it flickers red and green, warm amber glow, bold anime / manga style." }
+          ],
+          "cast": {
+            "cast": [
+              { "name": "Max Mayhem", "role": "Guru",        "description": "Max Mayhem — manic financial-news anchor, opens & closes every episode." },
+              { "name": "Bitcoin",    "role": "Protagonist", "description": "Bitcoin — smug gold-orange veteran, the ₿ that's seen it all." },
+              { "name": "Ethereum",   "role": "Protagonist", "description": "Ethereum — earnest, over-explaining younger sibling, iridescent blue-purple." },
+              { "name": "Doge",       "role": "Protagonist", "description": "Doge — chaos-gremlin Shiba Inu memecoin, golden-yellow, zero impulse control." },
+              { "name": "The Fed",    "role": "Antagonist", "description": "The Fed — disapproving-parent rate-setter, dollar-green tie, cold glare." },
+              { "name": "Gold",       "role": "Antagonist", "description": "Gold — boomer bar of bullion, 'back in my day', warm amber." }
+            ],
+            "castImages": [],
+            "castVoices": [
+              { "characterName": "Max Mayhem", "voiceName": "Patrick", "voiceId": "ODq5zmih8GrVes37Dizd" },
+              { "characterName": "Bitcoin",    "voiceName": "Roger",   "voiceId": "CwhRBWXzGAHq8TQ4Fs17" },
+              { "characterName": "Ethereum",   "voiceName": "Liam",    "voiceId": "TX3LPaxmHKxFdv7VOQHJ" },
+              { "characterName": "Doge",       "voiceName": "Jeremy",  "voiceId": "bVMeCyTHy58xNoL34h3p" },
+              { "characterName": "The Fed",    "voiceName": "Paul",    "voiceId": "5Q0t7uMcjvnagumLfvZi" },
+              { "characterName": "Gold",       "voiceName": "Michael", "voiceId": "flq6f7yk4E4fJM5XTYuZ" }
+            ],
+            "castSubtitles": [
+              { "characterName": "Max Mayhem", "fontFamily": "Orbitron", "color": "#FF3B30" },
+              { "characterName": "Bitcoin",    "fontFamily": "Orbitron", "color": "#F7931A" },
+              { "characterName": "Ethereum",   "fontFamily": "Orbitron", "color": "#627EEA" },
+              { "characterName": "Doge",       "fontFamily": "Orbitron", "color": "#F2C94C" },
+              { "characterName": "The Fed",    "fontFamily": "Orbitron", "color": "#2E7D5B" },
+              { "characterName": "Gold",       "fontFamily": "Orbitron", "color": "#D4AF37" }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

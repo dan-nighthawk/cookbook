@@ -1,0 +1,39 @@
+# BreakingBricksNews mixes source/text (scripts, docs, generated stories) with a
+# handful of binary brand assets. The repo-root catch-all
+#   marketing/** filter=lfs diff=lfs merge=lfs -text
+# is right for the all-binary marketing subtrees (ItalianJob, YakYakOriginals)
+# but wrong here: it would push every .md / .py / .sh / .json into Git LFS, so a
+# fresh clone without git-lfs reads pointers instead of source and nothing diffs.
+#
+# This file overrides the catch-all for THIS subtree only:
+#   - text/source  -> normal Git (diffable, 3-way merge, EOL normalized). The
+#                     `-filter` clears the inherited `filter=lfs` so blobs are
+#                     stored inline, not as LFS pointers.
+#   - binary assets -> stay in LFS (re-stated explicitly so they survive even if
+#                     the root catch-all is ever narrowed).
+# Do NOT use `-diff`/`-merge` on the text rules — that would flag them binary.
+
+# --- text / source: keep OUT of LFS, keep diffable -------------------------
+*.md           text diff merge -filter
+*.sh           text diff merge -filter
+*.py           text diff merge -filter
+*.js           text diff merge -filter
+*.json         text diff merge -filter
+*.txt          text diff merge -filter
+*.env          text diff merge -filter
+# Keep attributes files themselves as plain text (else marketing/** would LFS
+# them and a no-lfs clone would read a pointer instead of these rules).
+.gitattributes text diff merge -filter
+.gitkeep       text diff merge -filter
+
+# --- binary assets: keep IN LFS --------------------------------------------
+*.mp3 filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.pdf filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
