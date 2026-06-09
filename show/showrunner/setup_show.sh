@@ -37,7 +37,7 @@ for a in "$@"; do
     *) SHOW_DIR_ARG="$a" ;;
   esac
 done
-SHOW_DIR_ARG="${SHOW_DIR_ARG:-$REPO_ROOT/marketing/Horoscopes}"
+SHOW_DIR_ARG="${SHOW_DIR_ARG:-$REPO_ROOT/show/Horoscopes}"
 
 SHOW_DIR="$(cd "$SHOW_DIR_ARG" 2>/dev/null && pwd || true)"
 [[ -n "$SHOW_DIR" && -d "$SHOW_DIR" ]] || { echo "error: show dir not found: $SHOW_DIR_ARG" >&2; exit 1; }

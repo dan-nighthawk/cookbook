@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # plan_due_shows.sh — decide which shows should run now and emit a GitHub Actions
-# matrix. Scans marketing/*/show.env and selects shows that are ENABLED and whose
+# matrix. Scans show/*/show.env and selects shows that are ENABLED and whose
 # CADENCE is due today.
 #
 #   ./plan_due_shows.sh [forceShow]
@@ -21,13 +21,13 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-MARKETING="$REPO_ROOT/marketing"
+SHOWS_DIR="$REPO_ROOT/show"
 
 FORCE_SHOW="${FORCE_SHOW:-${1:-}}"
 DOW="${DOW:-$(date -u +%u)}"
 
 rows=()   # one "show|engine|prepare_kind|requires_model" per selected show
-for env in "$MARKETING"/*/show.env; do
+for env in "$SHOWS_DIR"/*/show.env; do
   [[ -f "$env" ]] || continue
   show="$(basename "$(dirname "$env")")"
 

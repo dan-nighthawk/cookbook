@@ -1,0 +1,199 @@
+name: run-shows
+
+# Scheduled, containerized runs of the showrunner shows. Pulls the showrunner
+# engine images from Docker Hub (yakyaksdk, built by publish-dockerhub.yml) and
+# runs each due show in a matrix. RENDER-ONLY by default; posting to social is an
+# explicit opt-in.
+#
+# Everything a show needs lives under ./show, which is the Docker build context
+# for the engine images — so inside the container the show dirs sit at /app/<Show>
+# (no marketing/ prefix), while on the runner they are checked out at show/<Show>.
+
+on:
+  schedule:
+    # 06:15 UTC daily. Each show self-selects via its CADENCE (plan_due_shows.sh).
+    - cron: '15 6 * * *'
+  workflow_dispatch:
+    inputs:
+      show:
+        description: 'Run exactly one show now (basename, e.g. Horoscopes). Blank = all due.'
+        required: false
+        default: ''
+      post:
+        description: 'Also POST to social (irreversible). Default false = render only.'
+        type: boolean
+        required: false
+        default: false
+
+env:
+  DOCKERHUB_NAMESPACE: yakyaksdk
+  # Pin to a known-good version in repo variables for reproducible runs / rollback.
+  # Falls back to :latest if the variable is unset.
+  SHOWRUNNER_TAG: ${{ vars.SHOWRUNNER_TAG || 'latest' }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: plan
+        env:
+          FORCE_SHOW: ${{ github.event.inputs.show }}
+        run: bash show/showrunner/plan_due_shows.sh
+
+  run:
+    needs: plan
+    if: ${{ needs.plan.outputs.count != '0' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write               # commit the generated story back to the repo
+    env:
+      # Mapped here so the login step can gate on it — the `secrets` context is
+      # not available in a step-level `if:`, but `env` is.
+      DOCKER_HUB_PAT: ${{ secrets.DOCKER_HUB_PAT }}
+    timeout-minutes: 75               # ~30m scene poll + ~15m render + headroom
+    strategy:
+      fail-fast: false               # one show failing must not kill the others
+      max-parallel: 3
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    concurrency:
+      # Never two runs racing the same campaign (the picker grabs "next empty").
+      group: run-show-${{ matrix.show }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute image refs
+        # SHOW_PATH is the runner-side checkout path (show/<Show>); SHOW is the
+        # basename, which is also the in-container path under /app (the engine
+        # images bake ./show at /app, so the show dir is /app/<Show>).
+        run: |
+          {
+            echo "ENGINE_IMAGE=$DOCKERHUB_NAMESPACE/showrunner-${{ matrix.engine }}:$SHOWRUNNER_TAG"
+            echo "PREPARE_IMAGE=$DOCKERHUB_NAMESPACE/showrunner-prepare:$SHOWRUNNER_TAG"
+            echo "SHOW=${{ matrix.show }}"
+            echo "SHOW_PATH=show/${{ matrix.show }}"
+          } >> "$GITHUB_ENV"
+
+      - name: Log in to Docker Hub
+        # Only needed for private repos / to dodge anonymous pull rate limits.
+        # Skips cleanly when the secret is absent (public images pull anonymously).
+        if: ${{ env.DOCKER_HUB_PAT != '' }}
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKERHUB_NAMESPACE }}
+          password: ${{ env.DOCKER_HUB_PAT }}
+
+      - name: Pull images
+        run: |
+          docker pull "$ENGINE_IMAGE"
+          if [ "${{ matrix.requires_model }}" = "true" ]; then docker pull "$PREPARE_IMAGE"; fi
+
+      - name: Ensure campaign (self-heal setup)
+        # Only for shows that ship a campaign.import.json AND have no CAMPAIGN_ID
+        # committed in show.env. setup_show.sh is idempotent (finds the campaign by
+        # name, skips already-done cast/soundtrack), so this is safe and cheap. It
+        # writes CAMPAIGN_ID/SOUNDTRACK_AUDIO_PATH into the checked-out show.env,
+        # which later steps mount into the container. Recommended flow is still to
+        # run setup locally once and commit show.env — then this no-ops.
+        env:
+          YAKYAK_PAT: ${{ secrets.YAKYAK_PAT }}
+        run: |
+          if [ -f "$SHOW_PATH/campaign.import.json" ] && ! grep -qE '^CAMPAIGN_ID="[^"]+"' "$SHOW_PATH/show.env"; then
+            echo "No CAMPAIGN_ID in $SHOW_PATH/show.env — running setup_show.sh"
+            bash show/showrunner/setup_show.sh "$SHOW_PATH"
+          else
+            echo "CAMPAIGN_ID present (or no import file) — skipping setup"
+          fi
+
+      - name: Prepare story
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          mkdir -p "$SHOW_PATH/stories"
+          if [ "${{ matrix.requires_model }}" = "true" ]; then
+            # Prompt/WebFetch show -> needs the claude CLI image + a Claude
+            # credential. Prefer the subscription OAuth token (not metered against
+            # API credit); fall back to the API key. Forward ONLY the one in use
+            # so the two never conflict inside the container.
+            if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
+              echo "Prepare auth: CLAUDE_CODE_OAUTH_TOKEN (subscription)"
+              AUTH_ENV=(-e CLAUDE_CODE_OAUTH_TOKEN)
+            elif [ -n "$ANTHROPIC_API_KEY" ]; then
+              echo "Prepare auth: ANTHROPIC_API_KEY (metered)"
+              AUTH_ENV=(-e ANTHROPIC_API_KEY)
+            else
+              echo "::error::No Claude credential set — define the CLAUDE_CODE_OAUTH_TOKEN or ANTHROPIC_API_KEY secret"
+              exit 1
+            fi
+            # Mount the WHOLE show dir from the checkout (ro), with stories nested
+            # rw for the output. This decouples show content (prompt.md, show.env,
+            # campaign.import.json) from the baked image — a NEW show works without
+            # rebuilding the image (publish-dockerhub only needs re-running on
+            # showrunner/** changes).
+            docker run --rm "${AUTH_ENV[@]}" \
+              -v "$PWD/$SHOW_PATH:/app/$SHOW:ro" \
+              -v "$PWD/$SHOW_PATH/stories:/app/$SHOW/stories" \
+              --entrypoint showrunner/prepare.sh \
+              "$PREPARE_IMAGE" "$SHOW"
+          else
+            # Computed show -> deterministic, runs in the plain engine image.
+            # Whole show dir (ro) + nested stories (rw) so a new show's compute.py
+            # comes from the checkout, not the baked image. See note above.
+            docker run --rm \
+              -v "$PWD/$SHOW_PATH:/app/$SHOW:ro" \
+              -v "$PWD/$SHOW_PATH/stories:/app/$SHOW/stories" \
+              --entrypoint showrunner/prepare.sh \
+              "$ENGINE_IMAGE" "$SHOW"
+          fi
+
+      - name: Upload + render (+ post if opted in)
+        env:
+          YAKYAK_PAT: ${{ secrets.YAKYAK_PAT }}
+        run: |
+          POST_FLAGS=""
+          if [ "${{ github.event.inputs.post }}" = "true" ]; then
+            POST_FLAGS="--post --yes"
+            echo "::warning::Posting to social is ENABLED for ${{ matrix.show }}"
+          else
+            echo "Render-only (no --post). Use the 'post' dispatch input to publish."
+          fi
+          docker run --rm -e YAKYAK_PAT \
+            -v "$PWD/$SHOW_PATH/show.env:/app/$SHOW/show.env:ro" \
+            -v "$PWD/$SHOW_PATH/stories:/app/$SHOW/stories" \
+            "$ENGINE_IMAGE" --show "$SHOW" $POST_FLAGS
+
+      - name: Commit story back to repo
+        # Persist the generated story in-repo instead of as a throwaway artifact.
+        # Runs even on render failure so a successfully-prepared story is never lost.
+        if: always()
+        run: |
+          set -euo pipefail
+          # The prepare container wrote the story as root into the mounted volume;
+          # take ownership so git can stage it.
+          sudo chown -R "$(id -u):$(id -g)" "$SHOW_PATH/stories" 2>/dev/null || true
+          git config user.name  "yakyak-showrunner[bot]"
+          git config user.email "showrunner@users.noreply.github.com"
+          git add "$SHOW_PATH/stories/"
+          if git diff --cached --quiet; then
+            echo "No new story files to commit for ${{ matrix.show }}."
+            exit 0
+          fi
+          git commit -m "showrunner: ${{ matrix.show }} story $(date -u +%Y%m%dT%H%M%SZ) [skip ci]"
+          # Several matrix shows may push to main at once — rebase-and-retry to
+          # survive non-fast-forward rejects.
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then
+              echo "Pushed story for ${{ matrix.show }} (attempt $attempt)."
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt) — rebasing on latest main…" >&2
+            git pull --rebase --autostash origin main || true
+            sleep $(( (RANDOM % 5) + 2 ))
+          done
+          echo "::error::Failed to push story for ${{ matrix.show }} after 5 attempts" >&2
+          exit 1

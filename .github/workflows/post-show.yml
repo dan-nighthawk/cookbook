@@ -1,0 +1,98 @@
+name: post-show
+
+# Manual, post-ONLY run of a single show. Posts an ALREADY-rendered episode to
+# the campaign's linked social networks — no prepare, no upload, no render. This
+# is the companion to run-shows.yml (which renders, render-only by default):
+#   - run-shows.yml  -> prepare + upload + render (+ optional --post)
+#   - post-show.yml  -> post an existing rendered episode, nothing else
+#
+# Generic across all shows: pick the show by basename. By default it posts the
+# most-recently-rendered episode (engine's pick_latest_rendered); pass a movieId
+# to post a specific one instead. Posting is irreversible, hence dispatch-only.
+#
+# Engine images come from Docker Hub (yakyaksdk). The show dir is checked out at
+# show/<Show> on the runner and lives at /app/<Show> inside the container.
+
+on:
+  workflow_dispatch:
+    inputs:
+      show:
+        description: 'Show to post (basename, e.g. Horoscopes or BreakingBricksNews).'
+        required: true
+        default: ''
+      movie:
+        description: 'Optional movieId to post. Blank = most-recently-rendered episode.'
+        required: false
+        default: ''
+
+env:
+  DOCKERHUB_NAMESPACE: yakyaksdk
+  # Pin to a known-good version in repo variables for reproducible runs / rollback.
+  # Falls back to :latest if the variable is unset.
+  SHOWRUNNER_TAG: ${{ vars.SHOWRUNNER_TAG || 'latest' }}
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    env:
+      # Mapped here so the login step can gate on it — the `secrets` context is
+      # not available in a step-level `if:`, but `env` is.
+      DOCKER_HUB_PAT: ${{ secrets.DOCKER_HUB_PAT }}
+    timeout-minutes: 20            # posting is fast; no render/poll loops here
+    concurrency:
+      # Never race run-shows.yml (or another post) on the same campaign.
+      group: run-show-${{ github.event.inputs.show }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve show + engine
+        # SHOW_PATH is the runner-side checkout path; SHOW (basename) is also the
+        # in-container path under /app (engine images bake ./show at /app).
+        run: |
+          SHOW="${{ github.event.inputs.show }}"
+          SHOW_PATH="show/$SHOW"
+          if [ ! -f "$SHOW_PATH/show.env" ]; then
+            echo "::error::No such show: $SHOW_PATH/show.env not found"
+            exit 1
+          fi
+          # Each show declares which engine port CI uses (py|js|sh). Posting is
+          # identical across ports; default to py if unset. The loaders don't
+          # strip inline comments, so pull the quoted value directly.
+          ENGINE="$(grep -E '^ENGINE=' "$SHOW_PATH/show.env" | head -n1 | cut -d'"' -f2)"
+          ENGINE="${ENGINE:-py}"
+          {
+            echo "SHOW=$SHOW"
+            echo "SHOW_PATH=$SHOW_PATH"
+            echo "ENGINE_IMAGE=$DOCKERHUB_NAMESPACE/showrunner-$ENGINE:$SHOWRUNNER_TAG"
+          } >> "$GITHUB_ENV"
+
+      - name: Log in to Docker Hub
+        # Only needed for private repos / to dodge anonymous pull rate limits.
+        # Skips cleanly when the secret is absent (public images pull anonymously).
+        if: ${{ env.DOCKER_HUB_PAT != '' }}
+        uses: docker/login-action@v3
+        with:
+          username: ${{ env.DOCKERHUB_NAMESPACE }}
+          password: ${{ env.DOCKER_HUB_PAT }}
+
+      - name: Pull engine image
+        run: docker pull "$ENGINE_IMAGE"
+
+      - name: Post existing episode to social
+        env:
+          YAKYAK_PAT: ${{ secrets.YAKYAK_PAT }}
+        run: |
+          # --post-only skips upload+render and posts an already-rendered episode.
+          # With a movieId, --post-only still targets that exact movie (no render).
+          POST_ARGS="--post-only --yes"
+          MOVIE="${{ github.event.inputs.movie }}"
+          if [ -n "$MOVIE" ]; then
+            POST_ARGS="--post-only --movie $MOVIE --yes"
+            echo "::warning::Posting movie $MOVIE for ${{ github.event.inputs.show }}"
+          else
+            echo "::warning::Posting most-recently-rendered episode for ${{ github.event.inputs.show }}"
+          fi
+          docker run --rm -e YAKYAK_PAT \
+            -v "$PWD/$SHOW_PATH/show.env:/app/$SHOW/show.env:ro" \
+            "$ENGINE_IMAGE" --show "$SHOW" $POST_ARGS
