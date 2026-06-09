@@ -172,14 +172,22 @@ GURU_OUTLOOK = [
     "let what is ending end, and make room for what's next",
 ]
 GURU_CLOSING = [
-    "carry this calm into the days ahead",
-    "trust the stars, but trust yourself more",
-    "until next week, move slow and notice everything",
-    "take one small omen with you and let the rest go",
-    "whatever the week brings, meet it gently",
-    "the sky has spoken; the rest is yours",
-    "until the next turn of the wheel, be well",
-    "keep one eye on the stars and both feet on the ground",
+    "let the starlight settle in your bones and walk on",
+    "the wheel turns whether you watch or not, so turn with it",
+    "carry one ember of the cosmos and let the dark keep the rest",
+    "what the stars whispered, let your silence answer",
+    "step into the week as through a door only you can see",
+    "the tide that pulls you also remembers the way back",
+    "hold the omen lightly and it will hold you",
+    "the heavens have drawn the map, but the walking is yours",
+    "may the constellations keep your name on their tongue",
+    "trust the long orbit, even where the path runs dark",
+    "let what is written in light stay lighter than your worries",
+    "the veil thins for those who move gently, so move gently",
+    "gather the small magics and leave the doubt behind",
+    "every star you have ever seen has already wished you onward",
+    "go where the moon leans and you will not be lost",
+    "the sky closes its eye now, so keep yours open to wonder",
 ]
 
 
