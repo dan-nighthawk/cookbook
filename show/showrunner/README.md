@@ -58,6 +58,7 @@ do not strip trailing inline comments).
 | `CADENCE` | no | `daily` | CI scheduling: `daily` or `weekly` (weekly = Sundays). |
 | `ENGINE` | no | `py` | Which port CI runs for this show (`py`/`js`/`sh`). |
 | `ENABLED` | no | `true` | Set `false` to skip in scheduled runs. |
+| `POST` | no | `false` | Set `true` to PUBLISH to social on scheduled runs (irreversible). Default render-only. |
 
 ### The story-markdown contract
 

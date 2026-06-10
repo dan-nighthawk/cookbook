@@ -83,4 +83,9 @@ The **bash** lessons use only `curl` + `python3` (for JSON) and need no SDK.
 ---
 
 Reference: [API docs](https://api.yakyak.ai/api/docs) ·
-[concepts](../docs/) · [workflow diagram](../docs/workflows.md) · [SDKs](../sdk/)
+[concepts](../docs/) · [workflow diagram](../docs/workflows.md) ·
+[debugging](../docs/debugging.md) · [SDKs](../sdk/)
+
+> **Stuck?** If a render never finishes or a scene comes back blank, see
+> [Debugging](../docs/debugging.md) — it covers reading AI-generation failures on
+> the `/profile` page and diagnosing failing GitHub Actions.

@@ -37,11 +37,11 @@ for env in "$SHOWS_DIR"/*/show.env; do
     # shellcheck disable=SC1090
     . "$env"
     set +a
-    printf '%s|%s|%s|%s|%s' \
+    printf '%s|%s|%s|%s|%s|%s' \
       "${ENABLED:-true}" "${CADENCE:-daily}" "${ENGINE:-py}" \
-      "${PREPARE_KIND:-}" "${REQUIRES_MODEL:-false}"
+      "${PREPARE_KIND:-}" "${REQUIRES_MODEL:-false}" "${POST:-false}"
   )"
-  IFS='|' read -r enabled cadence engine prepare_kind requires_model <<<"$line"
+  IFS='|' read -r enabled cadence engine prepare_kind requires_model post <<<"$line"
 
   if [[ -n "$FORCE_SHOW" ]]; then
     [[ "$show" == "$FORCE_SHOW" ]] || continue        # forced: this show only
@@ -55,14 +55,14 @@ for env in "$SHOWS_DIR"/*/show.env; do
     esac
   fi
 
-  rows+=("$show|$engine|$prepare_kind|$requires_model")
+  rows+=("$show|$engine|$prepare_kind|$requires_model|$post")
 done
 
 # Build the JSON matrix with jq (present on GitHub runners).
 matrix="$(
   printf '%s\n' "${rows[@]:-}" | jq -R -s '
     [ split("\n")[] | select(length > 0) | split("|")
-      | { show: .[0], engine: .[1], prepare_kind: .[2], requires_model: .[3] } ]
+      | { show: .[0], engine: .[1], prepare_kind: .[2], requires_model: .[3], post: .[4] } ]
     | { include: . }'
 )"
 count="$(jq '.include | length' <<<"$matrix")"

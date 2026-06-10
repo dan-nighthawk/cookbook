@@ -171,11 +171,13 @@ jobs:
           YAKYAK_PAT: ${{ secrets.YAKYAK_PAT }}
         run: |
           POST_FLAGS=""
-          if [ "${{ github.event.inputs.post }}" = "true" ]; then
+          # Post when the manual dispatch input is set OR the show opts in via POST=
+          # in its show.env (threaded through the plan matrix as matrix.post).
+          if [ "${{ github.event.inputs.post }}" = "true" ] || [ "${{ matrix.post }}" = "true" ]; then
             POST_FLAGS="--post --yes"
             echo "::warning::Posting to social is ENABLED for ${{ matrix.show }}"
           else
-            echo "Render-only (no --post). Use the 'post' dispatch input to publish."
+            echo "Render-only (no --post). Set POST=true in show.env or use the 'post' dispatch input to publish."
           fi
           docker run --rm -e YAKYAK_PAT \
             -v "$PWD/$SHOW_PATH/show.env:/app/$SHOW/show.env:ro" \

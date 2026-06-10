@@ -28,7 +28,9 @@ YakYak turns a premise into published, episodic video through a layered model:
   and subtitle font/color.
 
 See **[Workflows & use cases](workflows.md)** for a flow diagram of the pipeline
-and the ways you re-enter it from a finished movie.
+and the ways you re-enter it from a finished movie, and
+**[Debugging](debugging.md)** for diagnosing failing GitHub Actions and reading
+AI-generation failures on the `/profile` page.
 
 ## The generation pipeline
 
