@@ -1,4 +1,4 @@
-name: Publish to DockerHub
+name: Publish Docker Images
 
 # Manually publish the showrunner engine images to Docker Hub (yakyaksdk),
 # tagged with an explicit version. Everything the build needs lives under ./show

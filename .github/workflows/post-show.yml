@@ -1,4 +1,4 @@
-name: post-show
+name: Post Episode
 
 # Manual, post-ONLY run of a single show. Posts an ALREADY-rendered episode to
 # the campaign's linked social networks — no prepare, no upload, no render. This

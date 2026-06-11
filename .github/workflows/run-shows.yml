@@ -1,4 +1,4 @@
-name: run-shows
+name: Render Shows
 
 # Scheduled, containerized runs of the showrunner shows. Pulls the showrunner
 # engine images from Docker Hub (yakyaksdk, built by publish-dockerhub.yml) and
