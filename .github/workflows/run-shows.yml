@@ -11,10 +11,11 @@ name: Render Shows
 
 on:
   schedule:
-    # 06:50 UTC daily (temporary near-term slot for testing BreakingBricksNews;
-    # revert to '15 6 * * *' afterward). Off the hour boundary to dodge GitHub's
-    # peak-load cron delays. Each show self-selects via its CADENCE (plan_due_shows.sh).
-    - cron: '50 6 * * *'
+    # 03:00 UTC daily = 10:00 Thai time (ICT, UTC+7, no DST) — the slot for
+    # BreakingBricksNews. Note GitHub may delay scheduled crons under peak load,
+    # so the real fire time can drift a few minutes past 10:00. Each show
+    # self-selects via its CADENCE (plan_due_shows.sh).
+    - cron: '0 3 * * *'
   workflow_dispatch:
     inputs:
       show:
