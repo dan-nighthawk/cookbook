@@ -11,8 +11,10 @@ name: run-shows
 
 on:
   schedule:
-    # 06:15 UTC daily. Each show self-selects via its CADENCE (plan_due_shows.sh).
-    - cron: '15 6 * * *'
+    # 05:40 UTC daily (temporary near-term slot for testing BreakingBricksNews;
+    # revert to '15 6 * * *' afterward). Off the hour boundary to dodge GitHub's
+    # peak-load cron delays. Each show self-selects via its CADENCE (plan_due_shows.sh).
+    - cron: '40 5 * * *'
   workflow_dispatch:
     inputs:
       show:
