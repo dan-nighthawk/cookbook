@@ -107,22 +107,45 @@ jobs:
           retry docker pull "$ENGINE_IMAGE"
           if [ "${{ matrix.requires_model }}" = "true" ]; then retry docker pull "$PREPARE_IMAGE"; fi
 
-      - name: Ensure campaign (self-heal setup)
-        # Only for shows that ship a campaign.import.json AND have no CAMPAIGN_ID
-        # committed in show.env. setup_show.sh is idempotent (finds the campaign by
-        # name, skips already-done cast/soundtrack), so this is safe and cheap. It
-        # writes CAMPAIGN_ID/SOUNDTRACK_AUDIO_PATH into the checked-out show.env,
-        # which later steps mount into the container. Recommended flow is still to
-        # run setup locally once and commit show.env — then this no-ops.
+      - name: Ensure campaign owned by this PAT (fork-heal)
+        # So a user only needs their own YAKYAK_PAT secret — no cloning the repo.
+        # If the committed CAMPAIGN_ID isn't owned by the PAT, fork it (instant,
+        # reuses rendered assets, zero tokens) and rewrite show.env to the new id;
+        # the next step commits that back. If it IS owned, this no-ops. Importing a
+        # fresh campaign from campaign.import.json (paid, re-renders) is the MANUAL
+        # path (setup_show.sh) and is intentionally NOT used here.
         env:
           YAKYAK_PAT: ${{ secrets.YAKYAK_PAT }}
+        run: bash show/showrunner/ensure_owned_campaign.sh "$SHOW_PATH"
+
+      - name: Commit healed CAMPAIGN_ID
+        # Persist the forked id immediately — before the expensive render — so a
+        # later failure doesn't drop it and cause a re-fork next run. Only runs when
+        # the heal step actually forked (CAMPAIGN_HEALED set via $GITHUB_ENV).
+        if: env.CAMPAIGN_HEALED == 'true'
         run: |
-          if [ -f "$SHOW_PATH/campaign.import.json" ] && ! grep -qE '^CAMPAIGN_ID="[^"]+"' "$SHOW_PATH/show.env"; then
-            echo "No CAMPAIGN_ID in $SHOW_PATH/show.env — running setup_show.sh"
-            bash show/showrunner/setup_show.sh "$SHOW_PATH"
-          else
-            echo "CAMPAIGN_ID present (or no import file) — skipping setup"
+          set -euo pipefail
+          git config user.name  "yakyak-showrunner[bot]"
+          git config user.email "showrunner@users.noreply.github.com"
+          git add "$SHOW_PATH/show.env"
+          if git diff --cached --quiet; then
+            echo "No show.env change to commit for ${{ matrix.show }}."
+            exit 0
           fi
+          git commit -m "showrunner: ${{ matrix.show }} adopt campaign $NEW_CID [skip ci]"
+          # Several matrix shows may push to main at once — rebase-and-retry to
+          # survive non-fast-forward rejects (each show edits only its own show.env).
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then
+              echo "Pushed healed CAMPAIGN_ID for ${{ matrix.show }} (attempt $attempt)."
+              exit 0
+            fi
+            echo "push rejected (attempt $attempt) — rebasing on latest main…" >&2
+            git pull --rebase --autostash origin main || true
+            sleep $(( (RANDOM % 5) + 2 ))
+          done
+          echo "::error::Failed to push healed CAMPAIGN_ID for ${{ matrix.show }} after 5 attempts" >&2
+          exit 1
 
       - name: Prepare story
         env:
