@@ -13,6 +13,9 @@ specific host environment.
 | [`codex/`](codex/) | Use YakYak from the OpenAI Codex CLI / agent environment. |
 | [`n8n/`](n8n/) | n8n nodes and workflow templates to automate the YakYak pipeline visually. |
 
+This section will be expanded over time as we integrate more deeply with existing
+AI tools.
+
 ## Reference
 
 - **API docs:** https://api.yakyak.ai/api/docs

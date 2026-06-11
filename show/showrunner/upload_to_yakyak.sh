@@ -7,7 +7,7 @@
 #
 # Show-AGNOSTIC engine. All show-specific settings (campaign, cast, soundtrack,
 # volume, …) live in <showDir>/show.env and are selected with --show. BBN is just
-# one show; see marketing/showrunner/README.md + docs/alternative_setups.md.
+# one show; see show/showrunner/README.md + docs/alternative_setups.md.
 #
 # Usage:
 #   ./upload_to_yakyak.sh --show <showDir> [campaignId] [storyFile] [flags]
@@ -154,7 +154,7 @@ if [[ -z "$SHOW_DIR_ARG" ]]; then
   exit 1
 fi
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"   # marketing/showrunner
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"   # show/showrunner
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"                  # repo root
 SHOW_DIR="$(cd "$SHOW_DIR_ARG" 2>/dev/null && pwd || true)"
 if [[ -z "$SHOW_DIR" || ! -d "$SHOW_DIR" ]]; then
@@ -167,7 +167,7 @@ ENV_FILE="$REPO_ROOT/e2e/.env.bb"
 # ---- load per-show config (show.env) --------------------------------------
 SHOW_ENV="$SHOW_DIR/show.env"
 if [[ ! -f "$SHOW_ENV" ]]; then
-  echo "error: no show config at $SHOW_ENV (see marketing/showrunner/README.md)." >&2
+  echo "error: no show config at $SHOW_ENV (see show/showrunner/README.md)." >&2
   exit 1
 fi
 set -o allexport

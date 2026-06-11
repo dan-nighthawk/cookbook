@@ -1,6 +1,0 @@
-{
-  "type": "module",
-  "dependencies": {
-    "yakyak-sdk": "^0.0.4"
-  }
-}

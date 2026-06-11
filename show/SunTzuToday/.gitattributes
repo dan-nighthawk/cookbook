@@ -1,5 +1,5 @@
 # Sun Tzu, Today is an EXTRACTED show: config + a generator + a public-domain text
-# corpus, all text. Override the repo-root `marketing/** filter=lfs` catch-all so
+# corpus, all text. Override any repo-wide `filter=lfs` catch-all so
 # the source is stored inline (diffable), not as Git LFS pointers. Comments on own line.
 *.js            text diff merge -filter
 *.py            text diff merge -filter

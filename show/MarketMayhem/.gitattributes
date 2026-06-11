@@ -1,5 +1,5 @@
-# Market Mayhem is a WEBFETCH show: config + a prompt, all text. Override the
-# repo-root `marketing/** filter=lfs` catch-all so the source is stored inline
+# Market Mayhem is a WEBFETCH show: config + a prompt, all text. Override
+# any repo-wide `filter=lfs` catch-all so the source is stored inline
 # (diffable), not as Git LFS pointers. Comments on their own line.
 *.md            text diff merge -filter
 *.json          text diff merge -filter

@@ -20,7 +20,7 @@
 # If PREPARE_KIND is unset, a compute.* (or COMPUTE_CMD) wins; otherwise prompt.md.
 #
 # This script is show-AGNOSTIC; the per-show creative/sourcing logic lives in the
-# show dir (prompt.md or compute.*). See marketing/showrunner/README.md.
+# show dir (prompt.md or compute.*). See show/showrunner/README.md.
 
 set -euo pipefail
 

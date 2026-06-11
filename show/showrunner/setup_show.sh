@@ -5,7 +5,7 @@
 # and wire the resulting ids into show.env.
 #
 #   YAKYAK_PAT=yy_live_... ./setup_show.sh [showDir] [--force] [--no-soundtrack]
-#   (showDir defaults to marketing/Horoscopes)
+#   (showDir defaults to show/Horoscopes)
 #
 # Idempotent / safe to re-run (and to call from CI self-heal):
 #   - Campaign: reuses show.env CAMPAIGN_ID if set; else finds an existing campaign
@@ -22,7 +22,7 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"   # marketing/showrunner
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"   # show/showrunner
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 FORCE=false
@@ -243,7 +243,7 @@ fi
 # ships S1E1 first.
 #
 # Idempotent: skipped when the template already has a soundtrackedMovieUrl.
-# See marketing/docs/show_runner_missing_trailer_bug.md.
+# See show/docs/show_runner_missing_trailer_bug.md.
 trailer_mv="$(curl -fsS "${AUTH[@]}" "$API/workflow/get-movie/$TEMPLATE_MOVIE_ID" 2>/dev/null || echo '{}')"
 trailer_url="$(jq -r '.movieSoundtrack.soundtrackedMovieUrl // ""' <<<"$trailer_mv")"
 if [[ -n "$trailer_url" ]]; then
@@ -407,5 +407,5 @@ echo "  Trailer:    ${trailer_url:-(none)}"
 echo "  Config:     $SHOW_ENV"
 echo
 echo "Next — generate + render an episode:"
-echo "  ./marketing/showrunner/prepare.sh $SHOW_DIR"
-echo "  python3 ./marketing/showrunner/upload_to_yakyak.py --show $SHOW_DIR"
+echo "  ./show/showrunner/prepare.sh $SHOW_DIR"
+echo "  python3 ./show/showrunner/upload_to_yakyak.py --show $SHOW_DIR"

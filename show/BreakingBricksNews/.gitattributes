@@ -1,9 +1,8 @@
 # BreakingBricksNews mixes source/text (scripts, docs, generated stories) with a
-# handful of binary brand assets. The repo-root catch-all
-#   marketing/** filter=lfs diff=lfs merge=lfs -text
-# is right for the all-binary marketing subtrees (ItalianJob, YakYakOriginals)
-# but wrong here: it would push every .md / .py / .sh / .json into Git LFS, so a
-# fresh clone without git-lfs reads pointers instead of source and nothing diffs.
+# handful of binary brand assets. A repo-wide `filter=lfs` catch-all would be
+# right for an all-binary subtree but wrong here: it would push every
+# .md / .py / .sh / .json into Git LFS, so a fresh clone without git-lfs reads
+# pointers instead of source and nothing diffs.
 #
 # This file overrides the catch-all for THIS subtree only:
 #   - text/source  -> normal Git (diffable, 3-way merge, EOL normalized). The
@@ -21,8 +20,8 @@
 *.json         text diff merge -filter
 *.txt          text diff merge -filter
 *.env          text diff merge -filter
-# Keep attributes files themselves as plain text (else marketing/** would LFS
-# them and a no-lfs clone would read a pointer instead of these rules).
+# Keep attributes files themselves as plain text (else a filter=lfs catch-all
+# would LFS them and a no-lfs clone would read a pointer instead of these rules).
 .gitattributes text diff merge -filter
 .gitkeep       text diff merge -filter
 

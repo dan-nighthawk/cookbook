@@ -17,7 +17,7 @@ for the full flag/cron/Docker/CI reference.
 ## Why this layout (no duplication)
 
 ```
-marketing/
+show/
   showrunner/                 # the engine — ONE copy, three language ports
     upload_to_yakyak.py|js|sh # the uploader (pick any port; behaviour is identical)
     story-format.js           # shared story-markdown → payload converters
@@ -94,8 +94,8 @@ PAT resolution: process env `$YAKYAK_PAT` (or the show's `PAT_ENV_KEY`), else
 ## Adding a new show
 
 1. Create the campaign in the app; note its uuid + (optional) soundtrack audioPath.
-2. `mkdir marketing/<Show> && touch marketing/<Show>/stories/.gitkeep`.
-3. Write `marketing/<Show>/show.env` (copy an existing one; set `CAMPAIGN_ID`,
+2. `mkdir show/<Show> && touch show/<Show>/stories/.gitkeep`.
+3. Write `show/<Show>/show.env` (copy an existing one; set `CAMPAIGN_ID`,
    `CAST_ALIASES`, `CADENCE`, `ENGINE`, `PREPARE_KIND`, `STORY_SUFFIX`/`STORY_GLOB`).
 4. Add the sourcing:
    - **compute** show → `compute.py` / `compute.sh` / `compute.js` that writes
@@ -108,11 +108,11 @@ PAT resolution: process env `$YAKYAK_PAT` (or the show's `PAT_ENV_KEY`), else
 ## One-time campaign setup (`setup_show.sh`)
 
 If a show ships a `campaign.import.json` (config + cast roster, no rendered
-assets — see `marketing/Horoscopes/`), `setup_show.sh` does the whole first-time
+assets — see `show/Horoscopes/`), `setup_show.sh` does the whole first-time
 setup from just a PAT:
 
 ```bash
-YAKYAK_PAT=yy_live_... ./marketing/showrunner/setup_show.sh marketing/Horoscopes
+YAKYAK_PAT=yy_live_... ./show/showrunner/setup_show.sh show/Horoscopes
 ```
 
 It is **idempotent** — safe to re-run and to call from CI:
@@ -148,10 +148,10 @@ paid steps behind a human), or let CI self-heal on first run.
 Build from the **repo root** (Dockerfile `COPY` paths assume it):
 
 ```bash
-docker build -f marketing/showrunner/Dockerfile.py -t yakyak/showrunner-py .
+docker build -f show/showrunner/Dockerfile.py -t yakyak/showrunner-py .
 docker run --rm -e YAKYAK_PAT \
-  -v "$PWD/marketing/Horoscopes/stories:/app/marketing/Horoscopes/stories" \
-  yakyak/showrunner-py --show marketing/Horoscopes
+  -v "$PWD/show/Horoscopes/stories:/app/show/Horoscopes/stories" \
+  yakyak/showrunner-py --show show/Horoscopes
 ```
 
 `Dockerfile.prepare` adds the `claude` CLI for prompt-kind shows; compute shows
@@ -160,7 +160,7 @@ prepare in the plain engine images.
 ## CI (GitHub Actions)
 
 - **`.github/workflows/build-showrunner.yml`** — on changes under
-  `marketing/showrunner/**`, builds the four images and pushes them to ECR
+  `show/showrunner/**`, builds the four images and pushes them to ECR
   (`426496910306.dkr.ecr.us-west-2.amazonaws.com/yakyak/showrunner-*`) tagged by
   git SHA + `latest`.
 - **`.github/workflows/run-shows.yml`** — daily cron + manual dispatch. `plan`

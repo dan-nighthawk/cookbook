@@ -5,13 +5,15 @@ A community-contributed [YakYak](https://yakyak.ai/) channel for
 *"Ride the BEST roads like a PRO."*
 
 TulipHunt offers curated, self-guided motorcycle routes through scenic regions
-(22+ routes in Northern Thailand, with European expansion planned), teaching riders
-the roadbook navigation techniques used by rally champions. Routes range from short
-8 km urban loops to 268 km multi-day adventures, graded by difficulty (green → blue
-→ red → black) and terrain mix, with themed stops at coffee shops, natural
-attractions, and cultural sites. Riders follow along by traditional roadbook or
-Google Maps, and "hunt tulips" — scanning physical tulip markers along the way to
-earn points and climb the *Top Tulip Hunters* leaderboard.
+(22+ routes in Northern Thailand, with European expansion under way — including the
+Tesch Treff routes in Belgium), teaching riders the roadbook navigation techniques
+used by rally champions. Routes range from short 8 km urban loops to 268 km
+multi-day adventures, graded by difficulty (🟢 green → 🔷 blue → 🛑 red → ⬛️ black)
+and terrain mix (paved roads and enduro trails), with themed stops at coffee shops,
+waterfalls, mountain villages, temples, viewpoints, and local eateries. Riders
+follow along by traditional roadbook or Google Maps, and "hunt tulips" — scanning
+physical tulip markers along the way to earn points and climb the *Top Tulip
+Hunters* leaderboard, with 24/7 online chat for navigation and roadside support.
 
 This YakYak channel turns those rides into episodic video: route highlights, trail
 previews, and community spotlights, published on auto-pilot to social.
@@ -30,9 +32,15 @@ previews, and community spotlights, published on auto-pilot to social.
 3. Generate the next episode (or a whole new season with
    `workflow/gen-movie-season`), render, and post.
 
+## Find TulipHunt
+
+- **Website:** https://tuliphunt.com/
+- **LinkedIn:** https://www.linkedin.com/company/tuliphunt/
+- **Instagram:** https://www.instagram.com/tuliphunt_com/
+- **TikTok:** https://www.tiktok.com/@tuliphunt_com
+
 ## Reference
 
-- **TulipHunt:** https://tuliphunt.com/
 - **YakYak:** https://yakyak.ai/
 
 See [`../README.md`](../README.md) for the community-contributions overview and

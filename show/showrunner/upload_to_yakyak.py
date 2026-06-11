@@ -7,7 +7,7 @@ post to social.
 
 This is the show-AGNOSTIC engine. All show-specific settings (campaign, cast,
 soundtrack, volume, …) live in <showDir>/show.env and are selected with --show.
-Breaking Bricks News is just one show; see marketing/showrunner/README.md and
+Breaking Bricks News is just one show; see show/showrunner/README.md and
 docs/alternative_setups.md.
 
 A Python port of upload_to_yakyak.sh, driving the YakYak API through the
@@ -18,7 +18,7 @@ Usage:
 
 Flags:
   --show <showDir>         REQUIRED (or $SHOW_DIR). Directory holding show.env +
-                           stories/ (e.g. marketing/BreakingBricksNews).
+                           stories/ (e.g. show/BreakingBricksNews).
   --post                   Post the rendered episode to every social network
                            linked to the campaign (NOT default).
   --post-only              Skip upload + render entirely; just post an
@@ -348,7 +348,7 @@ def load_show_config(show_dir: Path) -> dict[str, str]:
     if not cfg_file.is_file():
         die(
             f"no show config at {cfg_file}. Every show needs a show.env "
-            "(see marketing/showrunner/README.md or an existing show for the keys)."
+            "(see show/showrunner/README.md or an existing show for the keys)."
         )
     return load_env_file(cfg_file)
 
@@ -637,7 +637,7 @@ def confirm(prompt: str) -> bool:
 def main(argv: list[str]) -> int:
     args = parse_args(argv)
 
-    script_dir = Path(__file__).resolve().parent          # marketing/showrunner
+    script_dir = Path(__file__).resolve().parent          # show/showrunner
     repo_root = script_dir.parent.parent                   # repo root (yakyak/)
     show_dir = Path(args.show).resolve()
     if not show_dir.is_dir():

@@ -17,7 +17,7 @@ House rules baked in:
     shuffled deterministically and dealt without replacement (req 4).
   - No trailing period on any spoken line (YakYak dialogue house style).
 
-Invoked by marketing/showrunner/prepare.sh, which sets these env vars:
+Invoked by show/showrunner/prepare.sh, which sets these env vars:
   OUTPUT_FILE  absolute path to write the markdown to (required)
   TIMESTAMP    UTC stamp "YYYYmmddTHHMMSSZ" (used to derive the ISO week)
   SHOW_DIR     the show directory (unused here, available if needed)

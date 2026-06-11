@@ -7,7 +7,7 @@
 //
 // Show-AGNOSTIC engine. All show-specific settings (campaign, cast, soundtrack,
 // volume, …) live in <showDir>/show.env and are selected with --show. BBN is
-// just one show; see marketing/showrunner/README.md + docs/alternative_setups.md.
+// just one show; see show/showrunner/README.md + docs/alternative_setups.md.
 //
 // A JavaScript port of upload_to_yakyak.sh, driving the official `yakyak-sdk`
 // JavaScript client (https://github.com/yakyak-support/cookbook/tree/main/sdk).
@@ -172,7 +172,7 @@ if (POST_ONLY && SKIP_FINALIZE) {
 }
 if (!SHOW_DIR_ARG) die('--show <showDir> is required (or set $SHOW_DIR).');
 
-const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));   // marketing/showrunner
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));   // show/showrunner
 const REPO_ROOT = path.resolve(SCRIPT_DIR, '..', '..');            // repo root
 const SHOW_DIR = path.resolve(SHOW_DIR_ARG);
 if (!fs.existsSync(SHOW_DIR)) die(`--show dir not found: ${SHOW_DIR}`);
@@ -195,7 +195,7 @@ function loadEnvFile(file) {
 function loadShowConfig(showDir) {
   const f = path.join(showDir, 'show.env');
   if (!fs.existsSync(f)) {
-    die(`no show config at ${f}. Every show needs a show.env (see marketing/showrunner/README.md).`);
+    die(`no show config at ${f}. Every show needs a show.env (see show/showrunner/README.md).`);
   }
   return loadEnvFile(f);
 }

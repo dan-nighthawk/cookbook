@@ -29,7 +29,7 @@ NOT validated against a real 通書 (Tong Shu) 甲子 epoch. Pin a verified epoc
 presenting this as a true almanac; as a stylized daily-luck show it is self-
 consistent and reproducible.
 
-Invoked by marketing/showrunner/prepare.sh, which sets these env vars:
+Invoked by show/showrunner/prepare.sh, which sets these env vars:
   OUTPUT_FILE  absolute path to write the markdown to (required)
   TIMESTAMP    UTC stamp "YYYYmmddTHHMMSSZ" (used to derive the date)
   SHOW_DIR     the show directory (unused here, available if needed)

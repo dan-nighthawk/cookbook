@@ -1,5 +1,4 @@
-# showrunner/ is pure source. Override the repo-root catch-all
-#   marketing/** filter=lfs diff=lfs merge=lfs -text
+# showrunner/ is pure source. Guard against any repo-wide `filter=lfs` catch-all
 # so the engine code is stored inline (diffable), not as Git LFS pointers.
 # `-filter` clears the inherited LFS filter; `text diff merge` force normal text
 # handling. Do NOT use -diff/-merge (those flag a file binary).

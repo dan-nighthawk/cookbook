@@ -5,11 +5,11 @@ own cast, your own daily story, rendered into a finished video. This is the shor
 path to do that **against the hosted API** (`https://api.yakyak.ai`). You drive three
 small scripts from your own checkout; no Docker, no CI, no AWS.
 
-> The engine (`marketing/showrunner/`) is show-agnostic. Everything specific to *your*
+> The engine (`show/showrunner/`) is show-agnostic. Everything specific to *your*
 > show — campaign, cast, soundtrack, story source, cadence — lives in one directory
-> under `marketing/`, selected at runtime with `--show`. For the full engine reference
-> see [`README.md`](./README.md); for 10 ready-made show ideas see
-> [`../BreakingBricksNews/docs/alternative_setups.md`](../BreakingBricksNews/docs/alternative_setups.md).
+> under `show/`, selected at runtime with `--show`. For the full engine reference
+> see [`README.md`](./README.md); for the gallery of example shows to copy from see
+> [`../README.md`](../README.md).
 
 ---
 
@@ -42,8 +42,8 @@ Install once:
 
 - `git`, plus the toolchain for the **one** engine port you'll use:
   - **shell port** — just `bash`, `curl`, `jq` (nothing to install per-run);
-  - **JS port** — `node ≥ 18` + `npm` (then `npm install` in `marketing/showrunner/`);
-  - **Python port** — `python3 ≥ 3.8` + `pip` (then `pip install -r marketing/showrunner/requirements.txt`).
+  - **JS port** — `node ≥ 18` + `npm` (then `npm install` in `show/showrunner/`);
+  - **Python port** — `python3 ≥ 3.8` + `pip` (then `pip install -r show/showrunner/requirements.txt`).
 - `curl` + `jq` are needed by `setup_show.sh` **regardless** of which port you pick.
 - **AI path only:** the `claude` CLI (`npm i -g @anthropic-ai/claude-code`) and an
   `ANTHROPIC_API_KEY` (or `CLAUDE_CODE_OAUTH_TOKEN`) in your environment.
@@ -82,12 +82,12 @@ you ever need to point elsewhere.
 Copy the template that matches your AI/no-AI choice, then rename it:
 
 ```bash
-cp -r marketing/LuckyDay   marketing/MyShow     # without AI (deterministic)
+cp -r show/LuckyDay   show/MyShow     # without AI (deterministic)
 # or
-cp -r marketing/PettyCourt marketing/MyShow     # with AI (prompt.md)
+cp -r show/PettyCourt show/MyShow     # with AI (prompt.md)
 ```
 
-Now edit three things inside `marketing/MyShow/`:
+Now edit three things inside `show/MyShow/`:
 
 **`show.env`** — clear the campaign id and set your knobs:
 
@@ -118,7 +118,7 @@ between your source and the renderer.
 ### The story-markdown contract
 
 `prepare.sh` (or whatever you write) must produce a file shaped like this — abridged
-from a real `marketing/DailyPull/stories/…` file:
+from a real `show/DailyPull/stories/…` file:
 
 ```markdown
 # My Show — 2026-06-09
@@ -162,7 +162,7 @@ and writes the resolved `CAMPAIGN_ID` + `SOUNDTRACK_AUDIO_PATH` back into your
 `show.env`. It's **idempotent** — safe to re-run; paid steps already done are skipped.
 
 ```bash
-./marketing/showrunner/setup_show.sh marketing/MyShow
+./show/showrunner/setup_show.sh show/MyShow
 ```
 
 (Needs `curl` + `jq` and your `YAKYAK_PAT`. Pass `--no-soundtrack` to skip music.)
@@ -216,10 +216,10 @@ Caveats:
 ## Step 4 — Generate the next story
 
 ```bash
-./marketing/showrunner/prepare.sh marketing/MyShow
+./show/showrunner/prepare.sh show/MyShow
 ```
 
-Writes `marketing/MyShow/stories/<UTC-timestamp><STORY_SUFFIX>`. The compute path is
+Writes `show/MyShow/stories/<UTC-timestamp><STORY_SUFFIX>`. The compute path is
 deterministic and free; the prompt path calls `claude` (needs your Anthropic key).
 
 ---
@@ -230,13 +230,13 @@ Pick **one** port — behaviour is identical:
 
 ```bash
 # shell — needs only curl + jq
-./marketing/showrunner/upload_to_yakyak.sh --show marketing/MyShow
+./show/showrunner/upload_to_yakyak.sh --show show/MyShow
 
-# JS — run `npm install` in marketing/showrunner/ once first
-node marketing/showrunner/upload_to_yakyak.js --show marketing/MyShow
+# JS — run `npm install` in show/showrunner/ once first
+node show/showrunner/upload_to_yakyak.js --show show/MyShow
 
-# Python — run `pip install -r marketing/showrunner/requirements.txt` once first
-python3 marketing/showrunner/upload_to_yakyak.py --show marketing/MyShow
+# Python — run `pip install -r show/showrunner/requirements.txt` once first
+python3 show/showrunner/upload_to_yakyak.py --show show/MyShow
 ```
 
 The script finds the next empty episode slot, stamps your story onto it, regenerates
@@ -254,10 +254,10 @@ You can watch the result in the dashboard, or fetch it:
 
 ```bash
 export YAKYAK_PAT="yy_live_..."
-cp -r marketing/LuckyDay marketing/MyShow      # then edit show.env + campaign.import.json + compute.js/prompt.md
-./marketing/showrunner/setup_show.sh   marketing/MyShow   # once
-./marketing/showrunner/prepare.sh      marketing/MyShow   # per episode
-./marketing/showrunner/upload_to_yakyak.sh --show marketing/MyShow   # per episode
+cp -r show/LuckyDay show/MyShow      # then edit show.env + campaign.import.json + compute.js/prompt.md
+./show/showrunner/setup_show.sh   show/MyShow   # once
+./show/showrunner/prepare.sh      show/MyShow   # per episode
+./show/showrunner/upload_to_yakyak.sh --show show/MyShow   # per episode
 ```
 
 Repeat steps 4–5 whenever you want a new episode. To automate it later, wire those two

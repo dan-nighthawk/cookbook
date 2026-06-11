@@ -1,5 +1,5 @@
 # Horoscopes is a COMPUTED show: config + a deterministic generator, all text.
-# Override the repo-root `marketing/** filter=lfs` catch-all so the source is
+# Override any repo-wide `filter=lfs` catch-all so the source is
 # stored inline (diffable), not as Git LFS pointers. Comments on their own line.
 *.py            text diff merge -filter
 *.md            text diff merge -filter

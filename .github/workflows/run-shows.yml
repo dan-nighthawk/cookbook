@@ -7,7 +7,7 @@ name: Render Shows
 #
 # Everything a show needs lives under ./show, which is the Docker build context
 # for the engine images — so inside the container the show dirs sit at /app/<Show>
-# (no marketing/ prefix), while on the runner they are checked out at show/<Show>.
+# (no show/ prefix), while on the runner they are checked out at show/<Show>.
 
 on:
   schedule:
