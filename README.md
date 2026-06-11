@@ -1,7 +1,10 @@
-# YakYak Cookbook
+# The YakYak Cookbook
 
 **[YakYak](https://yakyak.ai/)** is an autonomous AI media agency: it writes, casts,
-voices, renders, and ships episodic video to your social channels on auto-pilot.
+voices, renders, and ships episodic video to your social channels on auto-pilot. 
+This repo is your magic wand 🪄 to create new and never seen before content, where the
+sky is the limit and your imagination is your super power 🚀. Best of all, it all runs
+automatically, so you can relax while your channels make 💰💰💰 for you. 
 
 ![YakYak architecture — the API, render engine, and scheduler at the core, fed by four entry points (① you in the app, ② the in-app scheduler, ③ your logic on GitHub, ④ your own system) and fanning out to your connected social channels](docs/assets/architecture.png)
 
