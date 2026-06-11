@@ -55,9 +55,12 @@
 #   2. Use the PAT as the bearer token; decode its embedded JWT to get
 #      the userId (no login round-trip).
 #   3. GET  /workflow/get-campaign/<campaignId>
-#   4. Find lowest-(season,episode) movie whose renderedMovieUrl is empty
-#      (not yet rendered). If none exist, POST /workflow/create-new-season
-#      and poll until the new season's episodes appear.
+#   4. Find lowest-(season,episode) movie whose renderedMovieUrl is empty (not
+#      yet rendered). If none and the campaign has movies, POST
+#      /workflow/create-new-season; if the campaign has NO movies at all (fresh/
+#      forked, no slots yet), POST /workflow/gen-movie-season on the template
+#      instead (create-new-season can't bootstrap an empty campaign). Then poll
+#      until episodes appear.
 #   5. POST /workflow/set-movie-metadata (movieId + story-file body as description)
 #   6. POST /workflow/update-movie-social-description (caption + title)
 #   7. POST /workflow/gen-movie-screenplay (kick the regen pipeline)
@@ -460,14 +463,34 @@ else
   NEXT="$(pick_next_episode "$CAMPAIGN_JSON")"
 
   if [[ -z "$NEXT" ]]; then
-    echo "→ No available episode in current season(s); creating new season"
-    CREATE_BODY="$(jq -nc --arg c "$CAMPAIGN_ID" '{campaignId:$c}')"
-    CREATE_RESP="$(curl -fsS -X POST -H "$AUTH_H" -H 'Content-Type: application/json' \
-      --data "$CREATE_BODY" \
-      "$API/workflow/create-new-season")"
-    echo "  $CREATE_RESP"
+    # Two distinct "no episode to fill" cases:
+    #  - movies exist → a season exists but every slot is rendered;
+    #    create-new-season adds the next season (needs an existing episode).
+    #  - 0 movies → a fresh/forked campaign has NO numbered slots yet.
+    #    create-new-season can't bootstrap from nothing (it 500s), so seed
+    #    season 1 from the template via gen-movie-season (as setup_show.sh does).
+    #    get-campaign filters the template out, so it's found via list-campaign.
+    if [[ "$TOTAL_MOVIES" -gt 0 ]]; then
+      echo "→ No available episode in current season(s); creating new season"
+      CREATE_BODY="$(jq -nc --arg c "$CAMPAIGN_ID" '{campaignId:$c}')"
+      CREATE_RESP="$(curl -fsS -X POST -H "$AUTH_H" -H 'Content-Type: application/json' \
+        --data "$CREATE_BODY" \
+        "$API/workflow/create-new-season")"
+      echo "  $CREATE_RESP"
+    else
+      echo "→ Campaign has no episode slots; bootstrapping season 1 from template"
+      TEMPLATE_MOVIE_ID="$(curl -fsS -H "$AUTH_H" "$API/workflow/list-campaign/$USER_ID" \
+        | jq -r --arg id "$CAMPAIGN_ID" '.campaigns[]? | select(.id == $id) | .template.id // empty')"
+      [[ -n "$TEMPLATE_MOVIE_ID" ]] || { echo "error: campaign $CAMPAIGN_ID has no template movie to bootstrap from" >&2; exit 1; }
+      echo "  template movie $TEMPLATE_MOVIE_ID → gen-movie-season"
+      SEED_BODY="$(jq -nc --arg mid "$TEMPLATE_MOVIE_ID" '{movieId:$mid}')"
+      SEED_RESP="$(curl -fsS -X POST -H "$AUTH_H" -H 'Content-Type: application/json' \
+        --data "$SEED_BODY" \
+        "$API/workflow/gen-movie-season")"
+      echo "  $SEED_RESP"
+    fi
 
-    echo "→ Polling for new season's episodes (up to ~3 minutes)…"
+    echo "→ Polling for episodes (up to ~3 minutes)…"
     for i in $(seq 1 36); do
       sleep 5
       CAMPAIGN_JSON="$(fetch_campaign)"
@@ -481,7 +504,7 @@ else
     done
 
     if [[ -z "$NEXT" ]]; then
-      echo "error: new season did not produce episodes within timeout" >&2
+      echo "error: season bootstrap did not produce episodes within timeout" >&2
       exit 1
     fi
   fi

@@ -69,7 +69,10 @@ What it does (mirrors the shell version step-for-step):
      the userId (no login round-trip).
   3. get-campaign
   4. Find lowest-(season,episode) movie whose renderedMovieUrl is empty.
-     If none, create-new-season and poll until episodes appear.
+     If none and the campaign has movies, create-new-season; if the campaign
+     has NO movies at all (fresh/forked, no slots yet), gen-movie-season on the
+     template instead (create-new-season can't bootstrap an empty campaign).
+     Then poll until episodes appear.
   5. set-movie-metadata (movieId + story-file body as description)
   6. update-movie-social-description (caption + title)
   7. gen-movie-screenplay (kick the regen pipeline)
@@ -91,8 +94,10 @@ returns non-2xx raises ApiException, caught at the entrypoint.
 A few endpoints still aren't fully modelled, so they go through the SDK's own
 low-level transport (`ApiClient.param_serialize` + `call_api`, same host/auth/
 pool, raw JSON in/out):
-  - create-new-season, update-movie-social-description — 0.0.7 exposes these only
-    as a generic request body (no DTO), so raw is just as clean.
+  - create-new-season, gen-movie-season, update-movie-social-description — 0.0.7
+    exposes these only as a generic request body (no DTO), so raw is just as
+    clean. list-campaign (template lookup for empty-campaign bootstrap) is read
+    raw too.
   - get-movie / render-history / available-soundtracks — read as plain dicts
     (nested fields like scene[].sceneBurnSubtitle.status) rather than models.
   - GET /users/{id} — the typed User schema omits `tokenBalance`.
@@ -256,6 +261,25 @@ class YakYak:
             SwitchCampaignModeDto.from_dict(
                 {"campaignId": self.campaign_id, "mode": mode}
             )
+        )
+
+    def template_movie_id(self) -> Optional[str]:
+        """The campaign's template (season==null) movie id, via list-campaign.
+
+        get-campaign filters templates out, so the template — the row used to
+        bootstrap season 1 — is read from the per-user campaign list instead.
+        """
+        data = self._request_ok("GET", f"/workflow/list-campaign/{self.user_id}")
+        for c in (data or {}).get("campaigns", []) or []:
+            if c.get("id") == self.campaign_id:
+                return (c.get("template") or {}).get("id") or None
+        return None
+
+    def gen_movie_season(self, template_movie_id: str) -> Any:
+        # Seed a campaign's first season of numbered episode slots from its
+        # template. Raw: 0.0.7 doesn't model this (no DTO).
+        return self._request_ok(
+            "POST", "/workflow/gen-movie-season", {"movieId": template_movie_id}
         )
 
     def create_new_season(self) -> Any:
@@ -707,6 +731,7 @@ def main(argv: list[str]) -> int:
     user_id = decode_pat_user_id(pat)
     if not user_id:
         die(f"could not extract userId from ${pat_env_key} (malformed token?)")
+    yy.user_id = user_id  # type: ignore[attr-defined]  # needed for list-campaign (template lookup)
     print(f"→ Authenticated via PAT (userId {user_id})")
 
     # ---- token balance gate ------------------------------------------------
@@ -777,20 +802,37 @@ def run(yy: YakYak, args: argparse.Namespace, story_file: Optional[Path], cdn_ba
     else:
         target = pick_next_episode(movies)
         if not target:
-            print("→ No available episode in current season(s); creating new season")
-            resp = yy.create_new_season()
-            print(f"  {json.dumps(resp) if resp is not None else 'ok'}")
-            print("→ Polling for new season's episodes (up to ~3 minutes)…")
+            # Two distinct "no episode to fill" cases:
+            #  - movies non-empty → a season exists but every slot is rendered;
+            #    create-new-season adds the next season (needs an existing episode).
+            #  - movies empty → a fresh/forked campaign has NO numbered slots yet.
+            #    create-new-season can't bootstrap from nothing (it 500s), so seed
+            #    season 1 from the template via gen-movie-season (as setup_show.sh
+            #    does). get-campaign filters the template out, so it's found via
+            #    list-campaign.
+            if movies:
+                print("→ No available episode in current season(s); creating new season")
+                resp = yy.create_new_season()
+                print(f"  {json.dumps(resp) if resp is not None else 'ok'}")
+            else:
+                print("→ Campaign has no episode slots; bootstrapping season 1 from template")
+                template_id = yy.template_movie_id()
+                if not template_id:
+                    die(f"campaign {campaign_id} has no template movie to bootstrap from")
+                print(f"  template movie {template_id} → gen-movie-season")
+                resp = yy.gen_movie_season(template_id)
+                print(f"  {json.dumps(resp) if resp is not None else 'ok'}")
+            print("→ Polling for episodes (up to ~3 minutes)…")
             for i in range(1, 37):
                 time.sleep(5)
                 movies = yy.get_campaign()
                 target = pick_next_episode(movies)
                 if target:
-                    print(f"  new episodes appeared ({len(movies)} total)")
+                    print(f"  episodes appeared ({len(movies)} total)")
                     break
                 print(f"  …still waiting ({i}/36)")
             if not target:
-                die("new season did not produce episodes within timeout")
+                die("season bootstrap did not produce episodes within timeout")
 
     movie_id = target["id"]
     season = target.get("season")

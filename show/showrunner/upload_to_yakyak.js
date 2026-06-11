@@ -444,23 +444,42 @@ async function run() {
   } else {
     target = pickNextEpisode(movies);
     if (!target) {
-      console.log('→ No available episode in current season(s); creating new season');
-      const createResp = await client.workflow.createNewSeason({ requestBody: { campaignId: CAMPAIGN_ID } });
-      console.log(`  ${JSON.stringify(createResp)}`);
+      // Two distinct "no episode to fill" cases:
+      //  - movies non-empty → a season exists but every slot is rendered;
+      //    create-new-season adds the next season (needs an existing episode).
+      //  - movies empty → a fresh/forked campaign has NO numbered slots yet.
+      //    create-new-season can't bootstrap from nothing (it 500s), so seed
+      //    season 1 from the template via gen-movie-season (as setup_show.sh
+      //    does). get-campaign filters the template out, so it's found via
+      //    list-campaign.
+      if (movies.length > 0) {
+        console.log('→ No available episode in current season(s); creating new season');
+        const createResp = await client.workflow.createNewSeason({ requestBody: { campaignId: CAMPAIGN_ID } });
+        console.log(`  ${JSON.stringify(createResp)}`);
+      } else {
+        console.log('→ Campaign has no episode slots; bootstrapping season 1 from template');
+        const list = await client.workflow.listCampaigns({ userId: USER_ID });
+        const entry = (list.campaigns || []).find((c) => c.id === CAMPAIGN_ID);
+        const templateId = entry && entry.template && entry.template.id;
+        if (!templateId) die(`campaign ${CAMPAIGN_ID} has no template movie to bootstrap from`);
+        console.log(`  template movie ${templateId} → gen-movie-season`);
+        const seedResp = await client.workflow.genMovieSeason({ requestBody: { movieId: templateId } });
+        console.log(`  ${JSON.stringify(seedResp)}`);
+      }
 
-      console.log('→ Polling for new season\'s episodes (up to ~3 minutes)…');
+      console.log('→ Polling for episodes (up to ~3 minutes)…');
       for (let i = 1; i <= 36; i++) {
         await sleep(5);
         campaign = await fetchCampaign();
         movies = campaign.movies || [];
         target = pickNextEpisode(movies);
         if (target) {
-          console.log(`  new episodes appeared (${movies.length} total)`);
+          console.log(`  episodes appeared (${movies.length} total)`);
           break;
         }
         console.log(`  …still waiting (${i}/36)`);
       }
-      if (!target) die('new season did not produce episodes within timeout');
+      if (!target) die('season bootstrap did not produce episodes within timeout');
     }
   }
 
