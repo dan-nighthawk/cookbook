@@ -1,6 +1,6 @@
 # Breaking Bricks News — Posting an Episode to Instagram
 
-Once an episode is rendered on [YakYak](https://beta.yakyak.ai), it can be
+Once an episode is rendered on [YakYak](https://yakyak.ai), it can be
 published to Instagram as a **reel** by a reusable Playwright script,
 **`e2e/src/post-to-instagram.ts`** (run via `npm run post-ig`). It mirrors the X
 poster (`posting_to_x.md`) and shares the same YakYak-side movie resolver.
@@ -78,13 +78,13 @@ cd e2e
 
 # DRY RUN — walks the create modal to the caption screen and screenshots it,
 # but never publishes. ALWAYS do this first (see the caveat below).
-npm run post-ig -- "https://beta.yakyak.ai/movieEdit?movieId=b8ce66d9-..." --headful
+npm run post-ig -- "https://yakyak.ai/movieEdit?movieId=b8ce66d9-..." --headful
 
 # PUBLISH (default social copy)
-npm run post-ig -- "https://beta.yakyak.ai/movieEdit?movieId=b8ce66d9-..." --post
+npm run post-ig -- "https://yakyak.ai/movieEdit?movieId=b8ce66d9-..." --post
 
 # PUBLISH with a custom caption
-npm run post-ig -- "https://beta.yakyak.ai/movieEdit?movieId=b8ce66d9-..." \
+npm run post-ig -- "https://yakyak.ai/movieEdit?movieId=b8ce66d9-..." \
   --caption-override $'My headline\n\nMy caption' \
   --post
 ```
@@ -105,7 +105,7 @@ You can pass either a bare `movieId` (UUID) or a full `movieEdit?movieId=…` UR
 | Var                                          | Purpose                                                       |
 | -------------------------------------------- | ------------------------------------------------------------- |
 | `YAKYAK_TEST_EMAIL` / `YAKYAK_TEST_PASSWORD` | YakYak login (render-history latest + social title/description). |
-| `YAKYAK_API_URL`                             | API base (default `https://api.beta.yakyak.ai`).              |
+| `YAKYAK_API_URL`                             | API base (default `https://api.yakyak.ai`).              |
 | `IG_PROFILE_DIR`                             | Persistent Chromium profile dir (default `e2e/.ig-profile`).  |
 
 ---

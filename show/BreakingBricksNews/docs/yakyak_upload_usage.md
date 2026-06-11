@@ -33,7 +33,7 @@ linked to the campaign.
 | `--post-only`               | off                                                                                | Skip upload + render entirely; only post an already-rendered episode. Implies `--post`.       |
 | `--movie <movieId>`         | —                                                                                  | Pin the run to a specific movie ID instead of the auto picker. Works in both modes.           |
 | `--volume <N>`              | `45`                                                                               | Soundtrack volume percentage (0–100).                                                         |
-| `--soundtrack <audioPath>`  | the BBN intro track captured in `render-beta2.yakyak.ai.har`                       | Override the default soundtrack. Falls back to `items[0]` of `available-soundtracks` if the supplied path isn't in the pool for the chosen movie. |
+| `--soundtrack <audioPath>`  | the BBN intro track captured from the web app                                      | Override the default soundtrack. Falls back to `items[0]` of `available-soundtracks` if the supplied path isn't in the pool for the chosen movie. |
 | `--skip-finalize`           | off                                                                                | Stop after kicking off screenplay regen — no scene wait, no soundtrack, no render. Useful if you want to finalise later by hand. Mutually exclusive with `--post-only`. |
 | `-h`, `--help`              | —                                                                                  | Print embedded help.                                                                          |
 
@@ -43,7 +43,7 @@ Environment (loaded from `e2e/.env.bb`):
 | ------------------------ | ----------------------------- | ---------------------------------------------------------------------- |
 | `YAKYAK_BB_EMAIL`        | `bb@yakyak.ai`                | Account that owns the campaign.                                        |
 | `YAKYAK_BB_PASSWORD`     | *(required)*                  | If empty the script aborts.                                            |
-| `YAKYAK_API_URL`         | `https://api.beta.yakyak.ai`  | Set to `https://api.beta2.yakyak.ai` for the beta2 cluster, etc.       |
+| `YAKYAK_API_URL`         | `https://api.yakyak.ai`  | Override to point at a different YakYak API host.                      |
 
 ---
 
@@ -134,7 +134,7 @@ Combining `--post-only` with `--skip-finalize` is rejected as contradictory.
 ### Two-step: render now, post later
 
 Use this when you want to eyeball the rendered MP4 in
-[https://beta.yakyak.ai/export](https://beta.yakyak.ai/export?movieId=…) before
+[https://yakyak.ai/export](https://yakyak.ai/export?movieId=…) before
 broadcasting it everywhere.
 
 ```bash
@@ -174,7 +174,7 @@ export page.
 ```bash
 ./upload_to_yakyak.sh \
   --volume 35 \
-  --soundtrack "beta/ugc/.../audio/<other-track-uuid>.mp3"
+  --soundtrack "prd/ugc/.../audio/<other-track-uuid>.mp3"
 ```
 
 The `--soundtrack` value must be an `audioPath` (not the CDN URL) and must

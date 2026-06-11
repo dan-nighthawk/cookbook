@@ -57,7 +57,7 @@ if not password:
     save_env("YAKYAK_PASSWORD", password, quote=True)
     print("🔐 Generated a password and saved it to course/.env (use it to sign into the web app too).")
 
-anon = UsersApi(ApiClient(Configuration(host=base)))  # host is overridable (beta vs prod)
+anon = UsersApi(ApiClient(Configuration(host=base)))  # host is overridable
 
 print(f"Creating account for {email} …")
 try:

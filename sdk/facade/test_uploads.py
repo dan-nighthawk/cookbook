@@ -37,7 +37,7 @@ class FakeHttp:
 
 def up(responses, **kw):
     http = FakeHttp(responses)
-    u = _Uploads(kw.get("base", "https://api.beta.yakyak.ai/"), kw.get("token", "tok"),
+    u = _Uploads(kw.get("base", "https://api.yakyak.ai/"), kw.get("token", "tok"),
                  kw.get("user_id"), http=http)
     return u, http
 
@@ -56,7 +56,7 @@ out = u.cast_image("camp-1", b"\x89PNG-bytes")
 c = http.calls[0]
 check("cast_image returns imageUrl", out == "https://cdn/x.png")
 check("cast_image POST", c["method"] == "POST")
-check("cast_image trailing-slash trimmed", c["url"] == "https://api.beta.yakyak.ai/workflow/upload-cast-character-image")
+check("cast_image trailing-slash trimmed", c["url"] == "https://api.yakyak.ai/workflow/upload-cast-character-image")
 check("cast_image auth header", c["headers"].get("Authorization") == "Bearer tok")
 check("cast_image file field is (name,data,ct)", c["fields"]["file"] == ("upload", b"\x89PNG-bytes", "image/png"))
 check("cast_image default userId from client", c["fields"]["userId"] == "user-1")
@@ -84,9 +84,9 @@ check("user_media file name uses filename", http.calls[0]["fields"]["file"][0] =
 check("user_media content-type", http.calls[0]["fields"]["file"][2] == "video/mp4")
 
 # 5. soundtrack: movieId, returns audioPath
-u, http = up([FakeResp(201, {"audioPath": "beta/.../a.mp3"})])
+u, http = up([FakeResp(201, {"audioPath": "prd/.../a.mp3"})])
 out = u.soundtrack("movie-7", b"mp3")
-check("soundtrack returns audioPath", out == "beta/.../a.mp3")
+check("soundtrack returns audioPath", out == "prd/.../a.mp3")
 check("soundtrack fields", http.calls[0]["fields"]["movieId"] == "movie-7" and http.calls[0]["fields"]["file"][2] == "audio/mpeg")
 
 # 6. scene_movie (the one verified from the HAR): sceneId -> movieUrl

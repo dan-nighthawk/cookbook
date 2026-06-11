@@ -14,7 +14,7 @@ const env = Object.fromEntries(
     .map((l) => { const i = l.indexOf("="); return [l.slice(0, i).trim(), l.slice(i + 1).trim()]; })
 );
 const { YAKYAK_API_BASE: base, YAKYAK_TOKEN: token, YAKYAK_USER_ID: userId } = env;
-const webBase = base.replace("//api.", "//"); // api.beta.yakyak.ai -> beta.yakyak.ai
+const webBase = base.replace("//api.", "//"); // api.yakyak.ai -> yakyak.ai
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const yak = new YakYakClient({ baseUrl: base, token });
 

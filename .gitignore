@@ -16,6 +16,11 @@ openapitools.json
 __pycache__/
 *.pyc
 
+# local secrets (YakYak PAT for scripts / regen tooling)
+e2e/.env.bb
+e2e/.env*
+*.env.bb
+
 # course / local SDK builds
 course/.env
 course/node_modules/

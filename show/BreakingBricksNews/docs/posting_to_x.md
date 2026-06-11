@@ -1,6 +1,6 @@
 # Breaking Bricks News — Posting an Episode to X
 
-Once an episode is rendered on [YakYak](https://beta.yakyak.ai), the last step is
+Once an episode is rendered on [YakYak](https://yakyak.ai), the last step is
 publishing it to X (Twitter) as a video tweet. That is handled by a reusable
 Playwright script, **`e2e/src/post-to-x.ts`** (run via `npm run post-x`).
 
@@ -87,13 +87,13 @@ cd e2e
 # DRY RUN — composes the tweet from the movie's social title/description
 # (shortened to 280 chars), attaches the video, screenshots it, but never posts.
 # Always do this first.
-npm run post-x -- "https://beta.yakyak.ai/movieEdit?movieId=b8ce66d9-..."
+npm run post-x -- "https://yakyak.ai/movieEdit?movieId=b8ce66d9-..."
 
 # PUBLISH (default social copy)
-npm run post-x -- "https://beta.yakyak.ai/movieEdit?movieId=b8ce66d9-..." --post
+npm run post-x -- "https://yakyak.ai/movieEdit?movieId=b8ce66d9-..." --post
 
 # PUBLISH with custom text instead of the social copy
-npm run post-x -- "https://beta.yakyak.ai/movieEdit?movieId=b8ce66d9-..." \
+npm run post-x -- "https://yakyak.ai/movieEdit?movieId=b8ce66d9-..." \
   --text-override $'My own headline\n\nMy own description' \
   --post
 ```
@@ -114,7 +114,7 @@ You can pass either a bare `movieId` (UUID) or a full `movieEdit?movieId=…` UR
 | Var                                       | Purpose                                                       |
 | ----------------------------------------- | ------------------------------------------------------------- |
 | `YAKYAK_TEST_EMAIL` / `YAKYAK_TEST_PASSWORD` | YakYak login, used to read `render-history` (latest render) and `get-movie` (social title/description). |
-| `YAKYAK_API_URL`                          | API base (default `https://api.beta.yakyak.ai`).              |
+| `YAKYAK_API_URL`                          | API base (default `https://api.yakyak.ai`).              |
 | `X_PROFILE_DIR`                           | Persistent Chromium profile dir (default `e2e/.x-profile`).   |
 
 Without YakYak creds the script still works but degrades to the public

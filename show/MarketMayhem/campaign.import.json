@@ -1,67 +1,409 @@
 {
-  "_comment": "Market Mayhem (Crypto & Markets Daily) campaign import for YakYak — structure mirrors a real /workflow/export-campaign export. Config + 6-member cast roster ONLY (Max Mayhem the anchor + 5 personified assets: Bitcoin, Ethereum, Doge, The Fed, Gold); no rendered images/videos/audio (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }. Then copy the returned campaign id into marketing/MarketMayhem/show.env CAMPAIGN_ID. The style resolves by label ('Anime / Manga'); no style.id is set because style uuids are per-environment. The bold editorial-cartoon / financial-terminal art direction is in movies[0].style — that text is appended to every image prompt. Per-character accent colors are in cast.castSubtitles (subtitle font 'Orbitron' for the whole cast — a geometric futuristic sans that reads as a trading terminal). Unlike the single-narrator computed shows, each character gets a DISTINCT voice so the comedy lands (smug veteran vs chaos gremlin vs disapproving Fed vs boomer). animationType is 'kenburns' on purpose: Ken Burns is the cheaper, reliable interim look while Kling AI animation is still being worked on (the docs/alternative_setups.md #6 target is Kling for green/red candle 'battles'). The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
-  "message": "Hand-authored Market Mayhem cast/config template (no rendered assets)",
-  "exportedAt": "2026-06-09 00:00:00",
+  "message": "Exported from user show@yakyak.ai at 2026-06-11 04:39:55",
+  "exportedAt": "2026-06-11 04:39:55",
   "campaigns": [
     {
+      "id": "42ebdc7c-3d88-496b-9bce-bf6e4e888256",
       "name": "Market Mayhem — Crypto & Markets Daily",
       "prompt": "A daily crypto/markets show: personified assets (Bitcoin, Ethereum, Doge, The Fed, Gold) react to the day's real price action, anchored by Max Mayhem. Eight scenes, dramatized from live prices and the Fear & Greed index.",
       "status": "active",
       "aspectRatio": "9:16",
-      "animationType": "kenburns",
+      "animationType": "kling",
       "imageQuality": "fast",
       "mode": "pro",
       "subtitleMode": "overlay",
       "allowNewCharacters": false,
       "skipSoundtrack": false,
+      "createdAt": "2026-06-11T02:15:43.958Z",
+      "updatedAt": "2026-06-11T02:15:43.958Z",
       "style": {
+        "id": "42466e2a-6781-4ae9-bc08-e095420e36df",
         "label": "Anime / Manga",
-        "description": "Anime / manga aesthetic — bold linework, cel shading, expressive characters and dramatic lighting."
+        "description": "Japanese animation style with expressive characters, dynamic action poses, and bold outlines. Features characteristic large eyes and stylized proportions."
       },
       "movies": [
         {
-          "title": "Market Mayhem",
-          "plot": "Recurring cast template for the daily Market Mayhem markets show. Holds Max Mayhem (anchor, opens + closes every episode) plus the five personified assets; each episode clones this roster.",
-          "styleShort": "Anime / Manga",
+          "id": "425b7398-05af-4ba7-b61e-2438caf9ac4c",
+          "title": "Rise of the Fed",
+          "status": "completed",
           "style": "Anime / manga meets financial-terminal HUD; a single personified market character front and center, bold clean linework and cel shading, expressive exaggerated emotion, speed-lines and dramatic anime lighting, glowing green and red candlestick charts, ticker tape and percentage glyphs in the background, high-contrast neon-on-dark palette. Green means up, red means down — that is the entire color language.",
+          "styleShort": "Anime / Manga",
           "season": null,
           "episode": null,
-          "scenes": [],
+          "createdAt": "2026-06-11T02:15:43.964Z",
           "customCast": [
-            { "name": "Max Mayhem", "role": "Guru",        "sortOrder": 0, "description": "Max Mayhem: a manic late-night financial-news anchor, loud pinstripe blazer with the sleeves pushed up, wild caffeinated eyes, slicked hair coming loose, seated at a glowing desk of blinking red-and-green tickers and breaking-news lower-thirds, gesturing big, bold anime / manga style." },
-            { "name": "Bitcoin",    "role": "Protagonist", "sortOrder": 1, "description": "Bitcoin: a smug gold-orange veteran character shaped around a glowing ₿ medallion, mirrored sunglasses, arms crossed, a been-here-before smirk, faint scars from past crashes, standing on a pile of older coins, warm orange rim light, bold anime / manga style." },
-            { "name": "Ethereum",   "role": "Protagonist", "sortOrder": 2, "description": "Ethereum: an earnest, slightly anxious younger-sibling character built around a faceted iridescent blue-purple diamond Ξ, too many gadgets and gas-fee meters clipped on, mid-explanation with a raised finger, eager helpful expression, cool violet glow, bold anime / manga style." },
-            { "name": "Doge",       "role": "Protagonist", "sortOrder": 3, "description": "Doge: a gleeful chaos-gremlin Shiba Inu memecoin, golden-yellow shiba fur, giant excited grin, tongue out, riding a rocket emoji, zero impulse control, comic-sans 'wow' energy crackling around it, bright yellow glow, bold anime / manga style." },
-            { "name": "The Fed",    "role": "Antagonist", "sortOrder": 4, "description": "The Fed: a stern grey-suited disapproving-parent character, dollar-green necktie, half-moon reading glasses lowered to deliver a rate-hike glare, a giant interest-rate dial behind it, arms folded, marble-pillar backdrop, cold institutional lighting, bold anime / manga style." },
-            { "name": "Gold",       "role": "Antagonist", "sortOrder": 5, "description": "Gold: a slow, sturdy boomer character shaped like a smug bar of bullion with a warm metallic sheen, tiny reading spectacles, 'back in my day' posture, leaning on a cane of solid gold, unbothered while everything around it flickers red and green, warm amber glow, bold anime / manga style." }
+            {
+              "id": "fa775bb7-8993-4e17-b4c5-10a236346003",
+              "movieId": "425b7398-05af-4ba7-b61e-2438caf9ac4c",
+              "name": "Max Mayhem",
+              "role": "Guru",
+              "description": "Max Mayhem: a manic late-night financial-news anchor, loud pinstripe blazer with the sleeves pushed up, wild caffeinated eyes, slicked hair coming loose, seated at a glowing desk of blinking red-and-green tickers and breaking-news lower-thirds, gesturing big, bold anime / manga style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/3a7e3c38-edff-4b5f-b054-c885f592fd3b.png",
+              "sortOrder": 0,
+              "createdAt": "2026-06-11T02:15:44.005Z",
+              "updatedAt": "2026-06-11T02:15:44.005Z"
+            },
+            {
+              "id": "74f78560-3aee-4c95-b827-2e01d2076362",
+              "movieId": "425b7398-05af-4ba7-b61e-2438caf9ac4c",
+              "name": "Bitcoin",
+              "role": "Protagonist",
+              "description": "Bitcoin: a smug gold-orange veteran character shaped around a glowing ₿ medallion, mirrored sunglasses, arms crossed, a been-here-before smirk, faint scars from past crashes, standing on a pile of older coins, warm orange rim light, bold anime / manga style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/827a0726-9170-4397-a099-a7ad4cdcbc6a.png",
+              "sortOrder": 1,
+              "createdAt": "2026-06-11T02:15:44.005Z",
+              "updatedAt": "2026-06-11T02:15:44.005Z"
+            },
+            {
+              "id": "f9cbacc4-564b-4d95-a93e-83dd51203d70",
+              "movieId": "425b7398-05af-4ba7-b61e-2438caf9ac4c",
+              "name": "Ethereum",
+              "role": "Protagonist",
+              "description": "Ethereum: an earnest, slightly anxious younger-sibling character built around a faceted iridescent blue-purple diamond Ξ, too many gadgets and gas-fee meters clipped on, mid-explanation with a raised finger, eager helpful expression, cool violet glow, bold anime / manga style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/16d51f0b-1760-4f92-844a-6c11eb2a3be8.png",
+              "sortOrder": 2,
+              "createdAt": "2026-06-11T02:15:44.005Z",
+              "updatedAt": "2026-06-11T02:15:44.005Z"
+            },
+            {
+              "id": "cbdb2839-8d48-463d-bf0b-a5854c64147c",
+              "movieId": "425b7398-05af-4ba7-b61e-2438caf9ac4c",
+              "name": "Doge",
+              "role": "Protagonist",
+              "description": "Doge: a gleeful chaos-gremlin Shiba Inu memecoin, golden-yellow shiba fur, giant excited grin, tongue out, riding a rocket emoji, zero impulse control, comic-sans 'wow' energy crackling around it, bright yellow glow, bold anime / manga style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/99df105b-8d59-4dff-be16-14c6a8570c70.png",
+              "sortOrder": 3,
+              "createdAt": "2026-06-11T02:15:44.005Z",
+              "updatedAt": "2026-06-11T02:15:44.005Z"
+            },
+            {
+              "id": "494febae-aaba-4f77-95b2-7e58f0047dca",
+              "movieId": "425b7398-05af-4ba7-b61e-2438caf9ac4c",
+              "name": "The Fed",
+              "role": "Antagonist",
+              "description": "The Fed: a stern grey-suited disapproving-parent character, dollar-green necktie, half-moon reading glasses lowered to deliver a rate-hike glare, a giant interest-rate dial behind it, arms folded, marble-pillar backdrop, cold institutional lighting, bold anime / manga style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/af0d83cb-ce5f-48bd-93a1-248a01e144f6.png",
+              "sortOrder": 4,
+              "createdAt": "2026-06-11T02:15:44.005Z",
+              "updatedAt": "2026-06-11T02:15:44.005Z"
+            },
+            {
+              "id": "73775488-2a0a-44e0-b86f-36fdd1174100",
+              "movieId": "425b7398-05af-4ba7-b61e-2438caf9ac4c",
+              "name": "Gold",
+              "role": "Antagonist",
+              "description": "Gold: a slow, sturdy boomer character shaped like a smug bar of bullion with a warm metallic sheen, tiny reading spectacles, 'back in my day' posture, leaning on a cane of solid gold, unbothered while everything around it flickers red and green, warm amber glow, bold anime / manga style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/2981db08-1220-4b55-8691-afe09034ab5b.png",
+              "sortOrder": 5,
+              "createdAt": "2026-06-11T02:15:44.005Z",
+              "updatedAt": "2026-06-11T02:15:44.005Z"
+            }
           ],
+          "plot": "- The studio is lit like a trauma ward at 3 a.m. — red wash, flickering overheads, a ticker scrolling numbers that all begin with a minus sign. MAX MAYHEM bursts through the stage door in a torn blazer, half his tie flipped over his shoulder, hair radiating static electricity. Behind him, a twelve-foot LED display alternates between the number 10 in bleeding crimson and the words EXTREME FEAR in a font that should only appear on hazmat signage. The desk is covered in cold coffee cups and crumpled central-bank statements. A janitor mops what might be spilled coffee or might be something else entirely and does not make eye contact with the camera. Bitcoin's chart crawls across the lower third — a slow, indifferent southward drift, nothing dramatic, no big red candle, just a gentleman sliding quietly out of a room without saying goodbye. Ethereum's line is so flat it might be mistaken for a burial certificate. Doge's chart is doing that thing where it circles a drain. The Fear & Greed dial — painted on the backdrop like a game-show wheel of misfortune — is pinned hard at 10, pegged in the gut of the \"Extreme Fear\" zone, trembling. The crowd holds its breath. Max grabs both sides of the desk and stares into the camera like a man who has never once considered going to bed early. Max Mayhem says: \"Fear index at TEN — the market is basically crying in a closet!\"\n\n  - The scene opens on a mahogany-paneled private club somewhere in the financial district. The carpet is thick, the lighting warm amber, and Bitcoin sits in a leather wingback armchair with a glass of something aged, studying the ticker tape winding off a mechanical terminal at his elbow. The tape reads −1.19%. He folds it once, twice, and tucks it into his breast pocket like a man folding a receipt he'll never dispute. Around him, the walls are lined with framed headlines from every crash cycle since 2011: MtGox. The China bans. The $3,000 floor. The $16,000 floor. March 2020. The FTX winter. He has seen all of it and survived all of it and is frankly a little bored by it. His reading glasses are pushed up on his forehead. His expression is the face of a man who has watched the market burn so many times he keeps marshmallows in his coat. Outside the window, the city skyline bleeds red — exchange building facades updated with real-time price colors, all soft crimson tonight. Not panic. Not catastrophe. Just a quiet, dignified −1.19%. He swirls the glass. The Fear & Greed index painting across the opposite wall reads 10. He barely glances at it. He has seen a 10 before. He has seen a 3. Bitcoin says: \"Down one-point-two percent — I've lost more in my sleep!\"\n\n  - Cut to a fluorescent-lit open-plan office — the kind with ergonomic chairs nobody adjusted and a whiteboard covered in flowcharts nobody finished. Ethereum stands at that whiteboard, marker uncapped, beside a bar chart where the \"ETH 24h change\" bar is a single pixel above the zero line. A magnifying glass has been taped to the wall next to it. Ethereum is in business-casual — pressed shirt, lanyard bearing a \"DeFi Summit 2024\" badge still clipped on — and is presenting to an empty room. The rolling chairs face forward but hold no one. The projector shows the slide deck title: \"WHY +0.04% IS ACTUALLY BULLISH — 47 Slides.\" There is a laser pointer involved. The gains are real. They are also so small that the chart line could be explained by rounding error or a brief moment of WiFi interference during the price API call. The whiteboard diagram has arrows pointing to the +0.04% figure with labels like \"resilience,\" \"baseline consolidation,\" and \"definitely not statistical noise.\" On the desk in the back of the room, a single plant — wilting — has a sticky note taped to its pot reading \"believed in ETH.\" The Fear & Greed index is pinned to the corkboard behind Ethereum, partly obscured by the slide clicker cable. It reads 10. Extreme Fear. Ethereum does not zoom in on that slide. Ethereum says: \"Technically I am up today, if you round up generously!\"\n\n  - The interior of an actual dogecart — a vintage racing kart spray-painted electric yellow with \"MUCH SPEED\" stenciled on the side — careening through what appears to be a hallway in a financial services building at approximately 45 miles per hour. Doge is driving. There is no second pedal. A DOGE price display has been duct-taped to the dashboard reading $0.0853, −0.54%. Doge does not seem to have noticed it, or has noticed it and decided it is fine, or has noticed it, decided it's fine, and then forgotten it happened, all within the span of eleven seconds. Confetti from a previous celebration — source unclear — still clings to Doge's fur. One paw is on the wheel. The other is filming a vertical video for an unspecified platform. The hallway stretches ahead through glass-walled conference rooms where suited figures press against the windows in alarm. At the bend, the Fear & Greed reading — spray-painted by Doge on an earlier visit in large yellow letters — has been updated from \"GREED 90 WOW\" to \"EXTREME FEAR 10 ALSO WOW.\" Doge did the update. Possibly this morning. The kart swerves. A vase of flowers falls. A motivational poster reading HUSTLE falls. The ride is, by Doge's metrics, going extremely well. Doge says: \"Half a percent down means we're basically FLYING right now, right?\"\n\n  - A high-ceilinged federal chamber somewhere windowless and gray. The walls are lined with monitors, each showing a different market metric, each currently red or barely breathing. At the center, The Fed sits behind a stone desk — no paper, no coffee, no concessions to human comfort — hands folded, watching the Fear & Greed display on the main screen. The number reads 10. The classification reads EXTREME FEAR. The Fed does not blink. This is the expression of someone who told you exactly what would happen and then waited, with infinite patience, for it to happen. On the left wall, a plaque reads: \"Rates were raised for a reason.\" On the right, a framed portrait of a 1970s inflation chart glows like a campfire warning. The Fed's suit is the color of poured concrete. A junior staffer enters, places a single sheet of paper on the desk containing today's full market summary — BTC −1.19%, ETH +0.04%, DOGE −0.54%, F&G: 10 — and backs away the way you back away from something that does not need to know your name. The Fed reads the sheet once. Nods. The Fear & Greed number pulses on the main screen: 10. EXTREME FEAR. The room is very quiet. The Fed approves of the room being very quiet. The Fed says: \"The index reads ten — exactly as interest rates have foreseen!\"\n\n  - A wood-paneled study somewhere very old and very expensive. Gold reclines in a chesterfield sofa that predates every asset class in this series by centuries. The fire is lit. A financial newspaper is open to a page that has nothing to do with crypto — it has never had anything to do with crypto — and the headline in the upper-left corner reads something about \"safe haven flows.\" A gilded clock on the mantle ticks at the pace of a man who has never been rushed by a bull run. Gold lifts a cup of tea. The Fear & Greed index is displayed on a small television set in the corner — a boxy, wood-framed unit appropriate to the decade of the room — and it reads 10, EXTREME FEAR. Gold tilts an eyebrow. This is the look of a retiree who sold the tech stocks in 1999, bought a vacation home, and has never heard the end of it from a nephew who now works in DeFi. Bitcoin's −1.19% drips across a ticker crawl at the bottom of the TV. Doge's manic skid. Ethereum's invisible gains. The room smells of leather and compound interest accumulated across centuries of quiet, undramatic existence. Gold sips the tea. Outside, the financial world is in Extreme Fear. In here, the fire crackles. Gold does not have push notifications. Gold does not need push notifications. Gold says: \"When they're scared, they always remember who the grown-up is!\"\n\n  - Same mahogany club as Scene 2, but it's later now — the amber lighting has deepened, the rest of the club has emptied out, and Bitcoin sits alone at the bar. The mechanical ticker tape has been running all session. He has pulled it all out and let it pool on the barstool beside him in long crimson spirals. The −1.19% feels different stretched out across the full twenty-four-hour window — not a stab wound, a slow sigh. The candlestick chart on the bar's backlit panel shows the day's range: the high end of the session tried to push, got rebuffed, soft-landed here at $62,674. Bitcoin traces the chart with one finger, the way a retired boxer traces an old scar. He remembers $200. He remembers $68,000. He remembers the days when −1.19% would have been celebrated as relief after something far worse. The Fear & Greed needle behind the bar is still pinned at 10. EXTREME FEAR. The bartender — a mahogany silhouette who asks no questions — refills without being asked. Around the whole financial world outside, models are recalibrating, traders are refreshing, interns are drafting \"what this means\" emails at midnight. Bitcoin looks at the tape one more time. Folds it. Pockets it. Finishes the drink. Bitcoin says: \"Sixty-two thousand dollars and they still call it a bad day?\"\n\n  - The studio again, ninety minutes later, and the energy has curdled from manic to unhinged post-show exhaustion. The overhead lights are off except for the desk lamp and the LED ticker, which scrolls the day's final numbers in slow red loops: BTC −1.19%, ETH +0.04%, DOGE −0.54%, FEAR & GREED: 10 — EXTREME FEAR. Max Mayhem is still standing — he is always still standing, this is a medical curiosity that cardiologists have flagged — jacket off and draped over the Fear & Greed wheel backdrop, one sleeve obscuring the needle that would not move. His collar is open. The tie is gone. Its location is unknown and will remain unknown. Behind him, the production crew has begun to clean up: a grip coils cables with the mechanical focus of someone who has watched too many red days, a segment producer stares at tomorrow's pre-market feeds like she is reading her own tarot. On Max's desk, the cold coffee cups have been joined by a printout of the Fear & Greed index history, annotated in red Sharpie. The word \"AGAIN?\" is circled three times. Max looks at the camera. He has looked at this camera on green days and red days and days when the entire system seemed held together by a single dog meme. Today was a quiet kind of red. Extreme Fear, low volume, a gentle downward drift. Sometimes that's the scariest kind. Max grins. He picks up the Sharpie. He circles \"AGAIN?\" a fourth time. Max Mayhem says: \"Fear index TEN, BTC bleeding — we'll see you in the wreckage!\"",
           "cast": {
-            "cast": [
-              { "name": "Max Mayhem", "role": "Guru",        "description": "Max Mayhem — manic financial-news anchor, opens & closes every episode." },
-              { "name": "Bitcoin",    "role": "Protagonist", "description": "Bitcoin — smug gold-orange veteran, the ₿ that's seen it all." },
-              { "name": "Ethereum",   "role": "Protagonist", "description": "Ethereum — earnest, over-explaining younger sibling, iridescent blue-purple." },
-              { "name": "Doge",       "role": "Protagonist", "description": "Doge — chaos-gremlin Shiba Inu memecoin, golden-yellow, zero impulse control." },
-              { "name": "The Fed",    "role": "Antagonist", "description": "The Fed — disapproving-parent rate-setter, dollar-green tie, cold glare." },
-              { "name": "Gold",       "role": "Antagonist", "description": "Gold — boomer bar of bullion, 'back in my day', warm amber." }
-            ],
-            "castImages": [],
-            "castVoices": [
-              { "characterName": "Max Mayhem", "voiceName": "Patrick", "voiceId": "ODq5zmih8GrVes37Dizd" },
-              { "characterName": "Bitcoin",    "voiceName": "Roger",   "voiceId": "CwhRBWXzGAHq8TQ4Fs17" },
-              { "characterName": "Ethereum",   "voiceName": "Liam",    "voiceId": "TX3LPaxmHKxFdv7VOQHJ" },
-              { "characterName": "Doge",       "voiceName": "Jeremy",  "voiceId": "bVMeCyTHy58xNoL34h3p" },
-              { "characterName": "The Fed",    "voiceName": "Paul",    "voiceId": "5Q0t7uMcjvnagumLfvZi" },
-              { "characterName": "Gold",       "voiceName": "Michael", "voiceId": "flq6f7yk4E4fJM5XTYuZ" }
+            "cast": "[{\"name\":\"Max Mayhem\",\"role\":\"Guru\",\"description\":\"Max Mayhem: a manic late-night financial-news anchor, loud pinstripe blazer with the sleeves pushed up, wild caffeinated eyes, slicked hair coming loose, seated at a glowing desk of blinking red-and-green tickers and breaking-news lower-thirds, gesturing big, bold anime / manga style.\"},{\"name\":\"Bitcoin\",\"role\":\"Protagonist\",\"description\":\"Bitcoin: a smug gold-orange veteran character shaped around a glowing ₿ medallion, mirrored sunglasses, arms crossed, a been-here-before smirk, faint scars from past crashes, standing on a pile of older coins, warm orange rim light, bold anime / manga style.\"},{\"name\":\"Ethereum\",\"role\":\"Protagonist\",\"description\":\"Ethereum: an earnest, slightly anxious younger-sibling character built around a faceted iridescent blue-purple diamond Ξ, too many gadgets and gas-fee meters clipped on, mid-explanation with a raised finger, eager helpful expression, cool violet glow, bold anime / manga style.\"},{\"name\":\"Doge\",\"role\":\"Protagonist\",\"description\":\"Doge: a gleeful chaos-gremlin Shiba Inu memecoin, golden-yellow shiba fur, giant excited grin, tongue out, riding a rocket emoji, zero impulse control, comic-sans 'wow' energy crackling around it, bright yellow glow, bold anime / manga style.\"},{\"name\":\"The Fed\",\"role\":\"Antagonist\",\"description\":\"The Fed: a stern grey-suited disapproving-parent character, dollar-green necktie, half-moon reading glasses lowered to deliver a rate-hike glare, a giant interest-rate dial behind it, arms folded, marble-pillar backdrop, cold institutional lighting, bold anime / manga style.\"},{\"name\":\"Gold\",\"role\":\"Antagonist\",\"description\":\"Gold: a slow, sturdy boomer character shaped like a smug bar of bullion with a warm metallic sheen, tiny reading spectacles, 'back in my day' posture, leaning on a cane of solid gold, unbothered while everything around it flickers red and green, warm amber glow, bold anime / manga style.\"}]",
+            "castImages": [
+              {
+                "id": "3de45846-fdfe-402c-97d6-b82396844da0",
+                "characterName": "Max Mayhem",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/3a7e3c38-edff-4b5f-b054-c885f592fd3b.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/3a7e3c38-edff-4b5f-b054-c885f592fd3b.png",
+                "createdAt": "2026-06-11T02:15:43.994Z",
+                "updatedAt": "2026-06-11T02:15:43.994Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "4edb7a77-0194-4909-bf86-5314ead618a6",
+                "characterName": "Bitcoin",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/827a0726-9170-4397-a099-a7ad4cdcbc6a.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/827a0726-9170-4397-a099-a7ad4cdcbc6a.png",
+                "createdAt": "2026-06-11T02:15:43.994Z",
+                "updatedAt": "2026-06-11T02:15:43.994Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "aa0d88ee-3297-42f4-b0cd-0c33bee2d0ea",
+                "characterName": "Ethereum",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/16d51f0b-1760-4f92-844a-6c11eb2a3be8.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/16d51f0b-1760-4f92-844a-6c11eb2a3be8.png",
+                "createdAt": "2026-06-11T02:15:43.994Z",
+                "updatedAt": "2026-06-11T02:15:43.994Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "8fb6e2c2-15a1-4968-9014-14aeb071db1b",
+                "characterName": "Doge",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/99df105b-8d59-4dff-be16-14c6a8570c70.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/99df105b-8d59-4dff-be16-14c6a8570c70.png",
+                "createdAt": "2026-06-11T02:15:43.994Z",
+                "updatedAt": "2026-06-11T02:15:43.994Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "c0061347-98ce-4e8d-bd6c-a67c3d6c7a42",
+                "characterName": "The Fed",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/af0d83cb-ce5f-48bd-93a1-248a01e144f6.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/af0d83cb-ce5f-48bd-93a1-248a01e144f6.png",
+                "createdAt": "2026-06-11T02:15:43.994Z",
+                "updatedAt": "2026-06-11T02:15:43.994Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "655d9051-1a40-4f6d-8277-8658edcc5d5a",
+                "characterName": "Gold",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/2981db08-1220-4b55-8691-afe09034ab5b.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/b00ce378-238e-4c92-8262-f41c79eec793/cast-images/2981db08-1220-4b55-8691-afe09034ab5b.png",
+                "createdAt": "2026-06-11T02:15:43.994Z",
+                "updatedAt": "2026-06-11T02:15:43.994Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              }
             ],
             "castSubtitles": [
-              { "characterName": "Max Mayhem", "fontFamily": "Orbitron", "color": "#FF3B30" },
-              { "characterName": "Bitcoin",    "fontFamily": "Orbitron", "color": "#F7931A" },
-              { "characterName": "Ethereum",   "fontFamily": "Orbitron", "color": "#627EEA" },
-              { "characterName": "Doge",       "fontFamily": "Orbitron", "color": "#F2C94C" },
-              { "characterName": "The Fed",    "fontFamily": "Orbitron", "color": "#2E7D5B" },
-              { "characterName": "Gold",       "fontFamily": "Orbitron", "color": "#D4AF37" }
+              {
+                "id": "ec0a057d-ae48-453c-8582-a3ab97ccf10c",
+                "characterName": "The Fed",
+                "fontFamily": "Keania One",
+                "color": "#2E7D5B",
+                "createdAt": "2026-06-11T02:15:43.986Z",
+                "updatedAt": "2026-06-11T02:15:43.986Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "f0e58448-de4c-4b9e-8284-e717ef4ca1ef",
+                "characterName": "Ethereum",
+                "fontFamily": "Keania One",
+                "color": "#627EEA",
+                "createdAt": "2026-06-11T02:15:43.986Z",
+                "updatedAt": "2026-06-11T02:15:43.986Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "a6b0d3f6-87b1-4374-9743-6a5e7a5a1703",
+                "characterName": "Doge",
+                "fontFamily": "Keania One",
+                "color": "#F2C94C",
+                "createdAt": "2026-06-11T02:15:43.986Z",
+                "updatedAt": "2026-06-11T02:15:43.986Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "b21e9a45-be8f-44d1-8302-7aa1e6cdf0aa",
+                "characterName": "Max Mayhem",
+                "fontFamily": "Keania One",
+                "color": "#FF3B30",
+                "createdAt": "2026-06-11T02:15:43.986Z",
+                "updatedAt": "2026-06-11T02:15:43.986Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "8d9d05fe-42b4-4e91-9657-bfbb2a63dc21",
+                "characterName": "Bitcoin",
+                "fontFamily": "Keania One",
+                "color": "#F7931A",
+                "createdAt": "2026-06-11T02:15:43.986Z",
+                "updatedAt": "2026-06-11T02:15:43.986Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "a6d8e999-c5d8-4198-a4c0-691f14a75b58",
+                "characterName": "Gold",
+                "fontFamily": "Keania One",
+                "color": "#D4AF37",
+                "createdAt": "2026-06-11T02:15:43.986Z",
+                "updatedAt": "2026-06-11T02:15:43.986Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              }
+            ],
+            "castVoices": [
+              {
+                "id": "c44b8df4-eb3b-4768-a621-9188c2d97be0",
+                "characterName": "Max Mayhem",
+                "voiceName": "Patrick",
+                "voiceId": "ODq5zmih8GrVes37Dizd",
+                "createdAt": "2026-06-11T02:15:43.990Z",
+                "updatedAt": "2026-06-11T02:15:43.990Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "4371d9d5-40a2-421a-9123-cbefcd9d3925",
+                "characterName": "Bitcoin",
+                "voiceName": "Roger",
+                "voiceId": "CwhRBWXzGAHq8TQ4Fs17",
+                "createdAt": "2026-06-11T02:15:43.990Z",
+                "updatedAt": "2026-06-11T02:15:43.990Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "00bffb42-b28b-4cf6-8f77-e76f75772774",
+                "characterName": "Ethereum",
+                "voiceName": "Liam",
+                "voiceId": "TX3LPaxmHKxFdv7VOQHJ",
+                "createdAt": "2026-06-11T02:15:43.990Z",
+                "updatedAt": "2026-06-11T02:15:43.990Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "eb27b870-0201-4f42-a218-c5311581076d",
+                "characterName": "Doge",
+                "voiceName": "Jeremy",
+                "voiceId": "bVMeCyTHy58xNoL34h3p",
+                "createdAt": "2026-06-11T02:15:43.990Z",
+                "updatedAt": "2026-06-11T02:15:43.990Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "19d49f11-3678-4293-b6fc-513d7890d569",
+                "characterName": "The Fed",
+                "voiceName": "Paul",
+                "voiceId": "5Q0t7uMcjvnagumLfvZi",
+                "createdAt": "2026-06-11T02:15:43.990Z",
+                "updatedAt": "2026-06-11T02:15:43.990Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              },
+              {
+                "id": "db477b03-9e87-4b6b-98dc-a195f5d6901d",
+                "characterName": "Gold",
+                "voiceName": "Michael",
+                "voiceId": "flq6f7yk4E4fJM5XTYuZ",
+                "createdAt": "2026-06-11T02:15:43.990Z",
+                "updatedAt": "2026-06-11T02:15:43.990Z",
+                "movieCastId": "27a8728a-0960-4a0b-a790-f90685dc6e3b",
+                "generatorId": null
+              }
             ]
-          }
+          },
+          "season_episodes": "[]",
+          "screenplay": "{\"title\":\"Movie based on: - The studio is lit like a trauma ward at 3 a.m. —\",\"scenes\":[{\"id\":\"758045b2-8ae3-4768-9371-8d92d3d07cfc\",\"heading\":\"Opening Chaos\",\"description\":\"The studio pulsates in red with a flickering overhead light. Max Mayhem bursts in disheveled. A janitor mops. Bitcoin's chart moves quietly downward. Ethereum's line is flat. Doge's chart circles. Fear & Greed dial trembles at 10. Max grabs the desk, intense.\",\"actors\":[\"Max Mayhem\"],\"dialogue\":\"Fear index at TEN — the market is basically crying in a closet!\",\"animationPrompt\":\"A cinematic slow push-in on Max Mayhem, intense red lighting, subtle static in hair, tense and chaotic atmosphere, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"85de1e69-27c1-4931-a8b3-f35f31b367d1\",\"heading\":\"Market Veteran in Quiet Reflection\",\"description\":\"Bitcoin sits in a leather wingback armchair studying ticker tape, surrounded by crash cycle headlines. City skyline bleeds red outside. Bitcoin's expression conveys seasoned composure amidst market turbulence.\",\"actors\":[\"Bitcoin\"],\"dialogue\":\"Down one-point-two percent — I've lost more in my sleep!\",\"animationPrompt\":\"DOLLY PULL-OUT, warm amber lighting, subtle cityscape backdrop, atmosphere of seasoned resilience in the face of market volatility, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"fce8bf07-6cf5-4570-8e57-a5db1e8764f0\",\"heading\":\"Ethereum's Presentation\",\"description\":\"Ethereum stands at the whiteboard, explaining the +0.04% gain with enthusiasm and gestures. The empty chairs reflect the lack of audience. The wilting plant with a note 'believed in ETH' adds a touch of irony. The Fear & Greed index, obscured by the slide clicker cable, remains at 10. Extreme Fear.\",\"actors\":[\"Ethereum\"],\"dialogue\":\"Technically I am up today, if you round up generously!\",\"animationPrompt\":\"Slow push-in on Ethereum presenting, bright fluorescent lighting, animated explanation gestures, eerie silence in the empty room, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"64b3d89f-ac38-4b85-954d-0655234e9925\",\"heading\":\"Doge's Chaotic Ride\",\"description\":\"Doge careens through a financial services building hallway at 45 mph in a vintage kart. Price display unnoticed, confetti sticking to fur. Filming chaos, updating Fear & Greed to Extreme Fear. Vase and poster fall in the chaos.\",\"actors\":[\"Doge\"],\"dialogue\":\"Half a percent down means we're basically FLYING right now, right?\",\"animationPrompt\":\"HANDHELD FOLLOW: Fast-paced, chaotic movement with Doge driving recklessly, colorful lighting reflecting off surfaces, alarm from suited figures watching, high-energy atmosphere., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"e2bbc37e-aafa-41a1-a16f-280e19b6f2d3\",\"heading\":\"Federal Chamber of Fear\",\"description\":\"The high-ceilinged federal chamber exudes a stark, gray ambiance. Monitors display red, struggling market metrics. The Fed, in a poured concrete suit, calmly observes the Fear & Greed display at 10 Extreme Fear. Plaques adorn the walls, a junior staffer delivers a market summary, and a 1970s inflation chart glows ominously. The room is silent, expectant.\",\"actors\":[\"The Fed\"],\"dialogue\":\"The index reads ten — exactly as interest rates have foreseen!\",\"animationPrompt\":\"A slow push-in towards The Fed, cold institutional lighting, stoic posture, ominous atmosphere, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"23f50608-f7fe-45ab-9d1d-b825999b90cc\",\"heading\":\"The Grown-Up's Domain\",\"description\":\"Gold reclines in a chesterfield sofa in a lavish, antique-filled room. The fire crackles, a financial newspaper lies open nearby. A gilded clock ticks steadily. The Fear & Greed index displays '10, EXTREME FEAR' on an old wooden TV. The room exudes a sense of timeless wealth and sophistication.\",\"actors\":[\"Gold\"],\"dialogue\":\"When they're scared, they always remember who the grown-up is!\",\"animationPrompt\":\"Slow push-in on Gold, warm ambient lighting, crackling fire, elegant atmosphere, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"25798f63-968e-4480-a218-1517923835e3\",\"heading\":\"Bitcoin's Reflection\",\"description\":\"In the dimmed mahogany club, Bitcoin sits alone at the bar, surrounded by crimson ticker tape. The candlestick chart displays $62,674, memories of past highs linger. The Fear & Greed needle holds at 10. The bartender refills silently, while the financial world outside churns in response to the day's fluctuations.\",\"actors\":[\"Bitcoin\"],\"dialogue\":\"Sixty-two thousand dollars and they still call it a bad day?\",\"animationPrompt\":\"A slow push-in on Bitcoin, under warm amber lighting, introspective mood, reflective atmosphere, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"b40bb848-b0fa-468d-90a9-c9b7d3185a6c\",\"heading\":\"Post-Show Exhaustion\",\"description\":\"The studio is dim, bathed in a red glow from the LED ticker displaying the final numbers. Max Mayhem stands with open collar, sleeve obscuring the Fear & Greed needle. Production crew cleans up around him. Desk cluttered with annotated Fear & Greed index printout. Max grins at the camera in a quiet red setting of Extreme Fear.\",\"actors\":[\"Max Mayhem\"],\"dialogue\":\"Fear index TEN, BTC bleeding — we'll see you in the wreckage!\",\"animationPrompt\":\"DOLLY PULL-OUT, dim studio with red glow, exhausted crew cleaning, Max standing amidst clutter, subtle tension in the air, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"}]}",
+          "concatMovieUrl": null,
+          "soundtrackedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/movies/soundtrack-3594c921-fb00-469b-b372-d91fdc04e281.mp4",
+          "audioPath": "prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/audio/79df3b6e-1eef-44fa-b183-be4a5d40c95a.mp3",
+          "scenes": [
+            {
+              "sceneNumber": 1,
+              "title": "Opening Chaos",
+              "story": "The studio pulsates in red with a flickering overhead light. Max Mayhem bursts in disheveled. A janitor mops. Bitcoin's chart moves quietly downward. Ethereum's line is flat. Doge's chart circles. Fear & Greed dial trembles at 10. Max grabs the desk, intense.",
+              "dialogue": "Fear index at TEN — the market is basically crying in a closet!",
+              "leadCast": "Max Mayhem",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/758045b2-8ae3-4768-9371-8d92d3d07cfc/images/f03368e8-c620-4187-9f70-fdd7d4dc5964.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/758045b2-8ae3-4768-9371-8d92d3d07cfc/movies/5baf56e2-1f23-4e5e-9c72-8aeb0aa84e7f.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/758045b2-8ae3-4768-9371-8d92d3d07cfc/movies-subtitles/7f99d1e7-9b9f-41d1-a5e6-c0ad701cb33a.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/758045b2-8ae3-4768-9371-8d92d3d07cfc/movies-burned/c3b42723-95b7-4499-bc96-a41641408339.mp4"
+            },
+            {
+              "sceneNumber": 2,
+              "title": "Market Veteran in Quiet Reflection",
+              "story": "Bitcoin sits in a leather wingback armchair studying ticker tape, surrounded by crash cycle headlines. City skyline bleeds red outside. Bitcoin's expression conveys seasoned composure amidst market turbulence.",
+              "dialogue": "Down one-point-two percent — I've lost more in my sleep!",
+              "leadCast": "Bitcoin",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/85de1e69-27c1-4931-a8b3-f35f31b367d1/images/7d59e883-c259-41af-b965-8ce787f7a5e3.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/85de1e69-27c1-4931-a8b3-f35f31b367d1/movies/6e6b6489-5379-46a3-8787-c32777b8e427.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/85de1e69-27c1-4931-a8b3-f35f31b367d1/movies-subtitles/e94cb1ba-79b7-49fb-b19e-2c0b4a907366.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/85de1e69-27c1-4931-a8b3-f35f31b367d1/movies-burned/8c449b67-3f7a-4a97-a4eb-de3701527e21.mp4"
+            },
+            {
+              "sceneNumber": 3,
+              "title": "Ethereum's Presentation",
+              "story": "Ethereum stands at the whiteboard, explaining the +0.04% gain with enthusiasm and gestures. The empty chairs reflect the lack of audience. The wilting plant with a note 'believed in ETH' adds a touch of irony. The Fear & Greed index, obscured by the slide clicker cable, remains at 10. Extreme Fear.",
+              "dialogue": "Technically I am up today, if you round up generously!",
+              "leadCast": "Ethereum",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/fce8bf07-6cf5-4570-8e57-a5db1e8764f0/images/252b079b-0e4b-41ea-94a9-079628b2f0f8.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/fce8bf07-6cf5-4570-8e57-a5db1e8764f0/movies/1da1647c-e72a-4182-b3fe-b5eaf499b605.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/fce8bf07-6cf5-4570-8e57-a5db1e8764f0/movies-subtitles/8955f55e-5960-4b60-9c78-ceeb99862492.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/fce8bf07-6cf5-4570-8e57-a5db1e8764f0/movies-burned/aa1edc79-6345-4789-b680-0d0b2c6b7c03.mp4"
+            },
+            {
+              "sceneNumber": 4,
+              "title": "Doge's Chaotic Ride",
+              "story": "Doge careens through a financial services building hallway at 45 mph in a vintage kart. Price display unnoticed, confetti sticking to fur. Filming chaos, updating Fear & Greed to Extreme Fear. Vase and poster fall in the chaos.",
+              "dialogue": "Half a percent down means we're basically FLYING right now, right?",
+              "leadCast": "Doge",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/64b3d89f-ac38-4b85-954d-0655234e9925/images/d8df398e-a7cc-4243-a69a-092837a295b2.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/64b3d89f-ac38-4b85-954d-0655234e9925/movies/4c1308a1-fe49-46ee-a0ff-77136d3322fe.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/64b3d89f-ac38-4b85-954d-0655234e9925/movies-subtitles/32e1bb7e-0eae-43a8-9943-5efd7840e78a.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/64b3d89f-ac38-4b85-954d-0655234e9925/movies-burned/87eec48c-3d3f-4dd0-bbca-16a27ba6b8f6.mp4"
+            },
+            {
+              "sceneNumber": 5,
+              "title": "Federal Chamber of Fear",
+              "story": "The high-ceilinged federal chamber exudes a stark, gray ambiance. Monitors display red, struggling market metrics. The Fed, in a poured concrete suit, calmly observes the Fear & Greed display at 10 Extreme Fear. Plaques adorn the walls, a junior staffer delivers a market summary, and a 1970s inflation chart glows ominously. The room is silent, expectant.",
+              "dialogue": "The index reads ten — exactly as interest rates have foreseen!",
+              "leadCast": "The Fed",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/e2bbc37e-aafa-41a1-a16f-280e19b6f2d3/images/c5d19768-c214-4730-ba2d-7a8aa62b70c0.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/e2bbc37e-aafa-41a1-a16f-280e19b6f2d3/movies/13223539-2d65-417c-87ca-733337568a41.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/e2bbc37e-aafa-41a1-a16f-280e19b6f2d3/movies-subtitles/c348fc89-65ae-4042-9734-810591ac6040.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/e2bbc37e-aafa-41a1-a16f-280e19b6f2d3/movies-burned/69987720-c969-46b8-9302-c4b14ea74113.mp4"
+            },
+            {
+              "sceneNumber": 6,
+              "title": "The Grown-Up's Domain",
+              "story": "Gold reclines in a chesterfield sofa in a lavish, antique-filled room. The fire crackles, a financial newspaper lies open nearby. A gilded clock ticks steadily. The Fear & Greed index displays '10, EXTREME FEAR' on an old wooden TV. The room exudes a sense of timeless wealth and sophistication.",
+              "dialogue": "When they're scared, they always remember who the grown-up is!",
+              "leadCast": "Gold",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/23f50608-f7fe-45ab-9d1d-b825999b90cc/images/da39d273-29ed-48fc-8194-7cedba493804.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/23f50608-f7fe-45ab-9d1d-b825999b90cc/movies/4967181f-dc78-4824-aa97-d9a6340ac66d.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/23f50608-f7fe-45ab-9d1d-b825999b90cc/movies-subtitles/003403ea-70fd-441d-a36c-3a96539ee84d.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/23f50608-f7fe-45ab-9d1d-b825999b90cc/movies-burned/0b9a6f08-3faf-4d0f-87c5-5640b814861e.mp4"
+            },
+            {
+              "sceneNumber": 7,
+              "title": "Bitcoin's Reflection",
+              "story": "In the dimmed mahogany club, Bitcoin sits alone at the bar, surrounded by crimson ticker tape. The candlestick chart displays $62,674, memories of past highs linger. The Fear & Greed needle holds at 10. The bartender refills silently, while the financial world outside churns in response to the day's fluctuations.",
+              "dialogue": "Sixty-two thousand dollars and they still call it a bad day?",
+              "leadCast": "Bitcoin",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/25798f63-968e-4480-a218-1517923835e3/images/dd5a1d2f-3f90-4851-9888-9ccef18a1626.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/25798f63-968e-4480-a218-1517923835e3/movies/1b6e37aa-5bdd-4c9b-a7c5-07d4eaa48f78.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/25798f63-968e-4480-a218-1517923835e3/movies-subtitles/d8c74c2e-87db-439f-88e3-1c6a17479589.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/25798f63-968e-4480-a218-1517923835e3/movies-burned/6cafbbfa-6748-41ab-b420-d2ab242eac43.mp4"
+            },
+            {
+              "sceneNumber": 8,
+              "title": "Post-Show Exhaustion",
+              "story": "The studio is dim, bathed in a red glow from the LED ticker displaying the final numbers. Max Mayhem stands with open collar, sleeve obscuring the Fear & Greed needle. Production crew cleans up around him. Desk cluttered with annotated Fear & Greed index printout. Max grins at the camera in a quiet red setting of Extreme Fear.",
+              "dialogue": "Fear index TEN, BTC bleeding — we'll see you in the wreckage!",
+              "leadCast": "Max Mayhem",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/b40bb848-b0fa-468d-90a9-c9b7d3185a6c/images/2be4e668-0607-48fa-b8c3-4b55789ac3a0.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/b40bb848-b0fa-468d-90a9-c9b7d3185a6c/movies/f184b698-3618-4a9d-8693-a33a7a1ddce5.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/b40bb848-b0fa-468d-90a9-c9b7d3185a6c/movies-subtitles/70bb70cb-72d6-41b5-865d-dc4a8ed0a937.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/734c5d0a-ed65-4b4e-8abe-6925a69ff35b/e3ba2e09-6781-4a6a-8730-606ecff3e61e/scenes/b40bb848-b0fa-468d-90a9-c9b7d3185a6c/movies-burned/fb043768-e06c-433d-8f24-52c99c6c209b.mp4"
+            },
+            {
+              "sceneNumber": 9,
+              "title": "Made with YakYak",
+              "story": null,
+              "dialogue": null,
+              "leadCast": null,
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "movieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4"
+            }
+          ]
         }
       ]
     }

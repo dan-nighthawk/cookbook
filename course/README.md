@@ -40,7 +40,7 @@ cp .env.example .env
 `.env` (the scripts read it and write your token back into it):
 
 ```
-YAKYAK_API_BASE=https://api.beta.yakyak.ai   # tutorial runs on beta; swap to https://api.yakyak.ai for prod
+YAKYAK_API_BASE=https://api.yakyak.ai   # YakYak API base
 YAKYAK_EMAIL=you@example.com
 YAKYAK_PASSWORD=…
 YAKYAK_TOKEN=                                 # filled in by Lesson 1
@@ -50,7 +50,7 @@ YAKYAK_TUTORIAL_MOVIE_ID=                     # the episode Lesson 2 forks
 
 > **Base URL is overridable everywhere** — bash uses `$YAKYAK_API_BASE`, and the
 > SDK clients take it as a constructor option (`new YakYakClient({ baseUrl })` /
-> `Configuration(host=…)`), so you can point the same scripts at beta or prod.
+> `Configuration(host=…)`), so you can point the same scripts at any YakYak API host.
 
 ### 2. Prerequisite: SDK ≥ 0.0.7
 

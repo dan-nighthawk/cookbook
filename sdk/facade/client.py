@@ -99,7 +99,7 @@ class YakYakClient:
 
     Example::
 
-        yak = YakYakClient(base_url="https://api.beta.yakyak.ai", token=TOKEN, user_id=USER)
+        yak = YakYakClient(base_url="https://api.yakyak.ai", token=TOKEN, user_id=USER)
         yak.workflow.workflow_controller_create_campaign(...)   # raw generated calls
         url = yak.uploads.cast_image(campaign_id, "hero.png")   # multipart, hidden
     """

@@ -1,526 +1,1066 @@
 {
-  "_comment": "Daily Pull — Tarot (#8 in marketing/BreakingBricksNews/docs/alternative_setups.md). The FIRST 'Randomized (seeded)' show: each episode draws a 3-card Past/Present/Future spread from the 22 Major Arcana with a date-seeded RNG in compute.js, then dramatizes it via `claude -p`. Config + 23-member recurring cast ONLY (The Reader host + all 22 Major Arcana, so every drawable card has a stable portrait, per-card accent colour and voice — allowNewCharacters=false because the entire draw pool pre-exists); no rendered assets (those generate per episode). Import: POST /workflow/import-campaign { userId, importData: <this file> }, or just run marketing/showrunner/setup_show.sh which imports it, generates the 23 cast portraits, composes the soundtrack, and writes CAMPAIGN_ID into show.env. Style resolves by label ('Digital Painting'); the art-nouveau / Mucha art direction lives in movies[0].style (appended to every image prompt). Card meanings + imagery are public domain (A.E. Waite, Pictorial Key to the Tarot, 1911; Rider–Waite–Smith deck, 1909). animationType 'kenburns' = candle-lit drift (interim look while Kling AI is in progress). The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
-  "message": "Hand-authored Daily Pull cast/config template (no rendered assets)",
-  "exportedAt": "2026-06-09 00:00:00",
+  "message": "Exported from user show@yakyak.ai at 2026-06-11 04:39:52",
+  "exportedAt": "2026-06-11 04:39:52",
   "campaigns": [
     {
+      "id": "de4faab5-c447-4357-afe9-fce57a5795e7",
       "name": "Daily Pull — Tarot",
       "prompt": "A daily tarot show: The Reader, a mystic host, draws a 3-card Past/Present/Future spread from the 22 Major Arcana and reads it; each drawn card appears as its own personified figure. Five scenes, ending on a one-line takeaway caption card.",
       "status": "active",
       "aspectRatio": "9:16",
-      "animationType": "kenburns",
+      "animationType": "kling",
       "imageQuality": "fast",
       "mode": "pro",
       "subtitleMode": "overlay",
       "allowNewCharacters": false,
       "skipSoundtrack": false,
-      "style": {
-        "label": "Digital Painting",
-        "description": "Hand-painted aesthetic with visible brushstrokes, artistic color palettes, and painterly textures."
-      },
+      "createdAt": "2026-06-11T02:14:30.551Z",
+      "updatedAt": "2026-06-11T02:14:30.551Z",
+      "style": null,
       "movies": [
         {
-          "title": "Daily Pull",
-          "plot": "Recurring cast template for Daily Pull. Holds The Reader (mystic host; opens + closes every episode) and all 22 Major Arcana as personified recurring characters; each episode clones this roster and draws three of the cards.",
-          "styleShort": "Art Nouveau Tarot",
+          "id": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
+          "title": "The Shadow's Call",
+          "status": "completed",
           "style": "ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+          "styleShort": "Art Nouveau Tarot",
           "season": null,
           "episode": null,
-          "scenes": [],
+          "createdAt": "2026-06-11T02:14:30.556Z",
           "customCast": [
             {
+              "id": "89a2251e-57e5-484d-8f2b-eb0834d751e2",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Reader",
               "role": "Narrator",
+              "description": "The Reader: a warm, uncanny mystic host at a candle-lit table draped in dark velvet, a deck fanned before her, an ornate art-nouveau headscarf and amber jewellery, soft candlelight on her knowing face, inviting and serene. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/5b754ca7-5b54-46e5-ba7b-d6e563385e08.png",
               "sortOrder": 0,
-              "description": "The Reader: a warm, uncanny mystic host at a candle-lit table draped in dark velvet, a deck fanned before her, an ornate art-nouveau headscarf and amber jewellery, soft candlelight on her knowing face, inviting and serene. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "a5779c76-9a24-4bbf-a878-616a2784ad26",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Fool",
               "role": "Protagonist",
+              "description": "The Fool (Major Arcana 0), personified: a bright-eyed young wanderer in patchwork motley with a knapsack on a stick and a small white dog at the heel, stepping weightlessly toward a cliff edge under a white sun. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/71257670-0c02-44c5-810b-4169e60cd62f.png",
               "sortOrder": 1,
-              "description": "The Fool (Major Arcana 0), personified: a bright-eyed young wanderer in patchwork motley with a knapsack on a stick and a small white dog at the heel, stepping weightlessly toward a cliff edge under a white sun. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "e18bd5a2-d611-41b3-9827-ccc3dda415fc",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Magician",
               "role": "Protagonist",
+              "description": "The Magician (Major Arcana 1), personified: a poised figure in white and red robes, one hand raised to the sky and one to the earth, an infinity sign above the brow, the four suit-symbols on the table, roses and lilies around. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/73bcb02e-406e-4ef9-b742-449c507f015d.png",
               "sortOrder": 2,
-              "description": "The Magician (Major Arcana 1), personified: a poised figure in white and red robes, one hand raised to the sky and one to the earth, an infinity sign above the brow, the four suit-symbols on the table, roses and lilies around. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "8feec146-1f84-494b-9004-8be4ecd3c6fe",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The High Priestess",
               "role": "Protagonist",
+              "description": "The High Priestess (Major Arcana 2), personified: a serene veiled woman seated between a black pillar and a white pillar, a crescent moon at her feet and a scroll of hidden law on her lap, calm and unreadable. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/bbd77156-3937-4f98-9499-9f443fcaa37f.png",
               "sortOrder": 3,
-              "description": "The High Priestess (Major Arcana 2), personified: a serene veiled woman seated between a black pillar and a white pillar, a crescent moon at her feet and a scroll of hidden law on her lap, calm and unreadable. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "652472df-002a-4a34-b7e7-21d29b3f5e21",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Empress",
               "role": "Protagonist",
+              "description": "The Empress (Major Arcana 3), personified: a radiant crowned mother on a cushioned throne in a field of golden wheat, a heart-shaped shield at her side, forest and waterfall behind, generous and warm. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/9a2c0bca-bbc3-4e96-85a4-469960fb5d13.png",
               "sortOrder": 4,
-              "description": "The Empress (Major Arcana 3), personified: a radiant crowned mother on a cushioned throne in a field of golden wheat, a heart-shaped shield at her side, forest and waterfall behind, generous and warm. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "73a4c120-bd15-4642-81e6-5d04816b6d1c",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Emperor",
               "role": "Protagonist",
+              "description": "The Emperor (Major Arcana 4), personified: a stern bearded ruler on a stone throne carved with rams' heads, armour beneath the robe, an ankh sceptre in hand, barren red mountains behind, immovable. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/6fc5d2f7-4f44-4231-bfef-10cb4d6b2c87.png",
               "sortOrder": 5,
-              "description": "The Emperor (Major Arcana 4), personified: a stern bearded ruler on a stone throne carved with rams' heads, armour beneath the robe, an ankh sceptre in hand, barren red mountains behind, immovable. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "5e8b7ad7-420a-4d22-bff2-c002c5e423fa",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Hierophant",
               "role": "Protagonist",
+              "description": "The Hierophant (Major Arcana 5), personified: a robed high priest between two stone pillars raising a hand in blessing, a triple crown and crossed keys at his feet, two acolytes kneeling before him. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/e1aa5c52-3695-4ecb-aa4f-43bf16c6e77c.png",
               "sortOrder": 6,
-              "description": "The Hierophant (Major Arcana 5), personified: a robed high priest between two stone pillars raising a hand in blessing, a triple crown and crossed keys at his feet, two acolytes kneeling before him. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "620ad7d9-7da9-4c14-8c62-3b7fac962c1a",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Lovers",
               "role": "Protagonist",
+              "description": "The Lovers (Major Arcana 6), personified: a man and a woman beneath a radiant winged angel, a tree of flame behind one and a fruited tree behind the other, a mountain between them, sunlit and open. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/6a78388d-367b-4338-8106-92ac37c475d9.png",
               "sortOrder": 7,
-              "description": "The Lovers (Major Arcana 6), personified: a man and a woman beneath a radiant winged angel, a tree of flame behind one and a fruited tree behind the other, a mountain between them, sunlit and open. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "1a3bbca2-a293-4b88-adb8-189046562096",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Chariot",
               "role": "Protagonist",
+              "description": "The Chariot (Major Arcana 7), personified: an armoured charioteer crowned with stars under a starry canopy, a black sphinx and a white sphinx yoked before the car, a walled city behind, driven and resolute. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/b61e36a6-26b2-4eeb-ae01-afec3bac4c7d.png",
               "sortOrder": 8,
-              "description": "The Chariot (Major Arcana 7), personified: an armoured charioteer crowned with stars under a starry canopy, a black sphinx and a white sphinx yoked before the car, a walled city behind, driven and resolute. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "eada4859-c955-42bd-b3f7-62ac83a8012a",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "Strength",
               "role": "Protagonist",
+              "description": "Strength (Major Arcana 8), personified: a calm woman in a white gown garlanded with flowers gently closing the jaws of a great tawny lion with bare hands, an infinity sign over her head, serene. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/11e02687-3a58-4898-9d76-6bc6c1601355.png",
               "sortOrder": 9,
-              "description": "Strength (Major Arcana 8), personified: a calm woman in a white gown garlanded with flowers gently closing the jaws of a great tawny lion with bare hands, an infinity sign over her head, serene. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "add2fcfd-5a70-4bb1-8f51-4e727e741283",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Hermit",
               "role": "Protagonist",
+              "description": "The Hermit (Major Arcana 9), personified: a grey-robed elder alone on a snowy peak, a lantern holding a single six-pointed star raised before him, a staff in the other hand, contemplative and still. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/455221b2-fd66-4510-a33a-9f1872ce24e0.png",
               "sortOrder": 10,
-              "description": "The Hermit (Major Arcana 9), personified: a grey-robed elder alone on a snowy peak, a lantern holding a single six-pointed star raised before him, a staff in the other hand, contemplative and still. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "8bb746f4-6a87-449b-b7cd-369e8ee2669d",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "Wheel of Fortune",
               "role": "Protagonist",
+              "description": "Wheel of Fortune (Major Arcana 10), personified: a great golden wheel inscribed with mystic letters turning in the clouds, a sphinx above, a serpent descending, a jackal-headed figure rising, four winged beasts reading in the corners. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/af2c9835-7bf2-4c6d-8d13-369ac026cd5c.png",
               "sortOrder": 11,
-              "description": "Wheel of Fortune (Major Arcana 10), personified: a great golden wheel inscribed with mystic letters turning in the clouds, a sphinx above, a serpent descending, a jackal-headed figure rising, four winged beasts reading in the corners. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "86cb9155-bdb2-4d69-b3a5-420f891a9c92",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "Justice",
               "role": "Protagonist",
+              "description": "Justice (Major Arcana 11), personified: a crowned figure enthroned between two pillars, an upraised double-edged sword in one hand and balanced scales in the other, level-eyed and impartial. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/51123b93-abbf-4c4a-951a-c358abcc1834.png",
               "sortOrder": 12,
-              "description": "Justice (Major Arcana 11), personified: a crowned figure enthroned between two pillars, an upraised double-edged sword in one hand and balanced scales in the other, level-eyed and impartial. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "486861fb-c1ca-471a-bcd5-9238e604e9a3",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Hanged Man",
               "role": "Protagonist",
+              "description": "The Hanged Man (Major Arcana 12), personified: a man suspended serenely by one ankle from a living T-shaped tree, hands behind his back, a radiant halo about his head, at peace in the reversal. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/603d2f27-266a-4175-87df-94ee5796af5a.png",
               "sortOrder": 13,
-              "description": "The Hanged Man (Major Arcana 12), personified: a man suspended serenely by one ankle from a living T-shaped tree, hands behind his back, a radiant halo about his head, at peace in the reversal. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "f30cd6fa-f2e4-4e3f-8b3e-18a832e44520",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "Death",
               "role": "Protagonist",
+              "description": "Death (Major Arcana 13), personified: a skeletal rider in black armour on a pale white horse, a black banner bearing a white rose, a fallen king before him, a sun rising between two towers on the horizon. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/593b2e9a-1b58-465c-a806-c191d2c144cd.png",
               "sortOrder": 14,
-              "description": "Death (Major Arcana 13), personified: a skeletal rider in black armour on a pale white horse, a black banner bearing a white rose, a fallen king before him, a sun rising between two towers on the horizon. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "36541e80-6d9a-4439-b41a-0c192e1ef162",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "Temperance",
               "role": "Protagonist",
+              "description": "Temperance (Major Arcana 14), personified: a winged angel with one foot on land and one in a stream, pouring water endlessly between two golden cups, a path to a crowned mountain behind, calm and exact. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/0bf4ac58-811b-423b-9081-a5bd9c0b199f.png",
               "sortOrder": 15,
-              "description": "Temperance (Major Arcana 14), personified: a winged angel with one foot on land and one in a stream, pouring water endlessly between two golden cups, a path to a crowned mountain behind, calm and exact. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "b7748ea1-1d89-4a52-9f04-fd8d1cc6d6a0",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Devil",
               "role": "Protagonist",
+              "description": "The Devil (Major Arcana 15), personified: a horned half-goat figure on a black pedestal, a torch held downward, two loosely chained human figures below who could lift the chains off at any moment, low red glow. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/0ef48d1d-701e-4c95-9e56-156fdea2edfd.png",
               "sortOrder": 16,
-              "description": "The Devil (Major Arcana 15), personified: a horned half-goat figure on a black pedestal, a torch held downward, two loosely chained human figures below who could lift the chains off at any moment, low red glow. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "67c6061e-4d81-4783-a5be-95bcfb7a4763",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Tower",
               "role": "Protagonist",
+              "description": "The Tower (Major Arcana 16), personified: a tall stone tower struck by a bolt of lightning, its golden crown blasted off, flames in the windows, two figures falling headlong against a black sky. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/280f1dd3-3e4d-4465-a0ed-c642f8d0f633.png",
               "sortOrder": 17,
-              "description": "The Tower (Major Arcana 16), personified: a tall stone tower struck by a bolt of lightning, its golden crown blasted off, flames in the windows, two figures falling headlong against a black sky. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "f491954c-542e-431d-a970-c9e82d87b6f3",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Star",
               "role": "Protagonist",
+              "description": "The Star (Major Arcana 17), personified: a kneeling figure by a still pool under one great eight-pointed star and seven smaller ones, pouring water from two jugs onto land and water, a bird in a tree behind, tranquil. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/20d07b20-a260-4829-9102-8b726c5aa9bf.png",
               "sortOrder": 18,
-              "description": "The Star (Major Arcana 17), personified: a kneeling figure by a still pool under one great eight-pointed star and seven smaller ones, pouring water from two jugs onto land and water, a bird in a tree behind, tranquil. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "9f24d84d-bb12-48c4-a263-ef85b084eb5e",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Moon",
               "role": "Protagonist",
+              "description": "The Moon (Major Arcana 18), personified: a pale full moon dripping light over a winding path between two towers, a dog and a wolf baying upward, a crayfish crawling from the water, silver-blue and uncertain. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/1372f440-3155-4663-a161-77c79d798ea2.png",
               "sortOrder": 19,
-              "description": "The Moon (Major Arcana 18), personified: a pale full moon dripping light over a winding path between two towers, a dog and a wolf baying upward, a crayfish crawling from the water, silver-blue and uncertain. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "4b16d628-7140-429b-b382-675f562c8aaa",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The Sun",
               "role": "Protagonist",
+              "description": "The Sun (Major Arcana 19), personified: a radiant child crowned with a sunflower riding a white horse before a wall of tall sunflowers, a great beaming sun overhead, a red banner streaming, pure and bright. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/130ff0d0-8ff4-457e-8d7a-bb75fd73fb31.png",
               "sortOrder": 20,
-              "description": "The Sun (Major Arcana 19), personified: a radiant child crowned with a sunflower riding a white horse before a wall of tall sunflowers, a great beaming sun overhead, a red banner streaming, pure and bright. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "8ba8e486-fa57-40a4-bd58-7276df79d074",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "Judgement",
               "role": "Protagonist",
+              "description": "Judgement (Major Arcana 20), personified: a great angel sounding a trumpet from the clouds, pale figures rising with arms uplifted from open graves below, a cross banner, snow-capped mountains behind, awe-struck. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/2c262201-1d40-4870-ba25-11ad1cb185d2.png",
               "sortOrder": 21,
-              "description": "Judgement (Major Arcana 20), personified: a great angel sounding a trumpet from the clouds, pale figures rising with arms uplifted from open graves below, a cross banner, snow-capped mountains behind, awe-struck. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             },
             {
+              "id": "97b69ce3-c0e8-4b7c-ba57-98ea17d99444",
+              "movieId": "1bd020d1-ad16-44c4-ae06-ddbbf0209bfd",
               "name": "The World",
               "role": "Protagonist",
+              "description": "The World (Major Arcana 21), personified: a dancing figure draped in a violet sash within a great laurel wreath, a wand in each hand, the four winged beasts in the corners, cosmic and triumphant. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/73d66c4e-8b5d-4ae5-b3ce-baf9a8d4b20c.png",
               "sortOrder": 22,
-              "description": "The World (Major Arcana 21), personified: a dancing figure draped in a violet sash within a great laurel wreath, a wand in each hand, the four winged beasts in the corners, cosmic and triumphant. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous."
+              "createdAt": "2026-06-11T02:14:30.604Z",
+              "updatedAt": "2026-06-11T02:14:30.604Z"
             }
           ],
+          "plot": "- The room breathes slowly. A single beeswax taper stands on a low table draped in deep indigo velvet, its flame barely a finger-height above the wick, casting amber pools that soften the edges of everything they touch. The Reader sits opposite the cloth, a worn deck of the Major Arcana cradled in both palms like something living. The shuffle is deliberate — not hurried, not performed. Cards whisper against one another as they move. The Reader lifts the deck, splits it three times with the left hand, and sets it down. One breath. Two. Outside, or perhaps only in the imagination, a low wind stirs. Three positions wait on the velvet: a narrow space for what has been, a wider pocket of shadow for what is, and a far rectangle where candlelight barely reaches — for what is still arriving. A sandalwood incense stick curls a slow thread of smoke upward, catching bronze in the glow. The Reader's gaze settles somewhere slightly past the lens — past you, into the spread itself. The hands hover. The first card is chosen. --- The Reader says: \"Three cards today — and the wheel has something to say\"\n\n  - The Past card is laid face-down with a soft, decisive sound, then turned. **Wheel of Fortune — reversed.** The great card opens tilted, the wheel on its axis caught mid-rotation and frozen. In the copper-and-rust glow of the taper — a warm amber that deepens now toward old gold — the wheel burns as though lit from within, its mystical inscriptions raised in the flickering like embossed letters. The sphinx that should crown the wheel hangs at an uncertain angle, suspended between wisdom and falling. The serpent descending looks less controlled now, more like a thing that has slipped. The jackal-headed figure that should be rising grips the rim with an effort that was never meant to be this hard. In each corner, the four great winged beasts — the lion, the eagle, the ox, the human angel — sit undisturbed in their clouds, still reading their ancient books, patient with wheels that stall. This is the past the spread names: a season where the expected change would not come, where fate seemed to catch and hold in amber. A cycle that repeated when it should have released. Something kept you in its groove far longer than was meant. --- Wheel of Fortune says: \"I turned and turned — until something refused to let me go\"\n\n  - The second card is set into the Present position with careful, deliberate precision. **Temperance — reversed.** The accent that moves through the surrounding velvet now is unsettled teal — the colour of deep water before a storm — washing the near candlelight in cool, wavering blue at the edges. Even inverted, the angel is magnificent: vast white wings spread behind a robe of white and orange, the figure large against the card, commanding. But one foot that should rest solid on the riverbank is suspended mid-air; the other, that should dip serenely into the clear stream, seems uncertain of its depth. The two golden cups are tilted in those capable hands, and the water that was meant to arc perfectly between them — patient, endlessly precise — spills instead toward one side, overflows, pools where it should not. Behind the figure, a path leads toward a crowned mountain glowing faintly in the distance. It is still there. The destination has not changed. But the mist has thickened, and the angel's feet have not found their steady ground. This is the present moment's honest portrait: things are out of balance. The blending is off. Impatience or excess has crept in where patience was asked for, and the strain of it shows. --- Temperance says: \"Pour and pour again — still the cups will not agree\"\n\n  - The third card moves toward the Future position and is placed with a reverence the Reader cannot quite conceal — fingertips resting at the card's edge a breath longer before releasing. **The Empress — upright.** The card blooms. The room shifts. Deep gold and forest green flood the velvet around it, warmth spilling outward until the taper's amber seems richer, more generous, as though it too has been given permission to expand. She is radiant. The Empress sits enthroned on a cushion of deep crimson in a field of ripe golden wheat that presses in on all sides, full and unashamed. Her crown of twelve stars sits sure on her brow. The scepter in her right hand is unhurried. The heart-shaped shield at her side bears the sign of Venus — love made visible, beauty that is also power. Behind her, a dense green forest holds its breath and a waterfall turns silver at the edge of the frame, generous and unceasing. She is not looking at you from a place of effort. She has already done the work of growing. She is simply at rest inside fullness. After the stalled wheel and the spilled cups, she arrives like a door opened into warmth. Something you have tended — through difficulty, through imbalance, through the season that refused to turn — has kept growing in the soil. It is ripe now. --- The Empress says: \"What you have tended through the long season is finally yours\"\n\n  - The three cards lie open on the velvet in candlelight, a small constellation against the dark cloth: the tilted golden wheel, the angel with its spilling cups, and the radiant mother settled in her wheat. The sandalwood smoke has grown denser, pooling at the ceiling before dispersing. The Reader looks across all three, touches nothing, and speaks quietly — as to a friend rather than an audience. The arc is clear and it is patient. A past season of stalling — cycles that jammed when they should have moved, luck that soured or simply sat still, something meant to change that kept returning unchanged. That period cost something, and it left its mark in the present: the Empress reversed reflects it faithfully, the cups still tilting, the balance still being sought, the careful work of recalibration ongoing. This is not failure. It is honest. But neither of those two cards closes the story. The Empress does. She insists, in the way only abundance can insist — quietly, warmly, without urgency — that what you cared for in the hard season was not wasted. Growth was happening in the soil while the surface looked unchanged. The wheel is finally moving. The water is beginning to level. The field has already decided to give. Be gentle with how long it has taken. Then open your hands. The Reader says: \"The harvest was always coming — even when the wheel would not turn\"",
           "cast": {
-            "cast": [
+            "cast": "[{\"name\":\"The Reader\",\"role\":\"Narrator\",\"description\":\"The Reader: a warm, uncanny mystic host at a candle-lit table draped in dark velvet, a deck fanned before her, an ornate art-nouveau headscarf and amber jewellery, soft candlelight on her knowing face, inviting and serene. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Fool\",\"role\":\"Protagonist\",\"description\":\"The Fool (Major Arcana 0), personified: a bright-eyed young wanderer in patchwork motley with a knapsack on a stick and a small white dog at the heel, stepping weightlessly toward a cliff edge under a white sun. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Magician\",\"role\":\"Protagonist\",\"description\":\"The Magician (Major Arcana 1), personified: a poised figure in white and red robes, one hand raised to the sky and one to the earth, an infinity sign above the brow, the four suit-symbols on the table, roses and lilies around. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The High Priestess\",\"role\":\"Protagonist\",\"description\":\"The High Priestess (Major Arcana 2), personified: a serene veiled woman seated between a black pillar and a white pillar, a crescent moon at her feet and a scroll of hidden law on her lap, calm and unreadable. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Empress\",\"role\":\"Protagonist\",\"description\":\"The Empress (Major Arcana 3), personified: a radiant crowned mother on a cushioned throne in a field of golden wheat, a heart-shaped shield at her side, forest and waterfall behind, generous and warm. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Emperor\",\"role\":\"Protagonist\",\"description\":\"The Emperor (Major Arcana 4), personified: a stern bearded ruler on a stone throne carved with rams' heads, armour beneath the robe, an ankh sceptre in hand, barren red mountains behind, immovable. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Hierophant\",\"role\":\"Protagonist\",\"description\":\"The Hierophant (Major Arcana 5), personified: a robed high priest between two stone pillars raising a hand in blessing, a triple crown and crossed keys at his feet, two acolytes kneeling before him. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Lovers\",\"role\":\"Protagonist\",\"description\":\"The Lovers (Major Arcana 6), personified: a man and a woman beneath a radiant winged angel, a tree of flame behind one and a fruited tree behind the other, a mountain between them, sunlit and open. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Chariot\",\"role\":\"Protagonist\",\"description\":\"The Chariot (Major Arcana 7), personified: an armoured charioteer crowned with stars under a starry canopy, a black sphinx and a white sphinx yoked before the car, a walled city behind, driven and resolute. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"Strength\",\"role\":\"Protagonist\",\"description\":\"Strength (Major Arcana 8), personified: a calm woman in a white gown garlanded with flowers gently closing the jaws of a great tawny lion with bare hands, an infinity sign over her head, serene. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Hermit\",\"role\":\"Protagonist\",\"description\":\"The Hermit (Major Arcana 9), personified: a grey-robed elder alone on a snowy peak, a lantern holding a single six-pointed star raised before him, a staff in the other hand, contemplative and still. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"Wheel of Fortune\",\"role\":\"Protagonist\",\"description\":\"Wheel of Fortune (Major Arcana 10), personified: a great golden wheel inscribed with mystic letters turning in the clouds, a sphinx above, a serpent descending, a jackal-headed figure rising, four winged beasts reading in the corners. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"Justice\",\"role\":\"Protagonist\",\"description\":\"Justice (Major Arcana 11), personified: a crowned figure enthroned between two pillars, an upraised double-edged sword in one hand and balanced scales in the other, level-eyed and impartial. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Hanged Man\",\"role\":\"Protagonist\",\"description\":\"The Hanged Man (Major Arcana 12), personified: a man suspended serenely by one ankle from a living T-shaped tree, hands behind his back, a radiant halo about his head, at peace in the reversal. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"Death\",\"role\":\"Protagonist\",\"description\":\"Death (Major Arcana 13), personified: a skeletal rider in black armour on a pale white horse, a black banner bearing a white rose, a fallen king before him, a sun rising between two towers on the horizon. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"Temperance\",\"role\":\"Protagonist\",\"description\":\"Temperance (Major Arcana 14), personified: a winged angel with one foot on land and one in a stream, pouring water endlessly between two golden cups, a path to a crowned mountain behind, calm and exact. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Devil\",\"role\":\"Protagonist\",\"description\":\"The Devil (Major Arcana 15), personified: a horned half-goat figure on a black pedestal, a torch held downward, two loosely chained human figures below who could lift the chains off at any moment, low red glow. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Tower\",\"role\":\"Protagonist\",\"description\":\"The Tower (Major Arcana 16), personified: a tall stone tower struck by a bolt of lightning, its golden crown blasted off, flames in the windows, two figures falling headlong against a black sky. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Star\",\"role\":\"Protagonist\",\"description\":\"The Star (Major Arcana 17), personified: a kneeling figure by a still pool under one great eight-pointed star and seven smaller ones, pouring water from two jugs onto land and water, a bird in a tree behind, tranquil. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Moon\",\"role\":\"Protagonist\",\"description\":\"The Moon (Major Arcana 18), personified: a pale full moon dripping light over a winding path between two towers, a dog and a wolf baying upward, a crayfish crawling from the water, silver-blue and uncertain. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The Sun\",\"role\":\"Protagonist\",\"description\":\"The Sun (Major Arcana 19), personified: a radiant child crowned with a sunflower riding a white horse before a wall of tall sunflowers, a great beaming sun overhead, a red banner streaming, pure and bright. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"Judgement\",\"role\":\"Protagonist\",\"description\":\"Judgement (Major Arcana 20), personified: a great angel sounding a trumpet from the clouds, pale figures rising with arms uplifted from open graves below, a cross banner, snow-capped mountains behind, awe-struck. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"},{\"name\":\"The World\",\"role\":\"Protagonist\",\"description\":\"The World (Major Arcana 21), personified: a dancing figure draped in a violet sash within a great laurel wreath, a wand in each hand, the four winged beasts in the corners, cosmic and triumphant. ornate French art-nouveau tarot-card illustration in the spirit of Alphonse Mucha: a single figure framed by a decorative arched border of curling vines, stars and geometric ornament, flat gilded gold-leaf background, jewel-toned flowing line-work, candle-lit warm glow, elegant and luminous.\"}]",
+            "castImages": [
               {
-                "name": "The Reader",
-                "role": "Narrator",
-                "description": "The Reader — warm mystic host who draws and reads the spread; opens & closes every episode."
-              },
-              {
-                "name": "The Fool",
-                "role": "Protagonist",
-                "description": "The Fool — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Magician",
-                "role": "Protagonist",
-                "description": "The Magician — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The High Priestess",
-                "role": "Protagonist",
-                "description": "The High Priestess — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Empress",
-                "role": "Protagonist",
-                "description": "The Empress — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Emperor",
-                "role": "Protagonist",
-                "description": "The Emperor — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Hierophant",
-                "role": "Protagonist",
-                "description": "The Hierophant — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Lovers",
-                "role": "Protagonist",
-                "description": "The Lovers — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Chariot",
-                "role": "Protagonist",
-                "description": "The Chariot — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "Strength",
-                "role": "Protagonist",
-                "description": "Strength — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Hermit",
-                "role": "Protagonist",
-                "description": "The Hermit — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "Wheel of Fortune",
-                "role": "Protagonist",
-                "description": "Wheel of Fortune — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "Justice",
-                "role": "Protagonist",
-                "description": "Justice — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Hanged Man",
-                "role": "Protagonist",
-                "description": "The Hanged Man — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "Death",
-                "role": "Protagonist",
-                "description": "Death — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "Temperance",
-                "role": "Protagonist",
-                "description": "Temperance — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Devil",
-                "role": "Protagonist",
-                "description": "The Devil — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Tower",
-                "role": "Protagonist",
-                "description": "The Tower — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Star",
-                "role": "Protagonist",
-                "description": "The Star — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Moon",
-                "role": "Protagonist",
-                "description": "The Moon — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The Sun",
-                "role": "Protagonist",
-                "description": "The Sun — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "Judgement",
-                "role": "Protagonist",
-                "description": "Judgement — Major Arcana, personified; appears when drawn."
-              },
-              {
-                "name": "The World",
-                "role": "Protagonist",
-                "description": "The World — Major Arcana, personified; appears when drawn."
-              }
-            ],
-            "castImages": [],
-            "castVoices": [
-              {
+                "id": "b6bf276f-1632-44b5-a9f8-a5369db47035",
                 "characterName": "The Reader",
-                "voiceName": "Dorothy",
-                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/5b754ca7-5b54-46e5-ba7b-d6e563385e08.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/5b754ca7-5b54-46e5-ba7b-d6e563385e08.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "f356ae1e-e50c-4e37-a963-232849485962",
                 "characterName": "The Fool",
-                "voiceName": "Will",
-                "voiceId": "bIHbv24MWmeRgasZH58o"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/71257670-0c02-44c5-810b-4169e60cd62f.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/71257670-0c02-44c5-810b-4169e60cd62f.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "1117cf69-045b-40b5-8b30-6ec4af527d33",
                 "characterName": "The Magician",
-                "voiceName": "Michael",
-                "voiceId": "flq6f7yk4E4fJM5XTYuZ"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/73bcb02e-406e-4ef9-b742-449c507f015d.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/73bcb02e-406e-4ef9-b742-449c507f015d.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "ce6dc819-eebb-4a42-be48-432604bbe35b",
                 "characterName": "The High Priestess",
-                "voiceName": "Dorothy",
-                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/bbd77156-3937-4f98-9499-9f443fcaa37f.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/bbd77156-3937-4f98-9499-9f443fcaa37f.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "988f103d-0ea2-42ab-bfb9-e3f67bafbd11",
                 "characterName": "The Empress",
-                "voiceName": "Dorothy",
-                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/9a2c0bca-bbc3-4e96-85a4-469960fb5d13.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/9a2c0bca-bbc3-4e96-85a4-469960fb5d13.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "cfdb7226-afe2-4968-b5d1-1f1513499de3",
                 "characterName": "The Emperor",
-                "voiceName": "George",
-                "voiceId": "JBFqnCBsd6RMkjVDRZzb"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/6fc5d2f7-4f44-4231-bfef-10cb4d6b2c87.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/6fc5d2f7-4f44-4231-bfef-10cb4d6b2c87.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "cc85e0e5-dccc-42d1-906f-a2a73c981a0d",
                 "characterName": "The Hierophant",
-                "voiceName": "George",
-                "voiceId": "JBFqnCBsd6RMkjVDRZzb"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/e1aa5c52-3695-4ecb-aa4f-43bf16c6e77c.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/e1aa5c52-3695-4ecb-aa4f-43bf16c6e77c.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "4fe869e5-d7a5-4501-bf14-187f3cf104f3",
                 "characterName": "The Lovers",
-                "voiceName": "Will",
-                "voiceId": "bIHbv24MWmeRgasZH58o"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/6a78388d-367b-4338-8106-92ac37c475d9.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/6a78388d-367b-4338-8106-92ac37c475d9.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "79379021-21be-4be2-a143-f064f5282361",
                 "characterName": "The Chariot",
-                "voiceName": "Michael",
-                "voiceId": "flq6f7yk4E4fJM5XTYuZ"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/b61e36a6-26b2-4eeb-ae01-afec3bac4c7d.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/b61e36a6-26b2-4eeb-ae01-afec3bac4c7d.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "41801405-3a92-49b5-9281-0e2d7ca69e56",
                 "characterName": "Strength",
-                "voiceName": "Dorothy",
-                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/11e02687-3a58-4898-9d76-6bc6c1601355.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/11e02687-3a58-4898-9d76-6bc6c1601355.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "f2c669d7-baae-4aa3-9757-590182bb01db",
                 "characterName": "The Hermit",
-                "voiceName": "George",
-                "voiceId": "JBFqnCBsd6RMkjVDRZzb"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/455221b2-fd66-4510-a33a-9f1872ce24e0.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/455221b2-fd66-4510-a33a-9f1872ce24e0.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "d52bbf32-6d82-4d99-995d-390f0eed3e2c",
                 "characterName": "Wheel of Fortune",
-                "voiceName": "Brian",
-                "voiceId": "nPczCjzI2devNBz1zQrb"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/af2c9835-7bf2-4c6d-8d13-369ac026cd5c.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/af2c9835-7bf2-4c6d-8d13-369ac026cd5c.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "c939928a-2986-4bcd-9f05-fbf4fc826e70",
                 "characterName": "Justice",
-                "voiceName": "Patrick",
-                "voiceId": "ODq5zmih8GrVes37Dizd"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/51123b93-abbf-4c4a-951a-c358abcc1834.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/51123b93-abbf-4c4a-951a-c358abcc1834.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "dd33e5f8-920d-4c22-9552-99e1101e2a96",
                 "characterName": "The Hanged Man",
-                "voiceName": "Will",
-                "voiceId": "bIHbv24MWmeRgasZH58o"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/603d2f27-266a-4175-87df-94ee5796af5a.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/603d2f27-266a-4175-87df-94ee5796af5a.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "1080bab9-b854-4555-b2aa-0073a19606ca",
                 "characterName": "Death",
-                "voiceName": "Clyde",
-                "voiceId": "2EiwWnXFnvU5JabPnv8n"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/593b2e9a-1b58-465c-a806-c191d2c144cd.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/593b2e9a-1b58-465c-a806-c191d2c144cd.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "d6ae36d4-4b05-4ff0-8652-948942fe9790",
                 "characterName": "Temperance",
-                "voiceName": "Dorothy",
-                "voiceId": "ThT5KcBeYPX3keUQqHPh"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/0bf4ac58-811b-423b-9081-a5bd9c0b199f.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/0bf4ac58-811b-423b-9081-a5bd9c0b199f.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "6b39a657-9cf2-4b79-bbb2-053786bfb9c3",
                 "characterName": "The Devil",
-                "voiceName": "Clyde",
-                "voiceId": "2EiwWnXFnvU5JabPnv8n"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/0ef48d1d-701e-4c95-9e56-156fdea2edfd.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/0ef48d1d-701e-4c95-9e56-156fdea2edfd.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "f04ceece-9135-414e-ba05-469945d5f9c4",
                 "characterName": "The Tower",
-                "voiceName": "Clyde",
-                "voiceId": "2EiwWnXFnvU5JabPnv8n"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/280f1dd3-3e4d-4465-a0ed-c642f8d0f633.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/280f1dd3-3e4d-4465-a0ed-c642f8d0f633.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
-                "characterName": "The Star",
-                "voiceName": "Dorothy",
-                "voiceId": "ThT5KcBeYPX3keUQqHPh"
-              },
-              {
+                "id": "3ab210d4-385a-47aa-9e30-fa8eda5cac22",
                 "characterName": "The Moon",
-                "voiceName": "Patrick",
-                "voiceId": "ODq5zmih8GrVes37Dizd"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/1372f440-3155-4663-a161-77c79d798ea2.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/1372f440-3155-4663-a161-77c79d798ea2.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "fca7ed1c-0760-4894-b017-f5b411925ec0",
                 "characterName": "The Sun",
-                "voiceName": "Brian",
-                "voiceId": "nPczCjzI2devNBz1zQrb"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/130ff0d0-8ff4-457e-8d7a-bb75fd73fb31.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/130ff0d0-8ff4-457e-8d7a-bb75fd73fb31.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "73362c5b-e315-4ece-b68e-7ba57af3a125",
+                "characterName": "The Star",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/20d07b20-a260-4829-9102-8b726c5aa9bf.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/20d07b20-a260-4829-9102-8b726c5aa9bf.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "69ffa83e-514d-4541-a2cb-14a48d5d4570",
                 "characterName": "Judgement",
-                "voiceName": "Patrick",
-                "voiceId": "ODq5zmih8GrVes37Dizd"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/2c262201-1d40-4870-ba25-11ad1cb185d2.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/2c262201-1d40-4870-ba25-11ad1cb185d2.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "533bd350-6234-4845-a18c-30b5c050163a",
                 "characterName": "The World",
-                "voiceName": "Brian",
-                "voiceId": "nPczCjzI2devNBz1zQrb"
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/73d66c4e-8b5d-4ae5-b3ce-baf9a8d4b20c.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/b1b0749d-9682-4e03-b875-e1738ac2a0c1/cast-images/73d66c4e-8b5d-4ae5-b3ce-baf9a8d4b20c.png",
+                "createdAt": "2026-06-11T02:14:30.589Z",
+                "updatedAt": "2026-06-11T02:14:30.589Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               }
             ],
             "castSubtitles": [
               {
+                "id": "cd70cf5e-0cb2-4ce1-bab5-9384ac37e6b1",
                 "characterName": "The Reader",
-                "fontFamily": "Cinzel",
-                "color": "#F2D58A"
+                "fontFamily": "Griffy",
+                "color": "#F2D58A",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "2c973cca-1e5f-4e4f-ada1-b3eb031896d1",
                 "characterName": "The Fool",
-                "fontFamily": "Cinzel",
-                "color": "#8FD14F"
+                "fontFamily": "Griffy",
+                "color": "#8FD14F",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "9a86759f-70cf-42f7-93a8-cb1fea57a610",
                 "characterName": "The Magician",
-                "fontFamily": "Cinzel",
-                "color": "#E03A3A"
+                "fontFamily": "Griffy",
+                "color": "#E03A3A",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "bd6158c2-e8cc-46da-8a84-8563c05b3da7",
                 "characterName": "The High Priestess",
-                "fontFamily": "Cinzel",
-                "color": "#5B6BD6"
+                "fontFamily": "Griffy",
+                "color": "#5B6BD6",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "df778d4e-6ad9-4588-9a89-76e3ee8ce0c5",
                 "characterName": "The Empress",
-                "fontFamily": "Cinzel",
-                "color": "#E66FA8"
+                "fontFamily": "Griffy",
+                "color": "#E66FA8",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "5a6542d3-53d2-4bc7-9730-bb44196de3f9",
                 "characterName": "The Emperor",
-                "fontFamily": "Cinzel",
-                "color": "#8B1E1E"
+                "fontFamily": "Griffy",
+                "color": "#8B1E1E",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "7ff187bf-4962-4a99-947f-68deb723c3b7",
                 "characterName": "The Hierophant",
-                "fontFamily": "Cinzel",
-                "color": "#C9A227"
+                "fontFamily": "Griffy",
+                "color": "#C9A227",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "908581f7-c2cf-4e40-ba42-dad60c951c8a",
                 "characterName": "The Lovers",
-                "fontFamily": "Cinzel",
-                "color": "#FF8FB0"
+                "fontFamily": "Griffy",
+                "color": "#FF8FB0",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "26a7e449-0906-4ded-a66b-c6dab9bc0721",
                 "characterName": "The Chariot",
-                "fontFamily": "Cinzel",
-                "color": "#3E6E9C"
+                "fontFamily": "Griffy",
+                "color": "#3E6E9C",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "61618f3a-8a08-4368-99b8-6a1da54db7ab",
                 "characterName": "Strength",
-                "fontFamily": "Cinzel",
-                "color": "#E8A23D"
+                "fontFamily": "Griffy",
+                "color": "#E8A23D",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "e6aa2f94-2680-41f5-8e8e-1e4cf5a80eaf",
                 "characterName": "The Hermit",
-                "fontFamily": "Cinzel",
-                "color": "#9AA3AE"
+                "fontFamily": "Griffy",
+                "color": "#9AA3AE",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "88dc3ea2-ccbd-4d7d-ae3f-26fa3744ad13",
                 "characterName": "Wheel of Fortune",
-                "fontFamily": "Cinzel",
-                "color": "#E0A82E"
+                "fontFamily": "Griffy",
+                "color": "#E0A82E",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "f3342951-9450-4666-98a7-e219da01aaee",
                 "characterName": "Justice",
-                "fontFamily": "Cinzel",
-                "color": "#6E8CA0"
+                "fontFamily": "Griffy",
+                "color": "#6E8CA0",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "fdb85032-b2d2-4f55-a23c-fc5b277c853a",
                 "characterName": "The Hanged Man",
-                "fontFamily": "Cinzel",
-                "color": "#2FA3A3"
+                "fontFamily": "Griffy",
+                "color": "#2FA3A3",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "945defd8-15ee-4578-aa82-c7ca9e8dea5a",
                 "characterName": "Death",
-                "fontFamily": "Cinzel",
-                "color": "#E8E6DF"
+                "fontFamily": "Griffy",
+                "color": "#E8E6DF",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "2560db82-d6aa-4ae4-8654-b8519cfd6418",
                 "characterName": "Temperance",
-                "fontFamily": "Cinzel",
-                "color": "#5FB3C4"
+                "fontFamily": "Griffy",
+                "color": "#5FB3C4",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "754ea53c-0482-4bad-bbb5-16eb3296f4e2",
                 "characterName": "The Devil",
-                "fontFamily": "Cinzel",
-                "color": "#7A1020"
+                "fontFamily": "Griffy",
+                "color": "#7A1020",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "9fcde9ea-f27b-45ea-8100-22831b7dccfc",
                 "characterName": "The Tower",
-                "fontFamily": "Cinzel",
-                "color": "#E64A19"
+                "fontFamily": "Griffy",
+                "color": "#E64A19",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "a5f67b7d-c173-43a3-9b16-c8567454ff05",
                 "characterName": "The Star",
-                "fontFamily": "Cinzel",
-                "color": "#4FD1E0"
+                "fontFamily": "Griffy",
+                "color": "#4FD1E0",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "a6df2b86-7ff4-4698-8f27-ec9b7df58d07",
                 "characterName": "The Moon",
-                "fontFamily": "Cinzel",
-                "color": "#9FB4D4"
+                "fontFamily": "Griffy",
+                "color": "#9FB4D4",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "22cdd6d5-66fc-43ad-939b-94c5042ac3bd",
                 "characterName": "The Sun",
-                "fontFamily": "Cinzel",
-                "color": "#FFC93C"
+                "fontFamily": "Griffy",
+                "color": "#FFC93C",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "4fd595a5-0d9d-4fc9-8557-c48ca05591f7",
                 "characterName": "Judgement",
-                "fontFamily": "Cinzel",
-                "color": "#C98A2E"
+                "fontFamily": "Griffy",
+                "color": "#C98A2E",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               },
               {
+                "id": "e0fbe73c-c419-4f5a-9360-c9cf250f4754",
                 "characterName": "The World",
-                "fontFamily": "Cinzel",
-                "color": "#7E57C2"
+                "fontFamily": "Griffy",
+                "color": "#7E57C2",
+                "createdAt": "2026-06-11T02:14:30.575Z",
+                "updatedAt": "2026-06-11T02:14:30.575Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              }
+            ],
+            "castVoices": [
+              {
+                "id": "7618bf6c-8041-4ccb-acd8-9eaf9b6d3eb6",
+                "characterName": "The Reader",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "b40ab28f-4d1e-46d9-886a-83105b18e687",
+                "characterName": "The Fool",
+                "voiceName": "Will",
+                "voiceId": "bIHbv24MWmeRgasZH58o",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "69ebf765-e427-4610-ae1d-552ab8e58f84",
+                "characterName": "The Magician",
+                "voiceName": "Michael",
+                "voiceId": "flq6f7yk4E4fJM5XTYuZ",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "eed8babc-d481-43a5-85e8-49c1b1e97483",
+                "characterName": "The High Priestess",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "ac8fa74c-8a6d-4d83-a7a7-a491e89a43be",
+                "characterName": "The Empress",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "87d158dc-2a3e-43c6-8413-3b910aa4180d",
+                "characterName": "The Emperor",
+                "voiceName": "George",
+                "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "00cbd5e9-b5a2-4756-858a-06f4adcc6c16",
+                "characterName": "The Hierophant",
+                "voiceName": "George",
+                "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "43a38622-1af6-4ee7-abac-e50a1db896d7",
+                "characterName": "The Lovers",
+                "voiceName": "Will",
+                "voiceId": "bIHbv24MWmeRgasZH58o",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "d3283615-5118-403d-ad36-09ef179f0fb3",
+                "characterName": "The Chariot",
+                "voiceName": "Michael",
+                "voiceId": "flq6f7yk4E4fJM5XTYuZ",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "03e5c864-a5a7-4916-8030-f4f5185f4b33",
+                "characterName": "Strength",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "ec9dfbc5-76e7-4184-a8eb-339e4af024ea",
+                "characterName": "The Hermit",
+                "voiceName": "George",
+                "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "b690c1fb-2f64-4415-b1ba-7a3f3186ba51",
+                "characterName": "Wheel of Fortune",
+                "voiceName": "Brian",
+                "voiceId": "nPczCjzI2devNBz1zQrb",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "73702c1a-136c-4eb2-bd8d-ccc676cf8e98",
+                "characterName": "Justice",
+                "voiceName": "Patrick",
+                "voiceId": "ODq5zmih8GrVes37Dizd",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "acfd9061-8656-4e97-956f-c04d88fdabba",
+                "characterName": "The Hanged Man",
+                "voiceName": "Will",
+                "voiceId": "bIHbv24MWmeRgasZH58o",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "3b1cc117-b4c8-4292-ac13-a77d9eaf3cde",
+                "characterName": "Death",
+                "voiceName": "Clyde",
+                "voiceId": "2EiwWnXFnvU5JabPnv8n",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "5d7ade7d-b426-4184-b0b7-e1f4dd4392d3",
+                "characterName": "Temperance",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "c3099ca9-5f12-4f19-b074-ed9274d48495",
+                "characterName": "The Devil",
+                "voiceName": "Clyde",
+                "voiceId": "2EiwWnXFnvU5JabPnv8n",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "4ec63dbb-6996-4618-9794-2775e17aef20",
+                "characterName": "The Tower",
+                "voiceName": "Clyde",
+                "voiceId": "2EiwWnXFnvU5JabPnv8n",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "ffc1b30f-6289-4ee1-9aec-3c40297641b9",
+                "characterName": "The Star",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "1e324160-d019-41fc-8c8e-0f88f9c7efc3",
+                "characterName": "The Moon",
+                "voiceName": "Patrick",
+                "voiceId": "ODq5zmih8GrVes37Dizd",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "aa6676ee-8de4-46c4-a97f-6b9b02d7ba48",
+                "characterName": "The Sun",
+                "voiceName": "Brian",
+                "voiceId": "nPczCjzI2devNBz1zQrb",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "060da03e-1138-43c2-820d-6220f8fd3f21",
+                "characterName": "Judgement",
+                "voiceName": "Patrick",
+                "voiceId": "ODq5zmih8GrVes37Dizd",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
+              },
+              {
+                "id": "bcb52899-4287-428f-9631-fe080b669b60",
+                "characterName": "The World",
+                "voiceName": "Brian",
+                "voiceId": "nPczCjzI2devNBz1zQrb",
+                "createdAt": "2026-06-11T02:14:30.583Z",
+                "updatedAt": "2026-06-11T02:14:30.583Z",
+                "movieCastId": "58a692a5-a271-4a19-a486-0227ebad06aa",
+                "generatorId": null
               }
             ]
-          }
+          },
+          "season_episodes": "[]",
+          "screenplay": "{\"title\":\"Movie based on: - The room breathes slowly. A single beeswax taper\",\"scenes\":[{\"id\":\"155fc25e-b292-4e10-b137-6902a378ad4a\",\"heading\":\"The Wheel's Revelation\",\"description\":\"The room breathes slowly. The Reader cradles the Major Arcana deck, shuffling deliberately. The sandalwood incense curls upward, casting a bronze glow. Outside, a low wind stirs, setting the scene for the tarot reading.\",\"actors\":[\"The Reader\"],\"dialogue\":\"Three cards today — and the wheel has something to say\",\"animationPrompt\":\"SLOW PUSH-IN as the Reader hovers over the cards, warm candlelight, incense smoke, mysterious atmosphere, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"cd208a6b-03e3-4544-b8ec-7587385c479b\",\"heading\":\"Seasons Frozen in Amber\",\"description\":\"The Wheel of Fortune card, reversed, illuminates a scene of halted destiny. The sphinx, serpent, and jackal-headed figure struggle against stillness, while the four winged beasts observe in silent wisdom.\",\"actors\":[\"Wheel of Fortune\"],\"dialogue\":\"I turned and turned — until something refused to let me go\",\"animationPrompt\":\"A slow push-in to capture the intricate details of the frozen wheel, with warm candlelight casting mystical shadows, a sense of suspended time, and a deep aura of ancient wisdom, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"8c9b5ec8-38df-4f68-8cd5-2b1667304ed8\",\"heading\":\"Imbalance in the Present\",\"description\":\"The vast white-winged angel of Temperance, reversed, stands in magnificence. One foot hovers mid-air, the other uncertain over a stream. Golden cups spill, water flowing askew, mist thickening around a distant crowned mountain.\",\"actors\":[\"Temperance\"],\"dialogue\":\"Pour and pour again — still the cups will not agree\",\"animationPrompt\":\"Slow push-in on the angel of Temperance, teal lighting casting wavering shadows, subtle mist rising, a sense of imbalance and strain palpable, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"ba0dee00-70c4-43b1-a1de-504bf17bb146\",\"heading\":\"The Empress's Radiance\",\"description\":\"The Empress, radiant in deep gold and forest green, seated on crimson cushion amidst golden wheat. Crowned with stars, holding a Venus shield, forest backdrop with a silver waterfall. She exudes warmth and abundance.\",\"actors\":[\"The Empress\"],\"dialogue\":\"What you have tended through the long season is finally yours\",\"animationPrompt\":\"Slow push-in on The Empress, bathed in warm candlelight. Rich colors, serene expression, abundance exuding, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"65692321-803b-4c1c-8ecc-46010b5ad246\",\"heading\":\"Embracing Abundance\",\"description\":\"In the soft candlelight, the three open cards gleam on the dark velvet: the tilted Wheel of Fortune, the angel of Temperance with spilling cups, and the radiant Empress in her wheat field. Sandalwood smoke curls and dissipates gently. The Reader, serene, gazes across the tableau, absorbing the past stalling, the recalibration in progress, and the promise of growth. The atmosphere holds a quiet weight, a sense of culmination and renewal.\",\"actors\":[\"The Reader\"],\"dialogue\":\"The harvest was always coming — even when the wheel would not turn\",\"animationPrompt\":\"A cinematic slow push-in towards The Reader, warm candlelight casting soft shadows, a moment of contemplative stillness in the air, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"}]}",
+          "concatMovieUrl": null,
+          "soundtrackedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/movies/soundtrack-5e3706ff-8198-4207-920f-967bc8d4566d.mp4",
+          "audioPath": "prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/audio/3a752845-86ea-4bed-88dd-c8d4f15bfbd7.mp3",
+          "scenes": [
+            {
+              "sceneNumber": 1,
+              "title": "The Wheel's Revelation",
+              "story": "The room breathes slowly. The Reader cradles the Major Arcana deck, shuffling deliberately. The sandalwood incense curls upward, casting a bronze glow. Outside, a low wind stirs, setting the scene for the tarot reading.",
+              "dialogue": "Three cards today — and the wheel has something to say",
+              "leadCast": "The Reader",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/155fc25e-b292-4e10-b137-6902a378ad4a/images/d0e95472-8436-4ce4-883f-808f23fa7824.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/155fc25e-b292-4e10-b137-6902a378ad4a/movies/7d8bdad4-1e6a-477f-8ecc-e36d1a3a7dfa.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/155fc25e-b292-4e10-b137-6902a378ad4a/movies-subtitles/a249b3bd-e406-413d-88d0-44a794afb61e.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/155fc25e-b292-4e10-b137-6902a378ad4a/movies-burned/81455672-77a0-4583-acdb-47de1a8f4742.mp4"
+            },
+            {
+              "sceneNumber": 2,
+              "title": "Seasons Frozen in Amber",
+              "story": "The Wheel of Fortune card, reversed, illuminates a scene of halted destiny. The sphinx, serpent, and jackal-headed figure struggle against stillness, while the four winged beasts observe in silent wisdom.",
+              "dialogue": "I turned and turned — until something refused to let me go",
+              "leadCast": "Wheel of Fortune",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/cd208a6b-03e3-4544-b8ec-7587385c479b/images/d45411e0-722e-4827-bed6-62262bcc51b2.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/cd208a6b-03e3-4544-b8ec-7587385c479b/movies/b1f20952-db90-491d-9881-58c358d24340.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/cd208a6b-03e3-4544-b8ec-7587385c479b/movies-subtitles/9a2835b1-5dcb-4f5b-ba13-9dcf7034df7d.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/cd208a6b-03e3-4544-b8ec-7587385c479b/movies-burned/314bea58-d563-4688-924a-1cbb0967042f.mp4"
+            },
+            {
+              "sceneNumber": 3,
+              "title": "Imbalance in the Present",
+              "story": "The vast white-winged angel of Temperance, reversed, stands in magnificence. One foot hovers mid-air, the other uncertain over a stream. Golden cups spill, water flowing askew, mist thickening around a distant crowned mountain.",
+              "dialogue": "Pour and pour again — still the cups will not agree",
+              "leadCast": "Temperance",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/8c9b5ec8-38df-4f68-8cd5-2b1667304ed8/images/da9406fb-e9e3-4d2b-8d92-6902ac06f5e0.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/8c9b5ec8-38df-4f68-8cd5-2b1667304ed8/movies/fd867509-5847-4a70-bc51-706789c3d915.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/8c9b5ec8-38df-4f68-8cd5-2b1667304ed8/movies-subtitles/8575b54c-35ba-45b1-92ec-566c16618ecd.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/8c9b5ec8-38df-4f68-8cd5-2b1667304ed8/movies-burned/427a2177-c5c9-4006-9d90-38d3c15c4695.mp4"
+            },
+            {
+              "sceneNumber": 4,
+              "title": "The Empress's Radiance",
+              "story": "The Empress, radiant in deep gold and forest green, seated on crimson cushion amidst golden wheat. Crowned with stars, holding a Venus shield, forest backdrop with a silver waterfall. She exudes warmth and abundance.",
+              "dialogue": "What you have tended through the long season is finally yours",
+              "leadCast": "The Empress",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/ba0dee00-70c4-43b1-a1de-504bf17bb146/images/9c936be9-6faa-4a21-bdb5-a400caeb262d.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/ba0dee00-70c4-43b1-a1de-504bf17bb146/movies/98e1a5ce-0068-4a3f-a8e6-fe892c327997.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/ba0dee00-70c4-43b1-a1de-504bf17bb146/movies-subtitles/a33205ea-9104-4746-b8b5-8d629a0a6702.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/ba0dee00-70c4-43b1-a1de-504bf17bb146/movies-burned/5070d60d-dd18-4236-acdf-957d2db17fb2.mp4"
+            },
+            {
+              "sceneNumber": 5,
+              "title": "Embracing Abundance",
+              "story": "In the soft candlelight, the three open cards gleam on the dark velvet: the tilted Wheel of Fortune, the angel of Temperance with spilling cups, and the radiant Empress in her wheat field. Sandalwood smoke curls and dissipates gently. The Reader, serene, gazes across the tableau, absorbing the past stalling, the recalibration in progress, and the promise of growth. The atmosphere holds a quiet weight, a sense of culmination and renewal.",
+              "dialogue": "The harvest was always coming — even when the wheel would not turn",
+              "leadCast": "The Reader",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/65692321-803b-4c1c-8ecc-46010b5ad246/images/935c16ed-6455-4420-85ed-a9c429c6ff62.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/65692321-803b-4c1c-8ecc-46010b5ad246/movies/db623bfe-8b5a-4660-be76-3c560670e64b.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/65692321-803b-4c1c-8ecc-46010b5ad246/movies-subtitles/9a977c3c-3ec1-48a2-aff9-fc29028cf5e9.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/628da8c6-7157-4bdf-b66b-f388484aca36/36738dc2-b4d6-4b05-a6b6-d4e173f69b04/scenes/65692321-803b-4c1c-8ecc-46010b5ad246/movies-burned/19480259-8e1d-4072-aa3a-3d2424b2b8a9.mp4"
+            },
+            {
+              "sceneNumber": 6,
+              "title": "Made with YakYak",
+              "story": null,
+              "dialogue": null,
+              "leadCast": null,
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "movieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4"
+            }
+          ]
         }
       ]
     }

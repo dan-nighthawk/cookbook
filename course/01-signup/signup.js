@@ -48,7 +48,7 @@ if (!password) {
   console.log("🔐 Generated a password and saved it to course/.env (use it to sign into the web app too).");
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const anon = new YakYakClient({ baseUrl: base }); // base URL is overridable (beta vs prod)
+const anon = new YakYakClient({ baseUrl: base }); // base URL is overridable
 
 console.log(`Creating account for ${email} …`);
 try { await anon.users.createByEmail({ createByEmailDto: { email, password } }); } catch { /* may already exist */ }

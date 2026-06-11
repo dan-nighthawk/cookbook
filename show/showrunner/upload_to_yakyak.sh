@@ -89,7 +89,7 @@ DEFAULT_PAT_ENV_KEY="YAKYAK_PAT"
 LEGACY_PAT_ENV_KEY="YAKYAK_BB_PAT"
 # Scene-generation poll: every 15s for up to 30 min. The full pipeline (cast,
 # image, voice, animate, subtitle, burn) for ~11 scenes typically completes
-# inside 10-15 min on beta.
+# inside 10-15 min.
 SCENE_POLL_INTERVAL=15
 SCENE_POLL_MAX=120
 # Render poll: every 5s up to ~15 min. The export-render concat job is

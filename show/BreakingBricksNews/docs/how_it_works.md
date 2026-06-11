@@ -1,13 +1,13 @@
 # Breaking Bricks News — How It Works
 
 "Breaking Bricks News" (BBN) is a dark-comedy short-form video series generated
-on [YakYak](https://beta.yakyak.ai). Two shell scripts in `scripts/` drive the
+on [YakYak](https://yakyak.ai). Two shell scripts in `scripts/` drive the
 whole pipeline:
 
 1. **`prepare_latest.sh`** — crawls Middle East news and writes a 10-scene story
    markdown file into `../stories/`.
 2. **`upload_to_yakyak.sh`** — pushes the newest story into the next free episode
-   slot of a YakYak campaign on beta and triggers the screenplay regeneration.
+   slot of a YakYak campaign and triggers the screenplay regeneration.
 
 Both lean on the headless **Claude CLI** (`claude -p`) and the **YakYak API**.
 Everything below documents the calls each script makes, the external APIs they
@@ -41,7 +41,7 @@ flowchart TD
         B9 --> B10["claude -p → 50-char social title"]
         B10 --> B11["POST /workflow/update-movie-social-description"]
         B11 --> B12["POST /workflow/gen-movie-screenplay"]
-        B12 --> DONE[["Preview URL<br/>beta.yakyak.ai/export?movieId=…"]]
+        B12 --> DONE[["Preview URL<br/>yakyak.ai/export?movieId=…"]]
     end
 
     STORY -.handoff.-> B1
@@ -138,7 +138,7 @@ character. Only the fixed cast may speak.
 
 ## 3. `upload_to_yakyak.sh` — push to YakYak
 
-Pushes the newest story into a YakYak campaign on beta. Requires `curl` and `jq`
+Pushes the newest story into a YakYak campaign. Requires `curl` and `jq`
 (no Chrome at runtime). `claude` is optional — used only to generate the social
 title, with a headline fallback if it's absent.
 
@@ -154,7 +154,7 @@ title, with a headline fallback if it's absent.
 | `$2` storyFile | newest `*_latest_update.md` | Story to upload |
 | `YAKYAK_BB_EMAIL` | `bb@yakyak.ai` | Login email (from `e2e/.env.bb`) |
 | `YAKYAK_BB_PASSWORD` | — (required) | Login password (from `e2e/.env.bb`) |
-| `YAKYAK_API_URL` | `https://api.beta.yakyak.ai` | API base URL |
+| `YAKYAK_API_URL` | `https://api.yakyak.ai` | API base URL |
 
 Credentials are sourced from `<repo-root>/e2e/.env.bb`.
 
@@ -163,7 +163,7 @@ Credentials are sourced from `<repo-root>/e2e/.env.bb`.
 ```mermaid
 sequenceDiagram
     participant U as upload_to_yakyak.sh
-    participant API as YakYak API (beta)
+    participant API as YakYak API
     participant CL as claude -p
 
     U->>API: POST /users/login-by-email {email,password}
@@ -279,7 +279,7 @@ claude -p "$TITLE_PROMPT" --allowed-tools "" --output-format text
 |-----|---------|------|-------|
 | **Claude CLI** (`claude -p`) | both scripts | local CLI | Story writing (WebFetch+Write); social title (no tools) |
 | **WebFetch** (inside Claude) | `prepare_latest.sh` | none | BBC, CNN, Al Jazeera Middle East feeds |
-| **YakYak API** (`api.beta.yakyak.ai`) | `upload_to_yakyak.sh` | Bearer JWT | login, get-campaign, create-new-season, set-movie-metadata, update-movie-social-description, gen-movie-screenplay |
+| **YakYak API** (`api.yakyak.ai`) | `upload_to_yakyak.sh` | Bearer JWT | login, get-campaign, create-new-season, set-movie-metadata, update-movie-social-description, gen-movie-screenplay |
 
 ## 5. Running it
 
@@ -288,9 +288,9 @@ claude -p "$TITLE_PROMPT" --allowed-tools "" --output-format text
 ./scripts/prepare_latest.sh
 #    → writes stories/<UTC>_latest_update.md
 
-# 2. Push it to the next free episode of the BBN campaign on beta
+# 2. Push it to the next free episode of the BBN campaign
 ./scripts/upload_to_yakyak.sh
-#    → prints preview: https://beta.yakyak.ai/export?movieId=<id>
+#    → prints preview: https://yakyak.ai/export?movieId=<id>
 ```
 
 Prerequisites: `claude` on PATH (both scripts); `curl` + `jq` (upload);

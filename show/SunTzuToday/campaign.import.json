@@ -1,55 +1,274 @@
 {
-  "_comment": "Sun Tzu, Today campaign import for YakYak — structure mirrors a real /workflow/export-campaign export. Config + 3-member cast roster ONLY (The Strategist who frames each maxim, The Student who lives it, The Rival who opposes him); no rendered assets (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }. Then copy the returned campaign id into marketing/SunTzuToday/show.env CAMPAIGN_ID. The style resolves by label ('Oil Painting'); no style.id is set because style uuids are per-environment. The cinematic chiaroscuro / ink-and-steel art direction is in movies[0].style — that text is appended to every image prompt. This is the FIRST 'Extracted' show: the story comes from a public-domain corpus (corpus/art_of_war.md, Lionel Giles 1910 translation, Project Gutenberg #132) walked one maxim per episode by compute.js (cursor = number of files in stories/). Distinct voices per character. animationType is 'kenburns' on purpose: reliable interim look while Kling AI (the doc's #3 target for duel motion) is in progress. The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
-  "message": "Hand-authored Sun Tzu, Today cast/config template (no rendered assets)",
-  "exportedAt": "2026-06-09 00:00:00",
+  "message": "Exported from user show@yakyak.ai at 2026-06-11 04:39:58",
+  "exportedAt": "2026-06-11 04:39:58",
   "campaigns": [
     {
+      "id": "4ce7705d-a183-4e7d-b325-d686b65e1baa",
       "name": "Sun Tzu, Today — Ancient Strategy for Modern Life",
       "prompt": "An episodic series: each episode takes one verbatim maxim from Sun Tzu's Art of War and stages it as a modern micro-drama — The Strategist frames the maxim, The Student faces a contemporary dilemma and applies it, The Rival opposes him. Seven scenes, ending on the maxim as a caption card.",
       "status": "active",
       "aspectRatio": "9:16",
-      "animationType": "kenburns",
+      "animationType": "kling",
       "imageQuality": "fast",
       "mode": "pro",
       "subtitleMode": "overlay",
       "allowNewCharacters": false,
       "skipSoundtrack": false,
+      "createdAt": "2026-06-11T02:15:37.856Z",
+      "updatedAt": "2026-06-11T02:15:37.856Z",
       "style": {
+        "id": "68a7aa17-333b-42c4-845b-ca16a5ee57a0",
         "label": "Oil Painting",
-        "description": "Cinematic chiaroscuro oil painting — dramatic light, deep shadow, painterly brushwork and classical gravitas."
+        "description": "Classical oil painting aesthetic with rich textures, dramatic lighting, and artistic composition. Evokes fine art gallery quality with depth and sophistication."
       },
       "movies": [
         {
-          "title": "Sun Tzu, Today",
-          "plot": "Recurring cast template for Sun Tzu, Today. Holds The Strategist (mentor; opens + closes every episode), The Student (modern protagonist), and The Rival (recurring antagonist); each episode clones this roster.",
-          "styleShort": "Oil Painting",
+          "id": "703e5fa6-a7f5-4256-b39e-ba507bed74f9",
+          "title": "The Confrontation",
+          "status": "completed",
           "style": "Cinematic chiaroscuro oil painting; ink-and-steel palette of deep blacks, cold steel greys and a single warm gold light source; dramatic Caravaggio side-lighting, visible painterly brushwork, a lone figure emerging from shadow, classical gravitas, film-still composition, faint calligraphic ink textures in the background.",
+          "styleShort": "Oil Painting",
           "season": null,
           "episode": null,
-          "scenes": [],
+          "createdAt": "2026-06-11T02:15:37.860Z",
           "customCast": [
-            { "name": "The Strategist", "role": "Guru",        "sortOrder": 0, "description": "The Strategist: a timeless master-strategist mentor in the spirit of Sun Tzu, an ageless robed sage with a calm unreadable face, close-cropped grey beard, steel-grey and bronze robes, holding a single bamboo strategy slip, lit by one warm gold light against deep shadow, cinematic chiaroscuro oil-painting style." },
-            { "name": "The Student",    "role": "Protagonist", "sortOrder": 1, "description": "The Student: a modern young professional everyperson in a plain dark blazer, earnest and a little overwhelmed, expressive open face, carrying a worn notebook, caught between ambition and doubt, warm gold key light against steel-grey shadow, cinematic chiaroscuro oil-painting style." },
-            { "name": "The Rival",      "role": "Antagonist",  "sortOrder": 2, "description": "The Rival: a sharp, polished modern adversary — the toxic boss / ruthless competitor archetype — immaculate cold-grey suit, a thin confident smirk, hard backlit silhouette, crimson accent (tie or light), looming and composed, cinematic chiaroscuro oil-painting style." }
+            {
+              "id": "30c1757b-91c8-4ed5-9906-12dbd2919684",
+              "movieId": "703e5fa6-a7f5-4256-b39e-ba507bed74f9",
+              "name": "The Strategist",
+              "role": "Guru",
+              "description": "The Strategist: a timeless master-strategist mentor in the spirit of Sun Tzu, an ageless robed sage with a calm unreadable face, close-cropped grey beard, steel-grey and bronze robes, holding a single bamboo strategy slip, lit by one warm gold light against deep shadow, cinematic chiaroscuro oil-painting style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/b973878b-b0a3-4e62-aa79-dad783af1ade.png",
+              "sortOrder": 0,
+              "createdAt": "2026-06-11T02:15:37.887Z",
+              "updatedAt": "2026-06-11T02:15:37.887Z"
+            },
+            {
+              "id": "26a62f7e-204a-432c-8750-25cc91c8aa0d",
+              "movieId": "703e5fa6-a7f5-4256-b39e-ba507bed74f9",
+              "name": "The Student",
+              "role": "Protagonist",
+              "description": "The Student: a modern young professional everyperson in a plain dark blazer, earnest and a little overwhelmed, expressive open face, carrying a worn notebook, caught between ambition and doubt, warm gold key light against steel-grey shadow, cinematic chiaroscuro oil-painting style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/002b7467-7560-43af-90ba-e5b413922b87.png",
+              "sortOrder": 1,
+              "createdAt": "2026-06-11T02:15:37.887Z",
+              "updatedAt": "2026-06-11T02:15:37.887Z"
+            },
+            {
+              "id": "f0fd7002-c33e-4e60-bc90-b7b7e3e56275",
+              "movieId": "703e5fa6-a7f5-4256-b39e-ba507bed74f9",
+              "name": "The Rival",
+              "role": "Antagonist",
+              "description": "The Rival: a sharp, polished modern adversary — the toxic boss / ruthless competitor archetype — immaculate cold-grey suit, a thin confident smirk, hard backlit silhouette, crimson accent (tie or light), looming and composed, cinematic chiaroscuro oil-painting style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/7576f608-601a-42cd-afaf-bc14682b864c.png",
+              "sortOrder": 2,
+              "createdAt": "2026-06-11T02:15:37.887Z",
+              "updatedAt": "2026-06-11T02:15:37.887Z"
+            }
           ],
+          "plot": "- Extreme close-up: aged paper, the grain visible in amber light. A finger traces ink characters — not reading them, feeling the weight they carry. The camera pulls back slowly, revealing a figure at a sparse wooden desk: The Strategist. He is neither young nor old. He wears no particular century. The room exists at a full remove from time — deep shadow everywhere except the single lamp burning gold to his left, throwing the near half of his face into light and consigning the rest to dark. Behind him, indistinct shapes: shelves, a stone wall, suggestion only. On the desk: the open text, nothing else. He does not look up. He knows the camera is there the way a mountain knows the wind. He sets his finger flat against the page — and holds it there. A beat. Two. The ambient noise of a city pushes faintly through some unseen wall: a siren, the low register of traffic, the permanent hum of now. None of it penetrates this room. He speaks without raising his eyes. His voice is low, unhurried, the cadence of someone who has said this before and will say it again, because the world keeps forgetting. The Strategist says: \"Know the five factors before you enter any room\"\n\n  - Hard cut to glass and steel and blue-white light. A modern open-plan office at 11 p.m. — the kind that never fully darkens, always one bay of overhead LEDs left on, casting a clinical pallor over rows of empty desks. Maya Chen stands at her station at the far end, the one warm island in the cold: a small desk lamp bent low over her laptop, slides open on the screen, a takeout container pushed to the side. She is twenty-eight, driven in the way that looks like calm until it doesn't, rehearsing transitions under her breath. A notification pulse — small, blue — and she glances at her phone. Her expression does not collapse. It simply recalibrates. A forwarded email chain from a friendly contact inside the fund: three pages, Declan Hurst's letterhead, sent this afternoon to all three partners. The subject line: *Competitive Intelligence: Chen / Fulcrum Analytics.* She reads slowly, thumb scrolling. Her churn numbers described as \"catastrophically optimistic.\" Her TAM: \"a category error.\" Her founding team: \"unproven in any comparable domain.\" She sets the phone face-down. She looks at the lamp for a long moment. Then she picks up a legal pad. The Student says: \"They flooded the field before I even arrived\"\n\n  - Time-cut: earlier that same afternoon, golden hour light through floor-to-ceiling glass. The VC conference room, twenty-third floor, city sprawled behind it. Declan Hurst stands at the glass whiteboard — navy suit, no tie, the studied nonchalance of someone who has rehearsed looking unrehearsed. He is forty, or could be. His eyes are grey and calibrated. Three partners sit at the far end of the oval table: arms crossed, expressions professionally neutral, but leaning back — which means they are listening. Declan moves with the economy of a man who owns every room he enters until proven otherwise. He taps a column of projected numbers. The slide is immaculate — dark background, gold type, a design language that costs what a junior hire costs. He pauses at the line for retention, lets the partners find it themselves, gives them the beat of discovery. Then he advances to the next slide: a side-by-side. His company on the left, a redacted competitor on the right — but the redaction is thin. Everyone in the room knows who the column belongs to. He turns from the screen to face them, unhurried, and speaks as though delivering a verdict rather than a pitch. The Rival says: \"A promising idea — built on a foundation of wishful thinking\"\n\n  - Maya's apartment, 2 a.m. The city outside has muted itself to a low amber glow through half-drawn blinds — a grid of lit windows, some lives still awake out there. The laptop is closed. The takeout container is gone. On the kitchen table: a single legal pad, a black pen, the desk lamp from the office she must have brought home without thinking. She sits very still for a moment before she writes. Five headings, block capitals, deliberate pressure: MORAL LAW. HEAVEN. EARTH. THE COMMANDER. METHOD AND DISCIPLINE. She draws a vertical line down the center of the page. Left column: her company. Right column: his. She works down through the rows with the focused quiet of someone who has decided to stop reacting and start seeing. HEAVEN — timing, circumstance, what cannot be controlled but can be accounted for. EARTH — the terrain: this fund's investment thesis, the partners' prior bets, their known aversions. METHOD AND DISCIPLINE — where Declan's own memo, in its overreach, has given her a gift. She circles something in the right-hand column. Then she circles it again. She almost smiles. The Student says: \"I map every constant — including the ones he forgot\"\n\n  - The same conference room, the following morning. Hard light now — the east-facing glass is full of sun, the city below bright and cold. Maya stands at the whiteboard. She is composed in a way that reads differently than Declan's composed: less performance, more foundation. She doesn't open with her product deck. The first slide is a matrix — five rows labeled in bold, two columns, her company and a named competitor side by side. Not redacted. Named. One of the partners sits forward. Another glances at her colleague. Maya lets the slide breathe. She has done what Declan did not: she has assessed the field completely before entering it, and the assessment has given her something his confidence never could — specificity. She doesn't argue against his memo; she supersedes it. She addresses each of his claims not defensively but structurally, as factors already accounted for in her model. By the third row, the dynamic in the room has shifted. The partners are no longer leaning back. She turns from the screen to face them — the same move Declan made yesterday, but from an entirely different kind of ground. The Student says: \"Here is the field he didn't want you to see\"\n\n  - The corridor outside the conference room. The meeting continues behind the glass wall — warm light trapped inside, the city beyond still cold and blue. Declan stands in the corridor with his phone, thumb hovering over a pre-drafted message to his contact at the fund. Through the glass, he watches. He has been standing here for eleven minutes. He cannot read the room clearly through the reflection glare, but he does not need to: one of the partners is laughing, genuinely, the kind of laugh that comes after something lands rather than after something is sold. Maya's posture has the particular ease of someone who knows where the ground is. Declan watches the third partner — the skeptic, the one who never concedes publicly in the room — nod once, slowly, while writing something down. He pockets his phone without sending. The corridor is cool and fluorescent and perfectly quiet. He came here to watch a miscalculation fail. What he is watching instead is someone who mapped the field before she entered it — and him realizing, too late, that he had mapped only his own position, which is not the same thing at all. The Rival says: \"She mapped something I never thought to assess\"\n\n  - Cut back to the amber room. Everything exactly as we left it in Scene 1 — the wooden desk, the open book, the cold tea, the single gold lamp. The Strategist has not moved. Time passes differently here, or not at all. He looks down at the open page. The camera holds on the same composition: the warm half of his face illuminated, the other half consumed by shadow, the background indistinct and patient. There is no city noise now. There is only the lamp and the page and the silence between them. He draws a slow breath — not of effort, of preparation, the way you breathe before saying something you want the other person to carry with them when they leave. He does not look up. These words are not for the camera; they are for anyone who is about to walk into a room they have not mapped. The lamp burns steady. The ink on the page is very old. The problem it describes is not. He speaks — the same words from the cold open, the same weight behind them, because the weight does not live in the speaking. It lives in the understanding. The caption card holds on the final frame. The Strategist says: \"The art of war, then, is governed by five constant factors, to be taken into account in one's deliberations, when seeking to determine the conditions obtaining in the field.\"",
           "cast": {
-            "cast": [
-              { "name": "The Strategist", "role": "Guru",        "description": "The Strategist — timeless Sun Tzu-style mentor who frames each maxim; opens & closes every episode." },
-              { "name": "The Student",    "role": "Protagonist", "description": "The Student — modern young professional who faces a dilemma and applies the maxim." },
-              { "name": "The Rival",      "role": "Antagonist",  "description": "The Rival — recurring modern adversary (toxic boss / ruthless competitor), crimson accent." }
-            ],
-            "castImages": [],
-            "castVoices": [
-              { "characterName": "The Strategist", "voiceName": "George", "voiceId": "JBFqnCBsd6RMkjVDRZzb" },
-              { "characterName": "The Student",    "voiceName": "Will",   "voiceId": "bIHbv24MWmeRgasZH58o" },
-              { "characterName": "The Rival",      "voiceName": "Clyde",  "voiceId": "2EiwWnXFnvU5JabPnv8n" }
+            "cast": "[{\"name\":\"The Strategist\",\"role\":\"Guru\",\"description\":\"The Strategist: a timeless master-strategist mentor in the spirit of Sun Tzu, an ageless robed sage with a calm unreadable face, close-cropped grey beard, steel-grey and bronze robes, holding a single bamboo strategy slip, lit by one warm gold light against deep shadow, cinematic chiaroscuro oil-painting style.\"},{\"name\":\"The Student\",\"role\":\"Protagonist\",\"description\":\"The Student: a modern young professional everyperson in a plain dark blazer, earnest and a little overwhelmed, expressive open face, carrying a worn notebook, caught between ambition and doubt, warm gold key light against steel-grey shadow, cinematic chiaroscuro oil-painting style.\"},{\"name\":\"The Rival\",\"role\":\"Antagonist\",\"description\":\"The Rival: a sharp, polished modern adversary — the toxic boss / ruthless competitor archetype — immaculate cold-grey suit, a thin confident smirk, hard backlit silhouette, crimson accent (tie or light), looming and composed, cinematic chiaroscuro oil-painting style.\"}]",
+            "castImages": [
+              {
+                "id": "7bde1947-ea6a-4064-95bd-644e57d4feff",
+                "characterName": "The Strategist",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/b973878b-b0a3-4e62-aa79-dad783af1ade.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/b973878b-b0a3-4e62-aa79-dad783af1ade.png",
+                "createdAt": "2026-06-11T02:15:37.879Z",
+                "updatedAt": "2026-06-11T02:15:37.879Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              },
+              {
+                "id": "317934eb-77d7-4a4e-a506-ff7d624f773b",
+                "characterName": "The Student",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/002b7467-7560-43af-90ba-e5b413922b87.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/002b7467-7560-43af-90ba-e5b413922b87.png",
+                "createdAt": "2026-06-11T02:15:37.879Z",
+                "updatedAt": "2026-06-11T02:15:37.879Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              },
+              {
+                "id": "49302ec5-b0d6-4a23-99e7-9f1dc7a58aa9",
+                "characterName": "The Rival",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/7576f608-601a-42cd-afaf-bc14682b864c.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/da15b8b9-f309-4ffa-8b32-dd80f8aff78b/cast-images/7576f608-601a-42cd-afaf-bc14682b864c.png",
+                "createdAt": "2026-06-11T02:15:37.879Z",
+                "updatedAt": "2026-06-11T02:15:37.879Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              }
             ],
             "castSubtitles": [
-              { "characterName": "The Strategist", "fontFamily": "Cinzel", "color": "#C9A227" },
-              { "characterName": "The Student",    "fontFamily": "Cinzel", "color": "#6E8CA0" },
-              { "characterName": "The Rival",      "fontFamily": "Cinzel", "color": "#8B1E1E" }
+              {
+                "id": "2a658dce-803d-4f84-bb14-9d48f6a54ed2",
+                "characterName": "The Strategist",
+                "fontFamily": "Medievalsharp",
+                "color": "#C9A227",
+                "createdAt": "2026-06-11T02:15:37.873Z",
+                "updatedAt": "2026-06-11T02:15:37.873Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              },
+              {
+                "id": "0c05186c-39f8-4198-8bc6-51ebef91dc88",
+                "characterName": "The Student",
+                "fontFamily": "Medievalsharp",
+                "color": "#6E8CA0",
+                "createdAt": "2026-06-11T02:15:37.873Z",
+                "updatedAt": "2026-06-11T02:15:37.873Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              },
+              {
+                "id": "66d93a5e-34af-4ed7-a414-1c3654303522",
+                "characterName": "The Rival",
+                "fontFamily": "Medievalsharp",
+                "color": "#8B1E1E",
+                "createdAt": "2026-06-11T02:15:37.873Z",
+                "updatedAt": "2026-06-11T02:15:37.873Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              }
+            ],
+            "castVoices": [
+              {
+                "id": "5471fec7-2458-41b3-870d-535d78283f5e",
+                "characterName": "The Strategist",
+                "voiceName": "George",
+                "voiceId": "JBFqnCBsd6RMkjVDRZzb",
+                "createdAt": "2026-06-11T02:15:37.876Z",
+                "updatedAt": "2026-06-11T02:15:37.876Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              },
+              {
+                "id": "d82ed870-c0b2-4044-b2b0-d945d9664411",
+                "characterName": "The Student",
+                "voiceName": "Will",
+                "voiceId": "bIHbv24MWmeRgasZH58o",
+                "createdAt": "2026-06-11T02:15:37.876Z",
+                "updatedAt": "2026-06-11T02:15:37.876Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              },
+              {
+                "id": "009ff719-db1f-482e-831b-5eb072bf3850",
+                "characterName": "The Rival",
+                "voiceName": "Clyde",
+                "voiceId": "2EiwWnXFnvU5JabPnv8n",
+                "createdAt": "2026-06-11T02:15:37.876Z",
+                "updatedAt": "2026-06-11T02:15:37.876Z",
+                "movieCastId": "f9cda827-33ca-4c3f-9bf8-650ef0926231",
+                "generatorId": null
+              }
             ]
-          }
+          },
+          "season_episodes": "[]",
+          "screenplay": "{\"title\":\"Movie based on: - Extreme close-up: aged paper, the grain visible \",\"scenes\":[{\"id\":\"90ee243e-1adb-4853-b9a8-8d302794c606\",\"heading\":\"The Strategist's Wisdom\",\"description\":\"Extreme close-up of aged paper under amber light. The Strategist at a wooden desk in timeless room. He touches the page, deep in thought, disregarding city sounds. Camera slowly pulls back, revealing the setting.\",\"actors\":[\"The Strategist\"],\"dialogue\":\"Know the five factors before you enter any room\",\"animationPrompt\":\"Slow push-in on The Strategist, ambient golden light casting chiaroscuro shadows, mysterious and timeless atmosphere, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"97d8b494-00cb-4d29-be48-e0fab7a363ac\",\"heading\":\"Revelation in the Cold Light\",\"description\":\"Maya Chen, in the harsh office glow, absorbs a damning email, her face a mask of resolve.\",\"actors\":[\"The Student\"],\"dialogue\":\"They flooded the field before I even arrived\",\"animationPrompt\":\"A slow push-in on Maya, under clinical lighting, revealing her silent determination, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"93dd0fe3-1c98-4246-a64d-bd535240f24a\",\"heading\":\"The Strategic Presentation\",\"description\":\"In the VC conference room on the twenty-third floor during golden hour light, Declan Hurst, in a navy suit, presents immaculate slides comparing his company to a redacted competitor. Partners listen intently, arms crossed.\",\"actors\":[\"The Rival\"],\"dialogue\":\"A promising idea — built on a foundation of wishful thinking\",\"animationPrompt\":\"A cinematic slow push-in on Declan, golden hour lighting enhancing his composed demeanor, partners' subtle shifting expressions reveal growing interest, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"a14f484e-25ed-48af-ae38-a1fcce423579\",\"heading\":\"Strategic Revelation\",\"description\":\"In Maya's dimly lit apartment at 2 a.m., she sits still at the table, focused and deliberate. She organizes her thoughts methodically on the legal pad, contrasting her company with her rival's. A quiet determination fills the room as she circles a crucial detail, almost smiling with realization.\",\"actors\":[\"The Student\"],\"dialogue\":\"I map every constant — including the ones he forgot\",\"animationPrompt\":\"Slow push-in on Maya, under the warm glow of the desk lamp, methodical pen movements, a sense of discovery in the air, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"3e2b5da0-6220-4369-b5e6-21500769cd3d\",\"heading\":\"Unveiling the Strategic Revelation\",\"description\":\"Maya confidently presents a detailed matrix on the whiteboard, contrasting her company with a named competitor. Partners engage, dynamic shifts. Maya's strategic prowess shines.\",\"actors\":[\"The Student\"],\"dialogue\":\"Here is the field he didn't want you to see\",\"animationPrompt\":\"A slow push-in on Maya at the whiteboard, emphasizing her strategic acumen. Bright, hard sunlight streaming in, creating a tense but victorious atmosphere., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"ef6d2744-8740-4d41-8a02-7d2d16d0e9fe\",\"heading\":\"Silent Realization\",\"description\":\"Declan stands in the corridor, observing the meeting through the glass wall. He watches Maya's confident posture and the partner's reaction. Realization dawns as he understands his oversight.\",\"actors\":[\"The Rival\"],\"dialogue\":\"She mapped something I never thought to assess\",\"animationPrompt\":\"A slow push-in on The Rival, cool fluorescent lighting, subtle tension in the air, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"706e73bb-18ff-44c6-8774-364a4dbca59f\",\"heading\":\"Silent Wisdom\",\"description\":\"In the amber room, the Strategist remains motionless at his desk, bathed in dual light. The aged paper and the golden lamp create a timeless aura. His face half-lit, half-shrouded in shadow, exudes quiet contemplation. The room is devoid of sound, emphasizing the weight of his imminent words.\",\"actors\":[\"The Strategist\"],\"dialogue\":\"The art of war, then, is governed by five constant factors, to be taken into account in one's deliberations, when seeking to determine the conditions obtaining in the field\",\"animationPrompt\":\"Slow push-in on the Strategist, dual lighting casting contrasting shadows, stillness in the air, profound silence, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"}]}",
+          "concatMovieUrl": null,
+          "soundtrackedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/movies/soundtrack-d465094f-fc8b-4847-bdf1-bb6c99d26493.mp4",
+          "audioPath": "prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/audio/8c07a482-9623-442b-9de5-0f486f225c33.mp3",
+          "scenes": [
+            {
+              "sceneNumber": 1,
+              "title": "The Strategist's Wisdom",
+              "story": "Extreme close-up of aged paper under amber light. The Strategist at a wooden desk in timeless room. He touches the page, deep in thought, disregarding city sounds. Camera slowly pulls back, revealing the setting.",
+              "dialogue": "Know the five factors before you enter any room",
+              "leadCast": "The Strategist",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/90ee243e-1adb-4853-b9a8-8d302794c606/images/5f8d440c-fd37-4828-9620-a6e92c8bfb71.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/90ee243e-1adb-4853-b9a8-8d302794c606/movies/7b80a479-ab10-4463-b7d6-bea4df847086.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/90ee243e-1adb-4853-b9a8-8d302794c606/movies-subtitles/a175aff5-1ecc-4c86-af1c-e9f620c15beb.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/90ee243e-1adb-4853-b9a8-8d302794c606/movies-burned/d6bef6ee-9e15-4d9e-a8f4-83a7e95eb8bf.mp4"
+            },
+            {
+              "sceneNumber": 2,
+              "title": "Revelation in the Cold Light",
+              "story": "Maya Chen, in the harsh office glow, absorbs a damning email, her face a mask of resolve.",
+              "dialogue": "They flooded the field before I even arrived",
+              "leadCast": "The Student",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/97d8b494-00cb-4d29-be48-e0fab7a363ac/images/83b4a5c1-8fbd-4a8a-916b-fef433693d3a.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/97d8b494-00cb-4d29-be48-e0fab7a363ac/movies/460f80c5-68c2-4a40-a3ee-4c3c7b9bc8a0.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/97d8b494-00cb-4d29-be48-e0fab7a363ac/movies-subtitles/e9015718-6b61-41fd-8b9c-aae5450bd049.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/97d8b494-00cb-4d29-be48-e0fab7a363ac/movies-burned/a0b9a00d-b61c-47f9-be4a-fd1ccf46ee75.mp4"
+            },
+            {
+              "sceneNumber": 3,
+              "title": "The Strategic Presentation",
+              "story": "In the VC conference room on the twenty-third floor during golden hour light, Declan Hurst, in a navy suit, presents immaculate slides comparing his company to a redacted competitor. Partners listen intently, arms crossed.",
+              "dialogue": "A promising idea — built on a foundation of wishful thinking",
+              "leadCast": "The Rival",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/93dd0fe3-1c98-4246-a64d-bd535240f24a/images/64972bb4-9ad9-452a-a47c-50415c79b6d0.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/93dd0fe3-1c98-4246-a64d-bd535240f24a/movies/b80ba141-9f73-4aa6-95d3-f9d0e89aaed9.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/93dd0fe3-1c98-4246-a64d-bd535240f24a/movies-subtitles/152211ff-b153-44d8-b0b8-3a4305cf36b1.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/93dd0fe3-1c98-4246-a64d-bd535240f24a/movies-burned/cbb20524-9e88-4674-a477-96f3a381bee9.mp4"
+            },
+            {
+              "sceneNumber": 4,
+              "title": "Strategic Revelation",
+              "story": "In Maya's dimly lit apartment at 2 a.m., she sits still at the table, focused and deliberate. She organizes her thoughts methodically on the legal pad, contrasting her company with her rival's. A quiet determination fills the room as she circles a crucial detail, almost smiling with realization.",
+              "dialogue": "I map every constant — including the ones he forgot",
+              "leadCast": "The Student",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/a14f484e-25ed-48af-ae38-a1fcce423579/images/96c29608-3e88-49ee-97d5-62c91bb9b2fa.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/a14f484e-25ed-48af-ae38-a1fcce423579/movies/80074d6e-2c38-4ddc-951c-7646a96aa1c6.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/a14f484e-25ed-48af-ae38-a1fcce423579/movies-subtitles/b9f6a855-9e0c-4424-8e7b-7c36d3d31b4b.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/a14f484e-25ed-48af-ae38-a1fcce423579/movies-burned/6af6481b-4f88-4091-b7ab-5f1d0cdbf0f8.mp4"
+            },
+            {
+              "sceneNumber": 5,
+              "title": "Unveiling the Strategic Revelation",
+              "story": "Maya confidently presents a detailed matrix on the whiteboard, contrasting her company with a named competitor. Partners engage, dynamic shifts. Maya's strategic prowess shines.",
+              "dialogue": "Here is the field he didn't want you to see",
+              "leadCast": "The Student",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/3e2b5da0-6220-4369-b5e6-21500769cd3d/images/655b9796-7b24-4695-a368-9096f8986187.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/3e2b5da0-6220-4369-b5e6-21500769cd3d/movies/5842729f-ab47-4dfd-b44b-0f80a5fad866.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/3e2b5da0-6220-4369-b5e6-21500769cd3d/movies-subtitles/d21411fd-bb1a-42d8-ae65-22f516437c49.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/3e2b5da0-6220-4369-b5e6-21500769cd3d/movies-burned/3a003c2c-221a-4ed2-9eec-afd5e445d0b8.mp4"
+            },
+            {
+              "sceneNumber": 6,
+              "title": "Silent Realization",
+              "story": "Declan stands in the corridor, observing the meeting through the glass wall. He watches Maya's confident posture and the partner's reaction. Realization dawns as he understands his oversight.",
+              "dialogue": "She mapped something I never thought to assess",
+              "leadCast": "The Rival",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/ef6d2744-8740-4d41-8a02-7d2d16d0e9fe/images/b99a395b-b6f7-4f60-a7d7-71c859a68ddd.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/ef6d2744-8740-4d41-8a02-7d2d16d0e9fe/movies/e4e6f4eb-881e-4a2a-8f8f-ae05c0feed36.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/ef6d2744-8740-4d41-8a02-7d2d16d0e9fe/movies-subtitles/bfa12127-a8ce-4b09-97dc-a03183659532.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/ef6d2744-8740-4d41-8a02-7d2d16d0e9fe/movies-burned/084cf7fb-b054-441a-98de-37e0df02ac5e.mp4"
+            },
+            {
+              "sceneNumber": 7,
+              "title": "Silent Wisdom",
+              "story": "In the amber room, the Strategist remains motionless at his desk, bathed in dual light. The aged paper and the golden lamp create a timeless aura. His face half-lit, half-shrouded in shadow, exudes quiet contemplation. The room is devoid of sound, emphasizing the weight of his imminent words.",
+              "dialogue": "The art of war, then, is governed by five constant factors, to be taken into account in one's deliberations, when seeking to determine the conditions obtaining in the field",
+              "leadCast": "The Strategist",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/706e73bb-18ff-44c6-8774-364a4dbca59f/images/99e2e58b-39c6-4e9c-beb3-e7b89e3d1f9e.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/706e73bb-18ff-44c6-8774-364a4dbca59f/movies/c20ed31b-adfa-4776-aba9-deb0ce74d179.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/706e73bb-18ff-44c6-8774-364a4dbca59f/movies-subtitles/6089a0f2-cd8a-45a6-9898-3685d6f16718.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/17875332-6967-4111-bd22-2b8e344ddcd8/dfbb9305-6e98-457f-87ee-ab0a5226d8e1/scenes/706e73bb-18ff-44c6-8774-364a4dbca59f/movies-burned/be28ffd1-28c7-42d9-ad11-f70610f70fc6.mp4"
+            },
+            {
+              "sceneNumber": 8,
+              "title": "Made with YakYak",
+              "story": null,
+              "dialogue": null,
+              "leadCast": null,
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "movieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4"
+            }
+          ]
         }
       ]
     }

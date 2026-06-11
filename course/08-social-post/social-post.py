@@ -19,7 +19,7 @@ for line in open(os.path.join(ROOT, ".env")):
         env[k.strip()] = v.strip()
 BASE, TOKEN, USER = env["YAKYAK_API_BASE"], env["YAKYAK_TOKEN"], env["YAKYAK_USER_ID"]
 TUT_CAMPAIGN, TUT_MOVIE = env["YAKYAK_TUTORIAL_CAMPAIGN_ID"], env["YAKYAK_TUTORIAL_MOVIE_ID"]
-WEB_BASE = BASE.replace("//api.", "//")  # api.beta.yakyak.ai -> beta.yakyak.ai
+WEB_BASE = BASE.replace("//api.", "//")  # api.yakyak.ai -> yakyak.ai
 client = ApiClient(Configuration(host=BASE, access_token=TOKEN))
 wf, sc = WorkflowApi(client), SocialApi(client)
 

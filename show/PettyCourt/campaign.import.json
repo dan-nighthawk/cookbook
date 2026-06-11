@@ -1,67 +1,409 @@
 {
-  "_comment": "Petty Court (Reddit/AITA Drama Reenactments) campaign import for YakYak — structure mirrors a real /workflow/export-campaign export. Config + 6-member cast roster ONLY (Judge Justine Payne the anchor + 5 recurring litigant archetypes: Marlene the Monster-in-Law, Trevor the Freeloader, Bridezilla Bree, Dex the Petty Ex, Reasonable Ray); no rendered images/videos/audio (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }. Then copy the returned campaign id into marketing/PettyCourt/show.env CAMPAIGN_ID. The style resolves by label ('Cartoon 3D'); no style.id is set because style uuids are per-environment. The bold daytime-TV courtroom-sitcom art direction is in movies[0].style — that text is appended to every image prompt. Per-character accent colors are in cast.castSubtitles (subtitle font 'Bangers' for the whole cast — comic-book title energy that reads as a tabloid lower-third). Like Market Mayhem and unlike the single-narrator computed shows, each character gets a DISTINCT voice so the comedy lands (withering judge vs passive-aggressive MIL vs whiny bride vs smug ex vs sincere everyman). animationType is 'kenburns' on purpose: Ken Burns reaction shots + comedic zoom punches ARE the docs/alternative_setups.md #9 target (no Kling needed for this show). The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones this roster into each generated episode.",
-  "message": "Hand-authored Petty Court cast/config template (no rendered assets)",
-  "exportedAt": "2026-06-09 00:00:00",
+  "message": "Exported from user show@yakyak.ai at 2026-06-11 04:39:57",
+  "exportedAt": "2026-06-11 04:39:57",
   "campaigns": [
     {
+      "id": "e98010e1-6fc0-4c1c-b0a0-770fc60e3339",
       "name": "Petty Court — Reddit/AITA Drama Reenactments",
       "prompt": "A daily small-claims-TV sitcom: a real Reddit drama thread, paraphrased and dramatized, presided over by Judge Justine Payne with a recurring roster of litigant archetypes. Eight scenes, ending on the verdict.",
       "status": "active",
       "aspectRatio": "9:16",
-      "animationType": "kenburns",
+      "animationType": "kling",
       "imageQuality": "fast",
       "mode": "pro",
       "subtitleMode": "overlay",
       "allowNewCharacters": false,
       "skipSoundtrack": false,
+      "createdAt": "2026-06-11T02:15:23.838Z",
+      "updatedAt": "2026-06-11T02:15:23.838Z",
       "style": {
+        "id": "11d0cee0-c689-4ab5-b167-d0c225afeed1",
         "label": "Cartoon 3D",
         "description": "Colorful and bouncy 3D characters with exaggerated features, smooth surfaces, and playful animations. Family-friendly style with vibrant color palettes."
       },
       "movies": [
         {
-          "title": "Petty Court",
-          "plot": "Recurring cast template for the daily Petty Court drama show. Holds Judge Justine Payne (anchor, opens every episode + delivers the verdict) plus the five recurring litigant archetypes; each episode clones this roster and casts the day's two real-story parties onto whichever archetypes fit.",
-          "styleShort": "Cartoon 3D",
+          "id": "806d2886-d606-4e12-841d-2d4402d2b33f",
+          "title": "Casserole Catastrophe",
+          "status": "completed",
           "style": "Bouncy 3D cartoon sitcom staged in an over-the-top daytime-TV small-claims courtroom; a single exaggerated character front and center, big expressive rubbery faces, glossy smooth surfaces, bold saturated colors and high-contrast comic lighting, warm TV-studio key light, a glossy faux-wood judge's bench with a brass gavel and a 'PETTY COURT' nameplate, cheesy lower-third chyrons and a fake-courtroom backdrop, comedic zoom punches on reaction shots. Family-friendly, punchy, screenshot-ready.",
+          "styleShort": "Cartoon 3D",
           "season": null,
           "episode": null,
-          "scenes": [],
+          "createdAt": "2026-06-11T02:15:23.844Z",
           "customCast": [
-            { "name": "Judge Justine Payne",        "role": "Guru",        "sortOrder": 0, "description": "Judge Justine Payne: a sharp-tongued daytime-TV small-claims judge, flowing black judicial robe with a bold statement necklace, reading glasses perched low on her nose, one eyebrow permanently raised, a brass gavel caught mid-bang, seated high behind a glossy faux-wood bench with a 'PETTY COURT' nameplate, warm studio key light, exaggerated bouncy 3D cartoon style." },
-            { "name": "Marlene the Monster-in-Law", "role": "Antagonist", "sortOrder": 1, "description": "Marlene the Monster-in-Law: an immaculately groomed overbearing mother-in-law, stiff helmet of silver hair, twin-set and pearls, a pinched passive-aggressive smile, clutching a casserole dish like a weapon, a smug 'I was only trying to help' sparkle in her eye, exaggerated rubbery features, bouncy 3D cartoon style." },
-            { "name": "Trevor the Freeloader",      "role": "Antagonist", "sortOrder": 2, "description": "Trevor the Freeloader: a perpetually-lounging twenty-something couch-surfer, rumpled hoodie and pajama pants, epic bedhead, holding a game controller and somebody else's energy drink, an unbothered shrug, a faint cloud of laziness around him, exaggerated cartoon proportions, bouncy 3D cartoon style." },
-            { "name": "Bridezilla Bree",            "role": "Antagonist", "sortOrder": 3, "description": "Bridezilla Bree: a wild-eyed bride mid-meltdown, enormous poofy white gown, tiara knocked askew, one mascara streak of pure fury, clutching a seating chart in one hand and a phone in the other, screaming-but-make-it-glam energy, hot-pink accents, exaggerated rubbery features, bouncy 3D cartoon style." },
-            { "name": "Dex the Petty Ex",           "role": "Antagonist", "sortOrder": 4, "description": "Dex the Petty Ex: a smug, scheming ex-partner, slicked-back hair and a too-tight blazer, phone raised mid-screenshot, a self-satisfied smirk, holding a cardboard box of someone's returned belongings (suspiciously dented), cold turquoise rim light, exaggerated cartoon features, bouncy 3D cartoon style." },
-            { "name": "Reasonable Ray",             "role": "Protagonist", "sortOrder": 5, "description": "Reasonable Ray: a level-headed everyman, plain plaid shirt, a tired-but-sincere expression, palms open in honest 'I just asked them to do the dishes' bewilderment, visibly the only normal person in the room, warm trustworthy blue tones, exaggerated bouncy 3D cartoon style." }
+            {
+              "id": "2db53d56-7bc8-4bef-8170-d90ca42d4853",
+              "movieId": "806d2886-d606-4e12-841d-2d4402d2b33f",
+              "name": "Judge Justine Payne",
+              "role": "Guru",
+              "description": "Judge Justine Payne: a sharp-tongued daytime-TV small-claims judge, flowing black judicial robe with a bold statement necklace, reading glasses perched low on her nose, one eyebrow permanently raised, a brass gavel caught mid-bang, seated high behind a glossy faux-wood bench with a 'PETTY COURT' nameplate, warm studio key light, exaggerated bouncy 3D cartoon style.",
+              "imageUrl": null,
+              "sortOrder": 0,
+              "createdAt": "2026-06-11T02:15:23.882Z",
+              "updatedAt": "2026-06-11T02:15:23.882Z"
+            },
+            {
+              "id": "623e7d38-d311-4327-9926-8da49f631f58",
+              "movieId": "806d2886-d606-4e12-841d-2d4402d2b33f",
+              "name": "Marlene the Monster-in-Law",
+              "role": "Antagonist",
+              "description": "Marlene the Monster-in-Law: an immaculately groomed overbearing mother-in-law, stiff helmet of silver hair, twin-set and pearls, a pinched passive-aggressive smile, clutching a casserole dish like a weapon, a smug 'I was only trying to help' sparkle in her eye, exaggerated rubbery features, bouncy 3D cartoon style.",
+              "imageUrl": null,
+              "sortOrder": 1,
+              "createdAt": "2026-06-11T02:15:23.882Z",
+              "updatedAt": "2026-06-11T02:15:23.882Z"
+            },
+            {
+              "id": "d253835e-50e4-4eeb-9a6b-da02d67bf7a3",
+              "movieId": "806d2886-d606-4e12-841d-2d4402d2b33f",
+              "name": "Trevor the Freeloader",
+              "role": "Antagonist",
+              "description": "Trevor the Freeloader: a perpetually-lounging twenty-something couch-surfer, rumpled hoodie and pajama pants, epic bedhead, holding a game controller and somebody else's energy drink, an unbothered shrug, a faint cloud of laziness around him, exaggerated cartoon proportions, bouncy 3D cartoon style.",
+              "imageUrl": null,
+              "sortOrder": 2,
+              "createdAt": "2026-06-11T02:15:23.882Z",
+              "updatedAt": "2026-06-11T02:15:23.882Z"
+            },
+            {
+              "id": "804779ed-6f35-462e-8293-f055ea918f23",
+              "movieId": "806d2886-d606-4e12-841d-2d4402d2b33f",
+              "name": "Bridezilla Bree",
+              "role": "Antagonist",
+              "description": "Bridezilla Bree: a wild-eyed bride mid-meltdown, enormous poofy white gown, tiara knocked askew, one mascara streak of pure fury, clutching a seating chart in one hand and a phone in the other, screaming-but-make-it-glam energy, hot-pink accents, exaggerated rubbery features, bouncy 3D cartoon style.",
+              "imageUrl": null,
+              "sortOrder": 3,
+              "createdAt": "2026-06-11T02:15:23.882Z",
+              "updatedAt": "2026-06-11T02:15:23.882Z"
+            },
+            {
+              "id": "b2f14dcf-1806-4bd5-9476-12c142339704",
+              "movieId": "806d2886-d606-4e12-841d-2d4402d2b33f",
+              "name": "Dex the Petty Ex",
+              "role": "Antagonist",
+              "description": "Dex the Petty Ex: a smug, scheming ex-partner, slicked-back hair and a too-tight blazer, phone raised mid-screenshot, a self-satisfied smirk, holding a cardboard box of someone's returned belongings (suspiciously dented), cold turquoise rim light, exaggerated cartoon features, bouncy 3D cartoon style.",
+              "imageUrl": null,
+              "sortOrder": 4,
+              "createdAt": "2026-06-11T02:15:23.882Z",
+              "updatedAt": "2026-06-11T02:15:23.882Z"
+            },
+            {
+              "id": "2cf52cb9-ac6e-42f6-b68a-2db3da58e422",
+              "movieId": "806d2886-d606-4e12-841d-2d4402d2b33f",
+              "name": "Reasonable Ray",
+              "role": "Protagonist",
+              "description": "Reasonable Ray: a level-headed everyman, plain plaid shirt, a tired-but-sincere expression, palms open in honest 'I just asked them to do the dishes' bewilderment, visibly the only normal person in the room, warm trustworthy blue tones, exaggerated bouncy 3D cartoon style.",
+              "imageUrl": null,
+              "sortOrder": 5,
+              "createdAt": "2026-06-11T02:15:23.882Z",
+              "updatedAt": "2026-06-11T02:15:23.882Z"
+            }
           ],
+          "plot": "- The camera opens on the Petty Court set in full daytime-TV glory: a faux-mahogany bench lacquered to a blinding sheen, a banner reading \"JUSTICE IS SERVED (Portion Size May Vary)\" drooping slightly on the left, and a bailiff who has clearly given up on life but not on his polyester uniform. The studio audience is already fanning itself with the day's docket printouts. Judge Justine Payne sweeps in from stage left wearing robes that are somehow both authoritative and vaguely threatening, like a thundercloud that passed the bar exam. She drops her gavel — a comically oversized mallet with a Hello Kitty sticker on the handle — onto the bench with a crack that makes the front row flinch. The camera pushes in on her face: reading glasses perched at the exact angle of maximum contempt, lips pressed into a line thin enough to cut glass. She glances at her docket, then at the two parties already seated at their respective tables — one man in a rumpled polo radiating exhausted righteousness, and another in a track jacket radiating the specific energy of someone who has not paid rent in nine months and considers this normal. The Judge's eyebrow ascends. The audience senses blood in the water. --- Judge Justine Payne says: \"Today's case: one deadbolt, one displaced freeloader — let's proceed!\"\n\n  - Reasonable Ray takes the witness stand with the posture of a man who has rehearsed this moment in the shower approximately forty times. He is ordinary in the best possible way — button-down shirt, sensible shoes, the kind of guy whose idea of chaos is parking in the wrong zone. But his eyes carry the thousand-yard stare of someone who has been explaining the concept of \"private property\" to houseguests for seven consecutive months. He smooths a stack of handwritten notes that are, on closer inspection, just a single index card that reads \"MY HOUSE, MY RULES\" in capital letters. He explains, methodically and without raising his voice, that his brother-in-law moved in after a divorce-related housing collapse and then, two months later, imported his two adult daughters like bonus roommates nobody ordered. The daughters — young women of eighteen who have apparently never encountered the social technology known as knocking — began using his teenage daughter's bedroom as an open-access storage unit and personal boutique. Ray's jaw tightens as he catalogs the losses. The camera cuts to an animated chyron at the bottom of the screen: \"Items reported missing: 14 hair ties, 1 charger, half a bookshelf of novels, an entire vibe.\" The audience murmurs sympathetically. --- Reasonable Ray says: \"She couldn't keep a tube of ChapStick safe in her own room!\"\n\n  - Trevor the Freeloader approaches the bench with the loping confidence of a man who has never once been told no in a way that truly landed. He is wearing a track jacket with the zipper half-down, which somehow communicates his entire worldview. He spreads his hands in a gesture meant to project warmth and instead projects the energy of a guy who once ate the last of someone else's leftovers and left the empty container back in the fridge. His defense is that family does not have doors, metaphorically speaking, and that the lock his brother-in-law installed on his niece's bedroom is a cold, architectural act of aggression against the beautiful communal spirit that should, in Trevor's vision, pervade this household that he is residing in for free. He says the word \"family\" six times in forty-five seconds. The camera cuts to a reaction shot of Judge Justine Payne, who has begun very slowly clicking her pen in a rhythm that seems designed to communicate a medical diagnosis. The audience's murmur shifts register — from sympathetic to the low, anticipatory rumble of people who came here to watch someone get their comeuppance and sense it is nearly at hand. --- Trevor the Freeloader says: \"We're family — private property is just a wall nobody needs!\"\n\n  - Reasonable Ray returns to the stand with a grocery bag. This is not a metaphor. It is an actual brown paper bag, stapled shut, labeled in Sharpie: \"EVIDENCE.\" He opens it with the gravity of a man presenting the Rosetta Stone. Out comes a ziplock bag of hair ties — fourteen, as he noted, now recovered — followed by a phone charger with a suspicious crimp, two novels with the spines visibly cracked in the wrong direction, and a sticky note that reads, in different handwriting, \"borrowed :)\" with an actual smiley face. The audience inhales as one. The camera zooms slowly on the smiley face. It is cheerful. It is monstrous. Ray explains that his daughter, a sixteen-year-old who only wanted her own space in a house that had become increasingly crowded, had started keeping her belongings in a backpack she wore to breakfast. He says this without melodrama. The understatement lands harder than any outburst could. The camera catches Trevor's face mid-reaction — the faintest flicker of a man who understands, on some level, that the smiley note was perhaps not the legal masterstroke his daughters believed it to be. He recovers and crosses his arms. --- Reasonable Ray says: \"Your Honor, I present Exhibit A: fourteen missing hair ties!\"\n\n  - Trevor is back at the microphone and he has pivoted to philosophy. He argues, with a straight face and the conviction of someone who has spent nine months constructing an internal legal system where he is always the winner, that there is no meaningful moral difference between borrowing and taking, particularly within a family unit, and that the lock — the lock — is a symbol of emotional estrangement rather than, say, a device that prevents people from walking through a door. He gestures broadly. He uses the phrase \"toxic energy\" in a non-ironic context. The camera cuts to a reaction shot of Reasonable Ray, who has placed both palms flat on his table and is staring at a point about eight inches in front of his face with the focused expression of a man employing every calming technique he knows. The bailiff, to his credit, does not move, but the camera catches his eye twitch. Trevor wraps his monologue by suggesting that if everyone in the household simply adopted more openness and generosity of spirit, this whole situation could be resolved — while remaining, conspicuously, silent on the question of when he plans to leave. The studio audience has begun the slow, rhythmic clap of a crowd that wants the next act to begin. --- Trevor the Freeloader says: \"They were borrowing — indefinitely, without asking — that's just sharing!\"\n\n  - Reasonable Ray leans into the microphone and delivers the scene with the tone of a man narrating a victory that should never have needed to be a victory. He recounts the precise Saturday afternoon when, after discovering his daughter had begun putting a chair under her doorknob and cataloging her belongings in a spreadsheet, he went to the hardware store, bought a doorknob lock set, and installed it himself with a YouTube tutorial and twenty minutes of labor. His voice is calm. His hands are steady. He says he told the household that the lock stays until the guests move out and that he will not negotiate this, not because he is unreasonable, but because he has now spent months being extremely reasonable and it has not worked. The camera pushes in slowly on his face as he says this last part. There is no anger in it — only the serene clarity of a person who has done the math. Behind him, the grocery bag of evidence sits on the plaintiff's table, the smiley-face sticky note visible through the plastic. The audience is quiet for a beat. Then a single person in the third row starts clapping and is immediately joined by everyone else. --- Reasonable Ray says: \"So I installed the lock — the door closes now, your Honor!\"\n\n  - Trevor is standing. Nobody told him to stand. He is simply standing, one hand on the table, one pointing at the general direction of justice, delivering what can only be described as his closing argument to the universe. His voice cracks on \"soul.\" The camera catches it from three angles simultaneously — main shot, a low-angle that makes him look simultaneously villainous and pathetic, and a tight close-up on his face that reveals, in high definition, the absolute sincerity with which he believes himself to be the aggrieved party in this situation. He is not performing outrage. He genuinely feels it. This is, somehow, the funniest thing the show has ever broadcast. The audience erupts. Judge Justine Payne's gavel comes down once — not in warning, but with the precise, surgical authority of a woman who has heard enough and is ready to pronounce. Trevor, mid-gesture, freezes. His pointing finger slowly lowers. He sits. The camera holds on the remnants of his dignity, which are, at this point, scattered across the studio floor like confetti. The bailiff straightens his collar. In the gallery, someone is eating popcorn. The Judge's reading glasses come off. This is the signal. The verdict is coming. --- Trevor the Freeloader says: \"A lock on that door is a personal attack on my soul!\"\n\n  - Judge Justine Payne sets her reading glasses on the bench with the deliberate care of a person placing a full stop at the end of an argument. She takes one long look at Trevor, one look at Reasonable Ray, and one look directly into the camera — that signature Petty Court gaze that has launched a thousand screenshot-worthy GIFs. The courtroom holds its breath. She begins with the observation that in her many years on the bench she has presided over disputes involving parking cones, soup recipes, and a man who sued his neighbor over wind chimes, but that this case represents something special: a man who has lived rent-free in another family's home for the better part of a year, imported additional houseguests without negotiation, allowed those guests to systematically help themselves to a teenager's bedroom, and then had the absolute audacity to characterize a deadbolt as an act of hostility. She lets that sit. She rules: Not the Asshole — the lock stays, the door is closed, and if the defendant feels targeted by basic architectural privacy, she suggests he may wish to reconsider the nature of the situation he is currently in. The gavel drops. The Hello Kitty sticker catches the studio light. The audience loses their minds. Fade to the Petty Court outro sting. Judge Justine Payne says: \"The lock stays, and frankly so should your self-awareness!\"",
           "cast": {
-            "cast": [
-              { "name": "Judge Justine Payne",        "role": "Guru",        "description": "Judge Justine Payne — sharp-tongued small-claims judge, opens court & delivers the verdict every episode." },
-              { "name": "Marlene the Monster-in-Law", "role": "Antagonist", "description": "Marlene the Monster-in-Law — immaculate, passive-aggressive overbearing in-law; casserole as a weapon." },
-              { "name": "Trevor the Freeloader",      "role": "Antagonist", "description": "Trevor the Freeloader — couch-surfing slacker, eats your food, pays no rent, victim in his own mind." },
-              { "name": "Bridezilla Bree",            "role": "Antagonist", "description": "Bridezilla Bree — wild-eyed bride mid-meltdown, the whole day is all about her." },
-              { "name": "Dex the Petty Ex",           "role": "Antagonist", "description": "Dex the Petty Ex — smug and scheming, screenshots everything, returns your stuff damaged." },
-              { "name": "Reasonable Ray",             "role": "Protagonist", "description": "Reasonable Ray — level-headed everyman, usually Not the Asshole, the audience surrogate." }
-            ],
-            "castImages": [],
-            "castVoices": [
-              { "characterName": "Judge Justine Payne",        "voiceName": "Sarah",   "voiceId": "EXAVITQu4vr4xnSDxMaL" },
-              { "characterName": "Marlene the Monster-in-Law", "voiceName": "Dorothy", "voiceId": "ThT5KcBeYPX3keUQqHPh" },
-              { "characterName": "Trevor the Freeloader",      "voiceName": "Sam",     "voiceId": "yoZ06aMxZJJ28mfd3POQ" },
-              { "characterName": "Bridezilla Bree",            "voiceName": "Gigi",    "voiceId": "jBpfuIE2acCO8z3wKNLl" },
-              { "characterName": "Dex the Petty Ex",           "voiceName": "Antoni",  "voiceId": "ErXwobaYiN019PkySvjV" },
-              { "characterName": "Reasonable Ray",             "voiceName": "Brian",   "voiceId": "nPczCjzI2devNBz1zQrb" }
+            "cast": "[{\"name\":\"Judge Justine Payne\",\"role\":\"Guru\",\"description\":\"Judge Justine Payne — sharp-tongued small-claims judge, opens court & delivers the verdict every episode.\"},{\"name\":\"Marlene the Monster-in-Law\",\"role\":\"Antagonist\",\"description\":\"Marlene the Monster-in-Law — immaculate, passive-aggressive overbearing in-law; casserole as a weapon.\"},{\"name\":\"Trevor the Freeloader\",\"role\":\"Antagonist\",\"description\":\"Trevor the Freeloader — couch-surfing slacker, eats your food, pays no rent, victim in his own mind.\"},{\"name\":\"Bridezilla Bree\",\"role\":\"Antagonist\",\"description\":\"Bridezilla Bree — wild-eyed bride mid-meltdown, the whole day is all about her.\"},{\"name\":\"Dex the Petty Ex\",\"role\":\"Antagonist\",\"description\":\"Dex the Petty Ex — smug and scheming, screenshots everything, returns your stuff damaged.\"},{\"name\":\"Reasonable Ray\",\"role\":\"Protagonist\",\"description\":\"Reasonable Ray — level-headed everyman, usually Not the Asshole, the audience surrogate.\"}]",
+            "castImages": [
+              {
+                "id": "5c27a650-6f35-4a20-81f8-597234153a86",
+                "characterName": "Judge Justine Payne",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/21b5f3b1-0c79-46a2-9570-037bc28be200.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/21b5f3b1-0c79-46a2-9570-037bc28be200.png",
+                "createdAt": "2026-06-11T02:15:23.871Z",
+                "updatedAt": "2026-06-11T02:15:23.871Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "8560f2f7-7391-4c33-a71a-b083d10b456e",
+                "characterName": "Marlene the Monster-in-Law",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/b37193fa-8209-4920-b628-c7b02d5af81a.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/b37193fa-8209-4920-b628-c7b02d5af81a.png",
+                "createdAt": "2026-06-11T02:15:23.871Z",
+                "updatedAt": "2026-06-11T02:15:23.871Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "dc5030eb-a9fd-4427-bd93-d694d468f2d2",
+                "characterName": "Trevor the Freeloader",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/54effece-97ee-4b44-98e3-9e186d0e599e.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/54effece-97ee-4b44-98e3-9e186d0e599e.png",
+                "createdAt": "2026-06-11T02:15:23.871Z",
+                "updatedAt": "2026-06-11T02:15:23.871Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "59be9b84-0c62-454b-a7a3-5cd039eccb2a",
+                "characterName": "Bridezilla Bree",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/90870575-2d08-4e5d-a34d-4832982d3c02.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/90870575-2d08-4e5d-a34d-4832982d3c02.png",
+                "createdAt": "2026-06-11T02:15:23.871Z",
+                "updatedAt": "2026-06-11T02:15:23.871Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "68d9df74-b284-4ed3-afdd-0b025e3f9052",
+                "characterName": "Dex the Petty Ex",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/87033b17-380f-4129-862a-c089896e7987.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/87033b17-380f-4129-862a-c089896e7987.png",
+                "createdAt": "2026-06-11T02:15:23.871Z",
+                "updatedAt": "2026-06-11T02:15:23.871Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "1df55df7-772f-4aa8-a716-773595256d4c",
+                "characterName": "Reasonable Ray",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/c608403c-31b1-41ed-8ae1-a85380247563.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/ef1985eb-6816-4dc0-a757-0ed48674706b/cast-images/c608403c-31b1-41ed-8ae1-a85380247563.png",
+                "createdAt": "2026-06-11T02:15:23.871Z",
+                "updatedAt": "2026-06-11T02:15:23.871Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              }
             ],
             "castSubtitles": [
-              { "characterName": "Judge Justine Payne",        "fontFamily": "Bangers", "color": "#FFD700" },
-              { "characterName": "Marlene the Monster-in-Law", "fontFamily": "Bangers", "color": "#8E44AD" },
-              { "characterName": "Trevor the Freeloader",      "fontFamily": "Bangers", "color": "#2ECC40" },
-              { "characterName": "Bridezilla Bree",            "fontFamily": "Bangers", "color": "#FF1493" },
-              { "characterName": "Dex the Petty Ex",           "fontFamily": "Bangers", "color": "#00CED1" },
-              { "characterName": "Reasonable Ray",             "fontFamily": "Bangers", "color": "#1E90FF" }
+              {
+                "id": "26b69dc8-a57d-452f-8e7b-f0fe452786b5",
+                "characterName": "Judge Justine Payne",
+                "fontFamily": "Bangers",
+                "color": "#FFD700",
+                "createdAt": "2026-06-11T02:15:23.863Z",
+                "updatedAt": "2026-06-11T02:15:23.863Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "45c3e807-8b9d-46c4-939a-74f9e6c4b4df",
+                "characterName": "Marlene the Monster-in-Law",
+                "fontFamily": "Bangers",
+                "color": "#8E44AD",
+                "createdAt": "2026-06-11T02:15:23.863Z",
+                "updatedAt": "2026-06-11T02:15:23.863Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "3850eb61-5d52-4f59-9976-d4a5c0052511",
+                "characterName": "Trevor the Freeloader",
+                "fontFamily": "Bangers",
+                "color": "#2ECC40",
+                "createdAt": "2026-06-11T02:15:23.863Z",
+                "updatedAt": "2026-06-11T02:15:23.863Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "a20f607d-68ec-42a3-b0a4-c5b797ff4a08",
+                "characterName": "Bridezilla Bree",
+                "fontFamily": "Bangers",
+                "color": "#FF1493",
+                "createdAt": "2026-06-11T02:15:23.863Z",
+                "updatedAt": "2026-06-11T02:15:23.863Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "f2ceb62c-9ce1-4ce4-aee2-5e73b99317d9",
+                "characterName": "Dex the Petty Ex",
+                "fontFamily": "Bangers",
+                "color": "#00CED1",
+                "createdAt": "2026-06-11T02:15:23.863Z",
+                "updatedAt": "2026-06-11T02:15:23.863Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "5460ebfe-75ad-4f16-90c8-f20ba376e1b3",
+                "characterName": "Reasonable Ray",
+                "fontFamily": "Bangers",
+                "color": "#1E90FF",
+                "createdAt": "2026-06-11T02:15:23.863Z",
+                "updatedAt": "2026-06-11T02:15:23.863Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              }
+            ],
+            "castVoices": [
+              {
+                "id": "d3775368-317e-40fc-94f8-c0cdf1f1f6fd",
+                "characterName": "Judge Justine Payne",
+                "voiceName": "Sarah",
+                "voiceId": "EXAVITQu4vr4xnSDxMaL",
+                "createdAt": "2026-06-11T02:15:23.867Z",
+                "updatedAt": "2026-06-11T02:15:23.867Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "f4af9d18-746d-411e-beab-a56cfc6849e7",
+                "characterName": "Marlene the Monster-in-Law",
+                "voiceName": "Dorothy",
+                "voiceId": "ThT5KcBeYPX3keUQqHPh",
+                "createdAt": "2026-06-11T02:15:23.867Z",
+                "updatedAt": "2026-06-11T02:15:23.867Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "5241963d-5ea6-4a9a-8842-cb648802886b",
+                "characterName": "Trevor the Freeloader",
+                "voiceName": "Sam",
+                "voiceId": "yoZ06aMxZJJ28mfd3POQ",
+                "createdAt": "2026-06-11T02:15:23.867Z",
+                "updatedAt": "2026-06-11T02:15:23.867Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "8e589701-6224-4629-b8a6-7cd3467c56aa",
+                "characterName": "Bridezilla Bree",
+                "voiceName": "Gigi",
+                "voiceId": "jBpfuIE2acCO8z3wKNLl",
+                "createdAt": "2026-06-11T02:15:23.867Z",
+                "updatedAt": "2026-06-11T02:15:23.867Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "44377d5f-9711-4257-8199-e2aa07fef6e4",
+                "characterName": "Dex the Petty Ex",
+                "voiceName": "Antoni",
+                "voiceId": "ErXwobaYiN019PkySvjV",
+                "createdAt": "2026-06-11T02:15:23.867Z",
+                "updatedAt": "2026-06-11T02:15:23.867Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              },
+              {
+                "id": "f27c16c3-791a-4db5-983b-40c07ce43504",
+                "characterName": "Reasonable Ray",
+                "voiceName": "Brian",
+                "voiceId": "nPczCjzI2devNBz1zQrb",
+                "createdAt": "2026-06-11T02:15:23.867Z",
+                "updatedAt": "2026-06-11T02:15:23.867Z",
+                "movieCastId": "bcf6e226-98c9-49cc-b7cb-18bb99305e72",
+                "generatorId": null
+              }
             ]
-          }
+          },
+          "season_episodes": "[]",
+          "screenplay": "{\"title\":\"Movie based on: - The camera opens on the Petty Court set in full \",\"scenes\":[{\"id\":\"4e193e92-143d-4530-88a6-54d0b267a0eb\",\"heading\":\"Opening Courtroom Drama\",\"description\":\"The camera pans over the Petty Court set in all its daytime-TV glory: a gleaming faux-mahogany bench, a banner reading 'JUSTICE IS SERVED,' a disheveled bailiff, and a stern Judge Justine Payne. Audience rustles dockets. Exhausted Ray and nonchalant Trevor await. The tension is palpable.\",\"actors\":[\"Judge Justine Payne\"],\"dialogue\":\"Today's case: one deadbolt, one displaced freeloader — let's proceed!\",\"animationPrompt\":\"Slow push-in on Judge Justine Payne's authoritative face, intense studio lighting, audience fanning dockets, palpable tension, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"a929e7fd-6ef5-4b75-a08c-da1ffdee5d9b\",\"heading\":\"Reasonable Ray's Testimony\",\"description\":\"Reasonable Ray stands at the witness stand, composed in a button-down shirt. He presents a single index card labeled 'MY HOUSE, MY RULES.' Ray recounts the invasion of his space by his brother-in-law and daughters, detailing missing items. The audience reacts with sympathy.\",\"actors\":[\"Reasonable Ray\"],\"dialogue\":\"She couldn't keep a tube of ChapStick safe in her own room!\",\"animationPrompt\":\"A slow push-in on Reasonable Ray, warm studio lighting, audience murmurs, sympathetic atmosphere, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"45b082a6-c548-4d16-ac5b-d1451cf5eac6\",\"heading\":\"Family Dispute\",\"description\":\"Trevor confidently strides to the bench in a half-zipped track jacket, exuding entitlement. He gestures expansively, arguing against the bedroom lock as an affront to family unity. Judge Justine Payne clicks her pen methodically, anticipating the showdown.\",\"actors\":[\"Trevor the Freeloader\",\"Judge Justine Payne\"],\"dialogue\":\"We're family — private property is just a wall nobody needs!\",\"animationPrompt\":\"A slow push-in on Trevor, highlighting his misplaced confidence. Judge's pen-clicking adds tension., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"f6e1cfe6-d786-45ad-adf4-db776dc30c6e\",\"heading\":\"The Smile That Broke the Case\",\"description\":\"Reasonable Ray returns to the stand with a stapled brown paper bag labeled 'EVIDENCE.' He reveals recovered items: 14 hair ties, a crimped phone charger, novels with cracked spines, and a sticky note that reads 'borrowed :)' with a cheerful yet monstrous smiley face. The audience gasps collectively. Ray calmly explains his daughter's plight without drama, causing Trevor to briefly falter before composing himself.\",\"actors\":[\"Reasonable Ray\"],\"dialogue\":\"Your Honor, I present Exhibit A: fourteen missing hair ties!\",\"animationPrompt\":\"A slow push-in on Reasonable Ray, warm studio lighting, subtle tension in the air, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"d9529e78-a7b9-4138-96dd-50a68f46e8a5\",\"heading\":\"Philosophical Standoff\",\"description\":\"Trevor passionately argues about the blurred lines between borrowing and taking, seeing the lock as a symbol of estrangement. Ray maintains calm composure, while the bailiff's eye twitches in response. The audience's rhythmic clap builds anticipation.\",\"actors\":[\"Trevor the Freeloader\",\"Reasonable Ray\"],\"dialogue\":\"They were borrowing — indefinitely, without asking — that's just sharing!\",\"animationPrompt\":\"A slow push-in towards Trevor, contrasting lighting between warm and cool tones, subtle tension in the air as the audience claps rhythmically., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"c8eff774-d735-4075-9b2e-d317e3a9364e\",\"heading\":\"A Victory Narrated\",\"description\":\"Reasonable Ray leans into the microphone with calm determination, recounting the day he installed the lock. His hands steady, face serene, as he explains the non-negotiable decision. The evidence bag with the smiley-face sticky note sits in view. The audience is hushed, then erupts in applause.\",\"actors\":[\"Reasonable Ray\"],\"dialogue\":\"So I installed the lock — the door closes now, your Honor!\",\"animationPrompt\":\"SLOW PUSH-IN, warm studio key light, focused on Ray's composed expression, subtle background applause growing, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"ae6b642c-c6db-4f60-8e57-b6c4acea27eb\",\"heading\":\"The Verdict\",\"description\":\"Trevor stands, pointing passionately, voice cracking on 'soul.' Camera captures his sincerity, audience erupts. Judge's gavel falls decisively. Trevor freezes, then sits, dignity scattered. Bailiff adjusts, someone eats popcorn, Judge readies verdict.\",\"actors\":[\"Trevor the Freeloader\",\"Judge Justine Payne\"],\"dialogue\":\"A lock on that door is a personal attack on my soul!\",\"animationPrompt\":\"A slow push-in on Trevor from three angles, capturing his passion. Dramatic studio lighting, intense focus on facial expressions, mixed villainous and pathetic angles, audience reactions intensify., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"78652811-5785-4e2f-80d4-752ed3ca412b\",\"heading\":\"The Verdict\",\"description\":\"Judge Justine Payne delivers her final ruling with piercing gaze and authority. She emphasizes the audacity of the defendant's actions and declares the lock must stay, silencing the courtroom. The audience erupts in disbelief and approval.\",\"actors\":[\"Judge Justine Payne\"],\"dialogue\":\"The lock stays, and frankly so should your self-awareness!\",\"animationPrompt\":\"A cinematic slow push-in on Judge Justine Payne, dramatic spotlight on her face, tense silence in the courtroom, audience reaction building to a frenzy, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"}]}",
+          "concatMovieUrl": null,
+          "soundtrackedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/movies/soundtrack-7d7409bd-f003-40e6-aaf0-ce82807ce7de.mp4",
+          "audioPath": "prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/audio/a5005808-8982-431e-94c7-223aa512b24a.mp3",
+          "scenes": [
+            {
+              "sceneNumber": 1,
+              "title": "Opening Courtroom Drama",
+              "story": "The camera pans over the Petty Court set in all its daytime-TV glory: a gleaming faux-mahogany bench, a banner reading 'JUSTICE IS SERVED,' a disheveled bailiff, and a stern Judge Justine Payne. Audience rustles dockets. Exhausted Ray and nonchalant Trevor await. The tension is palpable.",
+              "dialogue": "Today's case: one deadbolt, one displaced freeloader — let's proceed!",
+              "leadCast": "Judge Justine Payne",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/4e193e92-143d-4530-88a6-54d0b267a0eb/images/60493e70-e825-4bd7-a629-5c9457f4fb3b.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/4e193e92-143d-4530-88a6-54d0b267a0eb/movies/2ab2bdde-8032-43aa-924f-774cd276bb4e.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/4e193e92-143d-4530-88a6-54d0b267a0eb/movies-subtitles/e7333f9c-bcd2-41e5-8e71-bb78eb30d061.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/4e193e92-143d-4530-88a6-54d0b267a0eb/movies-burned/077f809e-54af-46a2-b305-cdd2fd59ea61.mp4"
+            },
+            {
+              "sceneNumber": 2,
+              "title": "Reasonable Ray's Testimony",
+              "story": "Reasonable Ray stands at the witness stand, composed in a button-down shirt. He presents a single index card labeled 'MY HOUSE, MY RULES.' Ray recounts the invasion of his space by his brother-in-law and daughters, detailing missing items. The audience reacts with sympathy.",
+              "dialogue": "She couldn't keep a tube of ChapStick safe in her own room!",
+              "leadCast": "Reasonable Ray",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/a929e7fd-6ef5-4b75-a08c-da1ffdee5d9b/images/de0b8966-2e48-4d55-b807-d72deb46bcf6.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/a929e7fd-6ef5-4b75-a08c-da1ffdee5d9b/movies/57ebaa06-e07d-493f-9fc4-7a9d33982087.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/a929e7fd-6ef5-4b75-a08c-da1ffdee5d9b/movies-subtitles/d2db8b15-3b75-4232-aabf-cf29aedd7119.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/a929e7fd-6ef5-4b75-a08c-da1ffdee5d9b/movies-burned/8762f74a-e738-473c-99f7-abbaf23ecd3f.mp4"
+            },
+            {
+              "sceneNumber": 3,
+              "title": "Family Dispute",
+              "story": "Trevor confidently strides to the bench in a half-zipped track jacket, exuding entitlement. He gestures expansively, arguing against the bedroom lock as an affront to family unity. Judge Justine Payne clicks her pen methodically, anticipating the showdown.",
+              "dialogue": "We're family — private property is just a wall nobody needs!",
+              "leadCast": "Trevor the Freeloader",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/45b082a6-c548-4d16-ac5b-d1451cf5eac6/images/391a161f-d922-4b2e-bc5e-8f998c369c8c.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/45b082a6-c548-4d16-ac5b-d1451cf5eac6/movies/88e80236-5810-460c-a91a-755b10763f2e.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/45b082a6-c548-4d16-ac5b-d1451cf5eac6/movies-subtitles/80c04080-120e-49aa-93b9-2449c1e8a875.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/45b082a6-c548-4d16-ac5b-d1451cf5eac6/movies-burned/3f5df9f8-250c-4845-9124-bd9aa376233a.mp4"
+            },
+            {
+              "sceneNumber": 4,
+              "title": "The Smile That Broke the Case",
+              "story": "Reasonable Ray returns to the stand with a stapled brown paper bag labeled 'EVIDENCE.' He reveals recovered items: 14 hair ties, a crimped phone charger, novels with cracked spines, and a sticky note that reads 'borrowed :)' with a cheerful yet monstrous smiley face. The audience gasps collectively. Ray calmly explains his daughter's plight without drama, causing Trevor to briefly falter before composing himself.",
+              "dialogue": "Your Honor, I present Exhibit A: fourteen missing hair ties!",
+              "leadCast": "Reasonable Ray",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/f6e1cfe6-d786-45ad-adf4-db776dc30c6e/images/8b8ef7cb-a810-49c6-aab3-e7919fbaf2de.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/f6e1cfe6-d786-45ad-adf4-db776dc30c6e/movies/33626bc2-377a-4236-8aae-30f4bbda7c47.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/f6e1cfe6-d786-45ad-adf4-db776dc30c6e/movies-subtitles/afa93806-2ece-401c-824e-7b1972c5cde9.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/f6e1cfe6-d786-45ad-adf4-db776dc30c6e/movies-burned/30a38fca-532f-4bf6-bbf7-09f04720c58b.mp4"
+            },
+            {
+              "sceneNumber": 5,
+              "title": "Philosophical Standoff",
+              "story": "Trevor passionately argues about the blurred lines between borrowing and taking, seeing the lock as a symbol of estrangement. Ray maintains calm composure, while the bailiff's eye twitches in response. The audience's rhythmic clap builds anticipation.",
+              "dialogue": "They were borrowing — indefinitely, without asking — that's just sharing!",
+              "leadCast": "Trevor the Freeloader",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/d9529e78-a7b9-4138-96dd-50a68f46e8a5/images/276749a2-381f-43b4-8bf5-7228a7a3b159.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/d9529e78-a7b9-4138-96dd-50a68f46e8a5/movies/11c7f29a-e683-49a7-91b8-a81c5f7e1e7a.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/d9529e78-a7b9-4138-96dd-50a68f46e8a5/movies-subtitles/4331f854-28e9-48de-aa05-0f4c4cf68869.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/d9529e78-a7b9-4138-96dd-50a68f46e8a5/movies-burned/67ebe3a2-7dd8-4b9d-a2f2-abe3706403a1.mp4"
+            },
+            {
+              "sceneNumber": 6,
+              "title": "A Victory Narrated",
+              "story": "Reasonable Ray leans into the microphone with calm determination, recounting the day he installed the lock. His hands steady, face serene, as he explains the non-negotiable decision. The evidence bag with the smiley-face sticky note sits in view. The audience is hushed, then erupts in applause.",
+              "dialogue": "So I installed the lock — the door closes now, your Honor!",
+              "leadCast": "Reasonable Ray",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/c8eff774-d735-4075-9b2e-d317e3a9364e/images/32daf190-cffc-4a1b-ba61-b8b2bd9215c4.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/c8eff774-d735-4075-9b2e-d317e3a9364e/movies/3469307e-5b7b-4eba-812f-2e2677fb0a40.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/c8eff774-d735-4075-9b2e-d317e3a9364e/movies-subtitles/d959cb12-5c2f-467b-a142-370d718bbd72.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/c8eff774-d735-4075-9b2e-d317e3a9364e/movies-burned/707c63cc-636c-4e13-8724-3456423b0acc.mp4"
+            },
+            {
+              "sceneNumber": 7,
+              "title": "The Verdict",
+              "story": "Trevor stands, pointing passionately, voice cracking on 'soul.' Camera captures his sincerity, audience erupts. Judge's gavel falls decisively. Trevor freezes, then sits, dignity scattered. Bailiff adjusts, someone eats popcorn, Judge readies verdict.",
+              "dialogue": "A lock on that door is a personal attack on my soul!",
+              "leadCast": "Trevor the Freeloader",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/ae6b642c-c6db-4f60-8e57-b6c4acea27eb/images/1172f8df-0fcf-4f6d-baae-3e89b8272825.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/ae6b642c-c6db-4f60-8e57-b6c4acea27eb/movies/8f57fa3e-2aba-4134-b1ac-6eac6689b801.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/ae6b642c-c6db-4f60-8e57-b6c4acea27eb/movies-subtitles/d366d064-e7ef-4b95-a22b-2a00159577d0.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/ae6b642c-c6db-4f60-8e57-b6c4acea27eb/movies-burned/2995130f-b546-495a-bca0-2e1c68b39280.mp4"
+            },
+            {
+              "sceneNumber": 8,
+              "title": "The Verdict",
+              "story": "Judge Justine Payne delivers her final ruling with piercing gaze and authority. She emphasizes the audacity of the defendant's actions and declares the lock must stay, silencing the courtroom. The audience erupts in disbelief and approval.",
+              "dialogue": "The lock stays, and frankly so should your self-awareness!",
+              "leadCast": "Judge Justine Payne",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/78652811-5785-4e2f-80d4-752ed3ca412b/images/3db9d166-3437-4f7e-9576-dc5af80627c0.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/78652811-5785-4e2f-80d4-752ed3ca412b/movies/0ce6cc0a-48f8-4a70-8a60-95f2ef3c0a1a.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/78652811-5785-4e2f-80d4-752ed3ca412b/movies-subtitles/dccc9b27-a972-4fbc-8404-927b2f1ee13c.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/4952f10c-16f8-4bb6-a5a1-d636047a7ec4/f70c39ea-f6e5-4c5d-9612-50508ed941aa/scenes/78652811-5785-4e2f-80d4-752ed3ca412b/movies-burned/678620e6-a551-49b9-80f8-c94c2c558848.mp4"
+            },
+            {
+              "sceneNumber": 9,
+              "title": "Made with YakYak",
+              "story": null,
+              "dialogue": null,
+              "leadCast": null,
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "movieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4"
+            }
+          ]
         }
       ]
     }

@@ -45,7 +45,7 @@ From `course/`, create your `.env` first:
 ```bash
 cp .env.example .env
 # edit .env: set YAKYAK_EMAIL. Leave YAKYAK_PASSWORD blank to auto-generate one
-# (or set your own). YAKYAK_API_BASE defaults to beta.
+# (or set your own). YAKYAK_API_BASE defaults to https://api.yakyak.ai.
 ```
 
 Then pick a language:
@@ -73,7 +73,7 @@ curl -s -X DELETE "$YAKYAK_API_BASE/access-tokens/<id>" -H "Authorization: Beare
 - **Scopes**: `video_creation` (campaigns/episodes), `social_publishing` (posting),
   `account_management`. The course requests all three.
 - **Base URL is overridable** — `.env`'s `YAKYAK_API_BASE` and the SDK's
-  `baseUrl`/`host` point at beta; swap to `https://api.yakyak.ai` for production.
+  `baseUrl`/`host` default to `https://api.yakyak.ai`; override them to point elsewhere.
 - The PAT is shown **once** at creation — that's why we save it to `.env` immediately.
 - JS/Python need `yakyak-sdk` ≥ 0.0.7 (see the course [README](../README.md#2-prerequisite-sdk--007)).
 

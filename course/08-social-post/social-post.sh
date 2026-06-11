@@ -9,7 +9,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"; set -a; . "$ROOT/.env"; set +a
 : "${YAKYAK_API_BASE:?}"; : "${YAKYAK_TOKEN:?run Lesson 1 first}"; : "${YAKYAK_USER_ID:?}"
 : "${YAKYAK_TUTORIAL_CAMPAIGN_ID:?}"; : "${YAKYAK_TUTORIAL_MOVIE_ID:?}"
 AUTH="Authorization: Bearer $YAKYAK_TOKEN"
-WEB_BASE=$(printf '%s' "$YAKYAK_API_BASE" | sed 's#//api\.#//#')   # api.beta.yakyak.ai -> beta.yakyak.ai
+WEB_BASE=$(printf '%s' "$YAKYAK_API_BASE" | sed 's#//api\.#//#')   # api.yakyak.ai -> yakyak.ai
 api() { curl -s -X "$1" "$YAKYAK_API_BASE$2" -H "$AUTH" -H "Content-Type: application/json" ${3:+-d "$3"}; }
 
 # ---- Fork a movie and render it, so there's a finished video of yours to post ----

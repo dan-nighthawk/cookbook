@@ -1,47 +1,192 @@
 {
-  "_comment": "On This Day (Historical Reenactment) campaign import for YakYak — structure mirrors a real /workflow/export-campaign export. This is docs/alternative_setups.md #7, a 'Computed (date) + Extracted (public-domain history)' show. Config + a SINGLE recurring host in the cast roster (The Chronicler, a time-traveling narrator who opens and closes every episode); no rendered assets (those generate per episode). Import: POST /workflow/import-campaign with body { userId, importData: <this file> }, or just run marketing/showrunner/setup_show.sh which does it and writes CAMPAIGN_ID into show.env. The style resolves by label ('Photorealism'); no style.id is set because style uuids are per-environment. The sepia-archival-turning-to-color documentary art direction lives in movies[0].style (appended to every image prompt). CRITICAL DIFFERENCE from the other showrunner shows: allowNewCharacters is TRUE — the daily historical figures (Nero, Lincoln, the barons at Runnymede, …) are different every episode and are introduced per-episode from the scene briefs by gen-movie-screenplay; only The Chronicler is a fixed recurring character, providing brand continuity (the doc's 'anchor + rotating guests' lifecycle). The story comes from a baked public-domain corpus (corpus/on_this_day.md) keyed by today's calendar date by compute.js, then dramatized via `claude -p` (REQUIRES_MODEL=true). aspectRatio is '16:9' because history performs on YouTube (the doc calls for 16:9 + 9:16; 16:9 is the primary cut). animationType is 'kenburns' on purpose — period imagery drifting under Ken Burns nails the documentary feel; Kling AI is the doc's #7 target for the dramatic centerpiece once it's reliable. The single movie is a season=null/episode=null TEMPLATE: copyCastFromSource clones The Chronicler into each generated episode.",
-  "message": "Hand-authored On This Day cast/config template (no rendered assets)",
-  "exportedAt": "2026-06-09 00:00:00",
+  "message": "Exported from user show@yakyak.ai at 2026-06-11 04:39:56",
+  "exportedAt": "2026-06-11 04:39:56",
   "campaigns": [
     {
+      "id": "209b2a8e-0ddd-4658-aa5d-e8ff8b0f09a6",
       "name": "On This Day — History, Reenacted",
       "prompt": "A daily history show: each episode takes one real anniversary tied to today's calendar date and stages it as a dramatized reenactment — The Chronicler, a time-traveling narrator, frames the event; the historical figures of that day live it out. Seven scenes, ending on the 'On this day…' takeaway as a caption card. Different historical cast every day, unified by the recurring host.",
       "status": "active",
       "aspectRatio": "16:9",
-      "animationType": "kenburns",
+      "animationType": "kling",
       "imageQuality": "fast",
       "mode": "pro",
       "subtitleMode": "overlay",
-      "allowNewCharacters": true,
+      "allowNewCharacters": false,
       "skipSoundtrack": false,
+      "createdAt": "2026-06-11T02:15:32.531Z",
+      "updatedAt": "2026-06-11T02:15:32.531Z",
       "style": {
+        "id": "dab50180-a55b-4555-ac81-ee8161600c08",
         "label": "Photorealism",
-        "description": "Photorealistic historical-documentary look — period-accurate, cinematic, archival texture resolving into rich color."
+        "description": "Ultra-realistic rendering with detailed textures, natural lighting, and lifelike materials. Ideal for product visualization, architectural walkthroughs, and documentary-style content."
       },
       "movies": [
         {
-          "title": "On This Day",
-          "plot": "Recurring host template for the daily On This Day history show. Holds only The Chronicler (the time-traveling narrator who opens + closes every episode); the day's historical figures are introduced per episode from the scene briefs (allowNewCharacters). Each episode clones this template.",
-          "styleShort": "Photorealism",
+          "id": "23c81717-0121-4c92-8130-3e77833b18b5",
+          "title": "The Awakening",
+          "status": "completed",
           "style": "Cinematic historical-documentary photorealism; period-accurate costume, architecture and props for the era depicted; the look of aged archival photography — warm sepia tone, fine film grain, dust and soft vignette — resolving into rich, saturated cinematic color on the dramatic beats; dramatic naturalistic lighting, shallow depth of field, a single human figure or moment held in a film-still composition, museum-grade gravitas.",
+          "styleShort": "Photorealism",
           "season": null,
           "episode": null,
-          "scenes": [],
+          "createdAt": "2026-06-11T02:15:32.536Z",
           "customCast": [
-            { "name": "The Chronicler", "role": "Narrator", "sortOrder": 0, "description": "The Chronicler: the recurring host of On This Day — a calm, erudite time-traveling narrator, an ageless figure in a long dark travel-worn coat over period-neutral clothing, a brass pocket-watch and a worn leather chronicle in hand, kind knowing eyes, faint sepia light and drifting archival dust around them as if standing between eras, photorealistic cinematic-documentary style." }
+            {
+              "id": "8e666f38-327b-45b2-8c43-456189a15237",
+              "movieId": "23c81717-0121-4c92-8130-3e77833b18b5",
+              "name": "The Chronicler",
+              "role": "Narrator",
+              "description": "The Chronicler: the recurring host of On This Day — a calm, erudite time-traveling narrator, an ageless figure in a long dark travel-worn coat over period-neutral clothing, a brass pocket-watch and a worn leather chronicle in hand, kind knowing eyes, faint sepia light and drifting archival dust around them as if standing between eras, photorealistic cinematic-documentary style.",
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/cba4cab7-0c2a-4bdd-9f29-f818cee48787/cast-images/51f8ec09-4d2c-4e8f-90f6-bdae5244cf3b.png",
+              "sortOrder": 0,
+              "createdAt": "2026-06-11T02:15:32.564Z",
+              "updatedAt": "2026-06-11T02:15:32.564Z"
+            }
           ],
+          "plot": "- The image opens in near-total darkness — a sepia grain photograph of the Appian Way, the road's ancient stones ghostly pale under a thin June moon. A single figure stands at the edge of the frame: the Chronicler, collar turned against the night air, watching the distant smear of torchlight that is Rome. The city breathes, unaware. Grain and dust drift across the frame like old celluloid. Slowly — as the Chronicler begins to speak — color bleeds in at the edges. The sky above Rome resolves from ash to deep violet. Aqueducts stretch into the middle distance; cypress trees stand rigid as sentinels along the road. The date appears in worn gold serif type across the lower frame: ROME — 9 JUNE, AD 68. The Chronicler does not look at us. He looks toward the city as though watching something that cannot be stopped. He knows what this night costs. A line of emperors stretching back to Augustus himself — conqueror, poet, architect, tyrant — has arrived at its final night. One man, alone and hunted, has been abandoned by every institution that held him up: the Senate, the Praetorian Guard, the court that drank his wine this morning. By dawn, the Julio-Claudian age will be over. --- The Chronicler says: \"Rome tonight does not know it is about to change forever\"\n\n  - The Castra Praetoria, the Praetorian barracks northeast of Rome — night. The image is sepia: ranked soldiers in firelit half-darkness, lorica segmentata catching the lamplight in pale bands. Color enters first in the faces. The sharp, weathered expression of Nymphidius Sabinus, joint Praetorian Prefect, takes on warmth and resolution. This is a man who has performed his calculation and arrived at his answer. Word has come from the provinces. Galba, governor of Hispania Tarraconensis, has marched on Rome and declared himself emperor. Nymphidius has already sent his message of allegiance — carrying the Guard's loyalty as a gift to the advancing general, in exchange for promises of reward. All that remains is the announcement. He mounts a low stone platform before his assembled cohort. The men are the finest soldiers in the empire, sworn protectors of the throne. Thrones, Nymphidius knows, can change masters. He speaks and watches the ripple move through the ranks: uncertainty, exchange of glances, and then — most men — a slow nod. They follow power. Power has shifted. A low sound, almost like relief, moves through the barracks. Nero, alone in his palace on the Palatine, hears nothing. No one has thought to tell him yet. --- Nymphidius says: \"Galba is emperor now — the Guard stands with him\"\n\n  - A dirt road north of Rome, before dawn — the Via Nomentana, bleached reeds and low scrubland threading into darkness. Sepia: the road pale as bone, shadows heavy on either side. Color enters around a single lamp: the dusty brown of traveling cloaks, the bruised blue of a sky not yet fully light, and the pale, panicked face of an emperor in disguise. Phaon, Nero's freedman, rides slightly ahead. He is a man of the imperial household — freed slave, trusted secretary — and tonight he has offered the only shelter available: his modest suburban villa, four miles outside the city wall, a place no one would expect to find an emperor. He knows the Senate has voted Nero a public enemy. He knows riders are already out. Something older than strategy has put him on this road. He reins in beside a low gate half-hidden by overgrowth and dismounts. Nero behind him is barely recognizable — cloak pulled low, sandals cut for a palace floor, feet bleeding from the road. He is thirty years old. His eyes search the treeline for shapes that may or may not be soldiers. Phaon says nothing. He simply holds the gate open. The color deepens faintly in the east: dawn assembling itself, and no road back. --- Phaon says: \"My lord, the villa is yours — no one will find you\"\n\n  - The small interior of Phaon's villa — earthen floor, rough stone walls, a single oil lamp guttering in a draft. The image is in full, saturated color here: the warm amber of lamplight on pale stone, the glint of a blade. Nero crouches near the far wall. Around him, three or four freedmen stand helpless. From beyond the villa's walls comes the distant sound of hoofbeats — riders sent by the Senate to take him alive. Hold on his face. This is not wholly the figure of senatorial pamphlets. He is a man who wept before signing death warrants and signed them anyway; who performed on stage before thousands because he genuinely believed in his own art; who loved Greece and left Rome once to be applauded in its theaters. He is also the man who murdered his mother Agrippina and his wife Octavia. He is, entirely, what the Julio-Claudian dynasty became. The blade trembles in his grip. He raises it to his throat — and cannot complete the act alone. A freedman, Epaphroditus, moves quietly to his side and places a steadying hand over his. The lamp shudders. Outside, the hoofbeats grow louder. Nero draws one long, ragged breath and speaks — his voice thin, his conviction, for this one last moment, absolute. --- Nero says: \"What an artist the world is losing in me!\"\n\n  - The same room, moments later. Silence, except for the first birds of a June morning beyond the shuttered window — small, indifferent sounds of a world continuing. The lamp is lower. Epaphroditus kneels on the earthen floor. He is a freedman who rose through the imperial household to become Nero's personal secretary — a man who has served, feared, and in some irresolvable way remained loyal to the man now motionless beside him. Sepia bleeds back in slowly around the edges of the frame, color retreating to the center as though history is already beginning to absorb the moment into archive. A thin beam of early light finds the far wall. From outside, voices — a centurion arriving too late, sent by the Senate to bring Nero back for judgment. A horse pulls up at the gate. Boots on gravel. Epaphroditus rises. His hands are steady. He will be executed years later by the Emperor Domitian for this very act — for assisting the emperor's death rather than permitting capture. But that is another day in another reign. For now he straightens, draws his own cloak over the body, and turns to face the door. A single witness. The last servant of the last Julio-Claudian emperor standing in a borrowed room at the end of a dynasty. --- Epaphroditus says: \"It is done, Caesar — may the gods receive you\"\n\n  - A road into Rome, weeks later — but the image intercuts: sepia photographs of Galba's iron-hard, seventy-year-old face; a color panorama of the city from the Palatine Hill, smoke still threading up from quarters unsettled by Nero's final days. Galba rides at the head of his column. He is the first of what will become four emperors in a single year — a fact no one in this scene yet knows. Around him Rome is already fracturing. In the Rhine camps, Vitellius weighs his chances. Otho, who backed Galba's rise, grows quietly impatient. The Senate that voted Nero a public enemy now swears loyalty to the new man with the same mechanical unanimity it has extended to every emperor before him. The Praetorian Guard that abandoned one emperor for a reward awaits the delivery of that reward. These are not foundations; they are fault lines. Galba does not look triumphant. He looks tired — the tiredness of an old soldier who has crossed a threshold he cannot uncross. The camera pulls high and wide as he enters the city gates: Rome immense below, marble and tenement and temple and squalor, a million people going about an uncertain day. The dynasty of Augustus is gone. Power, it turns out, belongs to whoever the legions say it belongs to. The next man who proves that lesson will not be Galba. --- Galba says: \"Rome has endured the tyrant long enough — now she breathes\"\n\n  - We are back on the Appian Way — but now it is full dawn, and the world is in color. The Chronicler stands facing the camera for the first time, the road behind him stretching into the Roman morning. The grain is gone. The sepia is gone. The light is warm and clear and merciless, falling on stones that will still be here two thousand years from now. He speaks directly to us, as he does at the end of every episode. Behind him, Rome catches the early sun. From here it could be any century. The Chronicler's expression carries the weight it always carries at this moment: not satisfaction, not mourning exactly, but the gravity of a day whose consequences are still being counted. What Nero's death ended was not merely a man — however complicated, however destructive, however gifted in his own estimation. What ended was the idea that an emperor's legitimacy derived from blood, from the chain back to Augustus, from inheritance as a governing principle. The Julio-Claudians had held that idea together for a century, through genius and madness and murder. On a dirt floor outside Rome, on this morning, it came apart. What replaced it was simpler and more brutal: the emperor is whoever the armies choose to make emperor. Rome would spend the next year learning exactly what that meant — and the centuries after that trying to forget. The Chronicler says: \"On this day in 0068, the last Julio-Claudian fell\"",
           "cast": {
-            "cast": [
-              { "name": "The Chronicler", "role": "Narrator", "description": "The Chronicler — time-traveling narrator who frames each anniversary; opens & closes every episode. The one fixed recurring character; the day's historical figures change every episode." }
-            ],
-            "castImages": [],
-            "castVoices": [
-              { "characterName": "The Chronicler", "voiceName": "George", "voiceId": "JBFqnCBsd6RMkjVDRZzb" }
+            "cast": "[{\"name\":\"The Chronicler\",\"role\":\"Narrator\",\"description\":\"The Chronicler: the recurring host of On This Day — a calm, erudite time-traveling narrator, an ageless figure in a long dark travel-worn coat over period-neutral clothing, a brass pocket-watch and a worn leather chronicle in hand, kind knowing eyes, faint sepia light and drifting archival dust around them as if standing between eras, photorealistic cinematic-documentary style.\"}]",
+            "castImages": [
+              {
+                "id": "54e130bd-41b4-4729-bbe9-9f5a48550079",
+                "characterName": "The Chronicler",
+                "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/cba4cab7-0c2a-4bdd-9f29-f818cee48787/cast-images/51f8ec09-4d2c-4e8f-90f6-bdae5244cf3b.png",
+                "cdnImageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/cba4cab7-0c2a-4bdd-9f29-f818cee48787/cast-images/51f8ec09-4d2c-4e8f-90f6-bdae5244cf3b.png",
+                "createdAt": "2026-06-11T02:15:32.555Z",
+                "updatedAt": "2026-06-11T02:15:32.555Z",
+                "movieCastId": "430fea64-cfe5-4651-a165-fc01bf6527b9",
+                "generatorId": null
+              }
             ],
             "castSubtitles": [
-              { "characterName": "The Chronicler", "fontFamily": "Cinzel", "color": "#D4A857" }
+              {
+                "id": "6efe2dd6-3077-455e-973e-1ba21efbc611",
+                "characterName": "The Chronicler",
+                "fontFamily": "Bokor",
+                "color": "#D4A857",
+                "createdAt": "2026-06-11T02:15:32.550Z",
+                "updatedAt": "2026-06-11T02:15:32.550Z",
+                "movieCastId": "430fea64-cfe5-4651-a165-fc01bf6527b9",
+                "generatorId": null
+              }
+            ],
+            "castVoices": [
+              {
+                "id": "46c7f219-8672-4200-98fb-f988a3409817",
+                "characterName": "The Chronicler",
+                "voiceName": "Joseph",
+                "voiceId": "Zlb1dXrM653N07WRdFW3",
+                "createdAt": "2026-06-11T02:15:32.552Z",
+                "updatedAt": "2026-06-11T02:15:32.552Z",
+                "movieCastId": "430fea64-cfe5-4651-a165-fc01bf6527b9",
+                "generatorId": null
+              }
             ]
-          }
+          },
+          "season_episodes": "[]",
+          "screenplay": "{\"title\":\"Movie based on: - The image opens in near-total darkness — a sepia\",\"scenes\":[{\"id\":\"b39e84a7-dbc5-4a19-8e82-036396ed790c\",\"heading\":\"The Beginning of the End\",\"description\":\"The Chronicler stands at the edge of darkness, watching Rome awaken in sepia tones. Color seeps in, revealing ancient stones, aqueducts, and cypress trees. The date appears as the city teeters on the brink of change.\",\"actors\":[\"The Chronicler\"],\"dialogue\":\"Rome tonight does not know it is about to change forever\",\"animationPrompt\":\"A slow push-in on the Chronicler, transitioning from sepia to color, capturing the city's awakening. Soft lighting reveals details, a sense of anticipation in the air., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"1ea3fdd6-c0f0-4148-949c-7a186a5a1859\",\"heading\":\"Power Shift\",\"description\":\"The scene unfolds at the Castra Praetoria, sepia-toned darkness punctuated by firelit half-darkness. Lorica segmentata catches the lamplight as color enters the faces of ranked soldiers. Nymphidius Sabinus, Praetorian Prefect, mounts a stone platform, announcing allegiance to Galba. Soldiers nod in agreement, signaling a shift in power. A low sound of relief fills the barracks as Nero remains unaware in his palace.\",\"actors\":[\"The Chronicler\"],\"dialogue\":\"Galba is emperor now — the Guard stands with him\",\"animationPrompt\":\"A slow push-in towards Nymphidius, warm torchlight casting shadows, soldiers nodding in agreement, tense anticipation in the air, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"7d0c268d-ec11-47fd-8b02-460bd91b1ad3\",\"heading\":\"Dawn's Arrival\",\"description\":\"A dirt road north of Rome before dawn. Sepia tones give way to color: dusty brown cloaks, bruised blue sky. Phaon leads Nero towards a hidden villa. Panic and resolve mix in Nero's eyes.\",\"actors\":[\"The Chronicler\"],\"dialogue\":\"My lord, the villa is yours — no one will find you\",\"animationPrompt\":\"Slow push-in on Nero's face, shifting from sepia to color. Tense anticipation in the air., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"3de277cb-7d01-40b5-b99e-9885d08d8b36\",\"heading\":\"Nero's Final Stand\",\"description\":\"The small interior of Phaon's villa is bathed in warm amber lamplight, casting shadows on the rough stone walls. Nero crouches, blade trembling at his throat. Freedmen watch helplessly as hoofbeats approach. Nero's conflicted expression speaks volumes of his inner turmoil and the weight of his actions.\",\"actors\":[\"The Chronicler\"],\"dialogue\":\"What an artist the world is losing in me!\",\"animationPrompt\":\"A slow push-in on Nero, intense warm lighting, trembling blade, growing tension., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"07cea008-fbbf-4369-8b86-014004a61d59\",\"heading\":\"The Final Witness\",\"description\":\"The room is dim, with sepia tones seeping in as history captures the moment. Epaphroditus kneels beside the motionless Nero. A thin beam of morning light cuts through. Outside, the sound of approaching centurions echoes as a horse pulls up at the gate. Epaphroditus rises, drawing his cloak over Nero's body, silently preparing to face the inevitable.\",\"actors\":[\"The Chronicler\"],\"dialogue\":\"It is done, Caesar — may the gods receive you\",\"animationPrompt\":\"A slow push-in on Epaphroditus, sepia tones blending in, early light streaming in, tense anticipation in the air, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"ffe8ee3f-d552-4707-856d-b234fc457c0f\",\"heading\":\"The Fractured Rome\",\"description\":\"Galba leads his column into Rome, surrounded by sepia photos of his face. The city shows signs of unrest after Nero's days. Galba appears weary, not triumphant, as he enters the city gates amidst chaos and uncertainty.\",\"actors\":[\"The Chronicler\"],\"dialogue\":\"Rome has endured the tyrant long enough — now she breathes\",\"animationPrompt\":\"A slow push-in on Galba amidst a chaotic cityscape, featuring sepia photos of his face. Tired lighting, bustling atmosphere, and a sense of impending change., shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"},{\"id\":\"ed7292af-b8f3-4a5b-80eb-428a973847eb\",\"heading\":\"Epilogue: The Dawn of a New Era\",\"description\":\"The Chronicler stands on the Appian Way at full dawn, in vibrant color. The road stretches into the Roman morning, with warm, clear light falling on ancient stones. Behind him, Rome awakens under the early sun. The gravity of the day's consequences weighs on his expression.\",\"actors\":[\"The Chronicler\"],\"dialogue\":\"On this day in 0068, the last Julio-Claudian fell\",\"animationPrompt\":\"A slow push-in on the Chronicler, warm dawn light illuminating the scene, conveying the weight of transitioning eras, shot on ARRI Alexa 35, 50mm anamorphic lens, shallow depth of field, film grain, HDR, natural lighting\"}]}",
+          "concatMovieUrl": null,
+          "soundtrackedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/movies/soundtrack-972c2dc8-3e49-412f-8475-c8bb5056fea4.mp4",
+          "audioPath": "prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/audio/6644b3eb-4a79-4294-b89a-08b2aacccb46.mp3",
+          "scenes": [
+            {
+              "sceneNumber": 1,
+              "title": "The Beginning of the End",
+              "story": "The Chronicler stands at the edge of darkness, watching Rome awaken in sepia tones. Color seeps in, revealing ancient stones, aqueducts, and cypress trees. The date appears as the city teeters on the brink of change.",
+              "dialogue": "Rome tonight does not know it is about to change forever",
+              "leadCast": "The Chronicler",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/b39e84a7-dbc5-4a19-8e82-036396ed790c/images/66e5ed91-d9df-4dda-a06e-26c8356c04db.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/b39e84a7-dbc5-4a19-8e82-036396ed790c/movies/c7f18839-9854-4597-a873-1e5750e20bb0.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/b39e84a7-dbc5-4a19-8e82-036396ed790c/movies-subtitles/abf02843-f61f-4bf7-a521-ab3e1880938c.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/b39e84a7-dbc5-4a19-8e82-036396ed790c/movies-burned/682fbed1-8a4a-4c38-8cd5-c1ff01ecd4e7.mp4"
+            },
+            {
+              "sceneNumber": 2,
+              "title": "Power Shift",
+              "story": "The scene unfolds at the Castra Praetoria, sepia-toned darkness punctuated by firelit half-darkness. Lorica segmentata catches the lamplight as color enters the faces of ranked soldiers. Nymphidius Sabinus, Praetorian Prefect, mounts a stone platform, announcing allegiance to Galba. Soldiers nod in agreement, signaling a shift in power. A low sound of relief fills the barracks as Nero remains unaware in his palace.",
+              "dialogue": "Galba is emperor now — the Guard stands with him",
+              "leadCast": "The Chronicler",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/1ea3fdd6-c0f0-4148-949c-7a186a5a1859/images/a7437ca1-5e2b-4e99-8ca5-5e2f79dbab24.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/1ea3fdd6-c0f0-4148-949c-7a186a5a1859/movies/b46aa56a-4ec7-46bd-aba8-c59256bb01e2.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/1ea3fdd6-c0f0-4148-949c-7a186a5a1859/movies-subtitles/3837e7a5-db5a-4bad-b7ef-636b9d03c76b.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/1ea3fdd6-c0f0-4148-949c-7a186a5a1859/movies-burned/e6f96604-2403-4708-8d64-3fd6e80d000f.mp4"
+            },
+            {
+              "sceneNumber": 3,
+              "title": "Dawn's Arrival",
+              "story": "A dirt road north of Rome before dawn. Sepia tones give way to color: dusty brown cloaks, bruised blue sky. Phaon leads Nero towards a hidden villa. Panic and resolve mix in Nero's eyes.",
+              "dialogue": "My lord, the villa is yours — no one will find you",
+              "leadCast": "The Chronicler",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/7d0c268d-ec11-47fd-8b02-460bd91b1ad3/images/922240dc-39f2-43bd-bf14-fb84961cf225.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/7d0c268d-ec11-47fd-8b02-460bd91b1ad3/movies/be8e755e-547c-423b-ad97-7e39e1233011.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/7d0c268d-ec11-47fd-8b02-460bd91b1ad3/movies-subtitles/5610d29a-ea41-4080-80a8-bb97e24523c9.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/7d0c268d-ec11-47fd-8b02-460bd91b1ad3/movies-burned/2e69b2eb-d120-42d9-ad05-9bcff5f976b3.mp4"
+            },
+            {
+              "sceneNumber": 4,
+              "title": "Nero's Final Stand",
+              "story": "The small interior of Phaon's villa is bathed in warm amber lamplight, casting shadows on the rough stone walls. Nero crouches, blade trembling at his throat. Freedmen watch helplessly as hoofbeats approach. Nero's conflicted expression speaks volumes of his inner turmoil and the weight of his actions.",
+              "dialogue": "What an artist the world is losing in me!",
+              "leadCast": "The Chronicler",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/3de277cb-7d01-40b5-b99e-9885d08d8b36/images/7ce6067a-40fa-42b6-b15a-b9c751c18e2d.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/3de277cb-7d01-40b5-b99e-9885d08d8b36/movies/02e06e00-f86a-47ef-8689-58883997ebe7.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/3de277cb-7d01-40b5-b99e-9885d08d8b36/movies-subtitles/60f49cd6-b6bc-49e7-b1ec-fcd18f090a7b.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/3de277cb-7d01-40b5-b99e-9885d08d8b36/movies-burned/e6b60436-7084-4228-84fb-8be48fc47c16.mp4"
+            },
+            {
+              "sceneNumber": 5,
+              "title": "The Final Witness",
+              "story": "The room is dim, with sepia tones seeping in as history captures the moment. Epaphroditus kneels beside the motionless Nero. A thin beam of morning light cuts through. Outside, the sound of approaching centurions echoes as a horse pulls up at the gate. Epaphroditus rises, drawing his cloak over Nero's body, silently preparing to face the inevitable.",
+              "dialogue": "It is done, Caesar — may the gods receive you",
+              "leadCast": "The Chronicler",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/07cea008-fbbf-4369-8b86-014004a61d59/images/d770a197-995b-4d04-9048-22ba73298696.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/07cea008-fbbf-4369-8b86-014004a61d59/movies/91dcc129-dfd0-4282-8761-16fe2ea2f08e.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/07cea008-fbbf-4369-8b86-014004a61d59/movies-subtitles/e4692c15-27ad-4e78-90ba-4b6124888fef.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/07cea008-fbbf-4369-8b86-014004a61d59/movies-burned/8a4530e5-ae11-4946-b644-093f4b857e09.mp4"
+            },
+            {
+              "sceneNumber": 6,
+              "title": "The Fractured Rome",
+              "story": "Galba leads his column into Rome, surrounded by sepia photos of his face. The city shows signs of unrest after Nero's days. Galba appears weary, not triumphant, as he enters the city gates amidst chaos and uncertainty.",
+              "dialogue": "Rome has endured the tyrant long enough — now she breathes",
+              "leadCast": "The Chronicler",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/ffe8ee3f-d552-4707-856d-b234fc457c0f/images/22d7bcae-759f-43bf-8acf-e7a1d71208ad.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/ffe8ee3f-d552-4707-856d-b234fc457c0f/movies/5311f9b3-c612-4dfb-a52e-0fd5b93cf7a6.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/ffe8ee3f-d552-4707-856d-b234fc457c0f/movies-subtitles/c1f12f2b-10f0-4901-bfa7-ece3402d9b56.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/ffe8ee3f-d552-4707-856d-b234fc457c0f/movies-burned/b6057919-5c90-4698-8e1c-f10c53d54945.mp4"
+            },
+            {
+              "sceneNumber": 7,
+              "title": "Epilogue: The Dawn of a New Era",
+              "story": "The Chronicler stands on the Appian Way at full dawn, in vibrant color. The road stretches into the Roman morning, with warm, clear light falling on ancient stones. Behind him, Rome awakens under the early sun. The gravity of the day's consequences weighs on his expression.",
+              "dialogue": "On this day in 0068, the last Julio-Claudian fell",
+              "leadCast": "The Chronicler",
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/ed7292af-b8f3-4a5b-80eb-428a973847eb/images/eeda4cfe-ee17-40c8-a8e7-5998204905e4.png",
+              "movieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/ed7292af-b8f3-4a5b-80eb-428a973847eb/movies/ddb9f4de-5522-4f9c-b407-9230fa1a643a.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/ed7292af-b8f3-4a5b-80eb-428a973847eb/movies-subtitles/6ff26271-eeed-4bed-8f8c-492794345940.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/prd/ugc/f7d7cf1c-215c-42b2-92ee-1bb06bb46fd1/b9575d7d-ea5c-4e48-875e-0619e7a0fb3f/3bb2353c-14f5-4ad3-a713-1ad5f01a2ca4/scenes/ed7292af-b8f3-4a5b-80eb-428a973847eb/movies-burned/0a578444-2b39-479c-9e15-f6c5833d67d8.mp4"
+            },
+            {
+              "sceneNumber": 8,
+              "title": "Made with YakYak",
+              "story": null,
+              "dialogue": null,
+              "leadCast": null,
+              "backgroundColor": null,
+              "imageUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "movieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "subtitleMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4",
+              "burnedMovieUrl": "https://cdn.yakyak.ai/system/MadeWithYakYak.mp4"
+            }
+          ]
         }
       ]
     }

@@ -35,10 +35,10 @@ const jsonResp = (o: any) => ({ body: JSON.stringify(o) });
 async function main() {
   // 1. castImage: URL (trailing slash trimmed), file + default userId + campaignId, auth, returns imageUrl
   let calls = mockFetch([jsonResp({ imageUrl: 'https://cdn/x.png' })]);
-  let u = new Uploads('https://api.beta.yakyak.ai/', 'tok', 'user-1');
+  let u = new Uploads('https://api.yakyak.ai/', 'tok', 'user-1');
   let out = await u.castImage({ campaignId: 'camp-1', file: new Uint8Array([1, 2, 3]) });
   check('castImage returns imageUrl', out === 'https://cdn/x.png');
-  check('castImage url trimmed', calls[0].url === 'https://api.beta.yakyak.ai/workflow/upload-cast-character-image');
+  check('castImage url trimmed', calls[0].url === 'https://api.yakyak.ai/workflow/upload-cast-character-image');
   check('castImage POST', calls[0].opts.method === 'POST');
   check('castImage auth header', calls[0].opts.headers['Authorization'] === 'Bearer tok');
   let fd = calls[0].opts.body as FormData;
@@ -73,10 +73,10 @@ async function main() {
   check('userMedia file content-type', (fd.get('file') as Blob)?.type === 'video/mp4');
 
   // 5. soundtrack -> audioPath
-  calls = mockFetch([jsonResp({ audioPath: 'beta/a.mp3' })]);
+  calls = mockFetch([jsonResp({ audioPath: 'prd/a.mp3' })]);
   u = new Uploads('https://b', 'tok');
   out = await u.soundtrack({ movieId: 'movie-7', file: new Uint8Array([1]) });
-  check('soundtrack returns audioPath', out === 'beta/a.mp3');
+  check('soundtrack returns audioPath', out === 'prd/a.mp3');
   check('soundtrack movieId', (calls[0].opts.body as FormData).get('movieId') === 'movie-7');
 
   // 6. sceneMovie (HAR-verified) -> movieUrl
