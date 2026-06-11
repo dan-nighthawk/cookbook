@@ -1,4 +1,4 @@
-# The YakYak Cookbook
+# The YakYak Cookbook 🪄 
 
 **[YakYak](https://yakyak.ai/)** is an autonomous AI media agency: it writes, casts,
 voices, renders, and ships episodic video to your social channels on auto-pilot. 
