@@ -2,9 +2,12 @@
 #
 # ensure_owned_campaign.sh — CI self-heal so a user never has to clone the repo
 # to run the shows. Given a show dir, it checks whether the committed CAMPAIGN_ID
-# is owned by the PAT's user; if NOT, it FORKS that campaign (instant, reuses the
-# already-rendered assets, zero tokens), switches show.env to the new campaign id,
-# and signals CI to commit it back.
+# is owned by the PAT's user; if NOT, it ADOPTS the user's existing fork of that
+# campaign (matched by name), or FORKS it once if there's no prior fork (instant,
+# reuses the already-rendered assets, zero tokens). Either way it switches
+# show.env to the user-owned campaign id for THIS run only. The id is NOT
+# committed back to the repo — keeping the workflow strictly read-only against
+# the source repo (no commits, so no merge conflicts in show.env).
 #
 #   YAKYAK_PAT=yy_live_... ./ensure_owned_campaign.sh <showDir>
 #
@@ -14,16 +17,17 @@
 #
 # Behavior:
 #   - CAMPAIGN_ID owned by the PAT  -> no-op (fast path), exit 0.
-#   - CAMPAIGN_ID not owned         -> fork it, rewrite show.env CAMPAIGN_ID, exit 0.
+#   - not owned, prior fork exists  -> adopt it by name (no new fork), rewrite
+#                                      show.env CAMPAIGN_ID, exit 0.
+#   - not owned, no prior fork       -> fork once, rewrite show.env CAMPAIGN_ID, exit 0.
 #   - CAMPAIGN_ID empty             -> error (run setup_show.sh locally first).
 #   - fork returns non-2xx          -> error (campaigns must be forkable; a 403 etc.
 #                                      is a bug to surface, not paper over).
 #
-# Known tradeoff (we always fork when not owned, by design — no adopt-by-name):
-# if a run forks but dies before CI commits the new id, the next run sees the old
-# un-owned id and forks AGAIN, leaving an orphan same-named campaign. CI commits
-# show.env immediately after this step (before the expensive render) to keep that
-# window as small as possible.
+# Why adopt-by-name: because the forked id is never committed back, a naive
+# "always fork when not owned" would mint a new orphan campaign every run. A fork
+# inherits the source's NAME, so the next run finds that owned fork by name and
+# reuses it — idempotent, no orphan churn. Mirrors setup_show.sh's name lookup.
 #
 # Env:
 #   YAKYAK_PAT       (required)  yy_live_… PAT. Falls back to YAKYAK_BB_PAT, then e2e/.env.bb.
@@ -103,8 +107,28 @@ if jq -e --arg id "$CAMPAIGN_ID" '.campaigns[]? | select(.id == $id)' >/dev/null
   exit 0
 fi
 
-# ---- not owned -> fork (whole campaign: omit sourceMovieId) ----------------
-echo "→ campaign $CAMPAIGN_ID not owned by this PAT — forking into this account…"
+# ---- adopt-by-name: reuse a prior fork instead of forking again ------------
+# The committed CAMPAIGN_ID is the canonical (un-owned) source. A previous run
+# may already have forked it into this account under the SAME name (a fork
+# inherits the source's name). Reuse that fork so we don't mint a new orphan
+# campaign every run. The expected name is the one campaign.import.json was
+# minted with — the same lookup setup_show.sh uses.
+IMPORT_FILE="$SHOW_DIR/campaign.import.json"
+CAMPAIGN_NAME=""
+[[ -f "$IMPORT_FILE" ]] && CAMPAIGN_NAME="$(jq -r '.campaigns[0].name // empty' "$IMPORT_FILE")"
+if [[ -n "$CAMPAIGN_NAME" ]]; then
+  ADOPTED="$(jq -r --arg n "$CAMPAIGN_NAME" '.campaigns[]? | select(.name == $n) | .id' <<<"$owned" | head -1)"
+  if [[ -n "$ADOPTED" ]]; then
+    set_env_key "$SHOW_ENV" CAMPAIGN_ID "$ADOPTED"
+    echo "✓ adopted existing fork \"$CAMPAIGN_NAME\" ($ADOPTED) — no new fork needed; updated CAMPAIGN_ID in $SHOW_ENV"
+    emit_github_env CAMPAIGN_HEALED true
+    emit_github_env NEW_CID "$ADOPTED"
+    exit 0
+  fi
+fi
+
+# ---- no prior fork -> fork once (whole campaign: omit sourceMovieId) --------
+echo "→ campaign $CAMPAIGN_ID not owned and no prior fork named \"${CAMPAIGN_NAME:-?}\" — forking into this account…"
 body="$(jq -n --arg uid "$USER_ID" --arg src "$CAMPAIGN_ID" '{userId:$uid, sourceCampaignId:$src}')"
 resp="$(mktemp)"
 code="$(curl -sS -o "$resp" -w '%{http_code}' -X POST "${AUTH[@]}" "${JSON[@]}" -d "$body" "$API/workflow/fork-campaign" || true)"
@@ -122,6 +146,7 @@ rm -f "$resp"
 set_env_key "$SHOW_ENV" CAMPAIGN_ID "$NEW_CID"
 echo "✓ forked $CAMPAIGN_ID → $NEW_CID; updated CAMPAIGN_ID in $SHOW_ENV"
 
-# Signal CI to commit the rewritten show.env (no-op outside Actions).
+# Export the heal result for any later step that wants it (no-op outside Actions).
+# Note: CI no longer commits show.env back — the rewrite is for this run only.
 emit_github_env CAMPAIGN_HEALED true
 emit_github_env NEW_CID "$NEW_CID"

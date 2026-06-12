@@ -53,7 +53,7 @@ jobs:
     if: ${{ needs.plan.outputs.count != '0' }}
     runs-on: ubuntu-latest
     permissions:
-      contents: write               # commit the generated story back to the repo
+      contents: read                # read-only: stories are uploaded as artifacts, never committed back
     env:
       # Mapped here so the login step can gate on it — the `secrets` context is
       # not available in a step-level `if:`, but `env` is.
@@ -114,42 +114,14 @@ jobs:
       - name: Ensure campaign owned by this PAT (fork-heal)
         # So a user only needs their own YAKYAK_PAT secret — no cloning the repo.
         # If the committed CAMPAIGN_ID isn't owned by the PAT, fork it (instant,
-        # reuses rendered assets, zero tokens) and rewrite show.env to the new id;
-        # the next step commits that back. If it IS owned, this no-ops. Importing a
-        # fresh campaign from campaign.import.json (paid, re-renders) is the MANUAL
-        # path (setup_show.sh) and is intentionally NOT used here.
+        # reuses rendered assets, zero tokens) and rewrite show.env to the new id
+        # for this run only. The forked id is NOT committed back to the repo, so a
+        # later run re-forks (cheap: instant, reuses assets, zero tokens). If the id
+        # IS owned, this no-ops. Importing a fresh campaign from campaign.import.json
+        # (paid, re-renders) is the MANUAL path (setup_show.sh), not used here.
         env:
           YAKYAK_PAT: ${{ secrets.YAKYAK_PAT }}
         run: bash show/showrunner/ensure_owned_campaign.sh "$SHOW_PATH"
-
-      - name: Commit healed CAMPAIGN_ID
-        # Persist the forked id immediately — before the expensive render — so a
-        # later failure doesn't drop it and cause a re-fork next run. Only runs when
-        # the heal step actually forked (CAMPAIGN_HEALED set via $GITHUB_ENV).
-        if: env.CAMPAIGN_HEALED == 'true'
-        run: |
-          set -euo pipefail
-          git config user.name  "yakyak-showrunner[bot]"
-          git config user.email "showrunner@users.noreply.github.com"
-          git add "$SHOW_PATH/show.env"
-          if git diff --cached --quiet; then
-            echo "No show.env change to commit for ${{ matrix.show }}."
-            exit 0
-          fi
-          git commit -m "showrunner: ${{ matrix.show }} adopt campaign $NEW_CID [skip ci]"
-          # Several matrix shows may push to main at once — rebase-and-retry to
-          # survive non-fast-forward rejects (each show edits only its own show.env).
-          for attempt in 1 2 3 4 5; do
-            if git push origin HEAD:main; then
-              echo "Pushed healed CAMPAIGN_ID for ${{ matrix.show }} (attempt $attempt)."
-              exit 0
-            fi
-            echo "push rejected (attempt $attempt) — rebasing on latest main…" >&2
-            git pull --rebase --autostash origin main || true
-            sleep $(( (RANDOM % 5) + 2 ))
-          done
-          echo "::error::Failed to push healed CAMPAIGN_ID for ${{ matrix.show }} after 5 attempts" >&2
-          exit 1
 
       - name: Prepare story
         env:
@@ -211,33 +183,21 @@ jobs:
             -v "$PWD/$SHOW_PATH/stories:/app/$SHOW/stories" \
             "$ENGINE_IMAGE" --show "$SHOW" $POST_FLAGS
 
-      - name: Commit story back to repo
-        # Persist the generated story in-repo instead of as a throwaway artifact.
-        # Runs even on render failure so a successfully-prepared story is never lost.
+      - name: Take ownership of story files
+        # The prepare container wrote the story as root into the mounted volume;
+        # take ownership so the upload step can read them. Runs even on render
+        # failure so a successfully-prepared story is still captured below.
         if: always()
-        run: |
-          set -euo pipefail
-          # The prepare container wrote the story as root into the mounted volume;
-          # take ownership so git can stage it.
-          sudo chown -R "$(id -u):$(id -g)" "$SHOW_PATH/stories" 2>/dev/null || true
-          git config user.name  "yakyak-showrunner[bot]"
-          git config user.email "showrunner@users.noreply.github.com"
-          git add "$SHOW_PATH/stories/"
-          if git diff --cached --quiet; then
-            echo "No new story files to commit for ${{ matrix.show }}."
-            exit 0
-          fi
-          git commit -m "showrunner: ${{ matrix.show }} story $(date -u +%Y%m%dT%H%M%SZ) [skip ci]"
-          # Several matrix shows may push to main at once — rebase-and-retry to
-          # survive non-fast-forward rejects.
-          for attempt in 1 2 3 4 5; do
-            if git push origin HEAD:main; then
-              echo "Pushed story for ${{ matrix.show }} (attempt $attempt)."
-              exit 0
-            fi
-            echo "push rejected (attempt $attempt) — rebasing on latest main…" >&2
-            git pull --rebase --autostash origin main || true
-            sleep $(( (RANDOM % 5) + 2 ))
-          done
-          echo "::error::Failed to push story for ${{ matrix.show }} after 5 attempts" >&2
-          exit 1
+        run: sudo chown -R "$(id -u):$(id -g)" "$SHOW_PATH/stories" 2>/dev/null || true
+
+      - name: Upload story artifact
+        # Persist the generated story ONLY as a build artifact — never committed
+        # back to the source repo. Runs even on render failure so a
+        # successfully-prepared story is never lost.
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: story-${{ matrix.show }}
+          path: ${{ env.SHOW_PATH }}/stories/
+          if-no-files-found: ignore
+          retention-days: 90
